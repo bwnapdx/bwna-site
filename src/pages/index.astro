@@ -3,21 +3,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const base = import.meta.env.BASE_URL;
 
-// In a full implementation, these would come from content collections
 const upcomingEvents = [
   {
     title: "BWNA General Meeting",
-    date: new Date("2026-02-09"),
+    date: new Date("2026-04-13"),
     time: "7:00 PM",
     location: "Sylvan Learning Center",
     description: "Bimonthly general meeting open to all neighbors. All are welcome!"
   },
   {
-    title: "Neighborhood Styrofoam & Electronics Recycling",
-    date: new Date("2026-02-21"),
-    time: "9:00 AM - 1:00 PM",
-    location: "Great Spirit Methodist Church",
-    description: "Drop off your styrofoam and electronics for responsible recycling."
+    title: "BWNA Board Meeting",
+    date: new Date("2026-05-11"),
+    time: "7:00 PM",
+    location: "Sylvan Learning Center",
+    description: "Monthly board meeting. The public is welcome to attend."
   }
 ];
 
@@ -83,7 +82,7 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
       <div class="grid grid-3">
         <div class="card">
           <h3>Latest Newsletter</h3>
-          <p>Read the Jan-Feb 2026 issue for the latest neighborhood news, events, and community updates.</p>
+          <p>Read the latest issue for neighborhood news, events, and community updates.</p>
           <a href={`${base}newsletters`}>Read Newsletter &rarr;</a>
         </div>
 

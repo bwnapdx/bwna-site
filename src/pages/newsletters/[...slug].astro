@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('newsletters');
+  return articles.map(article => ({
+    params: { slug: article.id.replace(/\.md$/, '') },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+const base = import.meta.env.BASE_URL;
+
+// Get other articles from the same issue
+const allArticles = await getCollection('newsletters');
+const issueArticles = allArticles
+  .filter(a => a.data.issueSlug === article.data.issueSlug && a.id.replace(/\.md$/, '') !== article.id)
+  .sort((a, b) => (a.data.page ?? 99) - (b.data.page ?? 99));
+
+const categoryLabels: Record<string, string> = {
+  'presidents-message': "President's Message",
+  'community-news': 'Community News',
+  'land-use': 'Land Use',
+  'parks': 'Parks',
+  'safety': 'Safety',
+  'schools': 'Schools',
+  'business': 'Business',
+  'events': 'Events',
+  'history': 'History',
+  'environment': 'Environment',
+  'opinion': 'Opinion',
+  'announcements': 'Announcements',
+  'volunteer': 'Volunteer',
+  'other': 'Other',
+};
+---
+
+<BaseLayout title={article.data.title} description={`${article.data.title} — from the ${article.data.issue} BWNA Newsletter`}>
+  <article class="page-section" data-pagefind-body>
+    <div class="container content-width">
+      <div style="margin-bottom: 1.5rem;">
+        <a href={`${base}newsletters`} style="font-size: 0.875rem;">&larr; {article.data.issue} Newsletter</a>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+        <span class="category-badge" data-pagefind-filter="category">{categoryLabels[article.data.category] || article.data.category}</span>
+        <span style="font-size: 0.875rem; color: var(--color-text-light);">{article.data.issue}</span>
+      </div>
+
+      <h1 data-pagefind-meta="title" style="margin-bottom: 0.5rem;">{article.data.title}</h1>
+
+      {article.data.author && (
+        <p style="color: var(--color-text-light); margin-bottom: 2rem; font-size: 0.95rem;" data-pagefind-meta="author">
+          By {article.data.author}
+        </p>
+      )}
+
+      <div class="article-content">
+        <Content />
+      </div>
+
+      {article.data.pdfFile && (
+        <div class="card" style="background: var(--color-primary-light); margin-top: 2.5rem;">
+          <p style="margin-bottom: 0.5rem;">
+            This article appeared in the <strong>{article.data.issue}</strong> issue of the BWNA Newsletter.
+          </p>
+          <a href={`${base}newsletters/${article.data.pdfFile}`} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            Download complete issue (PDF)
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </a>
+        </div>
+      )}
+    </div>
+  </article>
+
+  {issueArticles.length > 0 && (
+    <section class="page-section" style="background: var(--color-background-alt);">
+      <div class="container content-width">
+        <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">More from {article.data.issue}</h2>
+        <ul style="list-style: none; padding: 0;">
+          {issueArticles.map(a => (
+            <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-border);">
+              <a href={`${base}newsletters/${a.id.replace(/\.md$/, '')}`} style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                <span>
+                  <strong>{a.data.title}</strong>
+                  {a.data.author && <span style="color: var(--color-text-light); font-size: 0.875rem;"> — {a.data.author}</span>}
+                </span>
+                <span class="category-badge" style="font-size: 0.7rem; flex-shrink: 0;">{categoryLabels[a.data.category] || a.data.category}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+</BaseLayout>

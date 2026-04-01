@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const allArticles = await getCollection('newsletters');
+const articles = allArticles.sort((a, b) => {
+  const dateCompare = new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+  if (dateCompare !== 0) return dateCompare;
+  return (a.data.page ?? 99) - (b.data.page ?? 99);
+});
+
+// Get unique categories and issues for filtering
+const categories = [...new Set(articles.map(a => a.data.category))].sort();
+const issues = [...new Set(articles.map(a => a.data.issue))];
+
+const categoryLabels: Record<string, string> = {
+  'presidents-message': "President's Message",
+  'community-news': 'Community News',
+  'land-use': 'Land Use',
+  'parks': 'Parks',
+  'safety': 'Safety',
+  'schools': 'Schools',
+  'business': 'Business',
+  'events': 'Events',
+  'history': 'History',
+  'environment': 'Environment',
+  'opinion': 'Opinion',
+  'announcements': 'Announcements',
+  'volunteer': 'Volunteer',
+  'other': 'Other',
+};
+---
+
+<BaseLayout title="All Articles" description="Browse all BWNA newsletter articles. Searchable archive of community news, events, and stories from Beaumont-Wilshire.">
+  <section class="hero" style="padding: 2rem 0;">
+    <div class="container">
+      <h1>Newsletter Articles</h1>
+      <p>Browse and search articles from the BWNA newsletter</p>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section style="background: var(--color-background-alt); padding: 1rem 0; border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <span style="font-weight: 500;">Filter:</span>
+        <button class="filter-btn active" data-filter="all">All</button>
+        {categories.map(cat => (
+          <button class="filter-btn" data-filter={cat}>
+            {categoryLabels[cat] || cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Article List -->
+  <section class="page-section">
+    <div class="container content-width">
+      <p style="color: var(--color-text-light); margin-bottom: 1.5rem;">{articles.length} articles</p>
+
+      {articles.map(article => (
+        <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} class="article-card" data-category={article.data.category} data-issue={article.data.issueSlug}>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px;">
+              <h3 style="margin-bottom: 0.25rem;">{article.data.title}</h3>
+              <div style="font-size: 0.875rem; color: var(--color-text-light);">
+                {article.data.issue}
+                {article.data.author && <span> &middot; {article.data.author}</span>}
+              </div>
+            </div>
+            <span class="category-badge">{categoryLabels[article.data.category] || article.data.category}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .article-card {
+    display: block;
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .article-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(30, 92, 58, 0.1);
+  }
+  .article-card h3 {
+    color: var(--color-primary);
+  }
+  .filter-btn {
+    background: white;
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .filter-btn:hover {
+    border-color: var(--color-primary);
+  }
+  .filter-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter articles
+      const cards = document.querySelectorAll('.article-card') as NodeListOf<HTMLElement>;
+      let count = 0;
+      cards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'block';
+          count++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

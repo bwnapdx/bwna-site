@@ -1,37 +1,26 @@
 ---
-title: "President's Message: A New Year of Possibilities"
+title: "President's Message: Progression"
 issue: "Jan-Feb 2026"
+issueSlug: "2026-01"
 author: "Al Ellis"
 date: 2026-01-01
+category: "presidents-message"
 featured: true
+page: 2
+pdfFile: "bwna-2026-01.pdf"
 ---
 
-Fellow Beaumont-Wilshire Neighbors,
+"Every new beginning comes from some other beginning's end." Popularized in a refrain from the 1990s hit song "Closing Time" by the band Semisonic, this lyric actually had its genesis some 2,000 years ago in ancient Rome, courtesy of philosopher, statesman, and dramatist Lucius Annaeus Seneca, known then as Seneca the Younger (his dad being Seneca the Elder). Later, he was simply known as Seneca.
 
-As I write this message for the start of 2026, I find myself reflecting on what makes our neighborhood special—and it's not just the beautiful tree-lined streets or our wonderful local businesses. It's you, our neighbors, who show up to meetings, deliver newsletters, plant flowers in the park, and wave hello on your morning walks.
+Selected as a tutor for young prince Nero, Seneca would later be elevated to the perilous position of royal advisor to erratic Emperor Nero, who eventually "went off the rails," sentencing Seneca to a "forced suicide" — an egregious chapter of disloyalty. Quoting from a 1960s song, "Paranoia strikes deep."
 
-## Looking Back at 2025
+But what's relevant in this for BWNA? Certainly not the erratic behavior of a paranoid autocrat. As we usher in the new year, what's relevant for the BWNA Board is Seneca's philosophical assertion that "every new beginning comes from some other beginning's end" — i.e., that decisions made for the coming year are inextricably tied to what worked well or didn't work so well in the previous year.
 
-Last year was one of our most active years yet. Our dedicated team of newsletter carriers delivered over 15,000 copies of the BWNA Newsletter to doorsteps throughout the neighborhood. We hosted successful community events including the beloved Art & Garden Tour, our recycling events, and neighborhood cleanups that brought dozens of volunteers together.
+Last November, in a meeting room converted from a former classroom at McMenamins Kennedy School, our board met for its annual retreat to strategize for 2026. Five hours in length, the get-together also afforded the opportunity for members to get to know each other better on a personal level, impossible in the fast-paced environment of a BWNA monthly business meeting. Accordingly, at the top of the retreat agenda was the following "ice breaker" question: "What kinds of civic engagement have you participated in over the years, and what kinds of civic engagement are you interested in currently, including BWNA projects?" Responses ran the gamut from politics to volunteerism. It was impressive.
 
-I want to extend special thanks to everyone who contributed to these successes. Your volunteer hours add up to something truly meaningful.
+In many ways 2025 was a banner year for BWNA — our neighborhood association implemented the crosswalk safety flags project, expanded the all-neighborhood street party, and was instrumental in gaining the city and state attention needed to help Beaumont Market establish the Green Cart container redemption program, which is coming soon, we hope. We also maintained an engaged, full, 15-member board.
 
-## What's Ahead in 2026
+Looking for positive civic engagement on the local level? Look no further. Join one of our BWNA committees to help our neighborhood continue to progress in 2026. Happy New Year, neighbors!
 
-This year, we're focusing on a few key priorities:
-
-**Improved Communication:** We're working on making it even easier for neighbors to stay informed about what's happening in Beaumont-Wilshire. Our new website (you might be reading this there!) is part of that effort.
-
-**Community Events:** We're planning to bring back all your favorites—the recycling events, spring cleanup, and Art & Garden Tour—plus some new gatherings we think you'll enjoy.
-
-**Civic Engagement:** With changes happening at the city level, your neighborhood association remains committed to being your voice in conversations that affect our community.
-
-## Get Involved
-
-Whether you have an hour a month or a few hours a year, there's a place for you in BWNA. Join us at our next general meeting on February 9th at 7 PM at Sylvan Learning Center. Come meet your neighbors and learn what we're working on.
-
-Here's to a wonderful 2026!
-
-*Al Ellis*  
-*President, BWNA*  
+*Al Ellis, BWNA Board President*
 *president@bwnapdx.org*

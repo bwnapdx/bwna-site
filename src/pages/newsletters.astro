@@ -1,11 +1,35 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const base = import.meta.env.BASE_URL;
 
-// Newsletter archive - these PDF links come from the existing Wix site
-const newsletters = [
-  { date: "Jan - Feb 2026", url: "https://www.bwnapdx.org/_files/ugd/5167d7_e5103ae941d147e48390a51c2b05c200.pdf", featured: true },
+// Get articles from content collection
+const allArticles = await getCollection('newsletters');
+const latestIssueSlug = '2026-01';
+const latestArticles = allArticles
+  .filter(a => a.data.issueSlug === latestIssueSlug)
+  .sort((a, b) => (a.data.page ?? 99) - (b.data.page ?? 99));
+
+const categoryLabels: Record<string, string> = {
+  'presidents-message': "President's Message",
+  'community-news': 'Community News',
+  'land-use': 'Land Use',
+  'parks': 'Parks',
+  'safety': 'Safety',
+  'schools': 'Schools',
+  'business': 'Business',
+  'events': 'Events',
+  'history': 'History',
+  'environment': 'Environment',
+  'opinion': 'Opinion',
+  'announcements': 'Announcements',
+  'volunteer': 'Volunteer',
+  'other': 'Other',
+};
+
+// Newsletter PDF archive - older issues still linking to Wix (will be migrated)
+const olderPdfs = [
   { date: "Nov - Dec 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_b93e1e7e75034b6082eea848f74fe31c.pdf" },
   { date: "Sept - Oct 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_41c08a6cebb34e5c9bc4d60f01b99bb5.pdf" },
   { date: "Jul - Aug 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_375b67b9d21d414abe1ad989da05fe48.pdf" },
@@ -23,16 +47,16 @@ const newsletters = [
   { date: "Jul - Aug 2023", url: "https://www.bwnapdx.org/_files/ugd/5167d7_482f45d2a2984b04a3c5808bc767b105.pdf" },
 ];
 
-// Group by year
-const newslettersByYear = newsletters.reduce((acc, nl) => {
+// Group older PDFs by year
+const pdfsByYear = olderPdfs.reduce((acc, nl) => {
   const year = nl.date.split(' ').pop()!;
   if (!acc[year]) acc[year] = [];
   acc[year].push(nl);
   return acc;
-}, {} as Record<string, typeof newsletters>);
+}, {} as Record<string, typeof olderPdfs>);
 ---
 
-<BaseLayout title="Newsletters" description="Read the BWNA newsletter for neighborhood news, events, and community updates. Archive dating back to 2012.">
+<BaseLayout title="Newsletters" description="Read the BWNA newsletter for neighborhood news, events, and community updates. Browse individual articles or download the full PDF.">
 
   <!-- Page Header -->
   <section class="hero" style="padding: 2rem 0;">
@@ -51,25 +75,48 @@ const newslettersByYear = newsletters.reduce((acc, nl) => {
         local merchants and organizations support the newsletter, which invites letters,
         editorials, articles, and announcements from neighbors.
       </p>
-
-      <div class="card" style="background: var(--color-primary-light); margin: 1.5rem 0;">
-        <h3 style="display: flex; align-items: center; gap: 0.5rem;">
-          Latest Issue: {newsletters[0].date}
-        </h3>
-        <p>The newest edition of the BWNA newsletter is now available!</p>
-        <a href={newsletters[0].url} target="_blank" rel="noopener" class="btn btn-secondary">
-          Download PDF &rarr;
-        </a>
-      </div>
     </div>
   </section>
 
-  <!-- Newsletter Archive -->
+  <!-- Latest Issue Articles -->
   <section class="page-section">
     <div class="container content-width">
-      <h2>Newsletter Archive</h2>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+        <h2>Jan-Feb 2026</h2>
+        <a href={`${base}newsletters/bwna-2026-01.pdf`} target="_blank" rel="noopener" style="font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+          Download full issue (PDF)
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </a>
+      </div>
 
-      {Object.entries(newslettersByYear).map(([year, items]) => (
+      <div style="display: grid; gap: 0.5rem;">
+        {latestArticles.map(article => (
+          <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.875rem 1rem; background: white; border: 1px solid var(--color-border); border-radius: 6px; text-decoration: none; color: inherit; transition: border-color 0.2s;">
+            <span>
+              <strong style="color: var(--color-primary);">{article.data.title}</strong>
+              {article.data.author && <span style="color: var(--color-text-light); font-size: 0.875rem;"> — {article.data.author}</span>}
+            </span>
+            <span class="category-badge" style="font-size: 0.7rem; flex-shrink: 0;">{categoryLabels[article.data.category] || article.data.category}</span>
+          </a>
+        ))}
+      </div>
+
+      <p style="text-align: center; margin-top: 1.5rem;">
+        <a href={`${base}articles`} class="btn btn-secondary">Browse All Articles &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Older PDFs -->
+  <section class="page-section" style="background: var(--color-background-alt);">
+    <div class="container content-width">
+      <h2>Past Issues (PDF)</h2>
+
+      {Object.entries(pdfsByYear).map(([year, items]) => (
         <div style="margin-bottom: 2rem;">
           <h3 style="font-size: 1.125rem; color: var(--color-text-light); margin-bottom: 0.75rem;">{year}</h3>
           <ul class="newsletter-list">
@@ -91,7 +138,7 @@ const newslettersByYear = newsletters.reduce((acc, nl) => {
       ))}
 
       <p style="text-align: center; color: var(--color-text-light); margin-top: 2rem;">
-        <a href={`${base}newsletter-archive`}>View complete archive (2012-present) &rarr;</a>
+        Looking for older issues? <a href="mailto:editor@bwnapdx.org">Contact the editor</a> for newsletters from 2012&ndash;2022.
       </p>
     </div>
   </section>

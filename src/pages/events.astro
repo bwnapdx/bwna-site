@@ -4,39 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 // Events data - in production, this comes from markdown files in src/content/events/
 const events = [
   {
-    slug: "general-meeting-feb-2026",
-    title: "BWNA General Meeting",
-    date: new Date("2026-02-09"),
-    time: "7:00 PM - 8:30 PM",
-    location: "Sylvan Learning Center",
-    address: "4411 NE Fremont St",
-    type: "meeting",
-    description: "On the second Monday of even-numbered months, we hold a general meeting that is open to the public. All are welcome and encouraged to attend.",
-    recurring: true
-  },
-  {
-    slug: "recycling-feb-2026",
-    title: "Neighborhood Styrofoam & Electronics Recycling Event",
-    date: new Date("2026-02-21"),
-    time: "9:00 AM - 1:00 PM",
-    location: "Great Spirit Methodist Church",
-    address: "5535 NE Fremont St",
-    type: "community",
-    description: "Bring your clean styrofoam and old electronics for responsible recycling. This event helps keep these materials out of the landfill.",
-    recurring: false
-  },
-  {
-    slug: "board-meeting-mar-2026",
-    title: "BWNA Board Meeting",
-    date: new Date("2026-03-09"),
-    time: "7:00 PM - 8:30 PM",
-    location: "Sylvan Learning Center",
-    address: "4411 NE Fremont St",
-    type: "meeting",
-    description: "BWNA board meetings are held the 2nd Monday of January, March, May, July, September, and November. The public is welcome; time for public input is limited.",
-    recurring: true
-  },
-  {
     slug: "general-meeting-apr-2026",
     title: "BWNA General Meeting",
     date: new Date("2026-04-13"),
@@ -44,7 +11,40 @@ const events = [
     location: "Sylvan Learning Center",
     address: "4411 NE Fremont St",
     type: "meeting",
-    description: "Bimonthly general meeting open to all neighbors. Topics TBD.",
+    description: "Bimonthly general meeting open to all neighbors. Come hear updates on neighborhood projects, voice your concerns, and connect with your community.",
+    recurring: true
+  },
+  {
+    slug: "board-meeting-may-2026",
+    title: "BWNA Board Meeting",
+    date: new Date("2026-05-11"),
+    time: "7:00 PM - 8:30 PM",
+    location: "Sylvan Learning Center",
+    address: "4411 NE Fremont St",
+    type: "meeting",
+    description: "Board meetings are held the 2nd Monday of odd-numbered months. The public is welcome to attend; time for public comment is provided.",
+    recurring: true
+  },
+  {
+    slug: "general-meeting-jun-2026",
+    title: "BWNA General Meeting",
+    date: new Date("2026-06-08"),
+    time: "7:00 PM - 8:30 PM",
+    location: "Sylvan Learning Center",
+    address: "4411 NE Fremont St",
+    type: "meeting",
+    description: "Bimonthly general meeting open to all neighbors. Join us to discuss summer plans, neighborhood initiatives, and community updates.",
+    recurring: true
+  },
+  {
+    slug: "board-meeting-jul-2026",
+    title: "BWNA Board Meeting",
+    date: new Date("2026-07-13"),
+    time: "7:00 PM - 8:30 PM",
+    location: "Sylvan Learning Center",
+    address: "4411 NE Fremont St",
+    type: "meeting",
+    description: "Board meetings are held the 2nd Monday of odd-numbered months. The public is welcome to attend; time for public comment is provided.",
     recurring: true
   }
 ];
@@ -80,18 +80,6 @@ const typeColors: Record<string, string> = {
     <div class="container">
       <h1>Upcoming Events</h1>
       <p>Meetings, activities, and gatherings in Beaumont-Wilshire</p>
-    </div>
-  </section>
-
-  <!-- Events Filter (placeholder for future interactivity) -->
-  <section style="background: var(--color-background-alt); padding: 1rem 0; border-bottom: 1px solid var(--color-border);">
-    <div class="container">
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-        <span style="font-weight: 500;">Filter:</span>
-        <button class="btn" style="background: var(--color-primary); color: white; padding: 0.25rem 0.75rem; font-size: 0.875rem;">All Events</button>
-        <button class="btn" style="background: white; border: 1px solid var(--color-border); padding: 0.25rem 0.75rem; font-size: 0.875rem;">Meetings</button>
-        <button class="btn" style="background: white; border: 1px solid var(--color-border); padding: 0.25rem 0.75rem; font-size: 0.875rem;">Community</button>
-      </div>
     </div>
   </section>
 
