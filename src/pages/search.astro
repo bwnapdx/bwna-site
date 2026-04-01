@@ -28,6 +28,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style is:global>
+  /* Pagefind theme variables — these are the supported API for customization */
   :root {
     --pagefind-ui-primary: #1e5c3a;
     --pagefind-ui-text: #333333;
@@ -40,65 +41,102 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     --pagefind-ui-scale: 1;
   }
 
-  .search-container {
-    min-height: 200px;
+  /*
+   * Pagefind UI overrides — using #search ID selector to beat
+   * Pagefind's doubled Svelte scoped classes (e.g. .class.svelte-xxx)
+   * without needing !important.
+   */
+
+  /* Form and input */
+  #search .pagefind-ui__form {
+    width: 100%;
   }
 
-  .pagefind-ui__search-input {
-    font-size: 1.125rem !important;
-    padding: 0.875rem 1rem !important;
-    border: 2px solid var(--pagefind-ui-border) !important;
-    border-radius: 8px !important;
-    transition: border-color 0.2s !important;
+  #search .pagefind-ui__search-input {
+    width: 100%;
+    font-size: 1.125rem;
+    padding: 0.875rem 1rem 0.875rem 3rem;
+    border: 2px solid var(--pagefind-ui-border);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
   }
 
-  .pagefind-ui__search-input:focus {
-    border-color: var(--pagefind-ui-primary) !important;
-    outline: none !important;
-    box-shadow: 0 0 0 3px rgba(30, 92, 58, 0.1) !important;
+  #search .pagefind-ui__search-input:focus {
+    border-color: var(--pagefind-ui-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(30, 92, 58, 0.1);
   }
 
-  .pagefind-ui__search-clear {
-    top: calc(50% - 10px) !important;
+  #search .pagefind-ui__search-clear {
+    display: none;
   }
 
-  .pagefind-ui__result {
-    padding: 1.25rem 0 !important;
-    border-top: 1px solid #e8ede8 !important;
+  #search .pagefind-ui__drawer {
+    width: 100%;
   }
 
-  .pagefind-ui__result-link {
-    color: var(--pagefind-ui-primary) !important;
-    font-size: 1.1rem !important;
-    font-weight: 600 !important;
+  /* Results */
+  #search .pagefind-ui__result {
+    padding: 1.25rem 0;
+    border-top: 1px solid #e8ede8;
   }
 
-  .pagefind-ui__result-link:hover {
-    text-decoration: underline !important;
+  #search .pagefind-ui__result-title .pagefind-ui__result-link {
+    color: var(--pagefind-ui-primary);
+    font-weight: 600;
   }
 
-  .pagefind-ui__result-excerpt {
-    font-size: 0.95rem !important;
-    line-height: 1.6 !important;
-    color: #555 !important;
+  #search .pagefind-ui__result-title .pagefind-ui__result-link:hover {
+    text-decoration: underline;
   }
 
-  .pagefind-ui__result-excerpt mark {
-    background: #d4edda !important;
-    color: inherit !important;
-    padding: 0.1rem 0.2rem !important;
-    border-radius: 2px !important;
+  #search .pagefind-ui__result-excerpt {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
   }
 
-  .pagefind-ui__message {
-    font-size: 0.95rem !important;
-    padding: 1rem 0 !important;
-    color: #666 !important;
+  #search .pagefind-ui__result-excerpt mark {
+    background: #d4edda;
+    color: inherit;
+    padding: 0.1rem 0.2rem;
+    border-radius: 2px;
   }
 
-  .pagefind-ui__button {
-    background: var(--pagefind-ui-primary) !important;
-    border-radius: 6px !important;
+  #search .pagefind-ui__message {
+    font-size: 0.95rem;
+    padding: 1rem 0;
+    color: #666;
+  }
+
+  /* Load more button */
+  #search .pagefind-ui__button {
+    background: var(--pagefind-ui-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    height: auto;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  #search .pagefind-ui__button:hover {
+    background: #164a2e;
+    color: white;
+    border: none;
+  }
+
+  /* Hide filter panel for now */
+  #search .pagefind-ui__filter-panel {
+    display: none;
+  }
+
+  /* Sub-results */
+  #search .pagefind-ui__result-nested .pagefind-ui__result-link {
+    font-size: 0.9em;
   }
 </style>
 
@@ -151,6 +189,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     showSubResults: true,
     showImages: false,
     autofocus: true,
+    bundlePath: import.meta.env.BASE_URL + 'pagefind/',
+    ranking: {
+      termSimilarity: 5.0,
+    },
   });
 
   // Suggestion chips trigger a search
@@ -166,7 +208,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     });
   });
 
-  // Hide suggestions when user types
+  // Hide suggestions when user types, and hide zero-count filter categories
   const observer = new MutationObserver(() => {
     const input = document.querySelector('.pagefind-ui__search-input') as HTMLInputElement;
     if (input?.value) {
@@ -174,6 +216,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     } else {
       document.querySelector('.search-suggestions')?.classList.remove('hidden');
     }
+
   });
 
   const searchEl = document.getElementById('search');

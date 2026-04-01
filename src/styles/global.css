@@ -171,16 +171,9 @@ a:hover {
   border-bottom-color: white;
 }
 
-.nav-search {
-  display: inline-flex !important;
-  align-items: center;
-  gap: 0.35rem;
-}
-
 .nav-search svg {
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
+  vertical-align: -0.15em;
+  margin-right: 0.25rem;
 }
 
 /* Dropdown menus */
@@ -428,6 +421,18 @@ a:hover {
 
 .footer-section a:hover {
   color: white;
+}
+
+.footer-section .btn-secondary {
+  background-color: white;
+  color: var(--color-primary);
+  border-color: white;
+}
+
+.footer-section .btn-secondary:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary-light);
 }
 
 .footer-bottom {
