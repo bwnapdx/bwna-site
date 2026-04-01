@@ -6,13 +6,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="hero" style="padding: 2rem 0;">
     <div class="container">
       <h1>Search</h1>
-      <p>Search across newsletter articles and site content</p>
+      <p>Find articles, events, and resources across the site</p>
     </div>
   </section>
 
   <section class="page-section" data-pagefind-ignore>
     <div class="container content-width">
-      <div id="search"></div>
+      <div id="search" class="search-container"></div>
+      <div class="search-suggestions">
+        <p>Try searching for:</p>
+        <div class="suggestion-chips">
+          <button class="suggestion-chip" data-query="volunteer">volunteer</button>
+          <button class="suggestion-chip" data-query="Wilshire Park">Wilshire Park</button>
+          <button class="suggestion-chip" data-query="recycling">recycling</button>
+          <button class="suggestion-chip" data-query="Fremont">Fremont</button>
+          <button class="suggestion-chip" data-query="meeting">meeting</button>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -22,28 +32,152 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     --pagefind-ui-primary: #1e5c3a;
     --pagefind-ui-text: #333333;
     --pagefind-ui-background: #ffffff;
-    --pagefind-ui-border: #e0e7e0;
+    --pagefind-ui-border: #d0d7d0;
     --pagefind-ui-tag: #e8f5e9;
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 8px;
     --pagefind-ui-font: inherit;
+    --pagefind-ui-scale: 1;
+  }
+
+  .search-container {
+    min-height: 200px;
   }
 
   .pagefind-ui__search-input {
     font-size: 1.125rem !important;
-    padding: 0.75rem 1rem !important;
+    padding: 0.875rem 1rem !important;
+    border: 2px solid var(--pagefind-ui-border) !important;
+    border-radius: 8px !important;
+    transition: border-color 0.2s !important;
+  }
+
+  .pagefind-ui__search-input:focus {
+    border-color: var(--pagefind-ui-primary) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(30, 92, 58, 0.1) !important;
+  }
+
+  .pagefind-ui__search-clear {
+    top: calc(50% - 10px) !important;
+  }
+
+  .pagefind-ui__result {
+    padding: 1.25rem 0 !important;
+    border-top: 1px solid #e8ede8 !important;
   }
 
   .pagefind-ui__result-link {
     color: var(--pagefind-ui-primary) !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+  }
+
+  .pagefind-ui__result-link:hover {
+    text-decoration: underline !important;
+  }
+
+  .pagefind-ui__result-excerpt {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: #555 !important;
+  }
+
+  .pagefind-ui__result-excerpt mark {
+    background: #d4edda !important;
+    color: inherit !important;
+    padding: 0.1rem 0.2rem !important;
+    border-radius: 2px !important;
+  }
+
+  .pagefind-ui__message {
+    font-size: 0.95rem !important;
+    padding: 1rem 0 !important;
+    color: #666 !important;
+  }
+
+  .pagefind-ui__button {
+    background: var(--pagefind-ui-primary) !important;
+    border-radius: 6px !important;
+  }
+</style>
+
+<style>
+  .search-suggestions {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .search-suggestions p {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .suggestion-chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .suggestion-chip {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border: 1px solid transparent;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .suggestion-chip:hover {
+    background: white;
+    border-color: var(--color-primary);
+  }
+
+  /* Hide suggestions once user has searched */
+  .search-suggestions.hidden {
+    display: none;
   }
 </style>
 
 <script>
   import { PagefindUI } from '@pagefind/default-ui';
-  new PagefindUI({
+
+  const pf = new PagefindUI({
     element: '#search',
     showSubResults: true,
     showImages: false,
+    autofocus: true,
   });
+
+  // Suggestion chips trigger a search
+  document.querySelectorAll('.suggestion-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const query = chip.getAttribute('data-query');
+      const input = document.querySelector('.pagefind-ui__search-input') as HTMLInputElement;
+      if (input) {
+        input.value = query!;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        document.querySelector('.search-suggestions')?.classList.add('hidden');
+      }
+    });
+  });
+
+  // Hide suggestions when user types
+  const observer = new MutationObserver(() => {
+    const input = document.querySelector('.pagefind-ui__search-input') as HTMLInputElement;
+    if (input?.value) {
+      document.querySelector('.search-suggestions')?.classList.add('hidden');
+    } else {
+      document.querySelector('.search-suggestions')?.classList.remove('hidden');
+    }
+  });
+
+  const searchEl = document.getElementById('search');
+  if (searchEl) {
+    observer.observe(searchEl, { childList: true, subtree: true });
+  }
 </script>

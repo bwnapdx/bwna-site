@@ -171,6 +171,18 @@ a:hover {
   border-bottom-color: white;
 }
 
+.nav-search {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-search svg {
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
 /* Dropdown menus */
 .has-dropdown {
   position: relative;
