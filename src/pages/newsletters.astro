@@ -28,23 +28,92 @@ const categoryLabels: Record<string, string> = {
   'other': 'Other',
 };
 
-// Newsletter PDF archive - older issues still linking to Wix (will be migrated)
+// Full newsletter PDF archive (2012-2025), all hosted locally
 const olderPdfs = [
-  { date: "Nov - Dec 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_b93e1e7e75034b6082eea848f74fe31c.pdf" },
-  { date: "Sept - Oct 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_41c08a6cebb34e5c9bc4d60f01b99bb5.pdf" },
-  { date: "Jul - Aug 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_375b67b9d21d414abe1ad989da05fe48.pdf" },
-  { date: "May - Jun 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_e6115c33237b46aa99635a71bf1f410d.pdf" },
-  { date: "Mar - Apr 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_9dfb71f57e074e85b72e98b2df2b9743.pdf" },
-  { date: "Jan - Feb 2025", url: "https://www.bwnapdx.org/_files/ugd/5167d7_641e43825a464b068be809b9e08f8a0f.pdf" },
-  { date: "Nov - Dec 2024", url: "https://www.bwnapdx.org/_files/ugd/5167d7_8db7719c1cc94eaab05e41a4509d39fe.pdf" },
-  { date: "Sep - Oct 2024", url: "https://www.bwnapdx.org/_files/ugd/5167d7_b865ecece9224a93b7007b36cd97c897.pdf" },
-  { date: "Jul - Aug 2024", url: "https://www.bwnapdx.org/_files/ugd/5167d7_f354e05678bc44c3911992bca313f846.pdf" },
-  { date: "May - Jun 2024", url: "https://www.bwnapdx.org/_files/ugd/5167d7_fdbcec19402e4cb2b2d648a95f8991e7.pdf" },
-  { date: "Mar - Apr 2024", url: "https://www.bwnapdx.org/_files/ugd/5167d7_bb692e5f17c242888071b7c19cf44ba2.pdf" },
-  { date: "Jan - Feb 2024", url: "https://www.bwnapdx.org/_files/ugd/5167d7_0a4bcb805585492bb4bb15ea63b3ecf8.pdf" },
-  { date: "Nov - Dec 2023", url: "https://www.bwnapdx.org/_files/ugd/5167d7_dd4cf500240d47d99ef49b13eebd91a1.pdf" },
-  { date: "Sep - Oct 2023", url: "https://www.bwnapdx.org/_files/ugd/5167d7_f8909bba878745558f3d6a8e8aa2739b.pdf" },
-  { date: "Jul - Aug 2023", url: "https://www.bwnapdx.org/_files/ugd/5167d7_482f45d2a2984b04a3c5808bc767b105.pdf" },
+  { date: "Nov - Dec 2025", file: "bwna-2025-11.pdf" },
+  { date: "Sept - Oct 2025", file: "bwna-2025-09.pdf" },
+  { date: "Jul - Aug 2025", file: "bwna-2025-07.pdf" },
+  { date: "May - Jun 2025", file: "bwna-2025-05.pdf" },
+  { date: "Mar - Apr 2025", file: "bwna-2025-03.pdf" },
+  { date: "Jan - Feb 2025", file: "bwna-2025-01.pdf" },
+  { date: "Nov - Dec 2024", file: "bwna-2024-11.pdf" },
+  { date: "Sep - Oct 2024", file: "bwna-2024-09.pdf" },
+  { date: "Jul - Aug 2024", file: "bwna-2024-07.pdf" },
+  { date: "May - Jun 2024", file: "bwna-2024-05.pdf" },
+  { date: "Mar - Apr 2024", file: "bwna-2024-03.pdf" },
+  { date: "Jan - Feb 2024", file: "bwna-2024-01.pdf" },
+  { date: "Nov - Dec 2023", file: "bwna-2023-11.pdf" },
+  { date: "Sep - Oct 2023", file: "bwna-2023-09.pdf" },
+  { date: "Jul - Aug 2023", file: "bwna-2023-07.pdf" },
+  { date: "May - Jun 2023", file: "bwna-2023-05.pdf" },
+  { date: "Mar - Apr 2023", file: "bwna-2023-03.pdf" },
+  { date: "Jan - Feb 2023", file: "bwna-2023-01.pdf" },
+  { date: "Nov - Dec 2022", file: "bwna-2022-11.pdf" },
+  { date: "Sept - Oct 2022", file: "bwna-2022-09.pdf" },
+  { date: "Jul - Aug 2022", file: "bwna-2022-07.pdf" },
+  { date: "May - Jun 2022", file: "bwna-2022-05.pdf" },
+  { date: "Mar - Apr 2022", file: "bwna-2022-03.pdf" },
+  { date: "Jan - Feb 2022", file: "bwna-2022-01.pdf" },
+  { date: "Nov - Dec 2021", file: "bwna-2021-11.pdf" },
+  { date: "Sep - Oct 2021", file: "bwna-2021-09.pdf" },
+  { date: "Jul - Aug 2021", file: "bwna-2021-07.pdf" },
+  { date: "May - Jun 2021", file: "bwna-2021-05.pdf" },
+  { date: "Mar - Apr 2021", file: "bwna-2021-03.pdf" },
+  { date: "Jan - Feb 2021", file: "bwna-2021-01.pdf" },
+  { date: "Nov - Dec 2020", file: "bwna-2020-11.pdf" },
+  { date: "Sep - Oct 2020", file: "bwna-2020-09.pdf" },
+  { date: "Jul - Aug 2020", file: "bwna-2020-07.pdf" },
+  { date: "May - Jun 2020", file: "bwna-2020-05.pdf" },
+  { date: "Mar - Apr 2020", file: "bwna-2020-03.pdf" },
+  { date: "Jan - Feb 2020", file: "bwna-2020-01.pdf" },
+  { date: "Nov - Dec 2019", file: "bwna-2019-11.pdf" },
+  { date: "Sep - Oct 2019", file: "bwna-2019-09.pdf" },
+  { date: "Jul - Aug 2019", file: "bwna-2019-07.pdf" },
+  { date: "May - Jun 2019", file: "bwna-2019-05.pdf" },
+  { date: "Mar - Apr 2019", file: "bwna-2019-03.pdf" },
+  { date: "Jan - Feb 2019", file: "bwna-2019-01.pdf" },
+  { date: "Nov - Dec 2018", file: "bwna-2018-11.pdf" },
+  { date: "Sep - Oct 2018", file: "bwna-2018-09.pdf" },
+  { date: "Jul - Aug 2018", file: "bwna-2018-07.pdf" },
+  { date: "May - Jun 2018", file: "bwna-2018-05.pdf" },
+  { date: "Mar - Apr 2018", file: "bwna-2018-03.pdf" },
+  { date: "Jan - Feb 2018", file: "bwna-2018-01.pdf" },
+  { date: "Nov - Dec 2017", file: "bwna-2017-11.pdf" },
+  { date: "Sep - Oct 2017", file: "bwna-2017-09.pdf" },
+  { date: "Jul - Aug 2017", file: "bwna-2017-07.pdf" },
+  { date: "May - Jun 2017", file: "bwna-2017-05.pdf" },
+  { date: "Mar - Apr 2017", file: "bwna-2017-03.pdf" },
+  { date: "Jan - Feb 2017", file: "bwna-2017-01.pdf" },
+  { date: "Nov - Dec 2016", file: "bwna-2016-11.pdf" },
+  { date: "Sep - Oct 2016", file: "bwna-2016-09.pdf" },
+  { date: "Jul - Aug 2016", file: "bwna-2016-07.pdf" },
+  { date: "May - Jun 2016", file: "bwna-2016-05.pdf" },
+  { date: "Mar - Apr 2016", file: "bwna-2016-03.pdf" },
+  { date: "Jan - Feb 2016", file: "bwna-2016-01.pdf" },
+  { date: "Nov - Dec 2015", file: "bwna-2015-11.pdf" },
+  { date: "Sep - Oct 2015", file: "bwna-2015-09.pdf" },
+  { date: "Jul - Aug 2015", file: "bwna-2015-07.pdf" },
+  { date: "May - Jun 2015", file: "bwna-2015-05.pdf" },
+  { date: "Mar - Apr 2015", file: "bwna-2015-03.pdf" },
+  { date: "Jan - Feb 2015", file: "bwna-2015-01.pdf" },
+  { date: "Nov - Dec 2014", file: "bwna-2014-11.pdf" },
+  { date: "Sep - Oct 2014", file: "bwna-2014-09.pdf" },
+  { date: "Jul - Aug 2014", file: "bwna-2014-07.pdf" },
+  { date: "May - Jun 2014", file: "bwna-2014-05.pdf" },
+  { date: "Mar - Apr 2014", file: "bwna-2014-03.pdf" },
+  { date: "Jan - Feb 2014", file: "bwna-2014-01.pdf" },
+  { date: "Nov - Dec 2013", file: "bwna-2013-11.pdf" },
+  { date: "Sep - Oct 2013", file: "bwna-2013-09.pdf" },
+  { date: "Jul - Aug 2013", file: "bwna-2013-07.pdf" },
+  { date: "May - Jun 2013", file: "bwna-2013-05.pdf" },
+  { date: "Mar - Apr 2013", file: "bwna-2013-03.pdf" },
+  { date: "Jan - Feb 2013", file: "bwna-2013-01.pdf" },
+  { date: "Nov - Dec 2012", file: "bwna-2012-11.pdf" },
+  { date: "Sep - Oct 2012", file: "bwna-2012-09.pdf" },
+  { date: "Jul - Aug 2012", file: "bwna-2012-07.pdf" },
+  { date: "May - Jun 2012", file: "bwna-2012-05.pdf" },
+  { date: "Mar - Apr 2012", file: "bwna-2012-03.pdf" },
+  { date: "Jan - Feb 2012", file: "bwna-2012-01.pdf" },
 ];
 
 // Group older PDFs by year
@@ -58,15 +127,13 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
 
 <BaseLayout title="Newsletters" description="Read the BWNA newsletter for neighborhood news, events, and community updates. Browse individual articles or download the full PDF.">
 
-  <!-- Page Header -->
-  <section class="hero" style="padding: 2rem 0;">
+  <section class="hero">
     <div class="container">
       <h1>Newsletter</h1>
       <p>Your source for Beaumont-Wilshire news and updates</p>
     </div>
   </section>
 
-  <!-- About the Newsletter -->
   <section class="page-section">
     <div class="container content-width">
       <p>
@@ -81,9 +148,9 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
   <!-- Latest Issue Articles -->
   <section class="page-section">
     <div class="container content-width">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+      <div class="issue-header">
         <h2>Jan-Feb 2026</h2>
-        <a href={`${base}newsletters/bwna-2026-01.pdf`} target="_blank" rel="noopener" style="font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <a href={`${base}newsletters/bwna-2026-01.pdf`} target="_blank" rel="noopener" class="pdf-link">
           Download full issue (PDF)
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -93,37 +160,37 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
         </a>
       </div>
 
-      <div style="display: grid; gap: 0.5rem;">
+      <div class="article-grid">
         {latestArticles.map(article => (
-          <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.875rem 1rem; background: white; border: 1px solid var(--color-border); border-radius: 6px; text-decoration: none; color: inherit; transition: border-color 0.2s;">
+          <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} class="article-link">
             <span>
-              <strong style="color: var(--color-primary);">{article.data.title}</strong>
-              {article.data.author && <span style="color: var(--color-text-light); font-size: 0.875rem;"> — {article.data.author}</span>}
+              <strong>{article.data.title}</strong>
+              {article.data.author && <span class="text-muted text-sm"> — {article.data.author}</span>}
             </span>
-            <span class="category-badge" style="font-size: 0.7rem; flex-shrink: 0;">{categoryLabels[article.data.category] || article.data.category}</span>
+            <span class="category-badge category-badge--sm">{categoryLabels[article.data.category] || article.data.category}</span>
           </a>
         ))}
       </div>
 
-      <p style="text-align: center; margin-top: 1.5rem;">
+      <div class="section-footer">
         <a href={`${base}articles`} class="btn btn-secondary">Browse All Articles &rarr;</a>
-      </p>
+      </div>
     </div>
   </section>
 
   <!-- Older PDFs -->
-  <section class="page-section" style="background: var(--color-background-alt);">
+  <section class="page-section archive-section">
     <div class="container content-width">
       <h2>Past Issues (PDF)</h2>
 
       {Object.entries(pdfsByYear).map(([year, items]) => (
-        <div style="margin-bottom: 2rem;">
-          <h3 style="font-size: 1.125rem; color: var(--color-text-light); margin-bottom: 0.75rem;">{year}</h3>
+        <div class="year-group">
+          <h3 class="year-heading">{year}</h3>
           <ul class="newsletter-list">
             {items.map((nl) => (
               <li>
                 <span>{nl.date}</span>
-                <a href={nl.url} target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.5rem;">
+                <a href={`${base}newsletters/${nl.file}`} target="_blank" rel="noopener" class="download-link">
                   <span>Download PDF</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -137,7 +204,7 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
         </div>
       ))}
 
-      <p style="text-align: center; color: var(--color-text-light); margin-top: 2rem;">
+      <p class="text-muted archive-note">
         Looking for older issues? <a href="mailto:editor@bwnapdx.org">Contact the editor</a> for newsletters from 2012&ndash;2022.
       </p>
     </div>
@@ -146,7 +213,7 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
   <!-- Contribute -->
   <section class="page-section">
     <div class="container content-width">
-      <div class="grid grid-2" style="gap: 2rem;">
+      <div class="grid grid-2 contribute-grid">
         <div class="card">
           <h3>Contribute Content</h3>
           <p>
@@ -169,10 +236,10 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
   </section>
 
   <!-- Email Subscribe -->
-  <section class="page-section" style="background: var(--color-primary); color: white; text-align: center;">
+  <section class="page-section cta-section">
     <div class="container">
-      <h2 style="color: white;">Get Updates by Email</h2>
-      <p style="max-width: 500px; margin: 0 auto 1.5rem; opacity: 0.95;">
+      <h2>Get Updates by Email</h2>
+      <p>
         Can't wait for the printed newsletter? Subscribe to our email list for
         monthly updates about meetings, events, and neighborhood news.
       </p>
@@ -180,3 +247,88 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .issue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .pdf-link {
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .article-grid {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .article-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+  }
+
+  .article-link:hover {
+    border-color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .article-link strong {
+    color: var(--color-primary);
+  }
+
+  .category-badge--sm {
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .section-footer {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+  }
+
+  .archive-section {
+    background: var(--color-background-alt);
+  }
+
+  .year-group {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .year-heading {
+    font-size: 1.125rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .download-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .archive-note {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+  }
+
+  .contribute-grid {
+    gap: var(--spacing-xl);
+  }
+</style>

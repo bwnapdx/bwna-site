@@ -1,152 +1,249 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Events data - in production, this comes from markdown files in src/content/events/
-const events = [
-  {
-    slug: "general-meeting-apr-2026",
-    title: "BWNA General Meeting",
-    date: new Date("2026-04-13"),
-    time: "7:00 PM - 8:30 PM",
-    location: "Sylvan Learning Center",
-    address: "4411 NE Fremont St",
-    type: "meeting",
-    description: "Bimonthly general meeting open to all neighbors. Come hear updates on neighborhood projects, voice your concerns, and connect with your community.",
-    recurring: true
-  },
-  {
-    slug: "board-meeting-may-2026",
-    title: "BWNA Board Meeting",
-    date: new Date("2026-05-11"),
-    time: "7:00 PM - 8:30 PM",
-    location: "Sylvan Learning Center",
-    address: "4411 NE Fremont St",
-    type: "meeting",
-    description: "Board meetings are held the 2nd Monday of odd-numbered months. The public is welcome to attend; time for public comment is provided.",
-    recurring: true
-  },
-  {
-    slug: "general-meeting-jun-2026",
-    title: "BWNA General Meeting",
-    date: new Date("2026-06-08"),
-    time: "7:00 PM - 8:30 PM",
-    location: "Sylvan Learning Center",
-    address: "4411 NE Fremont St",
-    type: "meeting",
-    description: "Bimonthly general meeting open to all neighbors. Join us to discuss summer plans, neighborhood initiatives, and community updates.",
-    recurring: true
-  },
-  {
-    slug: "board-meeting-jul-2026",
-    title: "BWNA Board Meeting",
-    date: new Date("2026-07-13"),
-    time: "7:00 PM - 8:30 PM",
-    location: "Sylvan Learning Center",
-    address: "4411 NE Fremont St",
-    type: "meeting",
-    description: "Board meetings are held the 2nd Monday of odd-numbered months. The public is welcome to attend; time for public comment is provided.",
-    recurring: true
-  }
-];
+const base = import.meta.env.BASE_URL;
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+const allEvents = await getCollection('events');
+const now = new Date();
+const upcomingEvents = allEvents
+  .filter(e => e.data.date >= now || (e.data.endDate && e.data.endDate >= now))
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+// Featured events (for hero cards)
+const featuredEvents = upcomingEvents.filter(e => e.data.featured);
+
+// Group remaining events by month
+const months = ['January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// Group events by month
-const eventsByMonth = events.reduce((acc, event) => {
-  const monthKey = `${event.date.getFullYear()}-${event.date.getMonth()}`;
+const eventsByMonth = upcomingEvents.reduce((acc, event) => {
+  const monthKey = `${event.data.date.getFullYear()}-${event.data.date.getMonth()}`;
   if (!acc[monthKey]) {
     acc[monthKey] = {
-      label: `${months[event.date.getMonth()]} ${event.date.getFullYear()}`,
+      label: `${months[event.data.date.getMonth()]} ${event.data.date.getFullYear()}`,
       events: []
     };
   }
   acc[monthKey].events.push(event);
   return acc;
-}, {} as Record<string, { label: string; events: typeof events }>);
+}, {} as Record<string, { label: string; events: typeof upcomingEvents }>);
 
 const typeColors: Record<string, string> = {
   meeting: '#1e5c3a',
   community: '#5c8a3e',
-  social: '#8b5c3e'
+  social: '#8b5c3e',
+  tour: '#6b4c8a',
 };
+
+function formatDate(date: Date, endDate?: Date) {
+  const opts: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+  if (endDate) {
+    return `${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - ${endDate.toLocaleDateString('en-US', opts)}`;
+  }
+  return date.toLocaleDateString('en-US', opts);
+}
+
+// Check if event has meaningful body content
+function hasBody(body: string) {
+  return body.trim().length > 10;
+}
 ---
 
 <BaseLayout title="Upcoming Events" description="Find upcoming BWNA meetings, community events, and neighborhood activities in Beaumont-Wilshire.">
-  
-  <!-- Page Header -->
-  <section class="hero" style="padding: 2rem 0;">
+
+  <section class="hero">
     <div class="container">
       <h1>Upcoming Events</h1>
       <p>Meetings, activities, and gatherings in Beaumont-Wilshire</p>
     </div>
   </section>
 
-  <!-- Events List -->
+  {featuredEvents.length > 0 && (
+    <section class="page-section">
+      <div class="container content-width">
+        {featuredEvents.map(event => (
+          <a href={`${base}events/${event.id.replace(/\.md$/, '')}`} class="featured-event">
+            {event.data.image && (
+              <img src={event.data.image.startsWith('/') ? `${base}${event.data.image.slice(1)}` : event.data.image} alt={event.data.imageAlt || event.data.title} class="featured-event-img" />
+            )}
+            <div class="featured-event-content">
+              <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>{event.data.type}</span>
+              <h2>{event.data.title}</h2>
+              <div class="event-meta">
+                {formatDate(event.data.date, event.data.endDate)} &middot; {event.data.time}
+              </div>
+              <div class="event-meta">{event.data.location}</div>
+              {event.data.summary && <p>{event.data.summary}</p>}
+              <span class="btn btn-secondary">View Details &rarr;</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
   <section class="page-section">
     <div class="container content-width">
-      
+
       {Object.entries(eventsByMonth).map(([key, { label, events: monthEvents }]) => (
-        <div style="margin-bottom: 2.5rem;">
-          <h2 style="font-size: 1.25rem; color: var(--color-text-light); border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem; margin-bottom: 1rem;">
-            {label}
-          </h2>
-          
+        <div class="month-group">
+          <h2 class="month-heading">{label}</h2>
+
           {monthEvents.map((event) => (
-            <div class="event-item" style="background: white; border: 1px solid var(--color-border);">
+            <div class="event-item event-item--bordered">
               <div class="event-date">
-                <div class="month">{monthsShort[event.date.getMonth()]}</div>
-                <div class="day">{event.date.getDate()}</div>
+                <div class="month">{monthsShort[event.data.date.getMonth()]}</div>
+                <div class="day">{event.data.date.getDate()}</div>
               </div>
-              <div class="event-details" style="flex: 1;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
-                  <h3 style="margin-bottom: 0.25rem;">{event.title}</h3>
-                  <span style={`background: ${typeColors[event.type] || '#666'}; color: white; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase;`}>
-                    {event.type}
+              <div class="event-details">
+                <div class="event-header">
+                  <h3>
+                    {hasBody(event.body || '') ? (
+                      <a href={`${base}events/${event.id.replace(/\.md$/, '')}`}>{event.data.title}</a>
+                    ) : (
+                      event.data.title
+                    )}
+                  </h3>
+                  <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>
+                    {event.data.type}
                   </span>
                 </div>
                 <div class="event-meta">
-                  🕐 {event.time} &nbsp;|&nbsp; 📍 {event.location}
+                  {event.data.time} &nbsp;|&nbsp; {event.data.location}
                 </div>
-                <p style="margin-bottom: 0.5rem;">{event.description}</p>
-                {event.address && (
-                  <a href={`https://maps.google.com/?q=${encodeURIComponent(event.address + ', Portland, OR')}`} 
-                     target="_blank" 
-                     rel="noopener"
-                     style="font-size: 0.875rem;">
-                    View on Map →
-                  </a>
-                )}
+                {event.data.summary && <p>{event.data.summary}</p>}
+                <div class="event-links">
+                  {event.data.address && (
+                    <a href={`https://maps.google.com/?q=${encodeURIComponent(event.data.address)}`}
+                       target="_blank"
+                       rel="noopener"
+                       class="text-sm">
+                      View on Map
+                    </a>
+                  )}
+                  {hasBody(event.body || '') && (
+                    <a href={`${base}events/${event.id.replace(/\.md$/, '')}`} class="text-sm">Details &rarr;</a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
       ))}
-      
+
+      {upcomingEvents.length === 0 && (
+        <p class="text-muted">No upcoming events scheduled. Check back soon!</p>
+      )}
+
     </div>
   </section>
 
-  <!-- Meeting Schedule Info -->
   <section class="page-section">
     <div class="container content-width">
-      <div class="card" style="background: var(--color-primary-light);">
+      <div class="card card--highlight">
         <h3>Regular Meeting Schedule</h3>
         <p><strong>General Meetings:</strong> 2nd Monday of even-numbered months (Feb, Apr, Jun, Aug, Oct, Dec)</p>
         <p><strong>Board Meetings:</strong> 2nd Monday of odd-numbered months (Jan, Mar, May, Jul, Sep, Nov)</p>
-        <p style="margin-bottom: 0;"><strong>Location:</strong> Sylvan Learning Center, 4411 NE Fremont St (unless otherwise noted)</p>
+        <p><strong>Location:</strong> Sylvan Learning Center, 4411 NE Fremont St (unless otherwise noted)</p>
       </div>
     </div>
   </section>
 
-  <!-- Add Event CTA -->
-  <section class="page-section" style="text-align: center;">
+  <section class="page-section section-header">
     <div class="container">
       <h3>Have a neighborhood event to share?</h3>
-      <p style="color: var(--color-text-light);">
-        Contact us to have your community event listed on our calendar.
-      </p>
+      <p>Contact us to have your community event listed on our calendar.</p>
       <a href="mailto:editor@bwnapdx.org" class="btn btn-secondary">Submit an Event</a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .featured-event {
+    display: block;
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .featured-event:hover {
+    box-shadow: 0 4px 16px rgba(30, 92, 58, 0.15);
+    text-decoration: none;
+  }
+
+  .featured-event-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .featured-event-content {
+    padding: var(--spacing-lg);
+  }
+
+  .featured-event-content h2 {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .featured-event-content p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .month-group {
+    margin-bottom: 2.5rem;
+  }
+
+  .month-heading {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .event-item--bordered {
+    background: white;
+    border: 1px solid var(--color-border);
+  }
+
+  .event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .event-header h3 {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .event-header h3 a {
+    color: var(--color-primary-dark);
+  }
+
+  .event-header h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .event-type {
+    color: white;
+    padding: 0.125rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .event-links {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xs);
+  }
+</style>

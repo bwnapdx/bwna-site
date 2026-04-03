@@ -51,18 +51,16 @@ const opportunities = [
 
 <BaseLayout title="Get Involved" description="Volunteer opportunities with the Beaumont-Wilshire Neighborhood Association. Find ways to contribute to your community.">
 
-  <!-- Page Header -->
-  <section class="hero" style="padding: 2rem 0;">
+  <section class="hero">
     <div class="container">
       <h1>Get Involved</h1>
       <p>Your community needs you!</p>
     </div>
   </section>
 
-  <!-- Intro -->
   <section class="page-section">
     <div class="container content-width">
-      <p style="font-size: 1.125rem;">
+      <p class="lead">
         While the Beaumont-Wilshire Neighborhood Association is officially guided by a volunteer
         board of directors, the strength of our community lies in the many residents who step
         up to provide valuable input, lend their time, and support neighborhood initiatives.
@@ -74,7 +72,6 @@ const opportunities = [
     </div>
   </section>
 
-  <!-- Opportunities -->
   <section class="page-section">
     <div class="container">
       <div class="section-header">
@@ -85,20 +82,20 @@ const opportunities = [
       <div class="grid grid-2">
         {opportunities.map((opp) => (
           <div class="card">
-            <h3 style="display: flex; align-items: center; gap: 0.5rem;">
-              <span style="font-size: 1.5rem;">{opp.icon}</span>
+            <h3 class="opp-title">
+              <span class="opp-icon">{opp.icon}</span>
               {opp.title}
             </h3>
             <p>{opp.description}</p>
-            <p style="font-size: 0.875rem; color: var(--color-text-light);">
+            <p class="text-sm text-muted">
               <strong>Time commitment:</strong> {opp.commitment}
             </p>
             {opp.contact ? (
-              <a href={`mailto:${opp.contact}`} class="btn btn-secondary" style="margin-top: 0.5rem;">
+              <a href={`mailto:${opp.contact}`} class="btn btn-secondary opp-btn">
                 Contact to Volunteer
               </a>
             ) : opp.link ? (
-              <a href={opp.link} target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top: 0.5rem;">
+              <a href={opp.link} target="_blank" rel="noopener" class="btn btn-secondary opp-btn">
                 Learn More &rarr;
               </a>
             ) : null}
@@ -108,16 +105,15 @@ const opportunities = [
     </div>
   </section>
 
-  <!-- Attend a Meeting -->
   <section class="page-section">
     <div class="container content-width">
-      <div class="card" style="background: var(--color-primary-light); text-align: center;">
+      <div class="card card--highlight meeting-card">
         <h3>Attend a BWNA Meeting</h3>
         <p>
           The easiest way to get involved is to attend one of our meetings! Listen, share
           concerns, vote on issues, meet neighbors, and stay updated on community plans.
         </p>
-        <p style="margin-bottom: 1rem;">
+        <p>
           <strong>General Meetings:</strong> 2nd Monday of even months, 7 PM<br>
           <strong>Board Meetings:</strong> 2nd Monday of odd months, 7 PM
         </p>
@@ -126,11 +122,10 @@ const opportunities = [
     </div>
   </section>
 
-  <!-- Open to Anything -->
-  <section class="page-section" style="text-align: center;">
+  <section class="page-section section-header">
     <div class="container">
       <h2>Open to Anything?</h2>
-      <p style="max-width: 500px; margin: 0 auto 1.5rem; color: var(--color-text-light);">
+      <p>
         Not sure where to start? Let us know you're interested and we'll match you with
         opportunities as they come up.
       </p>
@@ -140,10 +135,9 @@ const opportunities = [
     </div>
   </section>
 
-  <!-- Featured: Art & Garden Tour -->
   <section class="page-section">
     <div class="container content-width">
-      <div class="card" style="border: 2px solid var(--color-accent);">
+      <div class="card card--featured">
         <h3>Special Opportunity: Art &amp; Garden Tour Host</h3>
         <p>
           Share your garden or art collection with neighbors during our annual Art & Garden Tour!
@@ -156,3 +150,31 @@ const opportunities = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .lead {
+    font-size: 1.125rem;
+  }
+
+  .opp-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .opp-icon {
+    font-size: 1.5rem;
+  }
+
+  .opp-btn {
+    margin-top: var(--spacing-sm);
+  }
+
+  .meeting-card {
+    text-align: center;
+  }
+
+  .card--featured {
+    border: 2px solid var(--color-accent);
+  }
+</style>

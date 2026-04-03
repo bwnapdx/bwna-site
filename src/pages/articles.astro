@@ -34,7 +34,7 @@ const categoryLabels: Record<string, string> = {
 ---
 
 <BaseLayout title="All Articles" description="Browse all BWNA newsletter articles. Searchable archive of community news, events, and stories from Beaumont-Wilshire.">
-  <section class="hero" style="padding: 2rem 0;">
+  <section class="hero">
     <div class="container">
       <h1>Newsletter Articles</h1>
       <p>Browse and search articles from the BWNA newsletter</p>
@@ -42,10 +42,10 @@ const categoryLabels: Record<string, string> = {
   </section>
 
   <!-- Filters -->
-  <section style="background: var(--color-background-alt); padding: 1rem 0; border-bottom: 1px solid var(--color-border);">
+  <section class="filter-bar">
     <div class="container">
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-        <span style="font-weight: 500;">Filter:</span>
+      <div class="filter-row">
+        <span class="filter-label">Filter:</span>
         <button class="filter-btn active" data-filter="all">All</button>
         {categories.map(cat => (
           <button class="filter-btn" data-filter={cat}>
@@ -59,14 +59,14 @@ const categoryLabels: Record<string, string> = {
   <!-- Article List -->
   <section class="page-section">
     <div class="container content-width">
-      <p style="color: var(--color-text-light); margin-bottom: 1.5rem;">{articles.length} articles</p>
+      <p class="text-muted article-count">{articles.length} articles</p>
 
       {articles.map(article => (
         <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} class="article-card" data-category={article.data.category} data-issue={article.data.issueSlug}>
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 200px;">
-              <h3 style="margin-bottom: 0.25rem;">{article.data.title}</h3>
-              <div style="font-size: 0.875rem; color: var(--color-text-light);">
+          <div class="article-row">
+            <div class="article-info">
+              <h3>{article.data.title}</h3>
+              <div class="text-sm text-muted">
                 {article.data.issue}
                 {article.data.author && <span> &middot; {article.data.author}</span>}
               </div>
@@ -97,6 +97,37 @@ const categoryLabels: Record<string, string> = {
   }
   .article-card h3 {
     color: var(--color-primary);
+  }
+  .filter-bar {
+    background: var(--color-background-alt);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .filter-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-label {
+    font-weight: 500;
+  }
+  .article-count {
+    margin-bottom: var(--spacing-lg);
+  }
+  .article-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .article-info {
+    flex: 1;
+    min-width: 200px;
+  }
+  .article-info h3 {
+    margin-bottom: var(--spacing-xs);
   }
   .filter-btn {
     background: white;

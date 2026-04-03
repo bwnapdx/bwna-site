@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map(event => ({
+    params: { slug: event.id.replace(/\.md$/, '') },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+const { Content } = await event.render();
+const base = import.meta.env.BASE_URL;
+
+const typeColors: Record<string, string> = {
+  meeting: '#1e5c3a',
+  community: '#5c8a3e',
+  social: '#8b5c3e',
+  tour: '#6b4c8a',
+};
+
+function formatDate(date: Date, endDate?: Date) {
+  const opts: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+  if (endDate) {
+    return `${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} \u2013 ${endDate.toLocaleDateString('en-US', opts)}`;
+  }
+  return date.toLocaleDateString('en-US', opts);
+}
+---
+
+<BaseLayout title={event.data.title} description={event.data.summary || `${event.data.title} — a BWNA event`}>
+  <article class="page-section" data-pagefind-body>
+    <div class="container content-width">
+      <div class="event-back">
+        <a href={`${base}events`} class="text-sm">&larr; All Events</a>
+      </div>
+
+      <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>{event.data.type}</span>
+
+      <h1>{event.data.title}</h1>
+
+      {event.data.image && (
+        <img
+          src={event.data.image.startsWith('/') ? `${base}${event.data.image.slice(1)}` : event.data.image}
+          alt={event.data.imageAlt || event.data.title}
+          class="event-hero-img"
+        />
+      )}
+
+      <div class="event-info-card">
+        <div class="event-info-row">
+          <strong>Date:</strong> {formatDate(event.data.date, event.data.endDate)}
+        </div>
+        <div class="event-info-row">
+          <strong>Time:</strong> {event.data.time}
+        </div>
+        <div class="event-info-row">
+          <strong>Location:</strong> {event.data.location}
+          {event.data.address && (
+            <a href={`https://maps.google.com/?q=${encodeURIComponent(event.data.address)}`}
+               target="_blank" rel="noopener" class="text-sm"> (View Map)</a>
+          )}
+        </div>
+      </div>
+
+      <div class="article-content">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <section class="page-section section-header">
+    <div class="container">
+      <a href={`${base}events`} class="btn btn-secondary">&larr; All Upcoming Events</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .event-back {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .event-type {
+    display: inline-block;
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  h1 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .event-hero-img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .event-info-card {
+    background: var(--color-primary-light);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .event-info-row {
+    padding: var(--spacing-xs) 0;
+  }
+</style>

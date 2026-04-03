@@ -35,11 +35,16 @@ const events = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
     time: z.string(),
     location: z.string(),
     address: z.string().optional(),
-    type: z.enum(['meeting', 'community', 'social']),
+    type: z.enum(['meeting', 'community', 'social', 'tour']),
     recurring: z.boolean().default(false),
+    featured: z.boolean().default(false),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
+    summary: z.string().optional(),
   }),
 });
 

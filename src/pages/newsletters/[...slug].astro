@@ -41,19 +41,19 @@ const categoryLabels: Record<string, string> = {
 <BaseLayout title={article.data.title} description={`${article.data.title} — from the ${article.data.issue} BWNA Newsletter`}>
   <article class="page-section" data-pagefind-body>
     <div class="container content-width">
-      <div style="margin-bottom: 1.5rem;">
-        <a href={`${base}newsletters`} style="font-size: 0.875rem;">&larr; {article.data.issue} Newsletter</a>
+      <div class="article-back">
+        <a href={`${base}newsletters`} class="text-sm">&larr; {article.data.issue} Newsletter</a>
       </div>
 
-      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+      <div class="article-meta-row">
         <span class="category-badge" data-pagefind-filter="category">{categoryLabels[article.data.category] || article.data.category}</span>
-        <span style="font-size: 0.875rem; color: var(--color-text-light);">{article.data.issue}</span>
+        <span class="text-sm text-muted">{article.data.issue}</span>
       </div>
 
-      <h1 data-pagefind-meta="title" style="margin-bottom: 0.5rem;">{article.data.title}</h1>
+      <h1 data-pagefind-meta="title">{article.data.title}</h1>
 
       {article.data.author && (
-        <p style="color: var(--color-text-light); margin-bottom: 2rem; font-size: 0.95rem;" data-pagefind-meta="author">
+        <p class="article-author" data-pagefind-meta="author">
           By {article.data.author}
         </p>
       )}
@@ -63,11 +63,11 @@ const categoryLabels: Record<string, string> = {
       </div>
 
       {article.data.pdfFile && (
-        <div class="card" style="background: var(--color-primary-light); margin-top: 2.5rem;">
-          <p style="margin-bottom: 0.5rem;">
+        <div class="card card--highlight issue-card">
+          <p>
             This article appeared in the <strong>{article.data.issue}</strong> issue of the BWNA Newsletter.
           </p>
-          <a href={`${base}newsletters/${article.data.pdfFile}`} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+          <a href={`${base}newsletters/${article.data.pdfFile}`} target="_blank" rel="noopener" class="download-link">
             Download complete issue (PDF)
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -81,18 +81,18 @@ const categoryLabels: Record<string, string> = {
   </article>
 
   {issueArticles.length > 0 && (
-    <section class="page-section" style="background: var(--color-background-alt);">
+    <section class="page-section related-section">
       <div class="container content-width">
-        <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">More from {article.data.issue}</h2>
-        <ul style="list-style: none; padding: 0;">
+        <h2 class="related-heading">More from {article.data.issue}</h2>
+        <ul class="related-list">
           {issueArticles.map(a => (
-            <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-border);">
-              <a href={`${base}newsletters/${a.id.replace(/\.md$/, '')}`} style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+            <li>
+              <a href={`${base}newsletters/${a.id.replace(/\.md$/, '')}`} class="related-link">
                 <span>
                   <strong>{a.data.title}</strong>
-                  {a.data.author && <span style="color: var(--color-text-light); font-size: 0.875rem;"> — {a.data.author}</span>}
+                  {a.data.author && <span class="text-sm text-muted"> — {a.data.author}</span>}
                 </span>
-                <span class="category-badge" style="font-size: 0.7rem; flex-shrink: 0;">{categoryLabels[a.data.category] || a.data.category}</span>
+                <span class="category-badge category-badge--sm">{categoryLabels[a.data.category] || a.data.category}</span>
               </a>
             </li>
           ))}
@@ -101,3 +101,86 @@ const categoryLabels: Record<string, string> = {
     </section>
   )}
 </BaseLayout>
+
+<style>
+  .article-back {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .article-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .article-author {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-xl);
+    font-size: 0.95rem;
+  }
+
+  .issue-card {
+    margin-top: 2.5rem;
+  }
+
+  .issue-card p {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .related-section {
+    background: var(--color-background-alt);
+  }
+
+  .related-heading {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .related-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .related-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .related-list li:last-child {
+    border-bottom: none;
+  }
+
+  .related-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .related-link:hover {
+    text-decoration: none;
+  }
+
+  .related-link:hover strong {
+    text-decoration: underline;
+  }
+
+  .category-badge--sm {
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+</style>

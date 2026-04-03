@@ -223,8 +223,12 @@ a:hover {
 .hero {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
   color: white;
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-xl) 0;
   text-align: center;
+}
+
+.hero--tall {
+  padding: var(--spacing-2xl) 0;
 }
 
 .hero h1 {
@@ -345,29 +349,64 @@ a:hover {
   margin-bottom: var(--spacing-sm);
 }
 
-/* Board members */
-.board-member {
+/* Card variants */
+.card--highlight {
+  background: var(--color-primary-light);
+}
+
+/* CTA section (primary bg, white text, centered) */
+.cta-section {
+  background: var(--color-primary);
+  color: white;
   text-align: center;
 }
 
-.board-member img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
+.cta-section h2 {
+  color: white;
+}
+
+.cta-section p {
+  max-width: 500px;
+  margin: 0 auto var(--spacing-lg);
+  opacity: 0.95;
+}
+
+/* Button variants */
+.btn--outline {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn--outline:hover {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  text-decoration: none;
+}
+
+/* Utility: spaced list with indentation */
+.spaced-list {
+  margin-left: 1.5rem;
   margin-bottom: var(--spacing-md);
-  border: 3px solid var(--color-primary-light);
 }
 
-.board-member h3 {
-  margin-bottom: var(--spacing-xs);
-  font-size: 1.125rem;
-}
-
-.board-member .role {
-  color: var(--color-primary);
-  font-weight: 500;
+.spaced-list li {
   margin-bottom: var(--spacing-sm);
+}
+
+/* Utility: small text */
+.text-sm {
+  font-size: 0.875rem;
+}
+
+/* Utility: muted text */
+.text-muted {
+  color: var(--color-text-light);
+}
+
+/* Utility: back link */
+.back-link {
+  margin-top: var(--spacing-xl);
 }
 
 /* Newsletter archive */

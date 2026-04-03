@@ -5,7 +5,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Subscribe" description="Subscribe to BWNA email updates for neighborhood news, meetings, and events.">
-  <section class="hero" style="padding: 2rem 0;">
+  <section class="hero">
     <div class="container">
       <h1>Subscribe to BWNA Updates</h1>
       <p>Stay informed about neighborhood news and events</p>
@@ -20,7 +20,7 @@ const base = import.meta.env.BASE_URL;
       </p>
 
       <!-- Mailchimp Signup Form -->
-      <div class="card" style="margin: 2rem 0; padding: 0; overflow: hidden;">
+      <div class="card mc-card">
         <div id="mc_embed_shell">
           <link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
           <div id="mc_embed_signup">
@@ -74,7 +74,7 @@ const base = import.meta.env.BASE_URL;
         </div>
       </div>
 
-      <div class="card" style="background: var(--color-primary-light);">
+      <div class="card card--highlight">
         <h3>Printed Newsletter</h3>
         <p>
           BWNA also distributes a free bimonthly printed newsletter to over 2,600
@@ -87,6 +87,12 @@ const base = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <style>
+  .mc-card {
+    margin: var(--spacing-xl) 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
   #mc_embed_signup {
     font: 14px Helvetica, Arial, sans-serif;
     width: 100%;

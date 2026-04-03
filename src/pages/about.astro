@@ -25,7 +25,7 @@ const boardMembers = [
 <BaseLayout title="About Us" description="Learn about the Beaumont-Wilshire Neighborhood Association, our mission, and our volunteer board of directors.">
 
   <!-- Page Header -->
-  <section class="hero" style="padding: 2rem 0;">
+  <section class="hero">
     <div class="container">
       <h1>About Us</h1>
       <p>Building community in Northeast Portland</p>
@@ -89,9 +89,9 @@ const boardMembers = [
       </p>
 
       <p>Accordingly, we pledge:</p>
-      <ol style="margin-left: 1.5rem; margin-bottom: 1rem;">
-        <li style="margin-bottom: 0.5rem;">To listen and learn, and to assess our own practices and policies in regards to equity and inclusion.</li>
-        <li style="margin-bottom: 0.5rem;">To seek advice on how to combat racism in our neighborhood and our city, and welcome feedback that makes us better allies to our neighbors of color.</li>
+      <ol class="spaced-list">
+        <li>To listen and learn, and to assess our own practices and policies in regards to equity and inclusion.</li>
+        <li>To seek advice on how to combat racism in our neighborhood and our city, and welcome feedback that makes us better allies to our neighbors of color.</li>
         <li>To develop ways we can confront discrimination and support cooperation among Beaumont-Wilshire neighbors.</li>
       </ol>
     </div>
@@ -136,14 +136,14 @@ const boardMembers = [
   <section class="page-section">
     <div class="container content-width">
       <h2>Governing Documents</h2>
-      <ul style="list-style: none;">
-        <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-border);">
+      <ul class="resource-list">
+        <li>
           <a href={`${base}bylaws`}>BWNA Bylaws</a>
         </li>
-        <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-border);">
+        <li>
           <a href={`${base}policies`}>BWNA Policies</a>
         </li>
-        <li style="padding: 0.75rem 0;">
+        <li>
           <a href={`${base}meeting-minutes`}>Meeting Minutes Archive</a>
         </li>
       </ul>

@@ -5,7 +5,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Newsletter Submissions" description="Submit content for the BWNA newsletter.">
-  <section class="hero" style="padding: 2rem 0;">
+  <section class="hero">
     <div class="container">
       <h1>Newsletter Submissions</h1>
       <p>Contribute to the BWNA newsletter</p>
@@ -21,10 +21,10 @@ const base = import.meta.env.BASE_URL;
       </p>
 
       <h2>Submission Guidelines</h2>
-      <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-        <li style="margin-bottom: 0.5rem;">Articles should be relevant to the Beaumont-Wilshire neighborhood.</li>
-        <li style="margin-bottom: 0.5rem;">Submissions are subject to editing for length and clarity.</li>
-        <li style="margin-bottom: 0.5rem;">Deadline is typically 4 weeks before the issue date.</li>
+      <ul class="spaced-list">
+        <li>Articles should be relevant to the Beaumont-Wilshire neighborhood.</li>
+        <li>Submissions are subject to editing for length and clarity.</li>
+        <li>Deadline is typically 4 weeks before the issue date.</li>
         <li>Include your name and contact information with your submission.</li>
       </ul>
 
@@ -33,7 +33,7 @@ const base = import.meta.env.BASE_URL;
         <a href="mailto:editor@bwnapdx.org">editor@bwnapdx.org</a>.
       </p>
 
-      <p style="margin-top: 2rem;">
+      <p class="back-link">
         <a href={`${base}newsletters`}>&larr; Back to Newsletters</a>
       </p>
     </div>
