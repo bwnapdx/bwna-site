@@ -3,59 +3,76 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const base = import.meta.env.BASE_URL;
 
-const minutes = [
-  { title: "Board Meeting", date: "2024-09-09", file: "board-meeting-2024-09-09.pdf" },
-  { title: "General Meeting", date: "2024-08-12", file: "general-meeting-2024-08-12.pdf" },
-  { title: "Board Meeting", date: "2024-07-08", file: "board-meeting-2024-07-08.pdf" },
-  { title: "General Meeting", date: "2024-06-10", file: "general-meeting-2024-06-10.pdf" },
-  { title: "Board Meeting", date: "2024-05-13", file: "board-meeting-2024-05-13.pdf" },
-  { title: "General Meeting", date: "2024-04-08", file: "general-meeting-2024-04-08.pdf" },
-  { title: "Board Meeting", date: "2024-03-11", file: "board-meeting-2024-03-11.pdf" },
-  { title: "General Meeting", date: "2024-02-12", file: "general-meeting-2024-02-12.pdf" },
-  { title: "Board Meeting", date: "2024-01-08", file: "board-meeting-2024-01-08.pdf" },
-  { title: "General Meeting", date: "2023-12-11", file: "general-meeting-2023-12-11.pdf" },
-  { title: "Board Meeting", date: "2023-11-23", file: "board-meeting-2023-11-23.pdf" },
-  { title: "Board Meeting", date: "2023-09-11", file: "board-meeting-2023-09-11.pdf" },
-  { title: "General Meeting", date: "2023-08-14", file: "general-meeting-2023-08-14.pdf" },
-  { title: "Board Meeting", date: "2023-07-10", file: "board-meeting-2023-07-10.pdf" },
-  { title: "General Meeting", date: "2023-06-12", file: "general-meeting-2023-06-12.pdf" },
-  { title: "Board Meeting", date: "2023-05-08", file: "board-meeting-2023-05-08.pdf" },
-  { title: "General Meeting", date: "2023-04-10", file: "general-meeting-2023-04-10.pdf" },
-  { title: "Board Meeting", date: "2023-03-13", file: "board-meeting-2023-03-13.pdf" },
-  { title: "Board Meeting", date: "2023-01-09", file: "board-meeting-2023-01-09.pdf" },
-  { title: "General Meeting", date: "2022-12-12", file: "general-meeting-2022-12-12.pdf" },
-  { title: "Board Meeting", date: "2022-11-14", file: "board-meeting-2022-11-14.pdf" },
-  { title: "General Meeting", date: "2022-10-10", file: "general-meeting-2022-10-10.pdf" },
-  { title: "Board Meeting", date: "2022-09-12", file: "board-meeting-2022-09-12.pdf" },
-  { title: "General Meeting", date: "2022-08-08", file: "general-meeting-2022-08-08.pdf" },
-  { title: "Board Meeting", date: "2021-03-08", file: "board-meeting-2021-03-08.pdf" },
-  { title: "Special Meeting", date: "2021-02-11", file: "special-meeting-2021-02-11.pdf" },
-  { title: "General Meeting", date: "2021-02-08", file: "general-meeting-2021-02-08.pdf" },
-  { title: "Board Meeting", date: "2021-01-11", file: "board-meeting-2021-01-11.pdf" },
-  { title: "General Meeting", date: "2020-12-14", file: "general-meeting-2020-12-14.pdf" },
-  { title: "Board Meeting", date: "2020-11-09", file: "board-meeting-2020-11-09.pdf" },
-  { title: "General Meeting", date: "2020-10-12", file: "general-meeting-2020-10-12.pdf" },
-  { title: "Board Meeting", date: "2020-09-14", file: "board-meeting-2020-09-14.pdf" },
-  { title: "General Meeting", date: "2020-08-10", file: "general-meeting-2020-08-10.pdf" },
-  { title: "Board Meeting", date: "2020-07-13", file: "board-meeting-2020-07-13.pdf" },
-  { title: "Board Meeting", date: "2020-03-09", file: "board-meeting-2020-03-09.pdf" },
-  { title: "General Meeting", date: "2020-02-10", file: "general-meeting-2020-02-10.pdf" },
-  { title: "Special Board Meeting", date: "2020-01-29", file: "special-board-meeting-2020-01-29.pdf" },
-  { title: "Board Meeting", date: "2020-01-13", file: "board-meeting-2020-01-13.pdf" },
-  { title: "General Meeting", date: "2019-12-09", file: "general-meeting-2019-12-09.pdf" },
-  { title: "Board Meeting", date: "2019-11-11", file: "board-meeting-2019-11-11.pdf" },
-  { title: "General Meeting", date: "2019-10-14", file: "general-meeting-2019-10-14.pdf" },
-  { title: "Board Meeting", date: "2019-09-09", file: "board-meeting-2019-09-09.pdf" },
-  { title: "Board Meeting", date: "2019-07-08", file: "board-meeting-2019-07-08.pdf" },
+const minutesData = [
+  { title: "General Meeting", date: "2025-12-08" },
+  { title: "Board Meeting", date: "2025-11-10" },
+  { title: "General Meeting", date: "2025-10-13" },
+  { title: "Board Meeting", date: "2025-09-08" },
+  { title: "General Meeting", date: "2025-08-11" },
+  { title: "Board Meeting", date: "2025-07-14" },
+  { title: "General Meeting", date: "2025-06-09" },
+  { title: "Board Meeting", date: "2025-05-12" },
+  { title: "General Meeting", date: "2025-04-14" },
+  { title: "Board Meeting", date: "2025-03-10" },
+  { title: "General Meeting", date: "2025-02-10" },
+  { title: "Board Meeting", date: "2025-01-13" },
+  { title: "Board Meeting", date: "2024-09-09" },
+  { title: "General Meeting", date: "2024-08-12" },
+  { title: "Board Meeting", date: "2024-07-08" },
+  { title: "General Meeting", date: "2024-06-10" },
+  { title: "Board Meeting", date: "2024-05-13" },
+  { title: "General Meeting", date: "2024-04-08" },
+  { title: "Board Meeting", date: "2024-03-11" },
+  { title: "General Meeting", date: "2024-02-12" },
+  { title: "Board Meeting", date: "2024-01-08" },
+  { title: "General Meeting", date: "2023-12-11" },
+  { title: "Board Meeting", date: "2023-11-23" },
+  { title: "Board Meeting", date: "2023-09-11" },
+  { title: "General Meeting", date: "2023-08-14" },
+  { title: "Board Meeting", date: "2023-07-10" },
+  { title: "General Meeting", date: "2023-06-12" },
+  { title: "Board Meeting", date: "2023-05-08" },
+  { title: "General Meeting", date: "2023-04-10" },
+  { title: "Board Meeting", date: "2023-03-13" },
+  { title: "Board Meeting", date: "2023-01-09" },
+  { title: "General Meeting", date: "2022-12-12" },
+  { title: "Board Meeting", date: "2022-11-14" },
+  { title: "General Meeting", date: "2022-10-10" },
+  { title: "Board Meeting", date: "2022-09-12" },
+  { title: "General Meeting", date: "2022-08-08" },
+  { title: "Board Meeting", date: "2021-03-08" },
+  { title: "Special Meeting", date: "2021-02-11" },
+  { title: "General Meeting", date: "2021-02-08" },
+  { title: "Board Meeting", date: "2021-01-11" },
+  { title: "General Meeting", date: "2020-12-14" },
+  { title: "Board Meeting", date: "2020-11-09" },
+  { title: "General Meeting", date: "2020-10-12" },
+  { title: "Board Meeting", date: "2020-09-14" },
+  { title: "General Meeting", date: "2020-08-10" },
+  { title: "Board Meeting", date: "2020-07-13" },
+  { title: "Board Meeting", date: "2020-03-09" },
+  { title: "General Meeting", date: "2020-02-10" },
+  { title: "Special Board Meeting", date: "2020-01-29" },
+  { title: "Board Meeting", date: "2020-01-13" },
+  { title: "General Meeting", date: "2019-12-09" },
+  { title: "Board Meeting", date: "2019-11-11" },
+  { title: "General Meeting", date: "2019-10-14" },
+  { title: "Board Meeting", date: "2019-09-09" },
+  { title: "Board Meeting", date: "2019-07-08" },
 ];
 
+// Derive filename from title + date
+const minutes = minutesData.map(m => ({
+  ...m,
+  file: `${m.title.toLowerCase().replace(/ /g, '-')}-${m.date}.pdf`,
+}));
+
 // Group by year
-const byYear = minutes.reduce((acc, m) => {
+const byYear: Record<string, typeof minutes> = {};
+for (const m of minutes) {
   const year = m.date.split('-')[0];
-  if (!acc[year]) acc[year] = [];
-  acc[year].push(m);
-  return acc;
-}, {} as Record<string, typeof minutes>);
+  (byYear[year] ??= []).push(m);
+}
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr + 'T12:00:00');
@@ -75,12 +92,12 @@ function formatDate(dateStr: string) {
     <div class="container content-width">
       <p>
         Meeting minutes from BWNA general meetings and board meetings are approved at the
-        following meeting and then made available here. Minutes are available from 2019 to present.
+        following meeting and then made available here.
       </p>
 
-      {Object.entries(byYear).map(([year, items]) => (
-        <div class="year-group">
-          <h2 class="year-heading">{year}</h2>
+      {Object.entries(byYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items], index) => (
+        <details class="year-group" open={index === 0}>
+          <summary class="year-heading">{year} <span class="year-count">({items.length} meetings)</span></summary>
           <ul class="newsletter-list">
             {items.map(m => (
               <li>
@@ -99,7 +116,7 @@ function formatDate(dateStr: string) {
               </li>
             ))}
           </ul>
-        </div>
+        </details>
       ))}
     </div>
   </section>
@@ -120,24 +137,7 @@ function formatDate(dateStr: string) {
 </BaseLayout>
 
 <style>
-  .year-group {
-    margin-bottom: var(--spacing-xl);
-  }
-
-  .year-heading {
-    font-size: 1.25rem;
-    color: var(--color-text-light);
-    margin-bottom: 0.75rem;
-  }
-
   .meeting-type {
     font-weight: 600;
-  }
-
-  .download-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
   }
 </style>

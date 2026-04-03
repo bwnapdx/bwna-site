@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { categoryLabels } from '../data/categoryLabels';
 
 const base = import.meta.env.BASE_URL;
 
@@ -11,118 +12,25 @@ const latestArticles = allArticles
   .filter(a => a.data.issueSlug === latestIssueSlug)
   .sort((a, b) => (a.data.page ?? 99) - (b.data.page ?? 99));
 
-const categoryLabels: Record<string, string> = {
-  'presidents-message': "President's Message",
-  'community-news': 'Community News',
-  'land-use': 'Land Use',
-  'parks': 'Parks',
-  'safety': 'Safety',
-  'schools': 'Schools',
-  'business': 'Business',
-  'events': 'Events',
-  'history': 'History',
-  'environment': 'Environment',
-  'opinion': 'Opinion',
-  'announcements': 'Announcements',
-  'volunteer': 'Volunteer',
-  'other': 'Other',
-};
-
-// Full newsletter PDF archive (2012-2025), all hosted locally
-const olderPdfs = [
-  { date: "Nov - Dec 2025", file: "bwna-2025-11.pdf" },
-  { date: "Sept - Oct 2025", file: "bwna-2025-09.pdf" },
-  { date: "Jul - Aug 2025", file: "bwna-2025-07.pdf" },
-  { date: "May - Jun 2025", file: "bwna-2025-05.pdf" },
-  { date: "Mar - Apr 2025", file: "bwna-2025-03.pdf" },
-  { date: "Jan - Feb 2025", file: "bwna-2025-01.pdf" },
-  { date: "Nov - Dec 2024", file: "bwna-2024-11.pdf" },
-  { date: "Sep - Oct 2024", file: "bwna-2024-09.pdf" },
-  { date: "Jul - Aug 2024", file: "bwna-2024-07.pdf" },
-  { date: "May - Jun 2024", file: "bwna-2024-05.pdf" },
-  { date: "Mar - Apr 2024", file: "bwna-2024-03.pdf" },
-  { date: "Jan - Feb 2024", file: "bwna-2024-01.pdf" },
-  { date: "Nov - Dec 2023", file: "bwna-2023-11.pdf" },
-  { date: "Sep - Oct 2023", file: "bwna-2023-09.pdf" },
-  { date: "Jul - Aug 2023", file: "bwna-2023-07.pdf" },
-  { date: "May - Jun 2023", file: "bwna-2023-05.pdf" },
-  { date: "Mar - Apr 2023", file: "bwna-2023-03.pdf" },
-  { date: "Jan - Feb 2023", file: "bwna-2023-01.pdf" },
-  { date: "Nov - Dec 2022", file: "bwna-2022-11.pdf" },
-  { date: "Sept - Oct 2022", file: "bwna-2022-09.pdf" },
-  { date: "Jul - Aug 2022", file: "bwna-2022-07.pdf" },
-  { date: "May - Jun 2022", file: "bwna-2022-05.pdf" },
-  { date: "Mar - Apr 2022", file: "bwna-2022-03.pdf" },
-  { date: "Jan - Feb 2022", file: "bwna-2022-01.pdf" },
-  { date: "Nov - Dec 2021", file: "bwna-2021-11.pdf" },
-  { date: "Sep - Oct 2021", file: "bwna-2021-09.pdf" },
-  { date: "Jul - Aug 2021", file: "bwna-2021-07.pdf" },
-  { date: "May - Jun 2021", file: "bwna-2021-05.pdf" },
-  { date: "Mar - Apr 2021", file: "bwna-2021-03.pdf" },
-  { date: "Jan - Feb 2021", file: "bwna-2021-01.pdf" },
-  { date: "Nov - Dec 2020", file: "bwna-2020-11.pdf" },
-  { date: "Sep - Oct 2020", file: "bwna-2020-09.pdf" },
-  { date: "Jul - Aug 2020", file: "bwna-2020-07.pdf" },
-  { date: "May - Jun 2020", file: "bwna-2020-05.pdf" },
-  { date: "Mar - Apr 2020", file: "bwna-2020-03.pdf" },
-  { date: "Jan - Feb 2020", file: "bwna-2020-01.pdf" },
-  { date: "Nov - Dec 2019", file: "bwna-2019-11.pdf" },
-  { date: "Sep - Oct 2019", file: "bwna-2019-09.pdf" },
-  { date: "Jul - Aug 2019", file: "bwna-2019-07.pdf" },
-  { date: "May - Jun 2019", file: "bwna-2019-05.pdf" },
-  { date: "Mar - Apr 2019", file: "bwna-2019-03.pdf" },
-  { date: "Jan - Feb 2019", file: "bwna-2019-01.pdf" },
-  { date: "Nov - Dec 2018", file: "bwna-2018-11.pdf" },
-  { date: "Sep - Oct 2018", file: "bwna-2018-09.pdf" },
-  { date: "Jul - Aug 2018", file: "bwna-2018-07.pdf" },
-  { date: "May - Jun 2018", file: "bwna-2018-05.pdf" },
-  { date: "Mar - Apr 2018", file: "bwna-2018-03.pdf" },
-  { date: "Jan - Feb 2018", file: "bwna-2018-01.pdf" },
-  { date: "Nov - Dec 2017", file: "bwna-2017-11.pdf" },
-  { date: "Sep - Oct 2017", file: "bwna-2017-09.pdf" },
-  { date: "Jul - Aug 2017", file: "bwna-2017-07.pdf" },
-  { date: "May - Jun 2017", file: "bwna-2017-05.pdf" },
-  { date: "Mar - Apr 2017", file: "bwna-2017-03.pdf" },
-  { date: "Jan - Feb 2017", file: "bwna-2017-01.pdf" },
-  { date: "Nov - Dec 2016", file: "bwna-2016-11.pdf" },
-  { date: "Sep - Oct 2016", file: "bwna-2016-09.pdf" },
-  { date: "Jul - Aug 2016", file: "bwna-2016-07.pdf" },
-  { date: "May - Jun 2016", file: "bwna-2016-05.pdf" },
-  { date: "Mar - Apr 2016", file: "bwna-2016-03.pdf" },
-  { date: "Jan - Feb 2016", file: "bwna-2016-01.pdf" },
-  { date: "Nov - Dec 2015", file: "bwna-2015-11.pdf" },
-  { date: "Sep - Oct 2015", file: "bwna-2015-09.pdf" },
-  { date: "Jul - Aug 2015", file: "bwna-2015-07.pdf" },
-  { date: "May - Jun 2015", file: "bwna-2015-05.pdf" },
-  { date: "Mar - Apr 2015", file: "bwna-2015-03.pdf" },
-  { date: "Jan - Feb 2015", file: "bwna-2015-01.pdf" },
-  { date: "Nov - Dec 2014", file: "bwna-2014-11.pdf" },
-  { date: "Sep - Oct 2014", file: "bwna-2014-09.pdf" },
-  { date: "Jul - Aug 2014", file: "bwna-2014-07.pdf" },
-  { date: "May - Jun 2014", file: "bwna-2014-05.pdf" },
-  { date: "Mar - Apr 2014", file: "bwna-2014-03.pdf" },
-  { date: "Jan - Feb 2014", file: "bwna-2014-01.pdf" },
-  { date: "Nov - Dec 2013", file: "bwna-2013-11.pdf" },
-  { date: "Sep - Oct 2013", file: "bwna-2013-09.pdf" },
-  { date: "Jul - Aug 2013", file: "bwna-2013-07.pdf" },
-  { date: "May - Jun 2013", file: "bwna-2013-05.pdf" },
-  { date: "Mar - Apr 2013", file: "bwna-2013-03.pdf" },
-  { date: "Jan - Feb 2013", file: "bwna-2013-01.pdf" },
-  { date: "Nov - Dec 2012", file: "bwna-2012-11.pdf" },
-  { date: "Sep - Oct 2012", file: "bwna-2012-09.pdf" },
-  { date: "Jul - Aug 2012", file: "bwna-2012-07.pdf" },
-  { date: "May - Jun 2012", file: "bwna-2012-05.pdf" },
-  { date: "Mar - Apr 2012", file: "bwna-2012-03.pdf" },
-  { date: "Jan - Feb 2012", file: "bwna-2012-01.pdf" },
+// Generate bimonthly newsletter PDF archive (2012-2025)
+const bimonthlyPairs = [
+  ['Nov', 'Dec', '11'], ['Sep', 'Oct', '09'], ['Jul', 'Aug', '07'],
+  ['May', 'Jun', '05'], ['Mar', 'Apr', '03'], ['Jan', 'Feb', '01'],
 ];
 
-// Group older PDFs by year
-const pdfsByYear = olderPdfs.reduce((acc, nl) => {
+const olderPdfs: { date: string; file: string }[] = [];
+for (let year = 2025; year >= 2012; year--) {
+  for (const [start, end, month] of bimonthlyPairs) {
+    olderPdfs.push({ date: `${start} - ${end} ${year}`, file: `bwna-${year}-${month}.pdf` });
+  }
+}
+
+// Group by year (already ordered newest-first)
+const pdfsByYear: Record<string, typeof olderPdfs> = {};
+for (const nl of olderPdfs) {
   const year = nl.date.split(' ').pop()!;
-  if (!acc[year]) acc[year] = [];
-  acc[year].push(nl);
-  return acc;
-}, {} as Record<string, typeof olderPdfs>);
+  (pdfsByYear[year] ??= []).push(nl);
+}
 ---
 
 <BaseLayout title="Newsletters" description="Read the BWNA newsletter for neighborhood news, events, and community updates. Browse individual articles or download the full PDF.">
@@ -183,7 +91,7 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
     <div class="container content-width">
       <h2>Past Issues (PDF)</h2>
 
-      {Object.entries(pdfsByYear).map(([year, items], index) => (
+      {Object.entries(pdfsByYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items], index) => (
         <details class="year-group" open={index === 0}>
           <summary class="year-heading">{year} <span class="year-count">({items.length} issues)</span></summary>
           <ul class="newsletter-list">
@@ -255,13 +163,6 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
     margin-bottom: var(--spacing-md);
   }
 
-  .pdf-link {
-    font-size: 0.875rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
   .article-grid {
     display: grid;
     gap: 0.5rem;
@@ -290,71 +191,8 @@ const pdfsByYear = olderPdfs.reduce((acc, nl) => {
     color: var(--color-primary);
   }
 
-  .category-badge--sm {
-    font-size: 0.7rem;
-    flex-shrink: 0;
-  }
-
-  .section-footer {
-    text-align: center;
-    margin-top: var(--spacing-lg);
-  }
-
   .archive-section {
     background: var(--color-background-alt);
-  }
-
-  .year-group {
-    margin-bottom: 0.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    background: white;
-  }
-
-  .year-group[open] {
-    margin-bottom: var(--spacing-md);
-  }
-
-  .year-heading {
-    font-size: 1.125rem;
-    color: var(--color-text-light);
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .year-heading::-webkit-details-marker {
-    display: none;
-  }
-
-  .year-heading::before {
-    content: '▸';
-    font-size: 0.875rem;
-    transition: transform 0.2s;
-  }
-
-  .year-group[open] > .year-heading::before {
-    transform: rotate(90deg);
-  }
-
-  .year-count {
-    font-size: 0.8rem;
-    color: var(--color-text-muted, #999);
-    font-weight: normal;
-  }
-
-  .year-group .newsletter-list {
-    padding: 0 1rem 0.75rem;
-    margin: 0;
-  }
-
-  .download-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
   }
 
   .contribute-grid {

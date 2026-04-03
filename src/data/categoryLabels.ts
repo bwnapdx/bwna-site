@@ -1,0 +1,16 @@
+export const categoryLabels: Record<string, string> = {
+  'presidents-message': "President's Message",
+  'community-news': 'Community News',
+  'land-use': 'Land Use',
+  'parks': 'Parks',
+  'safety': 'Safety',
+  'schools': 'Schools',
+  'business': 'Business',
+  'events': 'Events',
+  'history': 'History',
+  'environment': 'Environment',
+  'opinion': 'Opinion',
+  'announcements': 'Announcements',
+  'volunteer': 'Volunteer',
+  'other': 'Other',
+};

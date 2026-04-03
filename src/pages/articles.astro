@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { categoryLabels } from '../data/categoryLabels';
 
 const base = import.meta.env.BASE_URL;
 
@@ -14,23 +15,6 @@ const articles = allArticles.sort((a, b) => {
 // Get unique categories and issues for filtering
 const categories = [...new Set(articles.map(a => a.data.category))].sort();
 const issues = [...new Set(articles.map(a => a.data.issue))];
-
-const categoryLabels: Record<string, string> = {
-  'presidents-message': "President's Message",
-  'community-news': 'Community News',
-  'land-use': 'Land Use',
-  'parks': 'Parks',
-  'safety': 'Safety',
-  'schools': 'Schools',
-  'business': 'Business',
-  'events': 'Events',
-  'history': 'History',
-  'environment': 'Environment',
-  'opinion': 'Opinion',
-  'announcements': 'Announcements',
-  'volunteer': 'Volunteer',
-  'other': 'Other',
-};
 ---
 
 <BaseLayout title="All Articles" description="Browse all BWNA newsletter articles. Searchable archive of community news, events, and stories from Beaumont-Wilshire.">

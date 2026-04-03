@@ -1,41 +1,24 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { categoryLabels } from '../../data/categoryLabels';
 
 export async function getStaticPaths() {
   const articles = await getCollection('newsletters');
   return articles.map(article => ({
     params: { slug: article.id.replace(/\.md$/, '') },
-    props: { article },
+    props: { article, allArticles: articles },
   }));
 }
 
-const { article } = Astro.props;
+const { article, allArticles } = Astro.props;
 const { Content } = await article.render();
 const base = import.meta.env.BASE_URL;
 
 // Get other articles from the same issue
-const allArticles = await getCollection('newsletters');
 const issueArticles = allArticles
   .filter(a => a.data.issueSlug === article.data.issueSlug && a.id.replace(/\.md$/, '') !== article.id)
   .sort((a, b) => (a.data.page ?? 99) - (b.data.page ?? 99));
-
-const categoryLabels: Record<string, string> = {
-  'presidents-message': "President's Message",
-  'community-news': 'Community News',
-  'land-use': 'Land Use',
-  'parks': 'Parks',
-  'safety': 'Safety',
-  'schools': 'Schools',
-  'business': 'Business',
-  'events': 'Events',
-  'history': 'History',
-  'environment': 'Environment',
-  'opinion': 'Opinion',
-  'announcements': 'Announcements',
-  'volunteer': 'Volunteer',
-  'other': 'Other',
-};
 ---
 
 <BaseLayout title={article.data.title} description={`${article.data.title} — from the ${article.data.issue} BWNA Newsletter`}>
@@ -133,12 +116,6 @@ const categoryLabels: Record<string, string> = {
     margin-bottom: var(--spacing-sm);
   }
 
-  .download-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
   .related-section {
     background: var(--color-background-alt);
   }
@@ -179,8 +156,4 @@ const categoryLabels: Record<string, string> = {
     text-decoration: underline;
   }
 
-  .category-badge--sm {
-    font-size: 0.7rem;
-    flex-shrink: 0;
-  }
 </style>
