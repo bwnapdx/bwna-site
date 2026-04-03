@@ -5,7 +5,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Policies" description="BWNA Policies - operational policies of the Beaumont-Wilshire Neighborhood Association.">
-  <section class="hero" style="padding: 2rem 0;">
+  <section class="hero">
     <div class="container">
       <h1>BWNA Policies</h1>
       <p>Operational policies of the association</p>
@@ -15,25 +15,34 @@ const base = import.meta.env.BASE_URL;
   <section class="page-section">
     <div class="container content-width">
       <p>
-        BWNA policies guide the day-to-day operations of the association, including
-        newsletter advertising, event management, and communication standards.
+        BWNA policies guide the day-to-day operations of the association, covering
+        meeting agenda content and the conducting of meetings. These policies are
+        subject to change at any time by majority vote of the Board.
       </p>
-      <div class="card" style="background: var(--color-primary-light); margin: 1.5rem 0;">
-        <h3>Policy Areas</h3>
-        <ul style="margin-left: 1.5rem;">
-          <li><strong>Newsletter advertising</strong> &mdash; rates, content guidelines, and deadlines for ad placement</li>
-          <li><strong>Events</strong> &mdash; guidelines for BWNA-sponsored and community events</li>
-          <li><strong>Communications</strong> &mdash; standards for official BWNA communications and social media</li>
-          <li><strong>Financial</strong> &mdash; budget approval, expenditure authorization, and reporting</li>
-        </ul>
+      <div class="pdf-viewer">
+        <object data={`${base}documents/bwna-policies.pdf`} type="application/pdf" width="100%" height="800px">
+          <p>Your browser does not support embedded PDFs. <a href={`${base}documents/bwna-policies.pdf`}>Download the BWNA Policies (PDF)</a>.</p>
+        </object>
       </div>
-      <p>
-        For the full text of any policy or for questions, please contact
-        <a href="mailto:president@bwnapdx.org">president@bwnapdx.org</a>.
+      <p class="pdf-download">
+        <a href={`${base}documents/bwna-policies.pdf`} class="btn btn-primary" download>Download Policies (PDF)</a>
       </p>
-      <p style="margin-top: 2rem;">
+      <p>
         <a href={`${base}about`}>&larr; Back to About Us</a>
       </p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .pdf-viewer {
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .pdf-download {
+    margin-bottom: 1.5rem;
+  }
+</style>

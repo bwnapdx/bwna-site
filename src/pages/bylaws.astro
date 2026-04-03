@@ -5,10 +5,10 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Bylaws" description="BWNA Bylaws - the governing rules of the Beaumont-Wilshire Neighborhood Association.">
-  <section class="hero" style="padding: 2rem 0;">
+  <section class="hero">
     <div class="container">
       <h1>BWNA Bylaws</h1>
-      <p>Governing rules of the association</p>
+      <p>Adopted December 9, 2024</p>
     </div>
   </section>
 
@@ -19,22 +19,30 @@ const base = import.meta.env.BASE_URL;
         Neighborhood Association. They define membership, board structure, meeting procedures,
         and amendment processes.
       </p>
-      <div class="card" style="background: var(--color-primary-light); margin: 1.5rem 0;">
-        <h3>Key Provisions</h3>
-        <ul style="margin-left: 1.5rem;">
-          <li>Membership is free and open to all residents, property owners, businesses, and nonprofits within the boundary</li>
-          <li>Board of directors elected by membership at the annual meeting</li>
-          <li>General meetings held bimonthly; board meetings held on alternating months</li>
-          <li>Amendments require notice to membership and a vote at a general meeting</li>
-        </ul>
+      <div class="pdf-viewer">
+        <object data={`${base}documents/bwna-bylaws.pdf`} type="application/pdf" width="100%" height="800px">
+          <p>Your browser does not support embedded PDFs. <a href={`${base}documents/bwna-bylaws.pdf`}>Download the BWNA Bylaws (PDF)</a>.</p>
+        </object>
       </div>
-      <p>
-        For a full copy of the current bylaws, please contact
-        <a href="mailto:president@bwnapdx.org">president@bwnapdx.org</a>.
+      <p class="pdf-download">
+        <a href={`${base}documents/bwna-bylaws.pdf`} class="btn btn-primary" download>Download Bylaws (PDF)</a>
       </p>
-      <p style="margin-top: 2rem;">
+      <p>
         <a href={`${base}about`}>&larr; Back to About Us</a>
       </p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .pdf-viewer {
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .pdf-download {
+    margin-bottom: 1.5rem;
+  }
+</style>
