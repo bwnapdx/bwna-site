@@ -3,14 +3,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const base = import.meta.env.BASE_URL;
 
-// Board members - in production, these would come from content collections
 const boardMembers = [
-  { name: "Al Ellis", role: "President", since: "2007", email: "president@bwnapdx.org" },
-  { name: "Tim Gillespie", role: "Vice President", since: "2018" },
-  { name: "Karla Lenox", role: "Treasurer", since: "2013", email: "treasurer@bwnapdx.org" },
-  { name: "Patti Koehler", role: "Secretary", since: "2022" },
-  { name: "Susan Trabucco", role: "Board Member & Newsletter Editor", since: "2022", email: "editor@bwnapdx.org" },
-  { name: "Patty Nelson", role: "Immediate Past President", since: "2021" },
+  { name: "Al Ellis", role: "President", since: "2007", resident: "1990", email: "president@bwnapdx.org", phone: "503-287-0477", photo: "al-ellis.jpg", quote: "I decided to join the board because vacancies needed to be filled and because serving in a leadership role for the betterment of the neighborhood appealed to me. In my 16 years on the BWNA board, I've served as president, newsletter editor for 12 years, vice president, and now president once again. D\u00e9j\u00e0 vu." },
+  { name: "Tim Gillespie", role: "Vice President", since: "2018", resident: "1979", phone: "503-287-6272", photo: "tim-gillespie.jpg", quote: "I've always appreciated that C.E.S. Wood quote etched into the Skidmore Fountain downtown: \u2018Good citizens are the riches of a city.\u2019 I joined the board as a way to pitch in, be a useful neighbor, and strive toward good citizenship." },
+  { name: "Karla Lenox", role: "Treasurer", since: "2013", resident: "2008", email: "treasurer@bwnapdx.org", phone: "503-686-5915", photo: "karla-lenox.jpg", quote: "I'm aware that Treasurer is not a job that just anyone has the background for or interest in, and I felt it would be a good fit for my skill set as an Accountant. I really had few excuses not to help out since the meetings are just around the corner from my house! I enjoy the work of the position, helping out with the events that BWNA puts on, and working with the great people on the board." },
+  { name: "Patti Koehler", role: "Secretary", since: "2022", resident: "1990", email: "patricekoehler@gmail.com", photo: "patti-koehler.jpg", quote: "Following retirement, I wanted to take a more active role in this neighborhood that I love. It's an honor to serve in whatever capacity I can to further improve communication, safety, accessibility, and hospitality for those who live here." },
+  { name: "Patty Nelson", role: "Immediate Past President", since: "2021", resident: "1991", phone: "503-281-8035", photo: "patty-nelson.jpg", quote: "I joined the board because I love our neighborhood and our city and hope to contribute in a meaningful way to maintain our neighborhood character and livability, bring friends and neighbors together, and support our local businesses." },
+  { name: "John Sandie", role: "Board Member", since: "2012", resident: "2011", phone: "219-508-4162", photo: "john-sandie.jpg", quote: "After finishing major house projects, I was looking for something to keep me active in retirement, and felt what better way to spend my time and energies then on local issues and improvements directly impacting the neighborhood around me." },
+  { name: "Aaron Breakstone", role: "Board Member", since: "2022", resident: "2016", email: "abreaks@hotmail.com", photo: "aaron-breakstone.jpg", quote: "I joined the BWNA Board because I believe that citizen involvement at all levels is vital. My family and I love that our neighborhood has so much to offer within walking distance, from businesses and services that we frequent to schools and parks minutes from home." },
+  { name: "Angela Frome", role: "Board Member", since: "2022", resident: "2009", email: "angfrome@yahoo.com", photo: "angela-frome.jpg", quote: "I have fond memories of growing up in the Cully and Beaumont Wilshire neighborhood and raised my own children in the community. I have been active with BWNA over the years with clean-up projects, home visiting for seniors and newsletter delivery. I look forward to ways I can continue to serve and build community with fellow neighbors. I am interested in neighborhood cleanup, aging in place, pedestrian and traffic safety." },
+  { name: "Colin O'Neill", role: "Board Member", since: "2022", resident: "2008", email: "colin@colinoneill.net", photo: "colin-oneill.jpg", quote: "To become more connected with the neighborhood and to help preserve what makes it a great place to live." },
+  { name: "Susan Trabucco", role: "Board Member & Newsletter Editor", since: "2022", resident: "2012", email: "editor@bwnapdx.org", phone: "503-440-7732", photo: "susan-trabucco.jpg", quote: "By serving on the board, together with my role as the BWNA newsletter editor, I hope to help foster a sense of connectedness among B-W neighbors, as well as doing my part to help make our neighborhood the best it can be." },
+  { name: "Rob Lee", role: "Board Member", since: "2023", resident: "2020", email: "swollentongue@gmail.com", photo: "rob-lee.jpg", quote: "When I moved to the neighborhood three years ago, I was surprised to find so much positive activity in Beaumont-Wilshire. I love our walkable neighborhood, and I'm a proponent of safe streets. I look forward to volunteering my time on the board." },
+  { name: "Tim Root", role: "Board Member", since: "2024", resident: "2007", email: "root.timothy@gmail.com", photo: "tim-root.jpg", quote: "I wish to focus on how we can support smart growth so the neighborhood character I love stays the same. I'm also interested in protecting all road users on our streets, supporting our local businesses, and supporting our police in relation to crime, theft, vandalism, and graffiti." },
+  { name: "David Knowles", role: "Board Member", since: "2024", resident: "1985", email: "davidknowlespdx@gmail.com", photo: "david-knowles.jpg", quote: "I hope to use my experience in transportation, land use, and politics to help our neighborhood and pay it forward for the next generation." },
+  { name: "Crystal Grainger", role: "Board Member", since: "2025", resident: "2022", email: "crystaldgrainger@gmail.com", photo: "crystal-grainger.jpg", quote: "My interest in serving on the BWNA board stems from a strong belief in civic engagement and collective care, as well as a desire to help foster a neighborhood where everyone feels connected, supported, & included." },
+  { name: "Tom Cuppernull", role: "Board Member", since: "2024", resident: "2021", email: "tcuppernull@gmail.com", photo: "tom-cuppernull.jpg", quote: "I'm thrilled to join the BWNA board! My partner Katie and I relocated to PDX after a 7-month road trip in 2021, during which we fell in love with Portland and Beaumont-Wilshire. Morning walks to Prince Coffee, picking up games at Puddletown, and taking my pup Oakley to Wilshire Park are some of my favorite B-W activities. I'm passionate about creating experiences that make people feel welcome and excited to live in this neighborhood, and I hope to leverage my background in event production, business strategy, and community management to make an impact. Originally from central New York, so\u2026Go Bills!" },
 ];
 ---
 
@@ -97,29 +105,30 @@ const boardMembers = [
         <p>Meet the volunteers who help guide our neighborhood association</p>
       </div>
 
-      <div class="grid grid-3">
+      <div class="board-grid">
         {boardMembers.map((member) => (
-          <div class="card board-member">
-            <div style="width: 120px; height: 120px; border-radius: 50%; background: var(--color-primary-light); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; color: var(--color-primary); font-size: 2rem;">
-              {member.name.split(' ').map(n => n[0]).join('')}
+          <div class="board-card">
+            <img src={`${base}images/board/${member.photo}`} alt={member.name} class="board-photo" loading="lazy" />
+            <div class="board-info">
+              <h3>{member.name}</h3>
+              <div class="role">{member.role}</div>
+              <p class="board-details">
+                Neighbor since {member.resident} &middot; Board member since {member.since}
+              </p>
+              <blockquote class="board-quote">{member.quote}</blockquote>
+              <div class="board-contact">
+                {member.email && <a href={`mailto:${member.email}`}>{member.email}</a>}
+                {member.email && member.phone && <span> &middot; </span>}
+                {member.phone && <a href={`tel:${member.phone}`}>{member.phone}</a>}
+              </div>
             </div>
-            <h3>{member.name}</h3>
-            <div class="role">{member.role}</div>
-            <p style="font-size: 0.875rem; color: var(--color-text-light);">
-              Board member since {member.since}
-            </p>
-            {member.email && (
-              <a href={`mailto:${member.email}`} style="font-size: 0.875rem;">{member.email}</a>
-            )}
           </div>
         ))}
       </div>
 
-      <div style="text-align: center; margin-top: 2rem;">
-        <p style="color: var(--color-text-light);">
-          Interested in joining the board? <a href={`${base}get-involved`}>Learn how to get involved</a>
-        </p>
-      </div>
+      <p class="board-cta">
+        Interested in joining the board? <a href={`${base}get-involved`}>Learn how to get involved</a>
+      </p>
     </div>
   </section>
 
@@ -141,3 +150,79 @@ const boardMembers = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .board-grid {
+    display: grid;
+    gap: var(--spacing-xl);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .board-card {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .board-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 3px solid var(--color-primary-light);
+  }
+
+  .board-info h3 {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .board-info .role {
+    color: var(--color-primary);
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .board-details {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .board-quote {
+    font-style: italic;
+    font-size: 0.925rem;
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-sm) 0;
+    padding: 0;
+    border: none;
+    color: var(--color-text);
+  }
+
+  .board-contact {
+    font-size: 0.875rem;
+  }
+
+  .board-cta {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    color: var(--color-text-light);
+  }
+
+  @media (max-width: 600px) {
+    .board-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .board-photo {
+      width: 120px;
+      height: 120px;
+    }
+  }
+</style>

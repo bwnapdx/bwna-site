@@ -387,6 +387,55 @@ a:hover {
   background: var(--color-background-alt);
 }
 
+/* Resource lists */
+.resource-list {
+  list-style: none;
+}
+
+.resource-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.resource-list li:last-child {
+  border-bottom: none;
+}
+
+.resource-list .detail {
+  color: var(--color-text-light);
+  font-size: 0.875rem;
+}
+
+.resource-list--emergency li {
+  border-bottom-color: #fecaca;
+}
+
+.resource-list--emergency li:first-child {
+  font-size: 1.125rem;
+}
+
+.card--emergency {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.card--emergency a {
+  color: #dc2626;
+}
+
+.link-list {
+  list-style: none;
+}
+
+.link-list li {
+  padding: 0.5rem 0;
+}
+
+.link-list-heading {
+  font-size: 1rem;
+  margin-top: var(--spacing-lg);
+}
+
 /* Footer */
 .site-footer {
   background-color: var(--color-primary-dark);
