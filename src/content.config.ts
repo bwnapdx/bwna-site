@@ -40,6 +40,7 @@ const events = defineCollection({
     location: z.string(),
     address: z.string().optional(),
     type: z.enum(['meeting', 'community', 'social', 'tour']),
+    scope: z.enum(['bwna', 'neighborhood', 'city']).default('bwna'),
     recurring: z.boolean().default(false),
     featured: z.boolean().default(false),
     image: z.string().optional(),

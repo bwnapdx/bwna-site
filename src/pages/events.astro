@@ -13,22 +13,42 @@ const upcomingEvents = allEvents
 // Featured events (for hero cards)
 const featuredEvents = upcomingEvents.filter(e => e.data.featured);
 
-// Group remaining events by month
 const months = ['January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const eventsByMonth = upcomingEvents.reduce((acc, event) => {
-  const monthKey = `${event.data.date.getFullYear()}-${event.data.date.getMonth()}`;
-  if (!acc[monthKey]) {
-    acc[monthKey] = {
-      label: `${months[event.data.date.getMonth()]} ${event.data.date.getFullYear()}`,
-      events: []
-    };
-  }
-  acc[monthKey].events.push(event);
-  return acc;
-}, {} as Record<string, { label: string; events: typeof upcomingEvents }>);
+// Group events by scope, then by month within each scope
+const scopeLabels: Record<string, string> = {
+  bwna: 'BWNA Events',
+  neighborhood: 'Around the Neighborhood',
+  city: 'Around Portland',
+};
+
+const scopeOrder = ['bwna', 'neighborhood', 'city'] as const;
+
+type EventEntry = typeof upcomingEvents[number];
+
+function groupByMonth(events: EventEntry[]) {
+  return events.reduce((acc, event) => {
+    const monthKey = `${event.data.date.getFullYear()}-${event.data.date.getMonth()}`;
+    if (!acc[monthKey]) {
+      acc[monthKey] = {
+        label: `${months[event.data.date.getMonth()]} ${event.data.date.getFullYear()}`,
+        events: []
+      };
+    }
+    acc[monthKey].events.push(event);
+    return acc;
+  }, {} as Record<string, { label: string; events: EventEntry[] }>);
+}
+
+const scopeGroups = scopeOrder
+  .map(scope => ({
+    scope,
+    label: scopeLabels[scope],
+    monthGroups: groupByMonth(upcomingEvents.filter(e => e.data.scope === scope)),
+  }))
+  .filter(g => Object.keys(g.monthGroups).length > 0);
 
 const typeColors: Record<string, string> = {
   meeting: '#1e5c3a',
@@ -45,10 +65,31 @@ function formatDate(date: Date, endDate?: Date) {
   return date.toLocaleDateString('en-US', opts);
 }
 
-// Check if event has meaningful body content
 function hasBody(body: string) {
   return body.trim().length > 10;
 }
+
+// Calendar bounds: current month through the month of the last event
+const lastEventDate = upcomingEvents.length > 0
+  ? upcomingEvents[upcomingEvents.length - 1].data.date
+  : now;
+const calMinYear = now.getFullYear();
+const calMinMonth = now.getMonth();
+const calMaxYear = lastEventDate.getFullYear();
+const calMaxMonth = lastEventDate.getMonth();
+
+// Prepare event data for the calendar (JSON-serializable)
+const calendarEvents = upcomingEvents.map(e => ({
+  title: e.data.title,
+  date: e.data.date.toISOString(),
+  endDate: e.data.endDate?.toISOString(),
+  time: e.data.time,
+  location: e.data.location,
+  type: e.data.type,
+  scope: e.data.scope,
+  summary: e.data.summary || '',
+  url: hasBody(e.body || '') ? `${base}events/${e.id.replace(/\.md$/, '')}` : '',
+}));
 ---
 
 <BaseLayout title="Upcoming Events" description="Find upcoming BWNA meetings, community events, and neighborhood activities in Beaumont-Wilshire.">
@@ -60,83 +101,115 @@ function hasBody(body: string) {
     </div>
   </section>
 
-  {featuredEvents.length > 0 && (
-    <section class="page-section">
-      <div class="container content-width">
-        {featuredEvents.map(event => (
-          <a href={`${base}events/${event.id.replace(/\.md$/, '')}`} class="featured-event">
-            {event.data.image && (
-              <img src={event.data.image.startsWith('/') ? `${base}${event.data.image.slice(1)}` : event.data.image} alt={event.data.imageAlt || event.data.title} class="featured-event-img" />
-            )}
-            <div class="featured-event-content">
-              <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>{event.data.type}</span>
-              <h2>{event.data.title}</h2>
-              <div class="event-meta">
-                {formatDate(event.data.date, event.data.endDate)} &middot; {event.data.time}
-              </div>
-              <div class="event-meta">{event.data.location}</div>
-              {event.data.summary && <p>{event.data.summary}</p>}
-              <span class="btn btn-secondary">View Details &rarr;</span>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
-  )}
-
+  <!-- Side-by-side layout: calendar + event list -->
   <section class="page-section">
-    <div class="container content-width">
+    <div class="container">
+      <div class="events-layout">
 
-      {Object.entries(eventsByMonth).map(([key, { label, events: monthEvents }]) => (
-        <div class="month-group">
-          <h2 class="month-heading">{label}</h2>
+        <!-- Event list (left/main) -->
+        <div class="events-list">
 
-          {monthEvents.map((event) => (
-            <div class="event-item event-item--bordered">
-              <div class="event-date">
-                <div class="month">{monthsShort[event.data.date.getMonth()]}</div>
-                <div class="day">{event.data.date.getDate()}</div>
-              </div>
-              <div class="event-details">
-                <div class="event-header">
-                  <h3>
-                    {hasBody(event.body || '') ? (
-                      <a href={`${base}events/${event.id.replace(/\.md$/, '')}`}>{event.data.title}</a>
-                    ) : (
-                      event.data.title
-                    )}
-                  </h3>
-                  <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>
-                    {event.data.type}
-                  </span>
-                </div>
-                <div class="event-meta">
-                  {event.data.time} &nbsp;|&nbsp; {event.data.location}
-                </div>
-                {event.data.summary && <p>{event.data.summary}</p>}
-                <div class="event-links">
-                  {event.data.address && (
-                    <a href={`https://maps.google.com/?q=${encodeURIComponent(event.data.address)}`}
-                       target="_blank"
-                       rel="noopener"
-                       class="text-sm">
-                      View on Map
-                    </a>
+          {featuredEvents.length > 0 && (
+            <div class="featured-section">
+              {featuredEvents.map(event => (
+                <a href={`${base}events/${event.id.replace(/\.md$/, '')}`} class="featured-event">
+                  {event.data.image && (
+                    <img src={event.data.image.startsWith('/') ? `${base}${event.data.image.slice(1)}` : event.data.image} alt={event.data.imageAlt || event.data.title} class="featured-event-img" />
                   )}
-                  {hasBody(event.body || '') && (
-                    <a href={`${base}events/${event.id.replace(/\.md$/, '')}`} class="text-sm">Details &rarr;</a>
-                  )}
+                  <div class="featured-event-content">
+                    <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>{event.data.type}</span>
+                    <h2>{event.data.title}</h2>
+                    <div class="event-meta">
+                      {formatDate(event.data.date, event.data.endDate)} &middot; {event.data.time}
+                    </div>
+                    <div class="event-meta">{event.data.location}</div>
+                    {event.data.summary && <p>{event.data.summary}</p>}
+                    <span class="btn btn-secondary">View Details &rarr;</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+          {scopeGroups.map((group) => (
+            <div class="scope-group">
+              <h2 class="scope-heading">{group.label}</h2>
+
+              {Object.entries(group.monthGroups).map(([key, { label, events: monthEvents }]) => (
+                <div class="month-group">
+                  <h3 class="month-heading">{label}</h3>
+
+                  {monthEvents.map((event) => (
+                    <div class="event-item event-item--bordered">
+                      <div class="event-date">
+                        <div class="month">{monthsShort[event.data.date.getMonth()]}</div>
+                        <div class="day">{event.data.date.getDate()}</div>
+                      </div>
+                      <div class="event-details">
+                        <div class="event-header">
+                          <h3>
+                            {hasBody(event.body || '') ? (
+                              <a href={`${base}events/${event.id.replace(/\.md$/, '')}`}>{event.data.title}</a>
+                            ) : (
+                              event.data.title
+                            )}
+                          </h3>
+                          <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>
+                            {event.data.type}
+                          </span>
+                        </div>
+                        <div class="event-meta">
+                          {event.data.time} &nbsp;|&nbsp; {event.data.location}
+                        </div>
+                        {event.data.summary && <p>{event.data.summary}</p>}
+                        <div class="event-links">
+                          {event.data.address && (
+                            <a href={`https://maps.google.com/?q=${encodeURIComponent(event.data.address)}`}
+                               target="_blank"
+                               rel="noopener"
+                               class="text-sm">
+                              View on Map
+                            </a>
+                          )}
+                          {hasBody(event.body || '') && (
+                            <a href={`${base}events/${event.id.replace(/\.md$/, '')}`} class="text-sm">Details &rarr;</a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              ))}
             </div>
           ))}
+
+          {upcomingEvents.length === 0 && (
+            <p class="text-muted">No upcoming events scheduled. Check back soon!</p>
+          )}
         </div>
-      ))}
 
-      {upcomingEvents.length === 0 && (
-        <p class="text-muted">No upcoming events scheduled. Check back soon!</p>
-      )}
+        <!-- Calendar sidebar (right on desktop, top on mobile) -->
+        <div class="events-calendar">
+          <div class="calendar-sticky">
+            <div class="calendar-nav">
+              <button class="calendar-nav-btn" id="cal-prev">&larr;</button>
+              <h3 class="calendar-month-label" id="cal-label"></h3>
+              <button class="calendar-nav-btn" id="cal-next">&rarr;</button>
+            </div>
+            <div class="calendar-grid">
+              <div class="calendar-header">Su</div>
+              <div class="calendar-header">Mo</div>
+              <div class="calendar-header">Tu</div>
+              <div class="calendar-header">We</div>
+              <div class="calendar-header">Th</div>
+              <div class="calendar-header">Fr</div>
+              <div class="calendar-header">Sa</div>
+            </div>
+            <div class="calendar-days" id="cal-days"></div>
+            <div class="calendar-detail" id="cal-detail"></div>
+          </div>
+        </div>
 
+      </div>
     </div>
   </section>
 
@@ -195,15 +268,36 @@ function hasBody(body: string) {
     margin-bottom: var(--spacing-md);
   }
 
+  /* Side-by-side layout */
+  .events-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 400px;
+    gap: var(--spacing-xl);
+    align-items: start;
+  }
+
+  /* Scope groups */
+  .scope-group {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .scope-heading {
+    font-size: 1.5rem;
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--color-primary);
+  }
+
   .month-group {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
 
   .month-heading {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     color: var(--color-text-light);
-    border-bottom: 2px solid var(--color-border);
-    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.4rem;
     margin-bottom: var(--spacing-md);
   }
 
@@ -246,4 +340,288 @@ function hasBody(body: string) {
     gap: var(--spacing-md);
     margin-top: var(--spacing-xs);
   }
+
+  /* Calendar sidebar */
+  .calendar-sticky {
+    position: sticky;
+    top: 80px;
+  }
+
+  .events-calendar {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .calendar-nav-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--color-primary);
+    transition: background 0.2s;
+  }
+
+  .calendar-nav-btn:hover {
+    background: var(--color-primary-light);
+  }
+
+  .calendar-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .calendar-nav-btn:disabled:hover {
+    background: none;
+  }
+
+  .calendar-month-label {
+    font-size: 1.15rem;
+    text-align: center;
+    margin: 0;
+  }
+
+  .calendar-grid,
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .calendar-header {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .calendar-days :global(.cal-day) {
+    min-height: 52px;
+    padding: 0.3rem;
+    border: 1px solid var(--color-border);
+    border-top: none;
+    font-size: 0.85rem;
+    cursor: default;
+    text-align: center;
+  }
+
+  .calendar-days :global(.cal-day.empty) {
+    background: var(--color-background-alt);
+  }
+
+  .calendar-days :global(.cal-day.today) {
+    background: var(--color-primary-light);
+  }
+
+  .calendar-days :global(.cal-day.has-events) {
+    cursor: pointer;
+  }
+
+  .calendar-days :global(.cal-day.has-events:hover) {
+    background: #f0f7f0;
+  }
+
+  .calendar-days :global(.cal-day.selected) {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+  }
+
+  .calendar-days :global(.cal-day-num) {
+    font-weight: 500;
+    display: block;
+  }
+
+  .calendar-days :global(.cal-dots) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .calendar-days :global(.cal-dot) {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .calendar-detail {
+    margin-top: var(--spacing-sm);
+  }
+
+  .calendar-detail :global(.cal-detail-card) {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    margin-bottom: var(--spacing-xs);
+    background: var(--color-background-alt);
+  }
+
+  .calendar-detail :global(.cal-detail-title) {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.15rem;
+  }
+
+  .calendar-detail :global(.cal-detail-meta) {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+  }
+
+  .calendar-detail :global(.cal-detail-summary) {
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+  }
+
+  .calendar-detail :global(.cal-detail-link) {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+
+  /* Mobile: calendar on top, list below */
+  @media (max-width: 900px) {
+    .events-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .events-calendar {
+      order: -1;
+    }
+
+    .calendar-sticky {
+      position: static;
+    }
+  }
 </style>
+
+<script define:vars={{ calendarEvents, typeColors, monthNames: months, calMinYear, calMinMonth, calMaxYear, calMaxMonth }}>
+  const events = calendarEvents;
+  const today = new Date();
+  let currentYear = today.getFullYear();
+  let currentMonth = today.getMonth();
+  let selectedDay = null;
+
+  const daysEl = document.getElementById('cal-days');
+  const labelEl = document.getElementById('cal-label');
+  const detailEl = document.getElementById('cal-detail');
+  const prevBtn = document.getElementById('cal-prev');
+  const nextBtn = document.getElementById('cal-next');
+
+  function canGoPrev() {
+    return currentYear > calMinYear || (currentYear === calMinYear && currentMonth > calMinMonth);
+  }
+
+  function canGoNext() {
+    return currentYear < calMaxYear || (currentYear === calMaxYear && currentMonth < calMaxMonth);
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    if (!canGoPrev()) return;
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    selectedDay = null;
+    renderMonth();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    if (!canGoNext()) return;
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    selectedDay = null;
+    renderMonth();
+  });
+
+  function eventsOnDay(year, month, day) {
+    return events.filter(e => {
+      const d = new Date(e.date);
+      return d.getFullYear() === year && d.getMonth() === month && d.getDate() === day;
+    });
+  }
+
+  function renderMonth() {
+    if (!daysEl || !labelEl || !detailEl) return;
+    labelEl.textContent = monthNames[currentMonth] + ' ' + currentYear;
+
+    // Update nav button states
+    if (prevBtn) prevBtn.disabled = !canGoPrev();
+    if (nextBtn) nextBtn.disabled = !canGoNext();
+
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    let html = '';
+
+    for (let i = 0; i < firstDay; i++) {
+      html += '<div class="cal-day empty"></div>';
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dayEvents = eventsOnDay(currentYear, currentMonth, d);
+      const isToday = d === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear();
+      const isSelected = d === selectedDay;
+      const classes = ['cal-day'];
+      if (isToday) classes.push('today');
+      if (dayEvents.length > 0) classes.push('has-events');
+      if (isSelected) classes.push('selected');
+
+      html += `<div class="${classes.join(' ')}" data-day="${d}">`;
+      html += `<span class="cal-day-num">${d}</span>`;
+      if (dayEvents.length > 0) {
+        html += '<div class="cal-dots">';
+        dayEvents.forEach(e => {
+          const color = typeColors[e.type] || '#666';
+          html += `<span class="cal-dot" style="background:${color};" title="${e.title}"></span>`;
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+
+    daysEl.innerHTML = html;
+
+    daysEl.querySelectorAll('.cal-day.has-events').forEach(cell => {
+      cell.addEventListener('click', () => {
+        const day = parseInt(cell.getAttribute('data-day'));
+        selectedDay = day;
+        renderMonth();
+        showDayDetail(day);
+      });
+    });
+
+    if (selectedDay) showDayDetail(selectedDay);
+    else detailEl.innerHTML = '';
+  }
+
+  function showDayDetail(day) {
+    if (!detailEl) return;
+    const dayEvents = eventsOnDay(currentYear, currentMonth, day);
+    if (dayEvents.length === 0) { detailEl.innerHTML = ''; return; }
+
+    let html = '';
+    dayEvents.forEach(e => {
+      html += '<div class="cal-detail-card">';
+      html += `<div class="cal-detail-title">${e.title}</div>`;
+      html += `<div class="cal-detail-meta">${e.time} | ${e.location}</div>`;
+      if (e.summary) html += `<div class="cal-detail-summary">${e.summary}</div>`;
+      if (e.url) html += `<div class="cal-detail-link"><a href="${e.url}">Details &rarr;</a></div>`;
+      html += '</div>';
+    });
+    detailEl.innerHTML = html;
+  }
+
+  // Render on load
+  renderMonth();
+</script>
