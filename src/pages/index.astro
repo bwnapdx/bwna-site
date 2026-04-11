@@ -31,6 +31,46 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
     </div>
   </section>
 
+  <!-- About Preview -->
+  <section class="page-section">
+    <div class="container">
+      <div class="grid grid-2 grid--aligned">
+        <div>
+          <h2>About Our Neighborhood</h2>
+          <p>
+            The Beaumont-Wilshire Neighborhood Association (BWNA) is one of 95 officially
+            recognized neighborhood associations in Portland's historic tradition of local
+            volunteer activism and involvement.
+          </p>
+          <p>
+            Our boundary includes much of the Fremont and NE 42nd Avenue business districts,
+            Beaumont Middle School, and beautiful Wilshire Park.
+          </p>
+          <p>
+            <strong>Membership is free</strong> and open to all residents, property owners,
+            businesses, and nonprofits in the neighborhood.
+          </p>
+          <a href={`${base}about`} class="btn btn-secondary">Meet Our Board</a>
+        </div>
+        <div>
+          <img src={`${base}images/bwna-map.jpg`} alt="Beaumont-Wilshire neighborhood boundary map" class="map-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="page-section cta-section">
+    <div class="container">
+      <h2>Stay in the Know!</h2>
+      <p>
+        Subscribe to receive monthly email updates about BWNA meetings, activities,
+        and neighborhood announcements.
+      </p>
+      <a href={`${base}subscribe`} class="btn btn-primary">Subscribe to Updates</a>
+    </div>
+  </section>
+
   <!-- Upcoming Events -->
   <section class="page-section">
     <div class="container">
@@ -91,46 +131,6 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
           <a href={`${base}resources`}>View Resources &rarr;</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- About Preview -->
-  <section class="page-section">
-    <div class="container">
-      <div class="grid grid-2 grid--aligned">
-        <div>
-          <h2>About Our Neighborhood</h2>
-          <p>
-            The Beaumont-Wilshire Neighborhood Association (BWNA) is one of 95 officially
-            recognized neighborhood associations in Portland's historic tradition of local
-            volunteer activism and involvement.
-          </p>
-          <p>
-            Our boundary includes much of the Fremont and NE 42nd Avenue business districts,
-            Beaumont Middle School, and beautiful Wilshire Park.
-          </p>
-          <p>
-            <strong>Membership is free</strong> and open to all residents, property owners,
-            businesses, and nonprofits in the neighborhood.
-          </p>
-          <a href={`${base}about`} class="btn btn-secondary">Meet Our Board</a>
-        </div>
-        <div>
-          <img src={`${base}images/bwna-map.jpg`} alt="Beaumont-Wilshire neighborhood boundary map" class="map-img">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Newsletter Signup -->
-  <section class="page-section cta-section">
-    <div class="container">
-      <h2>Stay in the Know!</h2>
-      <p>
-        Subscribe to receive monthly email updates about BWNA meetings, activities,
-        and neighborhood announcements.
-      </p>
-      <a href={`${base}subscribe`} class="btn btn-primary">Subscribe to Updates</a>
     </div>
   </section>
 </BaseLayout>
