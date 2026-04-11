@@ -42,6 +42,9 @@ const events = defineCollection({
     type: z.enum(['meeting', 'community', 'social', 'tour']),
     scope: z.enum(['bwna', 'neighborhood', 'city']).default('bwna'),
     recurring: z.boolean().default(false),
+    recurrenceWeek: z.number().min(1).max(4).optional(),   // 1st, 2nd, 3rd, or 4th
+    recurrenceDay: z.number().min(0).max(6).optional(),    // 0=Sun, 1=Mon, ... 6=Sat
+    recurrenceMonths: z.enum(['all', 'even', 'odd']).optional(),
     featured: z.boolean().default(false),
     image: z.string().optional(),
     imageAlt: z.string().optional(),

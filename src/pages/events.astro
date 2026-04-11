@@ -1,21 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { expandEvents, type ExpandedEvent } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
 
 const allEvents = await getCollection('events');
-const now = new Date();
-const upcomingEvents = allEvents
-  .filter(e => e.data.date >= now || (e.data.endDate && e.data.endDate >= now))
-  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+const expanded = expandEvents(allEvents);
 
-// Featured events (for hero cards)
-const featuredEvents = upcomingEvents.filter(e => e.data.featured);
+// Featured events (for hero cards) — only non-recurring or one-off featured events
+const featuredEvents = expanded.filter(e => e.entry.data.featured && !e.entry.data.recurring);
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+const now = new Date();
 
 // Group events by scope, then by month within each scope
 const scopeLabels: Record<string, string> = {
@@ -26,27 +26,25 @@ const scopeLabels: Record<string, string> = {
 
 const scopeOrder = ['bwna', 'neighborhood', 'city'] as const;
 
-type EventEntry = typeof upcomingEvents[number];
-
-function groupByMonth(events: EventEntry[]) {
-  return events.reduce((acc, event) => {
-    const monthKey = `${event.data.date.getFullYear()}-${event.data.date.getMonth()}`;
+function groupByMonth(events: ExpandedEvent[]) {
+  return events.reduce((acc, ev) => {
+    const monthKey = `${ev.date.getFullYear()}-${ev.date.getMonth()}`;
     if (!acc[monthKey]) {
       acc[monthKey] = {
-        label: `${months[event.data.date.getMonth()]} ${event.data.date.getFullYear()}`,
+        label: `${months[ev.date.getMonth()]} ${ev.date.getFullYear()}`,
         events: []
       };
     }
-    acc[monthKey].events.push(event);
+    acc[monthKey].events.push(ev);
     return acc;
-  }, {} as Record<string, { label: string; events: EventEntry[] }>);
+  }, {} as Record<string, { label: string; events: ExpandedEvent[] }>);
 }
 
 const scopeGroups = scopeOrder
   .map(scope => ({
     scope,
     label: scopeLabels[scope],
-    monthGroups: groupByMonth(upcomingEvents.filter(e => e.data.scope === scope)),
+    monthGroups: groupByMonth(expanded.filter(e => e.entry.data.scope === scope)),
   }))
   .filter(g => Object.keys(g.monthGroups).length > 0);
 
@@ -70,8 +68,8 @@ function hasBody(body: string) {
 }
 
 // Calendar bounds: current month through the month of the last event
-const lastEventDate = upcomingEvents.length > 0
-  ? upcomingEvents[upcomingEvents.length - 1].data.date
+const lastEventDate = expanded.length > 0
+  ? expanded[expanded.length - 1].date
   : now;
 const calMinYear = now.getFullYear();
 const calMinMonth = now.getMonth();
@@ -79,16 +77,16 @@ const calMaxYear = lastEventDate.getFullYear();
 const calMaxMonth = lastEventDate.getMonth();
 
 // Prepare event data for the calendar (JSON-serializable)
-const calendarEvents = upcomingEvents.map(e => ({
-  title: e.data.title,
-  date: e.data.date.toISOString(),
-  endDate: e.data.endDate?.toISOString(),
-  time: e.data.time,
-  location: e.data.location,
-  type: e.data.type,
-  scope: e.data.scope,
-  summary: e.data.summary || '',
-  url: hasBody(e.body || '') ? `${base}events/${e.id.replace(/\.md$/, '')}` : '',
+const calendarEvents = expanded.map(e => ({
+  title: e.entry.data.title,
+  date: e.date.toISOString(),
+  endDate: e.entry.data.endDate?.toISOString(),
+  time: e.entry.data.time,
+  location: e.entry.data.location,
+  type: e.entry.data.type,
+  scope: e.entry.data.scope,
+  summary: e.entry.data.summary || '',
+  url: !e.entry.data.recurring && hasBody(e.entry.body || '') ? `${base}events/${e.entry.id.replace(/\.md$/, '')}` : '',
 }));
 ---
 
@@ -111,19 +109,19 @@ const calendarEvents = upcomingEvents.map(e => ({
 
           {featuredEvents.length > 0 && (
             <div class="featured-section">
-              {featuredEvents.map(event => (
-                <a href={`${base}events/${event.id.replace(/\.md$/, '')}`} class="featured-event">
-                  {event.data.image && (
-                    <img src={event.data.image.startsWith('/') ? `${base}${event.data.image.slice(1)}` : event.data.image} alt={event.data.imageAlt || event.data.title} class="featured-event-img" />
+              {featuredEvents.map(ev => (
+                <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`} class="featured-event">
+                  {ev.entry.data.image && (
+                    <img src={ev.entry.data.image.startsWith('/') ? `${base}${ev.entry.data.image.slice(1)}` : ev.entry.data.image} alt={ev.entry.data.imageAlt || ev.entry.data.title} class="featured-event-img" />
                   )}
                   <div class="featured-event-content">
-                    <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>{event.data.type}</span>
-                    <h2>{event.data.title}</h2>
+                    <span class="event-type" style={`background: ${typeColors[ev.entry.data.type] || '#666'};`}>{ev.entry.data.type}</span>
+                    <h2>{ev.entry.data.title}</h2>
                     <div class="event-meta">
-                      {formatDate(event.data.date, event.data.endDate)} &middot; {event.data.time}
+                      {formatDate(ev.date, ev.entry.data.endDate)} &middot; {ev.entry.data.time}
                     </div>
-                    <div class="event-meta">{event.data.location}</div>
-                    {event.data.summary && <p>{event.data.summary}</p>}
+                    <div class="event-meta">{ev.entry.data.location}</div>
+                    {ev.entry.data.summary && <p>{ev.entry.data.summary}</p>}
                     <span class="btn btn-secondary">View Details &rarr;</span>
                   </div>
                 </a>
@@ -138,40 +136,40 @@ const calendarEvents = upcomingEvents.map(e => ({
                 <div class="month-group">
                   <h3 class="month-heading">{label}</h3>
 
-                  {monthEvents.map((event) => (
+                  {monthEvents.map((ev) => (
                     <div class="event-item event-item--bordered">
                       <div class="event-date">
-                        <div class="month">{monthsShort[event.data.date.getMonth()]}</div>
-                        <div class="day">{event.data.date.getDate()}</div>
+                        <div class="month">{monthsShort[ev.date.getMonth()]}</div>
+                        <div class="day">{ev.date.getDate()}</div>
                       </div>
                       <div class="event-details">
                         <div class="event-header">
                           <h3>
-                            {hasBody(event.body || '') ? (
-                              <a href={`${base}events/${event.id.replace(/\.md$/, '')}`}>{event.data.title}</a>
+                            {!ev.entry.data.recurring && hasBody(ev.entry.body || '') ? (
+                              <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`}>{ev.entry.data.title}</a>
                             ) : (
-                              event.data.title
+                              ev.entry.data.title
                             )}
                           </h3>
-                          <span class="event-type" style={`background: ${typeColors[event.data.type] || '#666'};`}>
-                            {event.data.type}
+                          <span class="event-type" style={`background: ${typeColors[ev.entry.data.type] || '#666'};`}>
+                            {ev.entry.data.type}
                           </span>
                         </div>
                         <div class="event-meta">
-                          {event.data.time} &nbsp;|&nbsp; {event.data.location}
+                          {ev.entry.data.time} &nbsp;|&nbsp; {ev.entry.data.location}
                         </div>
-                        {event.data.summary && <p>{event.data.summary}</p>}
+                        {ev.entry.data.summary && <p>{ev.entry.data.summary}</p>}
                         <div class="event-links">
-                          {event.data.address && (
-                            <a href={`https://maps.google.com/?q=${encodeURIComponent(event.data.address)}`}
+                          {ev.entry.data.address && (
+                            <a href={`https://maps.google.com/?q=${encodeURIComponent(ev.entry.data.address)}`}
                                target="_blank"
                                rel="noopener"
                                class="text-sm">
                               View on Map
                             </a>
                           )}
-                          {hasBody(event.body || '') && (
-                            <a href={`${base}events/${event.id.replace(/\.md$/, '')}`} class="text-sm">Details &rarr;</a>
+                          {!ev.entry.data.recurring && hasBody(ev.entry.body || '') && (
+                            <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`} class="text-sm">Details &rarr;</a>
                           )}
                         </div>
                       </div>
@@ -182,7 +180,7 @@ const calendarEvents = upcomingEvents.map(e => ({
             </div>
           ))}
 
-          {upcomingEvents.length === 0 && (
+          {expanded.length === 0 && (
             <p class="text-muted">No upcoming events scheduled. Check back soon!</p>
           )}
         </div>

@@ -1,15 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { expandEvents } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
 
 const allEvents = await getCollection('events');
-const now = new Date();
-const upcomingEvents = allEvents
-  .filter(e => e.data.date >= now || (e.data.endDate && e.data.endDate >= now))
-  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime())
-  .slice(0, 3);
+const upcomingEvents = expandEvents(allEvents).slice(0, 3);
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 ---
@@ -80,20 +77,24 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
       </div>
 
       <div class="content-width centered">
-        {upcomingEvents.map((event) => (
+        {upcomingEvents.map((ev) => (
           <div class="event-item">
             <div class="event-date">
-              <div class="month">{months[event.data.date.getMonth()]}</div>
-              <div class="day">{event.data.date.getDate()}</div>
+              <div class="month">{months[ev.date.getMonth()]}</div>
+              <div class="day">{ev.date.getDate()}</div>
             </div>
             <div class="event-details">
               <h3>
-                <a href={`${base}events/${event.id.replace(/\.md$/, '')}`}>{event.data.title}</a>
+                {!ev.entry.data.recurring ? (
+                  <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`}>{ev.entry.data.title}</a>
+                ) : (
+                  ev.entry.data.title
+                )}
               </h3>
               <div class="event-meta">
-                {event.data.time} • {event.data.location}
+                {ev.entry.data.time} • {ev.entry.data.location}
               </div>
-              <p>{event.data.summary || ''}</p>
+              <p>{ev.entry.data.summary || ''}</p>
             </div>
           </div>
         ))}
