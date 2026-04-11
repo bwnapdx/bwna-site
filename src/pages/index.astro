@@ -85,7 +85,7 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
             </div>
             <div class="event-details">
               <h3>
-                {!ev.entry.data.recurring ? (
+                {!ev.entry.data.recurring && (ev.entry.body || '').trim().length > 10 ? (
                   <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`}>{ev.entry.data.title}</a>
                 ) : (
                   ev.entry.data.title

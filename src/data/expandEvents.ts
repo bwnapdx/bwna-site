@@ -9,13 +9,8 @@ export interface ExpandedEvent {
   date: Date;
 }
 
-/**
- * Find the Nth occurrence of a given weekday in a month.
- * week: 1–4, day: 0=Sun–6=Sat
- */
 function nthWeekdayOfMonth(year: number, month: number, week: number, day: number): Date {
   const first = new Date(year, month, 1);
-  // Days until the first occurrence of `day` in this month
   const offset = (day - first.getDay() + 7) % 7;
   const date = 1 + offset + (week - 1) * 7;
   return new Date(year, month, date);
@@ -29,10 +24,6 @@ function monthMatchesPattern(month: number, pattern: 'all' | 'even' | 'odd'): bo
   return true;
 }
 
-/**
- * Expand a list of events, generating occurrences for recurring events
- * up to 12 months from now. Non-recurring events pass through unchanged.
- */
 export function expandEvents(events: EventEntry[]): ExpandedEvent[] {
   const now = new Date();
   const horizon = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
@@ -45,22 +36,18 @@ export function expandEvents(events: EventEntry[]): ExpandedEvent[] {
       entry.data.recurrenceDay != null &&
       entry.data.recurrenceMonths
     ) {
-      // Generate occurrences from now through 12 months out
       let y = now.getFullYear();
       let m = now.getMonth();
 
-      while (true) {
+      while (new Date(y, m, 1) <= horizon) {
         if (monthMatchesPattern(m, entry.data.recurrenceMonths)) {
           const date = nthWeekdayOfMonth(y, m, entry.data.recurrenceWeek, entry.data.recurrenceDay);
           if (date >= now && date <= horizon) {
             result.push({ entry, date });
           }
-          if (date > horizon) break;
         }
         m++;
         if (m > 11) { m = 0; y++; }
-        // Safety: don't loop forever
-        if (y > now.getFullYear() + 2) break;
       }
     } else {
       // Non-recurring: use as-is

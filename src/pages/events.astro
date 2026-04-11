@@ -497,6 +497,12 @@ const calendarEvents = expanded.map(e => ({
 <script define:vars={{ calendarEvents, typeColors, monthNames: months, calMinYear, calMinMonth, calMaxYear, calMaxMonth }}>
   const events = calendarEvents;
   const today = new Date();
+
+  function esc(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
   let currentYear = today.getFullYear();
   let currentMonth = today.getMonth();
   let selectedDay = null;
@@ -570,7 +576,7 @@ const calendarEvents = expanded.map(e => ({
         html += '<div class="cal-dots">';
         dayEvents.forEach(e => {
           const color = typeColors[e.type] || '#666';
-          html += `<span class="cal-dot" style="background:${color};" title="${e.title}"></span>`;
+          html += `<span class="cal-dot" style="background:${color};" title="${esc(e.title)}"></span>`;
         });
         html += '</div>';
       }
@@ -600,10 +606,10 @@ const calendarEvents = expanded.map(e => ({
     let html = '';
     dayEvents.forEach(e => {
       html += '<div class="cal-detail-card">';
-      html += `<div class="cal-detail-title">${e.title}</div>`;
-      html += `<div class="cal-detail-meta">${e.time} | ${e.location}</div>`;
-      if (e.summary) html += `<div class="cal-detail-summary">${e.summary}</div>`;
-      if (e.url) html += `<div class="cal-detail-link"><a href="${e.url}">Details &rarr;</a></div>`;
+      html += `<div class="cal-detail-title">${esc(e.title)}</div>`;
+      html += `<div class="cal-detail-meta">${esc(e.time)} | ${esc(e.location)}</div>`;
+      if (e.summary) html += `<div class="cal-detail-summary">${esc(e.summary)}</div>`;
+      if (e.url) html += `<div class="cal-detail-link"><a href="${esc(e.url)}">Details &rarr;</a></div>`;
       html += '</div>';
     });
     detailEl.innerHTML = html;
