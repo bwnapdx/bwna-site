@@ -1,0 +1,20 @@
+---
+title: "Lightning Strike Gives B-W Douglas-fir New Lease on Life"
+issue: "Jan-Feb 2015"
+issueSlug: "2015-01"
+author: "Barbara Warren-Sams"
+date: 2015-01-01
+category: "environment"
+featured: false
+page: 10
+pdfFile: "bwna-2015-01.pdf"
+---
+*(condensed from Portland Parks & Recreation City Nature blog)*
+
+When my grandson, now fast approaching his twentieth birthday, was a fifth grader, he interviewed me about our tree and wrote a paper that he chose to title, "The Lucky Tree." Why'd he choose "lucky"? Well, here are major obstacles that Lucky survived:
+
+On October 12, 1962, a typhoon also known as "The Columbus Day Storm" or "The Big Blow" hit Portland causing massive tree loss in our northeast neighborhood and four days without power. A nearby neighbor reported to my dad that twice while he nervously watched our tree, its branches touched the front lawn. Around 1980 my mom grew tired of the frequent need to remove thousands of cone- and millions of needle-debris from the yard, drive, sidewalk, roof, and rain gutters. My sister and I promised that we and her four grandchildren would help more with clean ups, sparing Lucky an untimely death. I moved back into my childhood home and took over the Lucky tree's care in 1989. Over the next twenty-five years, this included two instances of major pruning, removal of damaged branches and the second top, and then "rebirth" as a wildlife snag. Unfortunately, in June 2012, Mother Nature once again threatened Lucky who now stood about 140 feet high with a DBA of 14 feet. As I stood in my living room one early evening during a brief lightning storm, I heard the crash of thunder as if a bomb had exploded in the backyard. The next morning I stepped outside and found a few pieces of thick Douglas-fir bark lying near the front porch. I assumed that lightning may have struck one of the large upper branches. To my dismay a month later I noticed that six or so feet of the Lucky tree's top looked like a red-sprayed holiday tree. The June lightning storm immediately came to my mind and a sinking feeling to my stomach. I called an arborist who advised me to wait to see whether the damage would extend down the tree before making any decision. I must have sounded pretty distressed because he tried to convince me not to panic, not yet. I felt heartbroken. The top continued to die until it involved the top third of the tree and then seemed to stop. In November 2012, I put out a bid to three certified arborists, in which I asked for two quotes—one for topping (my first choice) and one for removal if it came to that.
+
+The only response to my request for bids came from Springwater Arboriculture (it seems that not all certified arborists are equipped or eager to handle such a dangerous job). On November 28, 2013, Andrew Craig and his crew arrived along with a boom truck with telescoping crane to reach over numerous other large trees and multiple wires to remove and lower into the street two 25-foot sections from Lucky. Despite my sadness, I couldn't help feeling a bit exhilarated by the tremendous effort to save my tree. I crossed my fingers that all was well. But it wasn't. By June 2013, damage had extended another forty to fifty down the tree. I called Springwater again. No cranes this time. Brian spent a day and a half hanging from Lucky's trunk, carefully removing eight- to ten-foot sections of the trunk and lowering them to the ground. Two small sections of bark were removed, holes drilled, and then the bark replaced. Several short, bare limbs were left for perching. The lowest branches were saved.
+
+Lucky is alive and may be for a long time. Despite being described with the term "snag," the new look has a certain elegance and dignity about it. I think if you saw Lucky you might agree. The new lease-on-life provides habitat for a large variety of wildlife large and small, including the many birds that frequent my yard. There's been an upswing this past summer, especially in daily visits from red-breasted nuthatches and northern flickers. Nearby neighbors have also spotted several owls and hawks.

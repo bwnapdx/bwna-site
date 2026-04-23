@@ -1,0 +1,22 @@
+---
+title: "Editor's Notes"
+issue: "Nov-Dec 2016"
+issueSlug: "2016-11"
+author: "Al Ellis"
+date: 2016-11-01
+category: "community-news"
+featured: false
+page: 3
+pdfFile: "bwna-2016-11.pdf"
+---
+The winter holiday season is a dichotomy of extremes: arguably the most gratifying time of the year, but also the most frantic—housecleaning to do, relatives to host, dinners to prepare, gifts to buy, school events to attend…you name it. Often when busy lives become even busier, something's got to give, and you can bet it's not going to be job obligations or family commitments or seasonal household responsibilities. So what's left? You guessed it: volunteerism—the very engine that keeps neighborhood associations chugging along. But fortunately for BWNA, Beaumont-Wilshire residents have had a history of stepping up to the plate in times of need, and this season is no exception. Case in point: last month's filling of two vital newsletter team positions.
+
+The first of these vacated positions was filled in response to my plaintive recruiting pitch in September/October's Editor's Notes for a reporter/writer volunteer. And indeed the need was acute, with all featured articles in the last issue penned by just two team members—BWNA President John Sandie and myself. Admittedly, it was the perfect storm scenario, with normally reliable article contributors unavailable to contribute due to jam-packed personal/professional calendars (reminiscent of a family coming down with colds all at once). Nonetheless, the message was clear: wiggle room was in short supply.
+
+Enter newly-arrived B-W resident Pat Bellamah to save the day: "I just read your request for reporter/writer volunteers in the BWNA newsletter. I'm volunteering." And the good news didn't stop there: "I have several years of experience as a reporter/editor for a national newsweekly, so I know how to interview people and put a story together." With a career encompassing journalism, publishing, and marketing, Pat's resume far exceeded our most optimistic expectations. Originally a native of Washington, D.C., she landed a job as a high-tech journalist in Boston and eventually was recruited by Microsoft, necessitating a move to Seattle in 1989 and later to Portland's Pearl District. Recently retired and transplanted to our neighborhood, Pat spends a good amount of time engaged in volunteer work and gardening, enjoying "…walking the neighborhood and appreciating the many lovely gardens around here." But familiarizing herself with the community is still a work in progress: "I'm not plugged in yet. But I would like to be." (On behalf of the neighborhood, Pat, a very warm welcome, and rest assured that our team will assist with that plug-in!)
+
+But as euphoria is ephemeral, so elation over Pat's e-mail would soon be overshadowed by news from John Sandie that another essential newsletter position needed filling—this time, Distribution Coordinator. With 2000-plus copies of the newsletter disseminated to residents and local businesses every other month by an army of over 60 volunteers, BWNA utilizes two distribution coordinators to run the show by organizing deliveries, monitoring routes and supervising the troops. John Sandie is one of those coordinators, but it was John's coordinator partner Serah Breakstone who had just announced that she was calling it quits after several years of service to the neighborhood as BWNA Board member, Land Use Chair, and finally Co-Distribution Coordinator. Thankfully our search for a replacement was short-lived: a neighbor living around the corner from Serah, Georgina Head, promptly rose to the occasion and volunteered.
+
+Georgina and husband Mike moved to our neighborhood from their farm in northwest Washington in 2014 to be closer to their children and grandchildren. Retired from a 35-year career as a library branch manager, during which she galvanized community volunteers in the construction of a new library building, Georgina now delights in caring for her grandkids, growing dahlias, remodeling her home, and "watching people of all ages go by our house—walking, running, biking. They are an inspiration to us to keep moving!"
+
+Well, Georgina and Pat, your civic-minded spirit is an inspiration to us all. Quoting again from Georgina's e-mail: "I hope by volunteering my time to the BWNA in the distribution of the newsletter, I will be able to express some of the appreciation we have for our home and our life in Beaumont-Wilshire." Amen to that…and wishes for fun and fulfilling holidays!

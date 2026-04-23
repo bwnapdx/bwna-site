@@ -1,0 +1,16 @@
+---
+title: "Fallout from delayed residential infill reform decision"
+issue: "Mar-Apr 2017"
+issueSlug: "2017-03"
+author: "Al Ellis"
+date: 2017-03-01
+category: "land-use"
+featured: false
+page: 8
+pdfFile: "bwna-2017-03.pdf"
+---
+At the hearing on residential infill policy held last December, the City Council agreed in principle with a proposal of reforms presented by its advisory body, the Bureau of Planning and Sustainability (BPS). However, disagreement on specifics led to amendments directing BPS staff to go back to the drawing board and return in 2017 with additional options for consideration by a reconstituted Council (i.e., new mayor, new commissioner) on such pivotal issues as size restrictions on new homes to ensure compatibility of scale with the neighborhood and increased density of smaller housing types in the heart of residential neighborhoods, which necessitates demolition of homes to make room for the building of duplexes and triplexes—so-called "middle housing." As the near capacity crowd exited Council Chambers that winter afternoon, speculation swirled: when might the BPS staff be ready to make its return to Council? Possibly as soon as February. Surely no later than April! Try next fall!
+
+This unexpectedly long delay is of special concern to neighborhoods like Beaumont-Wilshire, hard hit over the past few years by demolitions of viable, comparatively affordable "starter" homes—which are especially attractive to growing numbers of entry-level buyers, such as young couples preparing to start a family. Preservationists fear that developers, seeing the writing on the wall with respect to eventual Council adoption of size limits on new homes, will accelerate purchases of smaller, less expensive homes for the purpose of demolishing them in order to cash in on construction and sale of million-dollar-plus "monster homes" (as expressed by Commissioner Fish at the hearing). Sobering statistics lend credence to such worries: Over a three-year period, more than 1000 Portland homes fell victim to the bulldozer, with steady increases each year: 308 in 2014, 323 in 2014, 376 in 2015.
+
+So what recourse do preservation-minded residents have in stemming the tide of residential demolitions this year? First and foremost, let Mayor Wheeler and city commissioners hear from you with specific examples of perfectly good homes targeted for destruction in your area. Second, urge neighbors who put their homes up for sale to commit to selling to buyers who will reside in them, not tear them down. Third, explore the possibility of delaying demolition through appeal via BWNA within 35 days of a developer's demolition permit request to the Bureau of Development Services. BWNA and neighbors in the near vicinity of the proposed demolition site must be notified by law within five days of the demolition permit application's submission. This last option is admittedly a long shot, since the granting of an appeal hinges on being able to convince a hearing officer of the feasibility of plan to save the house through fundraising, finding another buyer or buyers, convincing the developer to refurbish instead of demolish, or even moving the house intact to a new location. Lastly, exercise free speech: put up signs! protest!

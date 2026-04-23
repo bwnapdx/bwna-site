@@ -1,0 +1,20 @@
+---
+title: "History of a house"
+issue: "Sep-Oct 2012"
+issueSlug: "2012-09"
+author: "Serah Breakstone"
+date: 2012-09-01
+category: "history"
+featured: false
+page: 4
+pdfFile: "bwna-2012-09.pdf"
+---
+For Ren Johns and her husband Zach, the house was meant to be. They were first time homebuyers and it was the very first house they looked at; instinct told them it was the right place for them. That was almost three years ago, and now that the house (built in 1912) is in its 100th year, Ren thought a celebration - a birthday party - would be in order. To prepare for the party and add some interest to the event, she decided to research the history of the house, going as far back as she could and digging up as much dirt as she could find.
+
+Researching the history of a house requires a bit of creativity because sources of information are found in a variety of different places. Ren looked at historical neighborhood plats, records of deeds, archived newspaper articles, and blogs from other people doing similar types of research. So far, Ren has been able to determine that approximately 17 different sets of people have either owned or rented her house since 1930. As she went further back in time, the information available became more random. For example, she knows that the man living in her house in 1949 owned a '41 Buick. She knows that Henry and Harryette (with a "y") lived in her house in the early 1940's - he was a paper hanger and she was an avid bowler. She knows that in 1918 a man wanted by the police for "smashing an auto" lived at her address. Prior to 1930, ownership of her house is less clear. A 1922 plat indicates that her house may have been owned by the Swift Meat Packing Company. The company closed in 1966 but in its operating days it provided employee housing, mostly in Kenton but perhaps in Beaumont as well.
+
+In researching the house, Ren also came across a lot of interesting history about the greater Beaumont neighborhood. Her area of the neighborhood (NE 36th between Skidmore and Prescott) was originally called the Willamette Addition and was platted in 1888. The oldest house in that area was built in 1904, so there was quite a lapse between platting and actual development, which was apparently common at that time. She also discovered that the area covered by Wilshire Park was at one time owned by a single property owner and was platted for residential development. The property owner died and his heirs decided to turn the land into a campground, which - not surprisingly - caused much debate within the neighborhood. In the end, the city purchased the land in 1937 and established Wilshire Park.
+
+For anyone interested in researching the history of their own house, Ren recommends a few good sources. The Rose City Park Neighborhood Association published a history book several years ago that provides a broad look at the history of that neighborhood as well as the surrounding area. (In fact, a large portion of the Beaumont neighborhood was originally part of the Rose City Neighborhood.) The Oregon Historical Society has also been a valuable source of information, as well as the Multnomah County archives, which holds deed records and platting information. Two blogs that Ren found useful were Vintage Portland (http://vintageportland.wordpress.com/) and Alameda Old House History (http://alamedahistory.org/). In addition, the City of Portland has developed a user's guide for researching your historic property, which can be found online at http://www.portlandoregon.gov/bps/article/146266.
+
+But back to the birthday party. . . Ren has researched recipes (including a Rose City Park cookbook from 1914) and plans to make several dishes representing the various decades her house has spanned. A friend of their's is brewing a special beer, called the 933 Ale, named for the original house address. Some historic photographs would also be a nice touch, but she has not had much luck finding any old pictures of the area. She would love to hear from anyone who could provide historical pictures or add to her collection of information. You can reach Ren by emailing me (Serah) at sryano@comcast.net.

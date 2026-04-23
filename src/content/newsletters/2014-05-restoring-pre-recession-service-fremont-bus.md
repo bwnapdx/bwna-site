@@ -1,0 +1,16 @@
+---
+title: "Restoring Pre-Recession Service on the Fremont Bus Line"
+issue: "May-Jun 2014"
+issueSlug: "2014-05"
+author: "Jim Howell and Al Ellis"
+date: 2014-05-01
+category: "land-use"
+featured: false
+page: 10
+pdfFile: "bwna-2014-05.pdf"
+---
+When the four-story apartment building on Fremont Street without on-site parking——"Beaumont Village Apartments"——was first proposed a couple of years ago, a stated prerequisite was that the location be accessible to regular public transit service: daily service available every 20 minutes or so. Opponents of the project repeatedly pointed out that this requirement was not being met and hadn't been for some time. Nonetheless, and to the chagrin of many B-W residents, the City gave the green light for the project to proceed to completion, sans on-site parking spaces. So who was right? The facts are that in September, of 2010, TriMet slashed one-half of the Fremont bus line's weekday service, eliminated all weekend service, and truncated the route at Emanuel Hospital. The result was a loss of over three-quarters of its previous ridership, ostensibly due to the lack of regular transit service. So much for the prerequisite.
+
+The Beaumont Village Apartments conundrum is one of many reasons why restored bus service on Fremont is sorely overdue. Since the cut in service, The Randall Children's Hospital has opened, a New Seasons Market was built on Fremont between Williams and Vancouver, a large transit-oriented development called One North is under construction with three multi-story office/retail buildings, and hundreds of new apartment dwellings with no parking have been constructed or are under construction in the area. With The Great Recession a thing of the past and payroll tax revenue up, residents are now calling for a restoration of pre-recession service as soon as possible. Their argument is that the Fremont bus line was, and could be again, a vital east-west link connecting nine north-south lines, five of which provide frequent service: 4, 6, 8, 75, and 72. Moreover, frequent service routes allow access to multiple destinations, often boosting ridership exponentially over single destination lines.
+
+The Fremont bus route used to go downtown via the Steel Bridge, duplicating the service provided by the #4 and #44 on Williams/Vancouver. A possible alternative routing that has the potential of opening up an entirely new market is via the Fremont Bridge and then south to downtown in the NW 18th/19th Avenue corridor. This route would provide a direct connection to Providence Park through the NW District and the proposed new Conway Development. Proponents of restored service point out that the convenience of this frequent service line could conceivably attract enough new fare paying riders to cover most of the additional operating cost. Area residents and their neighborhood associations can pursue these ideas with TriMet staff at an upcoming community meeting dedicated to identifying near-term and long-term bus service improvements for inclusion in TriMet's Eastside Service Enhancement Plan. The community meeting scheduled for Northeast Portland will be held at Parkrose High School Library, 12003 NE Shaver Street, 6:30-8:30pm on Tuesday, May 13th.

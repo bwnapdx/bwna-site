@@ -1,0 +1,20 @@
+---
+title: "Behind the scenes: lobbying for environmental safeguards"
+issue: "Nov-Dec 2017"
+issueSlug: "2017-11"
+author: "John Sandie"
+date: 2017-11-01
+category: "environment"
+featured: false
+page: 8
+pdfFile: "bwna-2017-11.pdf"
+---
+*Editor's note: The following is excerpted from a letter sent to the Oregon Department of Environmental Quality by John Sandie, who serves on a DEQ advisory committee, an Oregon Health Authority advisory committee, as well as the BWNA Board and the United Neighborhoods for Reform Steering Committee. John reflects on his letter: "It serves as an example of the continuing effort and engagement that must be maintained in hopes of making incremental steps for better accountability by state or municipal organizations. Effective change is only achieved through much perseverance and overcoming of levels of frustration."*
+
+First let me thank everyone for the time and effort to facilitate this effort to control exposure to asbestos and open up the proceedings to the public. The discussions regarding survey requirements, differences between friable and non-friable asbestos-containing materials (ACM), and the exemption of renovations were all very enlightening and gave me understanding of the issues faced by those who are daily and actively involved in adhering to the regulations to the best of their understanding and abilities. However, I continue to be concerned that we often get caught up with the minutia and language of regulations and laws during these review projects, losing sight of the core reason and spirit these were developed and enacted in first place. Our goal for these regulations is to protect workers and neighbors from exposure to asbestos through adherence to safe handling practices. Exposure to asbestos fibers in even small amounts can have traumatic health impacts including death; and we, as a society, must do everything in our power to protect the public from this risk by living up to our established safe guards!
+
+So while the discussion of handling the waste through hauling and at transfer stations is vitally important, as was brought up in the meeting several times, the real onus has to be placed on compliance at the point of generation. I had expected that the asbestos regulation review project would have been more in tune to this. While outreach efforts and training opportunities need to be continued for both contractors and property owners, so far the level of asbestos abatement compliance at residential demolitions remains extremely disappointing. Within the last couple of years data analysis by United Neighborhoods for Reform (UNR) and *The Oregonian* shows that compliance to proper asbestos abatement at residential demolitions within Portland are at levels < 35 percent, and the UNR's study of a couple neighborhoods puts it at <10 percent.
+
+Since my advocacy over the last three years has focused on responsible demolition methods, it is very apparent that a key action point for this process is the issuing of a permit and required documents to be included in that application. Requiring documented surveys and abatements for asbestos, as well as lead-based paint, offers the most effective action to increase compliance resulting in acceptable risk levels. Even given the potential problems of statutory language and coordination within agencies, other environmental oversight organizations have recognized this fact and require these documents. These requirements of surveys and abatement address the basic health and safety of our population and must be enacted in Oregon.
+
+DEQ must be consistently aware of points of airborne asbestos generation to have any opportunity to improve this critical stage of compliance. In my close-to-20 years' experience in manufacturing medical devices, I came to appreciate the impacts that periodic FDA audits had on our own processes and compliance efforts. I would encourage DEQ to figure out some means to perform a minimum level of site verification inspections to maintain some conceptual measurement of compliance. The old adage—if it isn't measured, it isn't important and won't get attention—holds true in any endeavor.

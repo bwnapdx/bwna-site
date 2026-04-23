@@ -1,0 +1,26 @@
+---
+title: "New Homes in Beaumont"
+issue: "Jan-Feb 2013"
+issueSlug: "2013-01"
+author: "Serah Breakstone"
+date: 2013-01-01
+category: "land-use"
+featured: false
+page: 4
+pdfFile: "bwna-2013-01.pdf"
+---
+During my daily walks through the neighborhood with my dog, I've been noticing a number of new homes under construction - currently four of them within just a few blocks of my house. What I found particularly interesting is that in all four cases, an existing home on the lot was torn down before the new home was built. The homes being torn down did not strike me as especially run-down (although I did not see the interiors), so I wondered what "formula" a property owner or developer uses when making this kind of decision. In other words, when does it make more sense financially to tear down a home and rebuild from scratch, rather than refurbish an existing home?
+
+I'm aware that there is a relationship between the value of land and the value of improvements (i.e., a home) on that land, and at some point that relationship, or ratio, shifts such that a tear-down is a viable option. To get a little more detail, I spoke with Brendan Buckley. Buckley is a market and housing analyst who works with a Portland firm and who I know through my job as a land use planner. He explained that the basic formula for this type of residential redevelopment is as follows: the value of the existing home plus the value of the land together must be less than or equal to the value of a vacant, buildable lot. It is somewhat counterintuitive - how can the value of land plus a home be less than the value of land alone?
+
+Generally, this formula works best when the lot is dividable into two lots, and therefore can support two new homes. Many older homes in Portland were built on what are now considered "double lots", meaning the lot is large enough that it could be split into two lots that still meet the minimum lot size standards in Portland's zoning regulations. Minimum lot size requirements in Beaumont range from 1,600 - 3,000 square feet, depending on a number of factors including when and how the lot was created. It's easy to see how the value of one house and a lot would be less than the value of a vacant lot that can be split and sold as two lots. I know this is the case in at least one of the projects near my house; one new home has been built and there is clearly room for a second one right next to it.
+
+However, the other three projects I've been watching involve just one new house being built on the lot. Brendan said this is likely feasible because land values in our neighborhood are high relative to other areas of Portland but there are still "distressed" homes in Beaumont - meaning foreclosed homes that are bank-owned and therefore available at lower-than-normal prices.
+
+Development companies scout around for opportunities to buy these types of homes; they are able to pay cash for them and save money by developing the lot themselves. Typically, development companies have pre-established home plans and can build a new home more economically than an individual property owner (who would have to hire an architect, contractor, etc.). Therefore, it becomes financially beneficial for them to tear down an existing home and rebuild one new one, even if there's no lot division involved.
+
+So far, the projects that I've seen are all single homes on a single lot. However, Portland zoning regulations allow for a variety of residential development types in the R-5 zone, which is the zoning designation that applies to the majority of Beaumont Wilshire (excluding the commercial area along Fremont). Townhomes, duplexes, manufactured homes, and accessory dwelling units are all allowed within the R-5 zone per the zoning code as are houseboats, but it's hard to imagine how that would work. There are certain standards that would apply to some of those development types, but generally speaking they are permitted outright.
+
+Of these allowed housing types, one that we are likely to see more of in Beaumont, and across Portland, is accessory dwelling units, or ADUs. An ADU is a small, secondary home built on a lot with an existing single home and can be beneficial from a variety of perspectives. The City of Portland sees them as an efficient way to increase housing stock in existing neighborhoods while minimizing impacts on the overall character of the neighborhood. ADUs are often not entirely visible from the street because they are small and built behind the primary home in a way that blends with the existing home. They can also provide more accessible and affordable housing and respond to changing family sizes. Property owners view them as a way to provide housing for additional family members (kids or elderly parents, for example) or as a means for additional income (ADUs may be rented). Portland's zoning regulations have specific development standards for ADUs that are intended to keep ADUs small in size (less than 800 square feet), located away from neighboring properties, and designed to be visually similar to the existing home (trim, color, eaves, etc.).
+
+More information about zoning in this neighborhood can be found on Portland's website at www.portlandonline.com.

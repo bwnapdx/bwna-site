@@ -1,0 +1,22 @@
+---
+title: "New Traffic Signals for Beaumont-Wilshire Arteries"
+issue: "Nov-Dec 2016"
+issueSlug: "2016-11"
+author: "Pat Bellamah and Al Ellis"
+date: 2016-11-01
+category: "land-use"
+featured: false
+page: 7
+pdfFile: "bwna-2016-11.pdf"
+---
+Each year neighborhood associations from around the city submit proposals to the Portland Bureau of Transportation (PBOT) for traffic light/crosswalk improvements and then wait months to find out if these projects have been given the green light for priority-need funding based on PBOT field studies. But while BWNA has been active over the years in advocating for project funding based on safety concerns expressed by residents, only occasionally have its proposals made the cut. In fact, it's been several years since the last BWNA proposal was funded by PBOT—installation of speed bumps along accident-waiting-to-happen, steeply-inclined Wistaria—and that came about only after three years of diligent lobbying for the project by BWNA and concerned residents. Lesson learned: perseverance greases the wheel.
+
+Fast forward to 2016: starting in early November, in response to a BWNA initiative, PBOT begins construction on a replacement of the traffic signals and street lighting at the intersection of N.E. Fremont/42nd/41st, adjoining Beaumont Middle School. Additionally, a long overdue left-hand-turn signal will be installed at the 33rd and Fremont intersection.
+
+Lisa Okimoto, Engineering Assistant with PBOT, and Adam Moore, the engineering associate who worked on the design specification for the 42nd and Fremont intersection project, provided perspective: the existing signals date from 1979 and "are at the end of their lifespan," according to Okimoto. (Nonetheless, 37 years of continuous service is pretty darn impressive!) The primary objective of the signal-replacement project is improved safety for pedestrians and better traffic flow through a problematic "offset" intersection where the north/south traffic must turn on to Fremont before continuing on to either 42nd or 41st. According to Moore, there was a particular safety concern, because cars turning at the intersection would be transecting the crosswalk at the same time as middle school students were crossing the street. With the new traffic signals, this and other problems can be addressed, because the signals will be programmable. The current plan is to allow only pedestrians in the street when the crosswalk signal indicates that it is safe to cross. Conversely, when the signals indicate that cars can turn, the pedestrian signal will be "Don't Walk," meaning that cars and pedestrians will alternate. The existing span-wire hanging overhead lights will be replaced with mast-arm poles, because the hanging lights "don't last as long."
+
+During discussions with PBOT staff about this modernization scheme, concern was expressed that the new settings might slow traffic through the intersection, especially at rush hour, but Moore was optimistic that other changes would optimize traffic flow. For example, it might speed things up if a car can turn in the intersection without having to wait for pedestrians when cars have the green light.
+
+More significantly, PBOT is implementing vehicle detection technology utilizing radar devices on the arms of the signal poles that will allow the timing of the signals to respond to the traffic actually waiting at the intersection. In other words, the lights will favor the directions where there is greatest demand. And because the signals are programmable, PBOT can observe traffic flow once they are working and tweak the timing as necessary. Still another safety enhancement included in the reconstruction of the traffic signals will be new LED street lighting at the intersection that will be brighter and more energy efficient.
+
+The entire project is projected to take 2 – 2½ months to complete, since it will entail extensive construction on all four corners of the intersection. The mast-arm poles will be built on new "sidewalk bubbles"—floating islands off the corner of the sidewalk. (In part this is because the city doesn't own the sidewalks on all four corners and had to find a way to build the new posts without encroaching on private property.) Existing sidewalks will have to be dug up to run new conduit (i.e., underground wiring) for the signals. Adding to the challenge, all construction must be completed with both new installation put in place and old signals still working. "We have to put in a new light bulb without turning the old one off," Moore said.

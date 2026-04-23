@@ -1,0 +1,20 @@
+---
+title: "St. Rose School: service to the community as a virtue—and as advertised!"
+issue: "Sep-Oct 2017"
+issueSlug: "2017-09"
+author: "Pat Bellamah"
+date: 2017-09-01
+category: "schools"
+featured: false
+page: 7
+pdfFile: "bwna-2017-09.pdf"
+---
+In this time of rapid change in the skyline and the neighborhoods of Portland, it's easy for the history of the city to evanesce with the landscape that embodied it. And so it was with some surprise to learn St. Rose School, now housed in a brick schoolhouse at 5309 NE Alameda, dates its inception to 1913. In that year, according to communications director Shelly Davidson, "Four Holy Child sisters left their community, homes and friends in England and traveled all the way to Oregon with the intention of starting a new school and community. The sisters lived in Ladd's Addition and traveled to Northeast by foot and streetcar. The area of the school was described in letters home as 'wild woodland' and impossible to reach by car."
+
+Today St. Rose, an advertiser with this newsletter since the beginning of the calendar year, educates about 245 students in an academic program that includes full-day pre-kindergarten and kindergarten, as well as 1st through 8th grades. As a school associated with St. Rose Church, last year about 71 percent of its students were Catholic, but 29 percent were not. And while 75 percent of the students come from the neighborhood, some commute from other parts of Portland or as far away as Happy Valley, with the minority enrollment demographic at an impressive 35 percent.
+
+When asked what attracts parents to choose St. Rose School for their kids, principal Karen Asbury ticked off the basics: academic excellence, small class size, physical education, music and art programs. But what really differentiates St. Rose, she emphasized, is what they refer to as "virtue education" and the school's serious commitment to instilling students with a spirit of service. Speaking to the process, Principal Asbury explained that virtue is taught by focusing on a specific virtue, such as perseverance, honesty, ethics, or integrity, for a couple of weeks. The word is introduced at a school assembly and then reinforced by the faculty in the context of teaching or discipline until another virtue becomes the focus.
+
+The service component of character development entails different service projects for each grade. For example, once a month all of the students bring in extra lunches to feed the homeless, except for the pre-K students who make lunches at school. The 6th-graders deliver the lunches to the St. Francis dining hall for the homeless in Southeast Portland. The 3rd-graders support Northwest Children's Outreach by collecting gently used clothes and toys from the other students, which the kids themselves go to Northeast Children's Outreach to sort. The 3rd-graders also go and visit ill and disabled children at the Providence Center for Medically Fragile Children. Someone from the Center trains the young students how to interact with the hospitalized children and the students quickly adapt. The 2nd-graders visit with the elderly at an assisted living home, and the 5th-graders support the parish food bank by collecting food door-to-door in the neighborhood. The whole school participates in a project they call the "blessing bags," referring to baggies the children assemble with non-perishable snacks and a note that school families can keep in their cars for the children to give to the homeless people they encounter.
+
+These and many other service projects not only teach St. Rose students to serve the poor, the ill, and the isolated, but also teach them from a young age not to be afraid of people who are different from them and to have the courage to engage by seeing the humanity in everyone. The result is a school with a palpable sense of joy and community, aptly summed up in their ad in this issue: "…helping to form lifelong learners who respect others and serve the community." Newsletter aside, St. Rose's most effective form of advertising is, not surprisingly, word-of-mouth—from the students to their friends.

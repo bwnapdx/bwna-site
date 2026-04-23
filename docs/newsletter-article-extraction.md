@@ -92,28 +92,29 @@ Check that the new articles appear in the build output and the page count increa
 
 ## Progress tracker
 
-| Issue | Status | Articles |
-|-------|--------|----------|
-| Jan-Feb 2026 | Done | 17 |
-| Nov-Dec 2025 | Done | 17 |
-| Sep-Oct 2025 | Not started | |
-| Jul-Aug 2025 | Not started | |
-| May-Jun 2025 | Not started | |
-| Mar-Apr 2025 | Not started | |
-| Jan-Feb 2025 | Not started | |
-| 2024 (6 issues) | Not started | |
-| 2023 (6 issues) | Not started | |
-| 2022 (6 issues) | Not started | |
-| 2021 (6 issues) | Not started | |
-| 2020 (6 issues) | Not started | |
-| 2019 (6 issues) | Not started | |
-| 2018 (6 issues) | Not started | |
-| 2017 (6 issues) | Not started | |
-| 2016 (6 issues) | Not started | |
-| 2015 (6 issues) | Not started | |
-| 2014 (6 issues) | Not started | |
-| 2013 (6 issues) | Not started | |
-| 2012 (6 issues) | Not started | |
+All 85 issues extracted (1,095 articles) via `scripts/extract-articles.mjs` on 2026-04-23 using the Anthropic API + Sonnet 4.6.
+
+First pass (image-based, Batch API) extracted 82 issues. Three issues (2014-03, 2025-01, 2025-09) repeatedly tripped Anthropic's output content filter. They succeeded on a retry using direct-PDF input + a softer prompt that established BWNA's ownership of the content.
+
+## Bulk extraction script
+
+The automated extraction lives in `scripts/extract-articles.mjs`. Usage:
+
+```bash
+# Pilot one issue (sync, image mode):
+node scripts/extract-articles.mjs --issues=2024-11
+
+# Direct-PDF mode (use this if image mode trips the output filter):
+node scripts/extract-articles.mjs --issues=2014-03 --pdf
+
+# All un-extracted issues via Batch API (splits into 25-issue chunks):
+node scripts/extract-articles.mjs --batch --all
+
+# Resume a running batch:
+node scripts/extract-articles.mjs --poll=msgbatch_XXX
+```
+
+Requires `ANTHROPIC_API_KEY` in `.env` (gitignored).
 
 ## Tips
 

@@ -1,0 +1,12 @@
+---
+title: "Reduce, Re-use, and Recycle on Earth Day"
+issue: "Mar-Apr 2012"
+issueSlug: "2012-03"
+author: "Barbara Ford"
+date: 2012-03-01
+category: "environment"
+featured: false
+page: 8
+pdfFile: "bwna-2012-03.pdf"
+---
+Clean out your closets, garages, backyards and basements and bring your items to the Cully Association of Neighbors Earth Day Spring Clean-Up on Saturday, April 21, 2012 from 9:00am to 3:00pm at Trinity Lutheran Church and School at 5520 NE Killingsworth Street. Acceptable items: wood, pallets, limited yard debris (no compost), metal, glass, rubber, carpets, mattresses, appliances (no refrigerators or cooling units), block styrofoam, car batteries, household batteries, furniture, cell phones, old bicycles and bicycle tires. Purchase usable items at the popular U-Price It area. Bring canned food and usable clothes for the NE Emergency Food Program. Do not bring: hazardous waste (gasoline, chemicals, paint, tar, animal waste, liquids) concrete, asphalt, asbestos, brick, cement, dirt or sod, sand, gravel, composition roofing, under-the-sink garbage. Fees for the clean-up (residential vehicles only) are $7.00 per car, van or SUV, $20.00 per truck. Additional fees for oversized loads and trailers, as well as electronics ($2.00); computers, monitors, TVs under 36" ($3.00); tires on-rim ($3.00) or tires off-rim ($2.00). This is our biggest fundraiser! Cully Clean-Up is a SOLV-sponsored Earth Day recycling event which is sponsored by the Cully Association of Neighbors, Central NE Neighbors, METRO and the Bureau of Planning and Sustainability. The Cully Clean-Up is also supported by Trinity Lutheran Church and School, Morel Ink, Albertsons, Safeway, Delphina's Bakery, Starbucks Coffee, Fire Station 28, Recology Portland, Total Reclaim, Free Geek, NE Emergency Food Program, Salvation Army, Jay's Lawnmower, Wood Waste Management, Community Appliances, Community Cycling Center, and Quality Used Tires. We need 60+ volunteers! This is a great way to meet neighbors and have fun while working together for a cleaner neighborhood. Community service credits are available for high school students, college students and others. Volunteers can dump for free! Want to volunteer? Sign up for a 2-hour shift. Contact Doug at 503.488.0401, or email dougsplanet@mac.com. Quiera ayudar? Llame a Larry 503.287.0523. For general questions or if you want to post a lawn sign in your front yard or a flyer on your business window. Contact Dennis at 503.528.6898, or email letsprune@gmail.com

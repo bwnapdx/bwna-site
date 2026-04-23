@@ -1,0 +1,18 @@
+---
+title: "Amazing aster family for late summer bloom"
+issue: "Sep-Oct 2017"
+issueSlug: "2017-09"
+author: "Barbara Strunk"
+date: 2017-09-01
+category: "environment"
+featured: false
+page: 9
+pdfFile: "bwna-2017-09.pdf"
+---
+Aster family plants are winners for late summer flowers. This huge group of plants includes annuals and perennials such as coneflowers, sunflowers, chrysanthemums, dahlias, black-eyed Susan, feverfew, asters, and lettuce among many others. The Asteraceae is one of the largest plant families, with 1620 genera and thousands of species. These flowers are very attractive to pollinators, birds, and people. They also attract beneficial insects that prey on not-so-helpful insects. I have several of these genera in my garden, and I love them dearly. Before describing just a few, it is important to emphasize that success in the garden means knowing how these plants grow in their native habitats and matching those conditions as much as possible. The aster family plants we garden need sun, good drainage, and regular water. It is especially important that newly planted plants get regular water. "Drought tolerant" means a plant can deal with less water, but only after it is well established. I planted coneflowers (Echinacea), black-eyed Susans (Rudbeckia), and others, early this summer. During the crazy hot weather at the beginning of August, I watered them twice a day.
+
+One of my favorite late bloomers is goldenrod (Solidago). It is not the allergy producer; ragweed is the allergy-creating culprit. Goldenrod has lovely sweeps of tiny yellow flowers. Some varieties such as 'Little Lemon' and 'Golden Baby' have been developed to be smaller than the species and fit perfectly into the late summer garden. There are also small goldenrods that are groundcovers. The biennial Brown-eyed Susan (Rudbeckia triloba) has been gently seeding around my garden for many years. The goldfinches get most of the seeds, but enough seeds drop to sprout for next year. They produce 2-inch long-lasting daisy-shaped yellow flowers with brown centers. They are lovely in the garden and long-lasting in bouquets. It is easy to pull out the plants that the birds and the wind "misplace." Speaking of goldfinches: I have noticed our resident Lesser Goldfinches eating the leaves of our sunflowers—but just some of the leaves; the plants are hale and hearty. Sunflowers (Helianthus annuus) provide greens and seeds for the birds, pollen and nectar for the bees, and flowers, seeds, and satisfaction for people.
+
+Coneflowers (various Echinacea species) have been developed over the years into amazing colors for gardens. I love the spiny centers surrounded by colorful downward pointing petals, from which the name is derived. The garden coneflowers have been developed from plants native to Eastern and Central North America in moist prairies, meadows, and open woods. They need regular water. Another aster family plant I love in my garden is feverfew (Tanacetum parthenium). This medium sized annual is covered with small white daisy-shaped flowers and dissected foliage, a bit like small chrysanthemums. It is a bit more weedy than others because the seeds are spread easily by the wind and passing people. The root systems are limited, and unwanted plants are easy to pull out.
+
+Go online and dig into books to explore this huge plant family. Check out the nurseries and your friends' gardens. Collect seeds and trade plants. The late summer effects you'll be able to create, from formal to wild, are amazing. This huge family has lots to choose from; a gardener can spend a lifetime exploring their possibilities.

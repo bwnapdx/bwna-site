@@ -1,0 +1,18 @@
+---
+title: "So, What's the Solution?"
+issue: "Sep-Oct 2014"
+issueSlug: "2014-09"
+author: "John Sandie"
+date: 2014-09-01
+category: "business"
+featured: false
+page: 6
+pdfFile: "bwna-2014-09.pdf"
+---
+This story started at Fremont Fest as I was talking with my booth mate representing the BBA; in another "small world" moment, I found out that Jerry Catlan had graduated a year ahead of my oldest son from Midland High School in Michigan. In a continuing pattern for the day, a few moments later a woman walked up with a Michigan shirt on and presto we had a mini-Midland reunion, as she had also lived in the city for some time. So these happenings just support my conspiracy theory that people from the Midwest are slowly, covertly taking over Portland. How else do you explain a Green Bay Packers bar and Pabst Blue ribbon beer here?
+
+Anyway, back to the story. Jerry and his partner in Sand's Solution Kurt Sand, are both graduates of MSU with accounting degrees; and they both indicated that an early "head for numbers" and a vision of broad career potential led them into the business and accounting field. How they landed in Portland in the mid-90's is a tale of youthful adventure: Jerry, appropriately, came by bike on a cross country solo trip; and Kurt, via the classic "couch landing" at a friend of a friend's. The two had not crossed paths in college but met here in Portland while working in separate accounting firms—one at larger regional company and the other at one of the "big four" accounting firms. During these years, Kurt met his wife Donnette, an accountant and third partner within Sand's Solutions and they initially established a home in the Alberta Arts District. They became active in Vernon School where their children attended. They have since moved with their two boys to a house just south of Fremont within the Beaumont Wilshire neighborhood, making an easy commute to work. In an unintended twist, their sons are known as the "money brothers"; check out your wallet for "fives and tens" and you'll have a good clue why. Meanwhile, Jerry moved about in governmental and non-profit positions and now also resides in the NE area in the Woodlawn neighborhood. He shares his home with chief of security for Sand's Solution: his dog, Joe. Joe performed his duties admirably when I arrived a few minutes early for our appointment.
+
+The friends and work associates decided to go out on their own in 2000 and set up an office at MLK and Fremont, providing full financial services and strategies to small businesses. With an eye towards getting closer to established small businesses and clients they moved to the Beaumont Village area. Eventually in 2013 with an eye towards future expansion, they settled into the present location—a two story Arts and Crafts house built in 1912 at 3420 NE 41st Ave. As I interviewed Kurt and Jerry in the old dining room that serves as their conference room, I noticed a bottle of wine and another of spirits on the shelf. I discovered these are kept handy to ease the client's angst when they have to be given a financial "tough love" message as part of Financial Therapy Services. Both Kurt and Jerry have long since retired their suits, and feel they bring a more casual, empathetic fellow small business owner atmosphere to meetings and discussions with clients. They feel their own small business experiences help them to be practical "problems solvers" within their tax and business consulting efforts.
+
+So when visiting Sand's Solution, bring a dog treat to get through security and show a little "angst." They might offer you something for that.
