@@ -7,6 +7,7 @@ category: "events"
 featured: false
 page: 7
 pdfFile: "bwna-2017-01.pdf"
+editorsNote: "This was a photo feature in the original newsletter. The captions are preserved below; see the PDF for the photos themselves."
 ---
 ## Scenes from Fremont Fest 2016
 

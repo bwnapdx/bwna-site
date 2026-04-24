@@ -7,6 +7,7 @@ category: "events"
 featured: true
 page: 1
 pdfFile: "bwna-2025-07.pdf"
+editorsNote: "The opening paragraph describes a committee group photo that appeared in the original newsletter. See the PDF for the photo."
 ---
 BWNA Events Committee members take organizing neighborhood events seriously, but not too seriously! Front row from left: Angela Frome, Kate Krider, Laurie Webber, and John Sandie. Back row from left: Ayumi Angel, Patti Koehler, Beverly Yashar, and Susan Trabucco. Not pictured: Ann Angulo and Ande Reisman.
 

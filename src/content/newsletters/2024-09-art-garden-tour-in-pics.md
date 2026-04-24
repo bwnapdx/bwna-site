@@ -7,6 +7,7 @@ category: "community-news"
 featured: false
 page: 10
 pdfFile: "bwna-2024-09.pdf"
+editorsNote: "This was a photo feature in the original newsletter. The captions are preserved below; see the PDF for the photos themselves."
 ---
 It was sunny (but not too hot) with lots of people (but it didn't feel too crowded) and loads of smiles and happy chatter as neighbors greeted those they knew and those they didn't while enjoying the eye-candy of five typically private Beaumont-Wilshire gardens, replete with art offerings. Not a bad outcome for BWNA's second Art & Garden Tour.
 

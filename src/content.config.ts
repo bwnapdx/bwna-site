@@ -27,6 +27,7 @@ const newsletters = defineCollection({
     featured: z.boolean().default(false),
     page: z.number().optional(),          // page in the PDF
     pdfFile: z.string().optional(),       // "bwna-2026-01.pdf"
+    editorsNote: z.string().optional(),   // callout shown at top of article (e.g., photo-feature disclaimer)
   }),
 });
 

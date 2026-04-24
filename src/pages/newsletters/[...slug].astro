@@ -41,6 +41,12 @@ const issueArticles = allArticles
         </p>
       )}
 
+      {article.data.editorsNote && (
+        <aside class="editors-note" data-pagefind-ignore>
+          <strong>Editor's note:</strong> {article.data.editorsNote}
+        </aside>
+      )}
+
       <div class="article-content">
         <Content />
       </div>
@@ -49,6 +55,11 @@ const issueArticles = allArticles
         <div class="card card--highlight issue-card">
           <p>
             This article appeared in the <strong>{article.data.issue}</strong> issue of the BWNA Newsletter.
+          </p>
+          <p class="text-sm text-muted archive-disclaimer">
+            Articles in our archive are text-extracted from the original newsletter PDFs;
+            photos, ads, and layout aren't included. Download the issue below for the
+            full experience.
           </p>
           <a href={`${base}newsletters/${article.data.pdfFile}`} target="_blank" rel="noopener" class="download-link">
             Download complete issue (PDF)
@@ -108,12 +119,30 @@ const issueArticles = allArticles
     font-size: 0.95rem;
   }
 
+  .editors-note {
+    background: var(--color-background-alt);
+    border-left: 3px solid var(--color-primary);
+    padding: 0.875rem 1.125rem;
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .editors-note strong {
+    color: var(--color-text);
+  }
+
   .issue-card {
     margin-top: 2.5rem;
   }
 
   .issue-card p {
     margin-bottom: var(--spacing-sm);
+  }
+
+  .archive-disclaimer {
+    font-style: italic;
   }
 
   .related-section {

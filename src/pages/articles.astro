@@ -12,9 +12,40 @@ const articles = allArticles.sort((a, b) => {
   return (a.data.page ?? 99) - (b.data.page ?? 99);
 });
 
-// Get unique categories and issues for filtering
 const categories = [...new Set(articles.map(a => a.data.category))].sort();
-const issues = [...new Set(articles.map(a => a.data.issue))];
+
+// Nested grouping: year -> issueSlug -> articles (all in descending order)
+type Article = typeof articles[number];
+type Issue = { issueSlug: string; issueLabel: string; articles: Article[] };
+type Year = { year: string; issues: Issue[]; allExtracted: boolean };
+
+const yearMap = new Map<string, Map<string, Issue>>();
+for (const a of articles) {
+  const year = String(new Date(a.data.date).getFullYear());
+  if (!yearMap.has(year)) yearMap.set(year, new Map());
+  const issues = yearMap.get(year)!;
+  const slug = a.data.issueSlug;
+  if (!issues.has(slug)) {
+    issues.set(slug, { issueSlug: slug, issueLabel: a.data.issue, articles: [] });
+  }
+  issues.get(slug)!.articles.push(a);
+}
+
+const years: Year[] = [...yearMap.entries()]
+  .sort(([a], [b]) => Number(b) - Number(a))
+  .map(([year, issueMap]) => {
+    const issues = [...issueMap.values()]
+      .sort((a, b) => b.issueSlug.localeCompare(a.issueSlug))
+      .map(issue => ({
+        ...issue,
+        articles: issue.articles.sort((a, b) => (a.data.page ?? 99) - (b.data.page ?? 99)),
+      }));
+    const allExtracted = issues.every(i => i.articles.every(a => a.data.pdfFile));
+    return { year, issues, allExtracted };
+  });
+
+// Find the index of the first year where everything is text-extracted — disclaimer goes above it.
+const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
 ---
 
 <BaseLayout title="All Articles" description="Browse all BWNA newsletter articles. Searchable archive of community news, events, and stories from Beaumont-Wilshire.">
@@ -25,7 +56,6 @@ const issues = [...new Set(articles.map(a => a.data.issue))];
     </div>
   </section>
 
-  <!-- Filters -->
   <section class="filter-bar">
     <div class="container">
       <div class="filter-row">
@@ -40,56 +70,116 @@ const issues = [...new Set(articles.map(a => a.data.issue))];
     </div>
   </section>
 
-  <!-- Article List -->
   <section class="page-section">
     <div class="container content-width">
-      <p class="text-muted article-count">{articles.length} articles</p>
+      <p class="text-muted article-count">
+        <span class="count-number">{articles.length}</span> articles
+      </p>
 
-      {articles.map(article => (
-        <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} class="article-card" data-category={article.data.category} data-issue={article.data.issueSlug}>
-          <div class="article-row">
-            <div class="article-info">
-              <h3>{article.data.title}</h3>
-              <div class="text-sm text-muted">
-                {article.data.issue}
-                {article.data.author && <span> &middot; {article.data.author}</span>}
-              </div>
+      {years.map((y, index) => (
+        <>
+          {index === firstExtractedYearIndex && (
+            <aside class="archive-banner">
+              <strong>About the archive below:</strong>
+              The articles that follow are text-extracted from the original newsletter PDFs.
+              Photos, ads, and layout aren't included — the complete PDF is linked from each article.
+            </aside>
+          )}
+          <details class="year-group" open={index === 0} data-year={y.year}>
+            <summary class="year-heading">
+              {y.year}
+              <span class="year-count">
+                ({y.issues.reduce((n, i) => n + i.articles.length, 0)} articles
+                in {y.issues.length} {y.issues.length === 1 ? 'issue' : 'issues'})
+              </span>
+            </summary>
+            <div class="year-body">
+              {y.issues.map(issue => (
+                <div class="issue-group" data-issue={issue.issueSlug}>
+                  <h3 class="issue-heading">
+                    <span>{issue.issueLabel}</span>
+                    <span class="issue-article-count">
+                      {issue.articles.length} {issue.articles.length === 1 ? 'article' : 'articles'}
+                    </span>
+                  </h3>
+                  <div class="issue-articles">
+                    {issue.articles.map(article => (
+                      <a
+                        href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`}
+                        class="article-card"
+                        data-category={article.data.category}
+                        data-issue={article.data.issueSlug}
+                      >
+                        <div class="article-row">
+                          <div class="article-info">
+                            <h4>{article.data.title}</h4>
+                            {article.data.author && (
+                              <div class="text-sm text-muted">{article.data.author}</div>
+                            )}
+                          </div>
+                          <span class="category-badge">{categoryLabels[article.data.category] || article.data.category}</span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-            <span class="category-badge">{categoryLabels[article.data.category] || article.data.category}</span>
-          </div>
-        </a>
+          </details>
+        </>
       ))}
     </div>
   </section>
 </BaseLayout>
 
 <style>
+  .archive-banner {
+    background: var(--color-background-alt);
+    border-left: 3px solid var(--color-primary);
+    padding: 0.875rem 1.125rem;
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    border-radius: 0 4px 4px 0;
+  }
+  .archive-banner strong {
+    color: var(--color-text);
+  }
+
   .article-card {
     display: block;
-    padding: 1.25rem;
-    margin-bottom: 0.75rem;
+    padding: 0.7rem 0.9rem;
     background: white;
     border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border-radius: 5px;
     text-decoration: none;
     color: inherit;
     transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .article-card + .article-card {
+    margin-top: 0.4rem;
   }
   .article-card:hover {
     border-color: var(--color-primary);
     box-shadow: 0 2px 8px rgba(30, 92, 58, 0.1);
   }
-  .article-card h3 {
+  .article-card h4 {
     color: var(--color-primary);
+    font-size: 1rem;
+    margin: 0 0 0.15rem;
+    font-weight: 600;
   }
   .filter-bar {
     background: var(--color-background-alt);
     padding: var(--spacing-md) 0;
     border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
   .filter-row {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
     align-items: center;
   }
@@ -110,9 +200,6 @@ const issues = [...new Set(articles.map(a => a.data.issue))];
     flex: 1;
     min-width: 200px;
   }
-  .article-info h3 {
-    margin-bottom: var(--spacing-xs);
-  }
   .filter-btn {
     background: white;
     border: 1px solid var(--color-border);
@@ -130,28 +217,116 @@ const issues = [...new Set(articles.map(a => a.data.issue))];
     color: white;
     border-color: var(--color-primary);
   }
+
+  .year-group {
+    margin-bottom: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+  }
+  .year-heading {
+    cursor: pointer;
+    font-size: 1.35rem;
+    font-weight: 600;
+    padding: 0.75rem 0;
+    color: var(--color-primary);
+    list-style: none;
+  }
+  .year-heading::-webkit-details-marker {
+    display: none;
+  }
+  .year-heading::before {
+    content: '▸';
+    display: inline-block;
+    margin-right: 0.5rem;
+    transition: transform 0.15s;
+    font-size: 0.9em;
+  }
+  .year-group[open] .year-heading::before {
+    transform: rotate(90deg);
+  }
+  .year-count {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--color-text-light);
+    margin-left: 0.5rem;
+  }
+  .year-body {
+    display: grid;
+    gap: var(--spacing-md);
+    padding: 0.5rem 0 0.75rem;
+  }
+
+  .issue-group {
+    background: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.9rem 1rem 1rem;
+  }
+  .issue-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.75rem;
+    padding: 0 0 0.6rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .issue-article-count {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-text-light);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: auto;
+  }
 </style>
 
 <script>
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.article-card');
+  const issueGroups = document.querySelectorAll<HTMLElement>('.issue-group');
+  const yearGroups = document.querySelectorAll<HTMLDetailsElement>('.year-group');
+  const countEl = document.querySelector<HTMLElement>('.count-number');
+  const totalCount = cards.length;
+
+  const defaultOpenState = new Map<HTMLDetailsElement, boolean>();
+  yearGroups.forEach(g => defaultOpenState.set(g, g.open));
+
+  filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-filter');
 
-      // Update active button
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      // Filter articles
-      const cards = document.querySelectorAll('.article-card') as NodeListOf<HTMLElement>;
-      let count = 0;
+      let visibleCount = 0;
       cards.forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-          card.style.display = 'block';
-          count++;
-        } else {
-          card.style.display = 'none';
-        }
+        const matches = filter === 'all' || card.getAttribute('data-category') === filter;
+        card.style.display = matches ? 'block' : 'none';
+        if (matches) visibleCount++;
       });
+
+      // Hide issue groups with no visible cards
+      issueGroups.forEach(group => {
+        const hasVisible = Array.from(group.querySelectorAll<HTMLElement>('.article-card'))
+          .some(c => c.style.display !== 'none');
+        group.style.display = hasVisible ? 'block' : 'none';
+      });
+
+      // Hide year groups with no visible issue groups; force-open when filtering
+      yearGroups.forEach(group => {
+        const hasVisible = Array.from(group.querySelectorAll<HTMLElement>('.issue-group'))
+          .some(g => g.style.display !== 'none');
+        group.style.display = hasVisible ? 'block' : 'none';
+        group.open = filter === 'all' ? (defaultOpenState.get(group) ?? false) : hasVisible;
+      });
+
+      if (countEl) {
+        countEl.textContent = filter === 'all' ? String(totalCount) : String(visibleCount);
+      }
     });
   });
 </script>
