@@ -1,0 +1,169 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const updates = (await getCollection('community-updates'))
+  .sort((a, b) => b.data.monthSlug.localeCompare(a.data.monthSlug));
+
+const [latest, ...older] = updates;
+
+// Group older updates by year for the archive
+const olderByYear: Record<string, typeof older> = {};
+for (const u of older) {
+  const year = u.data.monthSlug.slice(0, 4);
+  (olderByYear[year] ??= []).push(u);
+}
+---
+
+<BaseLayout title="Community Updates" description="Monthly Community Updates from the Beaumont-Wilshire Neighborhood Association — meetings, news, events, and ways to get involved.">
+
+  <section class="hero">
+    <div class="container">
+      <h1>Community Updates</h1>
+      <p>Monthly dispatches from your neighborhood</p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <p>
+        Each month BWNA sends a Community Update by email — a short roundup of upcoming meetings,
+        neighborhood news, events, and volunteer opportunities. Past updates are archived here
+        so subscribers and non-subscribers alike can reference them anytime.
+      </p>
+    </div>
+  </section>
+
+  {latest && (
+    <section class="page-section">
+      <div class="container content-width">
+        <div class="latest-card">
+          <span class="latest-label">Latest update</span>
+          <h2><a href={`${base}community-updates/${latest.data.monthSlug}`}>{latest.data.title}</a></h2>
+          <div class="latest-meta">{latest.data.month}</div>
+          {latest.data.summary && <p>{latest.data.summary}</p>}
+          <a href={`${base}community-updates/${latest.data.monthSlug}`} class="btn btn-secondary">Read full update &rarr;</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {older.length > 0 && (
+    <section class="page-section archive-section">
+      <div class="container content-width">
+        <h2>Past Updates</h2>
+        {Object.entries(olderByYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items], index) => (
+          <details class="year-group" open={index === 0}>
+            <summary class="year-heading">{year} <span class="year-count">({items.length} {items.length === 1 ? 'update' : 'updates'})</span></summary>
+            <ul class="update-list">
+              {items.map((u) => (
+                <li>
+                  <a href={`${base}community-updates/${u.data.monthSlug}`} class="update-link">
+                    <span>
+                      <strong>{u.data.month}</strong>
+                      {u.data.summary && <span class="text-muted text-sm"> — {u.data.summary}</span>}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="page-section cta-section">
+    <div class="container">
+      <h2>Get Updates by Email</h2>
+      <p>
+        Subscribe to BWNA's email list to receive each month's Community Update — meetings, events,
+        and neighborhood news — straight to your inbox.
+      </p>
+      <a href={`${base}subscribe`} class="btn btn-primary">Subscribe Now</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .latest-card {
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    background: white;
+  }
+
+  .latest-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary-dark);
+    background: var(--color-primary-light);
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .latest-card h2 {
+    margin-bottom: 0.25rem;
+  }
+
+  .latest-card h2 a {
+    color: var(--color-primary-dark);
+  }
+
+  .latest-card h2 a:hover {
+    text-decoration: underline;
+  }
+
+  .latest-meta {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .latest-card p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .archive-section {
+    background: var(--color-background-alt);
+  }
+
+  .update-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .update-list li {
+    padding: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .update-list li:last-child {
+    border-bottom: none;
+  }
+
+  .update-link {
+    display: block;
+    padding: 0.875rem 0.25rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .update-link:hover {
+    text-decoration: none;
+  }
+
+  .update-link strong {
+    color: var(--color-primary);
+  }
+
+  .update-link:hover strong {
+    text-decoration: underline;
+  }
+</style>

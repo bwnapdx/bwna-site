@@ -1,0 +1,211 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const updates = await getCollection('community-updates');
+  const sorted = updates.slice().sort((a, b) => a.data.monthSlug.localeCompare(b.data.monthSlug));
+  const allEvents = await getCollection('events');
+  return sorted.map((update, i) => ({
+    params: { slug: update.id.replace(/\.md$/, '') },
+    props: {
+      update,
+      prev: i > 0 ? sorted[i - 1] : null,
+      next: i < sorted.length - 1 ? sorted[i + 1] : null,
+      allEvents,
+    },
+  }));
+}
+
+const { update, prev, next, allEvents } = Astro.props;
+const { Content } = await update.render();
+const base = import.meta.env.BASE_URL;
+
+// Resolve referenced events by id (sans .md); drop any whose end date has passed.
+const now = new Date();
+const relatedSlugs = new Set(update.data.relatedEvents ?? []);
+const upcomingRelatedEvents = allEvents
+  .filter(e => relatedSlugs.has(e.id.replace(/\.md$/, '')))
+  .filter(e => {
+    const end = e.data.endDate ?? e.data.date;
+    return end >= now;
+  })
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+function formatEventDate(d: Date) {
+  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+}
+---
+
+<BaseLayout title={update.data.title} description={update.data.summary || `${update.data.title} — BWNA Community Update for ${update.data.month}`}>
+  <article class="page-section" data-pagefind-body>
+    <div class="container content-width">
+      <div class="article-back">
+        <a href={`${base}community-updates`} class="text-sm">&larr; All Community Updates</a>
+      </div>
+
+      <div class="article-meta-row">
+        <span class="text-sm text-muted">Community Update &middot; {update.data.month}</span>
+      </div>
+
+      <h1 data-pagefind-meta="title">{update.data.title}</h1>
+
+      <div class="article-content">
+        <Content />
+      </div>
+
+      {upcomingRelatedEvents.length > 0 && (
+        <div class="card card--highlight related-events-card">
+          <h3>Events in this update</h3>
+          <ul class="related-events-list">
+            {upcomingRelatedEvents.map(ev => (
+              <li>
+                <a href={`${base}events/${ev.id.replace(/\.md$/, '')}`} class="related-event-link">
+                  <span class="related-event-date">{formatEventDate(ev.data.date)}</span>
+                  <span class="related-event-info">
+                    <strong>{ev.data.title}</strong>
+                    <span class="text-sm text-muted">{ev.data.location}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </article>
+
+  {(prev || next) && (
+    <section class="page-section related-section">
+      <div class="container content-width">
+        <nav class="adjacent-nav">
+          {prev && (
+            <a href={`${base}community-updates/${prev.data.monthSlug}`} class="adj-link adj-prev">
+              <span class="adj-label">&larr; Previous</span>
+              <span class="adj-month">{prev.data.month}</span>
+            </a>
+          )}
+          {next && (
+            <a href={`${base}community-updates/${next.data.monthSlug}`} class="adj-link adj-next">
+              <span class="adj-label">Next &rarr;</span>
+              <span class="adj-month">{next.data.month}</span>
+            </a>
+          )}
+        </nav>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .article-back {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .article-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .related-events-card {
+    margin-top: 2.5rem;
+  }
+
+  .related-events-card h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .related-events-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .related-events-list li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .related-events-list li:last-child {
+    border-bottom: none;
+  }
+
+  .related-event-link {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-md);
+    padding: 0.625rem 0;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .related-event-link:hover {
+    text-decoration: none;
+  }
+
+  .related-event-link:hover strong {
+    text-decoration: underline;
+  }
+
+  .related-event-date {
+    flex: 0 0 auto;
+    width: 6.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .related-event-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .related-event-info strong {
+    color: var(--color-primary-dark);
+  }
+
+  .related-section {
+    background: var(--color-background-alt);
+  }
+
+  .adjacent-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+  }
+
+  .adj-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    max-width: 45%;
+  }
+
+  .adj-link:hover .adj-month {
+    text-decoration: underline;
+  }
+
+  .adj-next {
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .adj-label {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+  }
+
+  .adj-month {
+    color: var(--color-primary-dark);
+    font-weight: 600;
+  }
+</style>

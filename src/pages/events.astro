@@ -402,6 +402,7 @@ const calendarEvents = expanded.map(e => ({
     font-size: 0.85rem;
     cursor: default;
     text-align: center;
+    position: relative;
   }
 
   .calendar-days :global(.cal-day.empty) {
@@ -442,6 +443,79 @@ const calendarEvents = expanded.map(e => ({
     width: 6px;
     height: 6px;
     border-radius: 50%;
+  }
+
+  /* Hover popover on calendar days. No gap between day & popover so the cursor
+     can move in without losing :hover. */
+  .calendar-days :global(.cal-popover) {
+    position: absolute;
+    bottom: calc(100% - 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    max-width: 260px;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    padding: 0.55rem 0.7rem;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    text-align: left;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.12s ease;
+    pointer-events: none;
+  }
+
+  /* Invisible bridge so cursor can travel from day cell into the popover
+     without crossing dead space. */
+  .calendar-days :global(.cal-popover::after) {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 8px;
+  }
+
+  .calendar-days :global(.cal-day.has-events:hover .cal-popover),
+  .calendar-days :global(.cal-day.has-events:focus-within .cal-popover),
+  .calendar-days :global(.cal-popover:hover) {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .calendar-days :global(.cal-popover-row + .cal-popover-row) {
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .calendar-days :global(.cal-popover-title) {
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    line-height: 1.25;
+    display: block;
+  }
+
+  .calendar-days :global(.cal-popover-title:hover) {
+    text-decoration: underline;
+  }
+
+  .calendar-days :global(.cal-popover-meta) {
+    font-size: 0.72rem;
+    color: var(--color-text-light);
+    margin-top: 0.15rem;
+  }
+
+  /* Hide the hover popover on touch/small screens — they get the click-to-detail flow instead. */
+  @media (max-width: 900px), (hover: none) {
+    .calendar-days :global(.cal-popover) {
+      display: none;
+    }
   }
 
   .calendar-detail {
@@ -577,6 +651,19 @@ const calendarEvents = expanded.map(e => ({
         dayEvents.forEach(e => {
           const color = typeColors[e.type] || '#666';
           html += `<span class="cal-dot" style="background:${color};" title="${esc(e.title)}"></span>`;
+        });
+        html += '</div>';
+
+        html += '<div class="cal-popover" role="tooltip">';
+        dayEvents.forEach(e => {
+          html += '<div class="cal-popover-row">';
+          if (e.url) {
+            html += `<a class="cal-popover-title" href="${esc(e.url)}">${esc(e.title)}</a>`;
+          } else {
+            html += `<span class="cal-popover-title">${esc(e.title)}</span>`;
+          }
+          html += `<div class="cal-popover-meta">${esc(e.time)} &middot; ${esc(e.location)}</div>`;
+          html += '</div>';
         });
         html += '</div>';
       }

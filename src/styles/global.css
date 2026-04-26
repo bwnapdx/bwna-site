@@ -355,7 +355,8 @@ a:hover {
 }
 
 /* CTA section (primary bg, white text, centered) */
-.cta-section {
+/* Compound selector beats .page-section:where(:nth-child(even)) on specificity. */
+.page-section.cta-section {
   background: var(--color-primary);
   color: white;
   text-align: center;
@@ -617,7 +618,9 @@ a:hover {
   padding: var(--spacing-2xl) 0;
 }
 
-.page-section:nth-child(even) {
+/* :where() keeps specificity at a single class so class-based overrides
+   (.cta-section, .archive-section, .related-section) win regardless of source order. */
+.page-section:where(:nth-child(even)) {
   background-color: var(--color-background-alt);
 }
 

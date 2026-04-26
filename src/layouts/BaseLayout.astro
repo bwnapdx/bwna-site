@@ -49,9 +49,10 @@ const base = import.meta.env.BASE_URL;
             </ul>
           </li>
           <li class="has-dropdown">
-            <a href={`${base}events`} class={currentPath.includes('/events') || currentPath.includes('/meeting-minutes') || currentPath.includes('/get-involved') || currentPath.includes('/subscribe') ? 'active' : ''}>What's Happening?</a>
+            <a href={`${base}events`} class={currentPath.includes('/events') || currentPath.includes('/community-updates') || currentPath.includes('/meeting-minutes') || currentPath.includes('/get-involved') || currentPath.includes('/subscribe') ? 'active' : ''}>What's Happening?</a>
             <ul class="dropdown">
               <li><a href={`${base}events`}>Upcoming Events</a></li>
+              <li><a href={`${base}community-updates`}>Community Updates</a></li>
               <li><a href={`${base}meeting-minutes`}>Meeting Minutes</a></li>
               <li><a href={`${base}get-involved`}>Get Involved</a></li>
               <li><a href={`${base}subscribe`}>Subscribe</a></li>
@@ -109,7 +110,7 @@ const base = import.meta.env.BASE_URL;
 
         <div class="footer-section">
           <h4>Stay Connected</h4>
-          <p>Subscribe to our newsletter to receive monthly updates about BWNA activities and neighborhood news.</p>
+          <p>Subscribe to our email list for monthly Community Updates about BWNA activities and neighborhood news.</p>
           <a href={`${base}subscribe`} class="btn btn-secondary">Subscribe</a>
         </div>
       </div>

@@ -145,10 +145,13 @@ for (const nl of olderPdfs) {
     <div class="container">
       <h2>Get Updates by Email</h2>
       <p>
-        Can't wait for the printed newsletter? Subscribe to our email list for
-        monthly updates about meetings, events, and neighborhood news.
+        Can't wait for the printed newsletter? BWNA also sends a monthly
+        <strong>Community Update</strong> by email — meetings, events, and neighborhood news.
       </p>
-      <a href={`${base}subscribe`} class="btn btn-primary">Subscribe Now</a>
+      <div class="cta-buttons">
+        <a href={`${base}community-updates`} class="btn btn-primary">Read Community Updates</a>
+        <a href={`${base}subscribe`} class="btn btn-secondary">Subscribe by Email</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -197,5 +200,12 @@ for (const nl of olderPdfs) {
 
   .contribute-grid {
     gap: var(--spacing-xl);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
   }
 </style>

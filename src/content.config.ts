@@ -53,4 +53,17 @@ const events = defineCollection({
   }),
 });
 
-export const collections = { newsletters, events };
+const communityUpdates = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),                                   // "What's Up in Beaumont-Wilshire in May"
+    month: z.string(),                                   // "May 2026" (display)
+    monthSlug: z.string(),                               // "2026-05" (sort/group)
+    date: z.coerce.date(),                               // publication date
+    summary: z.string().optional(),                      // short teaser
+    relatedEvents: z.array(z.string()).optional(),       // event slugs mentioned in this update
+    featured: z.boolean().default(false),
+  }),
+});
+
+export const collections = { newsletters, events, 'community-updates': communityUpdates };
