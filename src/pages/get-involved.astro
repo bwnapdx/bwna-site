@@ -122,16 +122,45 @@ const opportunities = [
     </div>
   </section>
 
-  <section class="page-section section-header">
-    <div class="container">
-      <h2>Open to Anything?</h2>
-      <p>
-        Not sure where to start? Let us know you're interested and we'll match you with
-        opportunities as they come up.
-      </p>
-      <a href="mailto:president@bwnapdx.org?subject=Volunteer Interest" class="btn btn-secondary">
-        Express Interest
-      </a>
+  <section class="page-section">
+    <div class="container content-width">
+      <div class="section-header">
+        <h2>Express Volunteer Interest</h2>
+        <p>
+          Not sure where to start, or want us to know which opportunities appeal to
+          you? Send us a note and we'll reach out as openings come up.
+        </p>
+      </div>
+      <form action="https://formspree.io/p/3003290244603706655/f/volunteer" method="POST" class="volunteer-form" data-formspree="volunteer">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="vol-name">Name <span class="required">*</span></label>
+            <input type="text" id="vol-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="vol-email">Email <span class="required">*</span></label>
+            <input type="email" id="vol-email" name="email" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="vol-phone">Phone</label>
+          <input type="tel" id="vol-phone" name="phone">
+        </div>
+        <fieldset class="form-group">
+          <legend>I'm interested in:</legend>
+          <label class="checkbox"><input type="checkbox" name="interests" value="Upcoming Events"> Helping with upcoming events</label>
+          <label class="checkbox"><input type="checkbox" name="interests" value="BWNA Newsletter"> Newsletter (writing, design, editing)</label>
+          <label class="checkbox"><input type="checkbox" name="interests" value="Newsletter Delivery"> Newsletter delivery</label>
+          <label class="checkbox"><input type="checkbox" name="interests" value="Board Membership"> Board membership</label>
+          <label class="checkbox"><input type="checkbox" name="interests" value="Open to anything"> I'm open to anything — match me with what's needed</label>
+        </fieldset>
+        <div class="form-group">
+          <label for="vol-message">Tell us more (optional)</label>
+          <textarea id="vol-message" name="message" rows="5" placeholder="Skills, availability, or anything else we should know"></textarea>
+        </div>
+        <button type="submit" class="btn btn-secondary">Send</button>
+        <p class="form-status" data-form-status hidden role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 
@@ -163,4 +192,103 @@ const opportunities = [
   .card--featured {
     border: 2px solid var(--color-accent);
   }
+
+  .volunteer-form {
+    max-width: 600px;
+    margin: var(--spacing-lg) auto 0;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .form-group {
+    margin-bottom: var(--spacing-md);
+    border: none;
+    padding: 0;
+  }
+
+  .form-group label,
+  .form-group legend {
+    display: block;
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .required {
+    color: #dc2626;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="tel"],
+  .form-group textarea {
+    width: 100%;
+    padding: var(--spacing-sm) 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(30, 92, 58, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 400;
+    margin-bottom: var(--spacing-xs);
+    cursor: pointer;
+  }
+
+  .checkbox input {
+    margin: 0;
+  }
+
+  .form-status {
+    margin-top: var(--spacing-md);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+
+  .form-status--sending {
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  .form-status--success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+  }
+
+  .form-status--error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+  }
+
+  @media (max-width: 500px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
+
+<script>
+  import "../scripts/form-submit";
+</script>

@@ -12,11 +12,10 @@ const base = import.meta.env.BASE_URL;
     </div>
   </section>
 
-  <!-- Contact form — uncomment when Formspree is configured
   <section class="page-section">
     <div class="container content-width">
       <h2>Send Us a Message</h2>
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+      <form action="https://formspree.io/p/3003290244603706655/f/contact" method="POST" class="contact-form" data-formspree="contact">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name <span class="required">*</span></label>
@@ -46,10 +45,10 @@ const base = import.meta.env.BASE_URL;
           <textarea id="message" name="message" rows="6" required></textarea>
         </div>
         <button type="submit" class="btn btn-secondary">Send Message</button>
+        <p class="form-status" data-form-status hidden role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
-  -->
 
   <section class="page-section">
     <div class="container content-width">
@@ -132,9 +131,37 @@ const base = import.meta.env.BASE_URL;
     resize: vertical;
   }
 
+  .form-status {
+    margin-top: var(--spacing-md);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+
+  .form-status--sending {
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  .form-status--success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+  }
+
+  .form-status--error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+  }
+
   @media (max-width: 500px) {
     .form-row {
       grid-template-columns: 1fr;
     }
   }
 </style>
+
+<script>
+  import "../scripts/form-submit";
+</script>

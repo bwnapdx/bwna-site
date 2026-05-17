@@ -1,0 +1,10 @@
+{
+  "forms": {
+    "contact": {
+      "name": "Contact Form"
+    },
+    "volunteer": {
+      "name": "Volunteer Interest"
+    }
+  }
+}
