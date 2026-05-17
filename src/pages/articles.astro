@@ -295,38 +295,46 @@ const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
   const defaultOpenState = new Map<HTMLDetailsElement, boolean>();
   yearGroups.forEach(g => defaultOpenState.set(g, g.open));
 
+  function applyFilter(filter: string) {
+    filterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === filter));
+
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const matches = filter === 'all' || card.getAttribute('data-category') === filter;
+      card.style.display = matches ? 'block' : 'none';
+      if (matches) visibleCount++;
+    });
+
+    // Hide issue groups with no visible cards
+    issueGroups.forEach(group => {
+      const hasVisible = Array.from(group.querySelectorAll<HTMLElement>('.article-card'))
+        .some(c => c.style.display !== 'none');
+      group.style.display = hasVisible ? 'block' : 'none';
+    });
+
+    // Hide year groups with no visible issue groups; force-open when filtering
+    yearGroups.forEach(group => {
+      const hasVisible = Array.from(group.querySelectorAll<HTMLElement>('.issue-group'))
+        .some(g => g.style.display !== 'none');
+      group.style.display = hasVisible ? 'block' : 'none';
+      group.open = filter === 'all' ? (defaultOpenState.get(group) ?? false) : hasVisible;
+    });
+
+    if (countEl) {
+      countEl.textContent = filter === 'all' ? String(totalCount) : String(visibleCount);
+    }
+  }
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-filter');
-
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      let visibleCount = 0;
-      cards.forEach(card => {
-        const matches = filter === 'all' || card.getAttribute('data-category') === filter;
-        card.style.display = matches ? 'block' : 'none';
-        if (matches) visibleCount++;
-      });
-
-      // Hide issue groups with no visible cards
-      issueGroups.forEach(group => {
-        const hasVisible = Array.from(group.querySelectorAll<HTMLElement>('.article-card'))
-          .some(c => c.style.display !== 'none');
-        group.style.display = hasVisible ? 'block' : 'none';
-      });
-
-      // Hide year groups with no visible issue groups; force-open when filtering
-      yearGroups.forEach(group => {
-        const hasVisible = Array.from(group.querySelectorAll<HTMLElement>('.issue-group'))
-          .some(g => g.style.display !== 'none');
-        group.style.display = hasVisible ? 'block' : 'none';
-        group.open = filter === 'all' ? (defaultOpenState.get(group) ?? false) : hasVisible;
-      });
-
-      if (countEl) {
-        countEl.textContent = filter === 'all' ? String(totalCount) : String(visibleCount);
-      }
+      applyFilter(btn.getAttribute('data-filter') || 'all');
     });
   });
+
+  // Honor ?category=<slug> on load so deep-links from other pages preselect the filter.
+  const params = new URLSearchParams(window.location.search);
+  const initial = params.get('category');
+  if (initial && document.querySelector(`.filter-btn[data-filter="${CSS.escape(initial)}"]`)) {
+    applyFilter(initial);
+  }
 </script>

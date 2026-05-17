@@ -1,5 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { categoryLabels } from '../data/categoryLabels';
+
+const base = import.meta.env.BASE_URL;
+
+// Curated chips drawn from the newsletter taxonomy — skip catch-alls
+// (community-news, other) and meta categories (presidents-message,
+// announcements, opinion) that aren't useful as browse destinations.
+const chipCategories = [
+  'land-use',
+  'parks',
+  'environment',
+  'safety',
+  'schools',
+  'business',
+  'events',
+  'volunteer',
+  'history',
+] as const;
 ---
 
 <BaseLayout title="Search" description="Search BWNA newsletter articles, events, and site content." noindex>
@@ -14,13 +32,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container content-width">
       <div id="search" class="search-container"></div>
       <div class="search-suggestions">
-        <p>Try searching for:</p>
+        <p>Or browse articles by topic:</p>
         <div class="suggestion-chips">
-          <button class="suggestion-chip" data-query="volunteer">volunteer</button>
-          <button class="suggestion-chip" data-query="Wilshire Park">Wilshire Park</button>
-          <button class="suggestion-chip" data-query="recycling">recycling</button>
-          <button class="suggestion-chip" data-query="Fremont">Fremont</button>
-          <button class="suggestion-chip" data-query="meeting">meeting</button>
+          {chipCategories.map(cat => (
+            <a class="suggestion-chip" href={`${base}articles?category=${cat}`}>{categoryLabels[cat]}</a>
+          ))}
         </div>
       </div>
     </div>
@@ -160,6 +176,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .suggestion-chip {
+    display: inline-block;
     background: var(--color-primary-light);
     color: var(--color-primary);
     border: 1px solid transparent;
@@ -167,12 +184,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 20px;
     font-size: 0.85rem;
     cursor: pointer;
+    text-decoration: none;
     transition: background 0.2s, border-color 0.2s;
   }
 
   .suggestion-chip:hover {
     background: white;
     border-color: var(--color-primary);
+    color: var(--color-primary);
+    text-decoration: none;
   }
 
   /* Hide suggestions once user has searched */
@@ -193,19 +213,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     ranking: {
       termSimilarity: 5.0,
     },
-  });
-
-  // Suggestion chips trigger a search
-  document.querySelectorAll('.suggestion-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const query = chip.getAttribute('data-query');
-      const input = document.querySelector('.pagefind-ui__search-input') as HTMLInputElement;
-      if (input) {
-        input.value = query!;
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-        document.querySelector('.search-suggestions')?.classList.add('hidden');
-      }
-    });
   });
 
   // Hide suggestions when user types, and hide zero-count filter categories
