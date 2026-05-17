@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { expandEvents, type ExpandedEvent } from '../data/expandEvents';
+import { expandEvents, toLocalDate, type ExpandedEvent } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
 
@@ -17,36 +17,29 @@ const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 
 const now = new Date();
 
-// Group events by scope, then by month within each scope
+// Group all events by month, chronologically interleaved across scopes
 const scopeLabels: Record<string, string> = {
-  bwna: 'BWNA Events',
-  neighborhood: 'Around the Neighborhood',
-  city: 'Around Portland',
+  bwna: 'BWNA',
+  neighborhood: 'Neighborhood',
+  city: 'Citywide',
 };
 
-const scopeOrder = ['bwna', 'neighborhood', 'city'] as const;
-
-function groupByMonth(events: ExpandedEvent[]) {
-  return events.reduce((acc, ev) => {
-    const monthKey = `${ev.date.getFullYear()}-${ev.date.getMonth()}`;
-    if (!acc[monthKey]) {
-      acc[monthKey] = {
-        label: `${months[ev.date.getMonth()]} ${ev.date.getFullYear()}`,
-        events: []
-      };
-    }
-    acc[monthKey].events.push(ev);
-    return acc;
-  }, {} as Record<string, { label: string; events: ExpandedEvent[] }>);
+const monthGroups: { key: string; label: string; events: ExpandedEvent[] }[] = [];
+const monthIndex = new Map<string, number>();
+for (const ev of expanded) {
+  const key = `${ev.date.getFullYear()}-${ev.date.getMonth()}`;
+  let idx = monthIndex.get(key);
+  if (idx === undefined) {
+    idx = monthGroups.length;
+    monthIndex.set(key, idx);
+    monthGroups.push({
+      key,
+      label: `${months[ev.date.getMonth()]} ${ev.date.getFullYear()}`,
+      events: [],
+    });
+  }
+  monthGroups[idx].events.push(ev);
 }
-
-const scopeGroups = scopeOrder
-  .map(scope => ({
-    scope,
-    label: scopeLabels[scope],
-    monthGroups: groupByMonth(expanded.filter(e => e.entry.data.scope === scope)),
-  }))
-  .filter(g => Object.keys(g.monthGroups).length > 0);
 
 const typeColors: Record<string, string> = {
   meeting: '#1e5c3a',
@@ -80,7 +73,7 @@ const calMaxMonth = lastEventDate.getMonth();
 const calendarEvents = expanded.map(e => ({
   title: e.entry.data.title,
   date: e.date.toISOString(),
-  endDate: e.entry.data.endDate?.toISOString(),
+  endDate: e.entry.data.endDate ? toLocalDate(e.entry.data.endDate).toISOString() : undefined,
   time: e.entry.data.time,
   location: e.entry.data.location,
   type: e.entry.data.type,
@@ -118,7 +111,7 @@ const calendarEvents = expanded.map(e => ({
                     <span class="event-type" style={`background: ${typeColors[ev.entry.data.type] || '#666'};`}>{ev.entry.data.type}</span>
                     <h2>{ev.entry.data.title}</h2>
                     <div class="event-meta">
-                      {formatDate(ev.date, ev.entry.data.endDate)} &middot; {ev.entry.data.time}
+                      {formatDate(ev.date, ev.entry.data.endDate ? toLocalDate(ev.entry.data.endDate) : undefined)} &middot; {ev.entry.data.time}
                     </div>
                     <div class="event-meta">{ev.entry.data.location}</div>
                     {ev.entry.data.summary && <p>{ev.entry.data.summary}</p>}
@@ -128,53 +121,52 @@ const calendarEvents = expanded.map(e => ({
               ))}
             </div>
           )}
-          {scopeGroups.map((group) => (
-            <div class="scope-group">
-              <h2 class="scope-heading">{group.label}</h2>
+          {monthGroups.map(({ key, label, events: monthEvents }) => (
+            <div class="month-group">
+              <h2 class="month-heading">{label}</h2>
 
-              {Object.entries(group.monthGroups).map(([key, { label, events: monthEvents }]) => (
-                <div class="month-group">
-                  <h3 class="month-heading">{label}</h3>
-
-                  {monthEvents.map((ev) => (
-                    <div class="event-item event-item--bordered">
-                      <div class="event-date">
-                        <div class="month">{monthsShort[ev.date.getMonth()]}</div>
-                        <div class="day">{ev.date.getDate()}</div>
-                      </div>
-                      <div class="event-details">
-                        <div class="event-header">
-                          <h3>
-                            {!ev.entry.data.recurring && hasBody(ev.entry.body || '') ? (
-                              <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`}>{ev.entry.data.title}</a>
-                            ) : (
-                              ev.entry.data.title
-                            )}
-                          </h3>
-                          <span class="event-type" style={`background: ${typeColors[ev.entry.data.type] || '#666'};`}>
-                            {ev.entry.data.type}
-                          </span>
-                        </div>
-                        <div class="event-meta">
-                          {ev.entry.data.time} &nbsp;|&nbsp; {ev.entry.data.location}
-                        </div>
-                        {ev.entry.data.summary && <p>{ev.entry.data.summary}</p>}
-                        <div class="event-links">
-                          {ev.entry.data.address && (
-                            <a href={`https://maps.google.com/?q=${encodeURIComponent(ev.entry.data.address)}`}
-                               target="_blank"
-                               rel="noopener"
-                               class="text-sm">
-                              View on Map
-                            </a>
-                          )}
-                          {!ev.entry.data.recurring && hasBody(ev.entry.body || '') && (
-                            <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`} class="text-sm">Details &rarr;</a>
-                          )}
-                        </div>
+              {monthEvents.map((ev) => (
+                <div class="event-item event-item--bordered">
+                  <div class="event-date">
+                    <div class="month">{monthsShort[ev.date.getMonth()]}</div>
+                    <div class="day">{ev.date.getDate()}</div>
+                  </div>
+                  <div class="event-details">
+                    <div class="event-header">
+                      <h3>
+                        {!ev.entry.data.recurring && hasBody(ev.entry.body || '') ? (
+                          <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`}>{ev.entry.data.title}</a>
+                        ) : (
+                          ev.entry.data.title
+                        )}
+                      </h3>
+                      <div class="event-tags">
+                        {ev.entry.data.scope !== 'bwna' && (
+                          <span class="event-scope">{scopeLabels[ev.entry.data.scope]}</span>
+                        )}
+                        <span class="event-type" style={`background: ${typeColors[ev.entry.data.type] || '#666'};`}>
+                          {ev.entry.data.type}
+                        </span>
                       </div>
                     </div>
-                  ))}
+                    <div class="event-meta">
+                      {ev.entry.data.time} &nbsp;|&nbsp; {ev.entry.data.location}
+                    </div>
+                    {ev.entry.data.summary && <p>{ev.entry.data.summary}</p>}
+                    <div class="event-links">
+                      {ev.entry.data.address && (
+                        <a href={`https://maps.google.com/?q=${encodeURIComponent(ev.entry.data.address)}`}
+                           target="_blank"
+                           rel="noopener"
+                           class="text-sm">
+                          View on Map
+                        </a>
+                      )}
+                      {!ev.entry.data.recurring && hasBody(ev.entry.body || '') && (
+                        <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`} class="text-sm">Details &rarr;</a>
+                      )}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -263,29 +255,16 @@ const calendarEvents = expanded.map(e => ({
     align-items: start;
   }
 
-  /* Scope groups */
-  .scope-group {
+  .month-group {
     margin-bottom: var(--spacing-2xl);
   }
 
-  .scope-heading {
+  .month-heading {
     font-size: 1.5rem;
     color: var(--color-primary-dark);
     margin-bottom: var(--spacing-lg);
     padding-bottom: 0.5rem;
     border-bottom: 3px solid var(--color-primary);
-  }
-
-  .month-group {
-    margin-bottom: 2rem;
-  }
-
-  .month-heading {
-    font-size: 1.1rem;
-    color: var(--color-text-light);
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.4rem;
-    margin-bottom: var(--spacing-md);
   }
 
   .event-item--bordered {
@@ -313,12 +292,31 @@ const calendarEvents = expanded.map(e => ({
     text-decoration: underline;
   }
 
+  .event-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
   .event-type {
     color: white;
     padding: 0.125rem 0.5rem;
     border-radius: 4px;
     font-size: 0.75rem;
     text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .event-scope {
+    color: var(--color-text-light);
+    background: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    padding: 0.125rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
     flex-shrink: 0;
   }
 

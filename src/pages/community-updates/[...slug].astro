@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { toLocalDate } from '../../data/expandEvents';
 
 export async function getStaticPaths() {
   const updates = await getCollection('community-updates');
@@ -23,12 +24,13 @@ const base = import.meta.env.BASE_URL;
 
 // Resolve referenced events by id (sans .md); drop any whose end date has passed.
 const now = new Date();
+const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 const relatedSlugs = new Set(update.data.relatedEvents ?? []);
 const upcomingRelatedEvents = allEvents
   .filter(e => relatedSlugs.has(e.id.replace(/\.md$/, '')))
   .filter(e => {
-    const end = e.data.endDate ?? e.data.date;
-    return end >= now;
+    const end = toLocalDate(e.data.endDate ?? e.data.date);
+    return end >= todayStart;
   })
   .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
 
@@ -61,7 +63,7 @@ function formatEventDate(d: Date) {
             {upcomingRelatedEvents.map(ev => (
               <li>
                 <a href={`${base}events/${ev.id.replace(/\.md$/, '')}`} class="related-event-link">
-                  <span class="related-event-date">{formatEventDate(ev.data.date)}</span>
+                  <span class="related-event-date">{formatEventDate(toLocalDate(ev.data.date))}</span>
                   <span class="related-event-info">
                     <strong>{ev.data.title}</strong>
                     <span class="text-sm text-muted">{ev.data.location}</span>
