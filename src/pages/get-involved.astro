@@ -130,6 +130,7 @@ const opportunities = [
         class="volunteer-form"
         target="_blank"
         novalidate
+        data-mailchimp="volunteer-success"
       >
         <div class="form-group">
           <label for="vol-email">Email <span class="required">*</span></label>
@@ -157,10 +158,21 @@ const opportunities = [
         </div>
         <button type="submit" class="btn btn-secondary">Send</button>
       </form>
+      <div id="volunteer-success" class="card card--highlight form-success" hidden role="status" aria-live="polite">
+        <h3>Thanks for volunteering!</h3>
+        <p>
+          We sent a confirmation email — click the link inside to finalize your
+          interest. We'll be in touch as opportunities come up.
+        </p>
+      </div>
     </div>
   </section>
 
 </BaseLayout>
+
+<script>
+  import "../scripts/mailchimp-form";
+</script>
 
 <style>
   .lead {

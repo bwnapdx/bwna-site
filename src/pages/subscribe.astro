@@ -19,6 +19,14 @@ const base = import.meta.env.BASE_URL;
         community events, volunteer opportunities, and neighborhood announcements.
       </p>
 
+      <div id="subscribe-success" class="card card--highlight form-success" hidden role="status" aria-live="polite">
+        <h3>Almost there!</h3>
+        <p>
+          We sent a confirmation email — click the link inside to start receiving
+          Community Updates. (Check your spam folder if you don't see it.)
+        </p>
+      </div>
+
       <!-- Mailchimp Signup Form -->
       <div class="card mc-card">
         <div id="mc_embed_shell">
@@ -32,6 +40,7 @@ const base = import.meta.env.BASE_URL;
               class="validate"
               target="_blank"
               novalidate
+              data-mailchimp="subscribe-success"
             >
               <div id="mc_embed_signup_scroll">
                 <div class="indicates-required">

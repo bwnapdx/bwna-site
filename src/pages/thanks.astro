@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Thanks" description="Thanks for connecting with the Beaumont-Wilshire Neighborhood Association.">
+  <section class="hero">
+    <div class="container">
+      <h1 id="thanks-heading">Thanks!</h1>
+      <p id="thanks-tagline">Check your email to confirm.</p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <div class="card card--highlight" id="thanks-card-pending">
+        <h2>Almost there</h2>
+        <p>
+          We just sent you a confirmation email. Click the link inside to finalize
+          your signup — once you do, you'll start receiving Community Updates from BWNA.
+        </p>
+        <p class="text-sm text-muted">
+          Don't see it? Check your spam folder, or try
+          <a href={`${base}subscribe`}>signing up again</a>.
+        </p>
+      </div>
+
+      <div class="card card--highlight" id="thanks-card-confirmed" hidden>
+        <h2>You're in!</h2>
+        <p>
+          Your subscription is confirmed. The next Community Update will land in
+          your inbox soon — usually around the start of each month.
+        </p>
+        <p>
+          In the meantime, browse <a href={`${base}newsletters`}>past newsletter articles</a>
+          or check <a href={`${base}events`}>upcoming events</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  if (new URLSearchParams(location.search).get("confirmed") === "1") {
+    document.getElementById("thanks-card-pending")?.setAttribute("hidden", "");
+    document.getElementById("thanks-card-confirmed")?.removeAttribute("hidden");
+    const heading = document.getElementById("thanks-heading");
+    const tagline = document.getElementById("thanks-tagline");
+    if (heading) heading.textContent = "You're subscribed!";
+    if (tagline) tagline.textContent = "Welcome to BWNA Community Updates.";
+  }
+</script>
