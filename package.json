@@ -8,8 +8,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "deploy:forms": "formspree deploy"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
@@ -18,7 +17,6 @@
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.90.0",
-    "@formspree/cli": "^0.9.6",
     "dotenv": "^17.4.2"
   }
 }

@@ -26,13 +26,6 @@ const opportunities = [
     contact: "editor@bwnapdx.org"
   },
   {
-    title: "Beautification Projects",
-    icon: "🌱",
-    description: "Planting, cleaning, painting, landscaping, and maintaining public spaces to improve curb appeal.",
-    commitment: "Seasonal, varies",
-    contact: "president@bwnapdx.org"
-  },
-  {
     title: "Friends of Wilshire Park",
     icon: "🌳",
     description: "Join this volunteer group dedicated to keeping Wilshire Park vibrant and welcoming for all.",
@@ -128,38 +121,41 @@ const opportunities = [
         <h2>Express Volunteer Interest</h2>
         <p>
           Not sure where to start, or want us to know which opportunities appeal to
-          you? Send us a note and we'll reach out as openings come up.
+          you? Let us know and we'll reach out as openings come up.
         </p>
       </div>
-      <form action="https://formspree.io/p/3003290244603706655/f/volunteer" method="POST" class="volunteer-form" data-formspree="volunteer">
+      <form
+        action="https://bwnapdx.us21.list-manage.com/subscribe/post?u=203722a9c2f8af9e6db5b3d86&amp;id=bc0c6760de&amp;f_id=00aabfe6f0"
+        method="post"
+        class="volunteer-form"
+        target="_blank"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="vol-email">Email <span class="required">*</span></label>
+          <input type="email" id="vol-email" name="EMAIL" required>
+        </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="vol-name">Name <span class="required">*</span></label>
-            <input type="text" id="vol-name" name="name" required>
+            <label for="vol-fname">First Name <span class="required">*</span></label>
+            <input type="text" id="vol-fname" name="FNAME" required>
           </div>
           <div class="form-group">
-            <label for="vol-email">Email <span class="required">*</span></label>
-            <input type="email" id="vol-email" name="email" required>
+            <label for="vol-lname">Last Name <span class="required">*</span></label>
+            <input type="text" id="vol-lname" name="LNAME" required>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="vol-phone">Phone</label>
-          <input type="tel" id="vol-phone" name="phone">
         </div>
         <fieldset class="form-group">
           <legend>I'm interested in:</legend>
-          <label class="checkbox"><input type="checkbox" name="interests" value="Upcoming Events"> Helping with upcoming events</label>
-          <label class="checkbox"><input type="checkbox" name="interests" value="BWNA Newsletter"> Newsletter (writing, design, editing)</label>
-          <label class="checkbox"><input type="checkbox" name="interests" value="Newsletter Delivery"> Newsletter delivery</label>
-          <label class="checkbox"><input type="checkbox" name="interests" value="Board Membership"> Board membership</label>
-          <label class="checkbox"><input type="checkbox" name="interests" value="Open to anything"> I'm open to anything — match me with what's needed</label>
+          <label class="checkbox"><input type="checkbox" name="group[214996][1]" value="1"> Upcoming Events</label>
+          <label class="checkbox"><input type="checkbox" name="group[214996][2]" value="1"> BWNA Newsletter</label>
+          <label class="checkbox"><input type="checkbox" name="group[214996][32]" value="1"> Friends of Wilshire Park</label>
+          <label class="checkbox"><input type="checkbox" name="group[214996][4]" value="1"> Open to anything!</label>
         </fieldset>
-        <div class="form-group">
-          <label for="vol-message">Tell us more (optional)</label>
-          <textarea id="vol-message" name="message" rows="5" placeholder="Skills, availability, or anything else we should know"></textarea>
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+          <input type="text" name="b_203722a9c2f8af9e6db5b3d86_bc0c6760de" tabindex="-1" value="">
         </div>
         <button type="submit" class="btn btn-secondary">Send</button>
-        <p class="form-status" data-form-status hidden role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -222,9 +218,7 @@ const opportunities = [
   }
 
   .form-group input[type="text"],
-  .form-group input[type="email"],
-  .form-group input[type="tel"],
-  .form-group textarea {
+  .form-group input[type="email"] {
     width: 100%;
     padding: var(--spacing-sm) 0.75rem;
     border: 1px solid var(--color-border);
@@ -234,15 +228,10 @@ const opportunities = [
     transition: border-color 0.2s;
   }
 
-  .form-group input:focus,
-  .form-group textarea:focus {
+  .form-group input:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(30, 92, 58, 0.1);
-  }
-
-  .form-group textarea {
-    resize: vertical;
   }
 
   .checkbox {
@@ -258,37 +247,9 @@ const opportunities = [
     margin: 0;
   }
 
-  .form-status {
-    margin-top: var(--spacing-md);
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    font-size: 0.95rem;
-  }
-
-  .form-status--sending {
-    background: #f3f4f6;
-    color: #374151;
-  }
-
-  .form-status--success {
-    background: #ecfdf5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
-  }
-
-  .form-status--error {
-    background: #fef2f2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
-  }
-
   @media (max-width: 500px) {
     .form-row {
       grid-template-columns: 1fr;
     }
   }
 </style>
-
-<script>
-  import "../scripts/form-submit";
-</script>
