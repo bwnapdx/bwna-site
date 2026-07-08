@@ -19,5 +19,8 @@ dist/
 .vscode/
 .idea/
 
+# Claude Code (local/personal)
+.claude/
+
 # QA report (generated)
 qa-report.md
