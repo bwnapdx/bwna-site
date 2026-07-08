@@ -69,11 +69,19 @@ const calMinMonth = now.getMonth();
 const calMaxYear = lastEventDate.getFullYear();
 const calMaxMonth = lastEventDate.getMonth();
 
+// Emit a timezone-stable YYYY-MM-DD from each event's (local-midnight) date so
+// the client calendar plots it on the intended calendar day regardless of the
+// build machine's timezone. GitHub Actions builds in UTC, where toISOString()
+// yields e.g. "2026-07-13T00:00:00Z" and the client's local getters would read
+// that back as July 12 in Portland — shifting every event to the day before.
+const pad = (n: number) => String(n).padStart(2, '0');
+const ymd = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+
 // Prepare event data for the calendar (JSON-serializable)
 const calendarEvents = expanded.map(e => ({
   title: e.entry.data.title,
-  date: e.date.toISOString(),
-  endDate: e.entry.data.endDate ? toLocalDate(e.entry.data.endDate).toISOString() : undefined,
+  date: ymd(e.date),
+  endDate: e.entry.data.endDate ? ymd(toLocalDate(e.entry.data.endDate)) : undefined,
   time: e.entry.data.time,
   location: e.entry.data.location,
   type: e.entry.data.type,
@@ -611,8 +619,10 @@ const calendarEvents = expanded.map(e => ({
 
   function eventsOnDay(year, month, day) {
     return events.filter(e => {
-      const d = new Date(e.date);
-      return d.getFullYear() === year && d.getMonth() === month && d.getDate() === day;
+      // e.date is a plain "YYYY-MM-DD" — compare by components so no timezone
+      // conversion can shift the event to an adjacent day.
+      const [y, m, d] = e.date.split('-').map(Number);
+      return y === year && (m - 1) === month && d === day;
     });
   }
 
