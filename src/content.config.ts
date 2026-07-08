@@ -28,6 +28,14 @@ const newsletters = defineCollection({
     page: z.number().optional(),          // page in the PDF
     pdfFile: z.string().optional(),       // "bwna-2026-01.pdf"
     editorsNote: z.string().optional(),   // callout shown at top of article (e.g., photo-feature disclaimer)
+    image: z.string().optional(),         // "/images/newsletters/2026-05-example.jpg"
+    imageAlt: z.string().optional(),
+    gallery: z.array(z.object({           // photo-essay articles with several captioned images
+      src: z.string(),
+      alt: z.string().optional(),
+      caption: z.string().optional(),
+      wide: z.boolean().optional(),       // span the full gallery width (e.g., panoramic shots)
+    })).optional(),
   }),
 });
 

@@ -5,12 +5,30 @@ import { categoryLabels } from '../data/categoryLabels';
 
 const base = import.meta.env.BASE_URL;
 
-// Get articles from content collection
+// Get articles from content collection, grouped by issue
 const allArticles = await getCollection('newsletters');
-const latestIssueSlug = '2026-01';
-const latestArticles = allArticles
-  .filter(a => a.data.issueSlug === latestIssueSlug)
-  .sort((a, b) => (a.data.page ?? 99) - (b.data.page ?? 99));
+const issueMap = new Map<string, { slug: string; label: string; articles: typeof allArticles }>();
+for (const a of allArticles) {
+  const slug = a.data.issueSlug;
+  if (!issueMap.has(slug)) {
+    issueMap.set(slug, { slug, label: a.data.issue, articles: [] });
+  }
+  issueMap.get(slug)!.articles.push(a);
+}
+const issues = Array.from(issueMap.values())
+  .sort((a, b) => b.slug.localeCompare(a.slug));
+for (const issue of issues) {
+  issue.articles.sort((a, b) => (a.data.page ?? 99) - (b.data.page ?? 99));
+}
+
+// Web-native 2026 issues (full verbatim transcriptions) whose original print
+// PDF is available for download. Kept out of article frontmatter so these
+// issues don't inherit the "text-extracted" archive disclaimer. Add more here
+// (e.g. '2026-05') as their PDFs come in.
+const webIssuePdfs: Record<string, string> = {
+  '2026-07': 'bwna-2026-07.pdf',
+  '2026-05': 'bwna-2026-05.pdf',
+};
 
 // Generate bimonthly newsletter PDF archive (2012-2025)
 const bimonthlyPairs = [
@@ -24,6 +42,9 @@ for (let year = 2025; year >= 2012; year--) {
     olderPdfs.push({ date: `${start} - ${end} ${year}`, file: `bwna-${year}-${month}.pdf` });
   }
 }
+
+// Recent issues available as a PDF download but without web articles yet.
+olderPdfs.unshift({ date: 'Mar - Apr 2026', file: 'bwna-2026-03.pdf' });
 
 // Group by year (already ordered newest-first)
 const pdfsByYear: Record<string, typeof olderPdfs> = {};
@@ -53,33 +74,44 @@ for (const nl of olderPdfs) {
     </div>
   </section>
 
-  <!-- Latest Issue Articles -->
+  <!-- Issue Articles -->
+  {issues.map((issue, i) => {
+    const issuePdf = issue.articles[0]?.data.pdfFile ?? webIssuePdfs[issue.slug];
+    return (
+    <section class={`page-section ${i > 0 ? 'older-issue' : ''}`}>
+      <div class="container content-width">
+        <div class="issue-header">
+          <h2>{issue.label}</h2>
+          {issuePdf && (
+            <a href={`${base}newsletters/${issuePdf}`} target="_blank" rel="noopener" class="pdf-link">
+              Download full issue (PDF)
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </a>
+          )}
+        </div>
+
+        <div class="article-grid">
+          {issue.articles.map(article => (
+            <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} class="article-link">
+              <span>
+                <strong>{article.data.title}</strong>
+                {article.data.author && <span class="text-muted text-sm"> — {article.data.author}</span>}
+              </span>
+              <span class="category-badge category-badge--sm">{categoryLabels[article.data.category] || article.data.category}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+    );
+  })}
+
   <section class="page-section">
     <div class="container content-width">
-      <div class="issue-header">
-        <h2>Jan-Feb 2026</h2>
-        <a href={`${base}newsletters/bwna-2026-01.pdf`} target="_blank" rel="noopener" class="pdf-link">
-          Download full issue (PDF)
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-        </a>
-      </div>
-
-      <div class="article-grid">
-        {latestArticles.map(article => (
-          <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} class="article-link">
-            <span>
-              <strong>{article.data.title}</strong>
-              {article.data.author && <span class="text-muted text-sm"> — {article.data.author}</span>}
-            </span>
-            <span class="category-badge category-badge--sm">{categoryLabels[article.data.category] || article.data.category}</span>
-          </a>
-        ))}
-      </div>
-
       <div class="section-footer">
         <a href={`${base}articles`} class="btn btn-secondary">Browse All Articles &rarr;</a>
       </div>
@@ -93,7 +125,7 @@ for (const nl of olderPdfs) {
 
       {Object.entries(pdfsByYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items], index) => (
         <details class="year-group" open={index === 0}>
-          <summary class="year-heading">{year} <span class="year-count">({items.length} issues)</span></summary>
+          <summary class="year-heading">{year} <span class="year-count">({items.length} {items.length === 1 ? 'issue' : 'issues'})</span></summary>
           <ul class="newsletter-list">
             {items.map((nl) => (
               <li>

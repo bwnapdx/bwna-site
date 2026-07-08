@@ -2,16 +2,21 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { categoryLabels } from '../../data/categoryLabels';
+import { isPortraitImage } from '../../utils/imageOrientation.js';
 
 export async function getStaticPaths() {
   const articles = await getCollection('newsletters');
-  return articles.map(article => ({
+  return Promise.all(articles.map(async article => ({
     params: { slug: article.id.replace(/\.md$/, '') },
-    props: { article, allArticles: articles },
-  }));
+    props: {
+      article,
+      allArticles: articles,
+      heroPortrait: await isPortraitImage(article.data.image),
+    },
+  })));
 }
 
-const { article, allArticles } = Astro.props;
+const { article, allArticles, heroPortrait } = Astro.props;
 const { Content } = await article.render();
 const base = import.meta.env.BASE_URL;
 
@@ -23,7 +28,7 @@ const issueArticles = allArticles
 
 <BaseLayout title={article.data.title} description={`${article.data.title} — from the ${article.data.issue} BWNA Newsletter`}>
   <article class="page-section" data-pagefind-body>
-    <div class="container content-width">
+    <div class="container content-width article-layout">
       <div class="article-back">
         <a href={`${base}newsletters`} class="text-sm">&larr; {article.data.issue} Newsletter</a>
       </div>
@@ -47,9 +52,27 @@ const issueArticles = allArticles
         </aside>
       )}
 
+      {article.data.image && (
+        <figure class:list={["article-hero-image", { "article-hero-image--portrait": heroPortrait }]}>
+          <img src={`${base}${article.data.image.replace(/^\//, '')}`} alt={article.data.imageAlt || ''} />
+          {article.data.imageAlt && <figcaption>{article.data.imageAlt}</figcaption>}
+        </figure>
+      )}
+
       <div class="article-content">
         <Content />
       </div>
+
+      {article.data.gallery && article.data.gallery.length > 0 && (
+        <div class="article-gallery">
+          {article.data.gallery.map(img => (
+            <figure class:list={[{ "gallery-wide": img.wide }]}>
+              <img src={`${base}${img.src.replace(/^\//, '')}`} alt={img.alt || ''} />
+              {img.caption && <figcaption>{img.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
 
       {article.data.pdfFile && (
         <div class="card card--highlight issue-card">
@@ -131,6 +154,83 @@ const issueArticles = allArticles
 
   .editors-note strong {
     color: var(--color-text);
+  }
+
+  .article-layout {
+    /* Contain the floated portrait hero so it can't overlap later sections. */
+    display: flow-root;
+  }
+
+  .article-hero-image {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .article-hero-image img {
+    display: block;
+    width: 100%;
+    height: auto;          /* preserve natural aspect ratio — never crop */
+    border-radius: 6px;
+  }
+
+  /* Tall portrait photos float alongside the text instead of stretching
+     full-width, which would otherwise crop them or tower over the page. */
+  .article-hero-image--portrait {
+    float: right;
+    width: min(45%, 320px);
+    margin: 0.25rem 0 var(--spacing-md) var(--spacing-lg);
+  }
+
+  @media (max-width: 640px) {
+    .article-hero-image--portrait {
+      float: none;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto var(--spacing-lg);
+    }
+  }
+
+  .article-hero-image figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    font-style: italic;
+  }
+
+  /* Photo-essay gallery: responsive captioned grid. */
+  .article-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    align-items: start;
+    margin: var(--spacing-xl) 0;
+  }
+
+  .article-gallery figure {
+    margin: 0;
+  }
+
+  .article-gallery .gallery-wide {
+    grid-column: 1 / -1;
+  }
+
+  .article-gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .article-gallery figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .article-gallery {
+      grid-template-columns: 1fr;
+    }
   }
 
   .issue-card {

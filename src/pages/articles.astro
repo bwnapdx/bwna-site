@@ -21,7 +21,7 @@ type Year = { year: string; issues: Issue[]; allExtracted: boolean };
 
 const yearMap = new Map<string, Map<string, Issue>>();
 for (const a of articles) {
-  const year = String(new Date(a.data.date).getFullYear());
+  const year = a.data.issueSlug.slice(0, 4);
   if (!yearMap.has(year)) yearMap.set(year, new Map());
   const issues = yearMap.get(year)!;
   const slug = a.data.issueSlug;
