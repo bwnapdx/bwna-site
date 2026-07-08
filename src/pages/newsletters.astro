@@ -28,6 +28,7 @@ for (const issue of issues) {
 const webIssuePdfs: Record<string, string> = {
   '2026-07': 'bwna-2026-07.pdf',
   '2026-05': 'bwna-2026-05.pdf',
+  '2026-03': 'bwna-2026-03.pdf',
 };
 
 // Generate bimonthly newsletter PDF archive (2012-2025)
@@ -42,9 +43,6 @@ for (let year = 2025; year >= 2012; year--) {
     olderPdfs.push({ date: `${start} - ${end} ${year}`, file: `bwna-${year}-${month}.pdf` });
   }
 }
-
-// Recent issues available as a PDF download but without web articles yet.
-olderPdfs.unshift({ date: 'Mar - Apr 2026', file: 'bwna-2026-03.pdf' });
 
 // Group by year (already ordered newest-first)
 const pdfsByYear: Record<string, typeof olderPdfs> = {};

@@ -26,10 +26,10 @@ Wheeling around our neighborhood these past few weeks, I am interested by all th
 
 This month I found myself humming a tune from the early '70s performed by Five Man Electrical Band:
 
-*Sign, sign, everywhere, a sign*
-*Blockin' out the scenery*
-*Breakin' my mind*
-*"Do this," "Don't do that"*
+*Sign, sign, everywhere, a sign*  
+*Blockin' out the scenery*  
+*Breakin' my mind*  
+*"Do this," "Don't do that"*  
 *Can't you read the sign?*
 
 If you are nodding and remember this song, it's a sign that, yeah, we've been around for a while.
