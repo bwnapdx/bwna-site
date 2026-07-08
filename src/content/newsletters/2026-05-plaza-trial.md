@@ -4,7 +4,7 @@ issue: "May-Jun 2026"
 issueSlug: "2026-05"
 author: "Aaron Breakstone"
 date: 2026-05-01
-category: "land-use"
+category: "community-news"
 page: 1
 image: "/images/newsletters/2026-05-plaza-trial.jpg"
 imageAlt: "An impassioned group of B-W neighbors and business owners packed a room at Alameda Elementary School in February for a two-way discussion with BWNA representatives about a proposed public plaza on NE 44th near Fremont Street. The public plaza trial was approved by a vote of 13-2 at the April 13 BWNA board meeting. Photo by Susan Trabucco."

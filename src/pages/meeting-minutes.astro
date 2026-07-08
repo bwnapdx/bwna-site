@@ -4,6 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
 
 const minutesData = [
+  { title: "Special Meeting", date: "2026-02-18" },
+  { title: "General Meeting", date: "2026-02-09" },
+  { title: "Board Meeting", date: "2026-01-12" },
   { title: "General Meeting", date: "2025-12-08" },
   { title: "Board Meeting", date: "2025-11-10" },
   { title: "General Meeting", date: "2025-10-13" },
@@ -127,7 +130,7 @@ function formatDate(dateStr: string) {
         <h3>Meeting Schedule</h3>
         <p><strong>General Meetings:</strong> 2nd Monday of even-numbered months (Feb, Apr, Jun, Aug, Oct, Dec)</p>
         <p><strong>Board Meetings:</strong> 2nd Monday of odd-numbered months (Jan, Mar, May, Jul, Sep, Nov)</p>
-        <p><strong>Location:</strong> Sylvan Learning Center, 4411 NE Fremont St</p>
+        <p><strong>Location:</strong> Sylvan Learning Center, 4300 NE Fremont St, Suite 150</p>
       </div>
       <p class="back-link">
         <a href={`${base}events`}>View upcoming meetings &rarr;</a>
