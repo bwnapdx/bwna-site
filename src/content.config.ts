@@ -58,6 +58,7 @@ const events = defineCollection({
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     summary: z.string().optional(),
+    ticketUrl: z.string().optional(),        // external ticketing/RSVP page (e.g. Eventbrite)
   }),
 });
 

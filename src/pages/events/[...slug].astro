@@ -66,6 +66,12 @@ function formatDate(date: Date, endDate?: Date) {
         </div>
       </div>
 
+      {event.data.ticketUrl && (
+        <a href={event.data.ticketUrl} target="_blank" rel="noopener" class="btn btn-primary ticket-btn">
+          Buy Tickets
+        </a>
+      )}
+
       <div class="article-content">
         <Content />
       </div>
@@ -113,5 +119,10 @@ function formatDate(date: Date, endDate?: Date) {
 
   .event-info-row {
     padding: var(--spacing-xs) 0;
+  }
+
+  .ticket-btn {
+    display: inline-block;
+    margin-bottom: var(--spacing-xl);
   }
 </style>
