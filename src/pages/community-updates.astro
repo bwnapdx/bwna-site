@@ -30,8 +30,9 @@ for (const u of older) {
     <div class="container content-width">
       <p>
         Each month BWNA sends a Community Update by email — a short roundup of upcoming meetings,
-        neighborhood news, events, and volunteer opportunities. Past updates are archived here
-        so subscribers and non-subscribers alike can reference them anytime.
+        neighborhood news, events, and volunteer opportunities. The latest editions are posted
+        here so you can catch up if you missed one. For the full story behind the neighborhood
+        news, see the <a href={`${base}newsletters`}>newsletter</a>.
       </p>
     </div>
   </section>
@@ -53,7 +54,7 @@ for (const u of older) {
   {older.length > 0 && (
     <section class="page-section archive-section">
       <div class="container content-width">
-        <h2>Past Updates</h2>
+        <h2>Previous Editions</h2>
         {Object.entries(olderByYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items], index) => (
           <details class="year-group" open={index === 0}>
             <summary class="year-heading">{year} <span class="year-count">({items.length} {items.length === 1 ? 'update' : 'updates'})</span></summary>

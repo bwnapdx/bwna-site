@@ -43,15 +43,16 @@ const events = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    date: z.coerce.date(),
-    endDate: z.coerce.date().optional(),
+    date: z.coerce.date(),                // one-off: the event day. recurring: earliest occurrence (series start)
+    endDate: z.coerce.date().optional(),  // one-off: multi-day end. recurring: latest occurrence (series end)
     time: z.string(),
     location: z.string(),
     address: z.string().optional(),
     type: z.enum(['meeting', 'community', 'social', 'tour']),
     scope: z.enum(['bwna', 'neighborhood', 'city']).default('bwna'),
     recurring: z.boolean().default(false),
-    recurrenceWeek: z.number().min(1).max(4).optional(),   // 1st, 2nd, 3rd, or 4th
+    // Week(s) of the month: a single week or several, e.g. 2 → 2nd; [2, 4] → 2nd & 4th.
+    recurrenceWeek: z.union([z.number().min(1).max(5), z.array(z.number().min(1).max(5))]).optional(),
     recurrenceDay: z.number().min(0).max(6).optional(),    // 0=Sun, 1=Mon, ... 6=Sat
     recurrenceMonths: z.enum(['all', 'even', 'odd']).optional(),
     featured: z.boolean().default(false),

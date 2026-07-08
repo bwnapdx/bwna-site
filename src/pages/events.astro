@@ -8,8 +8,13 @@ const base = import.meta.env.BASE_URL;
 const allEvents = await getCollection('events');
 const expanded = expandEvents(allEvents);
 
-// Featured events (for hero cards) — only non-recurring or one-off featured events
-const featuredEvents = expanded.filter(e => e.entry.data.featured && !e.entry.data.recurring);
+// Hero: the single next upcoming featured event (expanded is date-sorted, so the
+// first match is the soonest). It's shown once as a hero card and excluded from
+// the month list below so it never appears twice.
+const nextFeatured = expanded.find(e => e.entry.data.featured && !e.entry.data.recurring) ?? null;
+const listEvents = nextFeatured
+  ? expanded.filter(e => e.entry.id !== nextFeatured.entry.id)
+  : expanded;
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -26,7 +31,7 @@ const scopeLabels: Record<string, string> = {
 
 const monthGroups: { key: string; label: string; events: ExpandedEvent[] }[] = [];
 const monthIndex = new Map<string, number>();
-for (const ev of expanded) {
+for (const ev of listEvents) {
   const key = `${ev.date.getFullYear()}-${ev.date.getMonth()}`;
   let idx = monthIndex.get(key);
   if (idx === undefined) {
@@ -108,25 +113,24 @@ const calendarEvents = expanded.map(e => ({
         <!-- Event list (left/main) -->
         <div class="events-list">
 
-          {featuredEvents.length > 0 && (
+          {nextFeatured && (
             <div class="featured-section">
-              {featuredEvents.map(ev => (
-                <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`} class="featured-event">
-                  {ev.entry.data.image && (
-                    <img src={ev.entry.data.image.startsWith('/') ? `${base}${ev.entry.data.image.slice(1)}` : ev.entry.data.image} alt={ev.entry.data.imageAlt || ev.entry.data.title} class="featured-event-img" />
-                  )}
-                  <div class="featured-event-content">
-                    <span class="event-type" style={`background: ${typeColors[ev.entry.data.type] || '#666'};`}>{ev.entry.data.type}</span>
-                    <h2>{ev.entry.data.title}</h2>
-                    <div class="event-meta">
-                      {formatDate(ev.date, ev.entry.data.endDate ? toLocalDate(ev.entry.data.endDate) : undefined)} &middot; {ev.entry.data.time}
-                    </div>
-                    <div class="event-meta">{ev.entry.data.location}</div>
-                    {ev.entry.data.summary && <p>{ev.entry.data.summary}</p>}
-                    <span class="btn btn-secondary">View Details &rarr;</span>
+              <span class="featured-label">Next featured event</span>
+              <a href={`${base}events/${nextFeatured.entry.id.replace(/\.md$/, '')}`} class="featured-event">
+                {nextFeatured.entry.data.image && (
+                  <img src={nextFeatured.entry.data.image.startsWith('/') ? `${base}${nextFeatured.entry.data.image.slice(1)}` : nextFeatured.entry.data.image} alt={nextFeatured.entry.data.imageAlt || nextFeatured.entry.data.title} class="featured-event-img" />
+                )}
+                <div class="featured-event-content">
+                  <span class="event-type" style={`background: ${typeColors[nextFeatured.entry.data.type] || '#666'};`}>{nextFeatured.entry.data.type}</span>
+                  <h2>{nextFeatured.entry.data.title}</h2>
+                  <div class="event-meta">
+                    {formatDate(nextFeatured.date, nextFeatured.entry.data.endDate ? toLocalDate(nextFeatured.entry.data.endDate) : undefined)} &middot; {nextFeatured.entry.data.time}
                   </div>
-                </a>
-              ))}
+                  <div class="event-meta">{nextFeatured.entry.data.location}</div>
+                  {nextFeatured.entry.data.summary && <p>{nextFeatured.entry.data.summary}</p>}
+                  <span class="btn btn-secondary">View Details &rarr;</span>
+                </div>
+              </a>
             </div>
           )}
           {monthGroups.map(({ key, label, events: monthEvents }) => (
@@ -224,6 +228,18 @@ const calendarEvents = expanded.map(e => ({
 </BaseLayout>
 
 <style>
+  .featured-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary-dark);
+    background: var(--color-primary-light);
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    margin-bottom: var(--spacing-sm);
+  }
+
   .featured-event {
     display: block;
     border: 2px solid var(--color-primary);
