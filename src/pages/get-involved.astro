@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 import PageHero from '../components/PageHero.astro';
+import SignupBand from '../components/SignupBand.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -131,64 +132,9 @@ const opportunities = [
     </div>
   </section>
 
-  <section class="page-section">
-    <div class="container content-width">
-      <div class="section-header">
-        <h2>Express Volunteer Interest</h2>
-        <p>
-          Not sure where to start, or want us to know which opportunities appeal to
-          you? Let us know and we'll reach out as openings come up.
-        </p>
-      </div>
-      <form
-        action="https://bwnapdx.us21.list-manage.com/subscribe/post?u=203722a9c2f8af9e6db5b3d86&amp;id=bc0c6760de&amp;f_id=00aabfe6f0"
-        method="post"
-        class="volunteer-form"
-        target="_blank"
-        novalidate
-        data-mailchimp="volunteer-success"
-      >
-        <div class="form-group">
-          <label for="vol-email">Email <span class="required">*</span></label>
-          <input type="email" id="vol-email" name="EMAIL" required>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="vol-fname">First Name <span class="required">*</span></label>
-            <input type="text" id="vol-fname" name="FNAME" required>
-          </div>
-          <div class="form-group">
-            <label for="vol-lname">Last Name <span class="required">*</span></label>
-            <input type="text" id="vol-lname" name="LNAME" required>
-          </div>
-        </div>
-        <fieldset class="form-group">
-          <legend>I'm interested in:</legend>
-          <label class="checkbox"><input type="checkbox" name="group[214996][1]" value="1"> Upcoming Events</label>
-          <label class="checkbox"><input type="checkbox" name="group[214996][2]" value="1"> BWNA Newsletter</label>
-          <label class="checkbox"><input type="checkbox" name="group[214996][32]" value="1"> Friends of Wilshire Park</label>
-          <label class="checkbox"><input type="checkbox" name="group[214996][4]" value="1"> Open to anything!</label>
-        </fieldset>
-        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-          <input type="text" name="b_203722a9c2f8af9e6db5b3d86_bc0c6760de" tabindex="-1" value="">
-        </div>
-        <button type="submit" class="btn btn-secondary">Send</button>
-      </form>
-      <div id="volunteer-success" class="card card--highlight form-success" hidden role="status" aria-live="polite">
-        <h3>Thanks for volunteering!</h3>
-        <p>
-          We sent a confirmation email — click the link inside to finalize your
-          interest. We'll be in touch as opportunities come up.
-        </p>
-      </div>
-    </div>
-  </section>
+  <SignupBand />
 
 </BaseLayout>
-
-<script>
-  import "../scripts/mailchimp-form";
-</script>
 
 <style>
   .lead {
@@ -230,67 +176,4 @@ const opportunities = [
     border: 2px solid var(--color-accent);
   }
 
-  .volunteer-form {
-    max-width: 600px;
-    margin: var(--spacing-lg) auto 0;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-md);
-  }
-
-  .form-group {
-    margin-bottom: var(--spacing-md);
-    border: none;
-    padding: 0;
-  }
-
-  .form-group label,
-  .form-group legend {
-    display: block;
-    font-weight: 500;
-    margin-bottom: var(--spacing-xs);
-  }
-
-  .required {
-    color: #dc2626;
-  }
-
-  .form-group input[type="text"],
-  .form-group input[type="email"] {
-    width: 100%;
-    padding: var(--spacing-sm) 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    font-family: var(--font-family);
-    font-size: 1rem;
-    transition: border-color 0.2s;
-  }
-
-  .form-group input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(30, 92, 58, 0.1);
-  }
-
-  .checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 400;
-    margin-bottom: var(--spacing-xs);
-    cursor: pointer;
-  }
-
-  .checkbox input {
-    margin: 0;
-  }
-
-  @media (max-width: 500px) {
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-  }
 </style>
