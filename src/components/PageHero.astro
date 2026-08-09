@@ -10,15 +10,16 @@ interface Props {
   image: string;    // path without size suffix, e.g. `${base}images/hero/hero-movie-blankets`
   imageAlt?: string; // empty string (decorative) unless the photo carries meaning
   position?: string; // object-position override, e.g. "center 30%"
+  maxWidth?: number; // largest processed variant, when the source is under 2200px
 }
 
-const { title, subtitle, image, imageAlt = '', position } = Astro.props;
+const { title, subtitle, image, imageAlt = '', position, maxWidth = 2200 } = Astro.props;
 ---
 
 <section class="page-hero">
   <img
-    src={`${image}-2200w.jpg`}
-    srcset={`${image}-1100w.jpg 1100w, ${image}-2200w.jpg 2200w`}
+    src={`${image}-${maxWidth}w.jpg`}
+    srcset={`${image}-1100w.jpg 1100w, ${image}-${maxWidth}w.jpg ${maxWidth}w`}
     sizes="100vw"
     alt={imageAlt}
     style={position ? `object-position: ${position};` : undefined}
