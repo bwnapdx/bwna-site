@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -21,7 +22,7 @@ const base = import.meta.env.BASE_URL;
       <p>
         We are working on making individual articles from each issue available as searchable
         web content. For older issues (2012&ndash;2022), please contact
-        <a href="mailto:editor@bwnapdx.org">editor@bwnapdx.org</a>.
+        <ObfuscatedEmail email="editor@bwnapdx.org" />.
       </p>
       <p class="back-link">
         <a href={`${base}newsletters`}>&larr; Back to Newsletters</a>

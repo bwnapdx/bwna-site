@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 import { expandEvents, toLocalDate, type ExpandedEvent } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
@@ -228,7 +229,7 @@ const calendarEvents = expanded.map(e => ({
     <div class="container">
       <h3>Have a neighborhood event to share?</h3>
       <p>Contact us to have your community event listed on our calendar.</p>
-      <a href="mailto:editor@bwnapdx.org" class="btn btn-secondary">Submit an Event</a>
+      <ObfuscatedEmail email="editor@bwnapdx.org" label="Submit an Event" class="btn btn-secondary" />
     </div>
   </section>
 </BaseLayout>

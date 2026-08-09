@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 
 interface Props {
   title: string;
@@ -102,7 +103,7 @@ const base = import.meta.env.BASE_URL;
         <div class="footer-section">
           <h4>Contact</h4>
           <ul>
-            <li><a href="mailto:info@bwnapdx.org">info@bwnapdx.org</a></li>
+            <li><ObfuscatedEmail email="info@bwnapdx.org" /></li>
             <li><a href={`${base}resources`}>Community Resources</a></li>
             <li><a href={`${base}contact`}>Contact Us</a></li>
           </ul>

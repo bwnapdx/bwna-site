@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -84,12 +85,14 @@ const opportunities = [
               <strong>Time commitment:</strong> {opp.commitment}
             </p>
             {opp.contact ? (
-              <a href={`mailto:${opp.contact}`} class="btn btn-secondary opp-btn">
-                Contact to Volunteer
-              </a>
+              <ObfuscatedEmail email={opp.contact} label="Contact to Volunteer" class="btn btn-secondary opp-btn" />
             ) : opp.link ? (
-              <a href={opp.link} target="_blank" rel="noopener" class="btn btn-secondary opp-btn">
-                Learn More &rarr;
+              <a
+                href={opp.link}
+                class="btn btn-secondary opp-btn"
+                {...(opp.link.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}
+              >
+                {opp.linkLabel || 'Learn More →'}
               </a>
             ) : null}
           </div>

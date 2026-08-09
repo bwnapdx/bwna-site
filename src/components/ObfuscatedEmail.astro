@@ -1,0 +1,43 @@
+---
+/*
+ * Renders a mailto link without putting the address (or the string "mailto:")
+ * in the built HTML. The user/domain are base64-encoded into data attributes
+ * at build time and reassembled by a small client script on load. A <noscript>
+ * fallback shows an at/dot form for the rare no-JS visitor.
+ */
+interface Props {
+  email: string;
+  label?: string;   // link text; defaults to the address itself once decoded
+  class?: string;
+}
+
+const { email, label, class: className } = Astro.props;
+const [user, domain] = email.split('@');
+const b64 = (s: string) => Buffer.from(s).toString('base64');
+---
+
+<a
+  class:list={['obf-email', className]}
+  data-u={b64(user)}
+  data-d={b64(domain)}
+  data-l={label ? b64(label) : undefined}
+>
+  <span class="obf-email__text">{label ?? 'Email'}</span><noscript> ({user} at {domain.replace(/\./g, ' dot ')})</noscript>
+</a>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('a.obf-email').forEach((el) => {
+    const data = el.dataset;
+    const user = data.u ? atob(data.u) : '';
+    const domain = data.d ? atob(data.d) : '';
+    if (!user || !domain) return;
+    const address = `${user}@${domain}`;
+    el.href = `mailto:${address}`;
+    const label = data.l ? atob(data.l) : '';
+    const text = el.querySelector('.obf-email__text');
+    if (text) text.textContent = label || address;
+    delete data.u;
+    delete data.d;
+    delete data.l;
+  });
+</script>
