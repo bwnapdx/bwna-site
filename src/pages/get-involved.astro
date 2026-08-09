@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+import PageHero from '../components/PageHero.astro';
+import SignupBand from '../components/SignupBand.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -8,6 +10,8 @@ const opportunities = [
   {
     title: "Upcoming Events",
     icon: "🎉",
+    image: `${base}images/get-involved/card-events.jpg`,
+    imageAlt: "Kids raising their hands on the grass at a Movie in the Park event",
     description: "Help set up, assist guests, run activities, clean up, and support event organizers as needed.",
     commitment: "Varies by event",
     contact: "events@bwnapdx.org"
@@ -15,6 +19,8 @@ const opportunities = [
   {
     title: "BWNA Newsletter",
     icon: "📰",
+    image: `${base}images/get-involved/card-newsletter.jpg`,
+    imageAlt: "The cover of the July-August 2026 BWNA newsletter",
     description: "Gather news, write articles, design layout, and distribute updates to keep neighbors informed.",
     commitment: "Bimonthly, 2-5 hours",
     contact: "editor@bwnapdx.org"
@@ -22,6 +28,8 @@ const opportunities = [
   {
     title: "Newsletter Delivery",
     icon: "🚶",
+    image: `${base}images/get-involved/card-delivery.jpg`,
+    imageAlt: "A volunteer with the newsletter distribution boxes on Fremont Street",
     description: "Deliver newsletters to homes on your block or nearby streets. Great exercise and a way to meet neighbors!",
     commitment: "6x per year, 1-2 hours each",
     contact: "editor@bwnapdx.org"
@@ -29,6 +37,8 @@ const opportunities = [
   {
     title: "Friends of Wilshire Park",
     icon: "🌳",
+    image: `${base}images/get-involved/card-wilshire-park.jpg`,
+    imageAlt: "A neighbor and her dog at the Wilshire Park dog fountain",
     description: "Join this volunteer group dedicated to keeping Wilshire Park vibrant and welcoming for all.",
     commitment: "Monthly meetups",
     link: "https://www.friendsofwilshirepark.org/"
@@ -36,6 +46,8 @@ const opportunities = [
   {
     title: "Board Membership",
     icon: "🏛️",
+    image: `${base}images/get-involved/card-board.jpg`,
+    imageAlt: "The Wilshire Park sign in golden morning light",
     description: "Help guide the direction of BWNA by joining the board of directors. Elections held annually.",
     commitment: "2-year term, monthly meetings",
     contact: "president@bwnapdx.org"
@@ -45,12 +57,13 @@ const opportunities = [
 
 <BaseLayout title="Get Involved" description="Volunteer opportunities with the Beaumont-Wilshire Neighborhood Association. Find ways to contribute to your community.">
 
-  <section class="hero">
-    <div class="container">
-      <h1>Get Involved</h1>
-      <p>Your community needs you!</p>
-    </div>
-  </section>
+  <PageHero
+    title="Get Involved"
+    subtitle="Your community needs you!"
+    image={`${base}images/hero/hero-stairs`}
+    maxWidth={1500}
+    position="center 18%"
+  />
 
   <section class="page-section">
     <div class="container content-width">
@@ -75,7 +88,8 @@ const opportunities = [
 
       <div class="grid grid-2">
         {opportunities.map((opp) => (
-          <div class="card">
+          <div class="card opp-card">
+            <img class="opp-img" src={opp.image} alt={opp.imageAlt} loading="lazy" />
             <h3 class="opp-title">
               <span class="opp-icon">{opp.icon}</span>
               {opp.title}
@@ -118,68 +132,26 @@ const opportunities = [
     </div>
   </section>
 
-  <section class="page-section">
-    <div class="container content-width">
-      <div class="section-header">
-        <h2>Express Volunteer Interest</h2>
-        <p>
-          Not sure where to start, or want us to know which opportunities appeal to
-          you? Let us know and we'll reach out as openings come up.
-        </p>
-      </div>
-      <form
-        action="https://bwnapdx.us21.list-manage.com/subscribe/post?u=203722a9c2f8af9e6db5b3d86&amp;id=bc0c6760de&amp;f_id=00aabfe6f0"
-        method="post"
-        class="volunteer-form"
-        target="_blank"
-        novalidate
-        data-mailchimp="volunteer-success"
-      >
-        <div class="form-group">
-          <label for="vol-email">Email <span class="required">*</span></label>
-          <input type="email" id="vol-email" name="EMAIL" required>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="vol-fname">First Name <span class="required">*</span></label>
-            <input type="text" id="vol-fname" name="FNAME" required>
-          </div>
-          <div class="form-group">
-            <label for="vol-lname">Last Name <span class="required">*</span></label>
-            <input type="text" id="vol-lname" name="LNAME" required>
-          </div>
-        </div>
-        <fieldset class="form-group">
-          <legend>I'm interested in:</legend>
-          <label class="checkbox"><input type="checkbox" name="group[214996][1]" value="1"> Upcoming Events</label>
-          <label class="checkbox"><input type="checkbox" name="group[214996][2]" value="1"> BWNA Newsletter</label>
-          <label class="checkbox"><input type="checkbox" name="group[214996][32]" value="1"> Friends of Wilshire Park</label>
-          <label class="checkbox"><input type="checkbox" name="group[214996][4]" value="1"> Open to anything!</label>
-        </fieldset>
-        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-          <input type="text" name="b_203722a9c2f8af9e6db5b3d86_bc0c6760de" tabindex="-1" value="">
-        </div>
-        <button type="submit" class="btn btn-secondary">Send</button>
-      </form>
-      <div id="volunteer-success" class="card card--highlight form-success" hidden role="status" aria-live="polite">
-        <h3>Thanks for volunteering!</h3>
-        <p>
-          We sent a confirmation email — click the link inside to finalize your
-          interest. We'll be in touch as opportunities come up.
-        </p>
-      </div>
-    </div>
-  </section>
+  <SignupBand />
 
 </BaseLayout>
-
-<script>
-  import "../scripts/mailchimp-form";
-</script>
 
 <style>
   .lead {
     font-size: 1.125rem;
+  }
+
+  /* Photo bleeds to the card edges above the title */
+  .opp-card {
+    padding-top: 0;
+    overflow: hidden;
+  }
+
+  .opp-img {
+    width: calc(100% + 2 * var(--spacing-lg));
+    margin: 0 calc(-1 * var(--spacing-lg)) var(--spacing-md);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
   .opp-title {
@@ -204,67 +176,4 @@ const opportunities = [
     border: 2px solid var(--color-accent);
   }
 
-  .volunteer-form {
-    max-width: 600px;
-    margin: var(--spacing-lg) auto 0;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-md);
-  }
-
-  .form-group {
-    margin-bottom: var(--spacing-md);
-    border: none;
-    padding: 0;
-  }
-
-  .form-group label,
-  .form-group legend {
-    display: block;
-    font-weight: 500;
-    margin-bottom: var(--spacing-xs);
-  }
-
-  .required {
-    color: #dc2626;
-  }
-
-  .form-group input[type="text"],
-  .form-group input[type="email"] {
-    width: 100%;
-    padding: var(--spacing-sm) 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    font-family: var(--font-family);
-    font-size: 1rem;
-    transition: border-color 0.2s;
-  }
-
-  .form-group input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(30, 92, 58, 0.1);
-  }
-
-  .checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 400;
-    margin-bottom: var(--spacing-xs);
-    cursor: pointer;
-  }
-
-  .checkbox input {
-    margin: 0;
-  }
-
-  @media (max-width: 500px) {
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-  }
 </style>

@@ -31,7 +31,7 @@ function formatDate(date: Date, endDate?: Date) {
 }
 ---
 
-<BaseLayout title={event.data.title} description={event.data.summary || `${event.data.title} — a BWNA event`}>
+<BaseLayout title={event.data.title} description={event.data.summary || `${event.data.title} — a BWNA event`} sortDate={event.data.date.toISOString().slice(0, 10)}>
   <article class="page-section" data-pagefind-body>
     <div class="container content-width">
       <div class="event-back">

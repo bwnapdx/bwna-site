@@ -1,9 +1,19 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
+import SignupBand from '../components/SignupBand.astro';
 import { expandEvents } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
+
+const heroSlides = [
+  { src: `${base}images/hero/hero-movie-kids`, alt: 'Kids dancing on the grass at Movie in the Park' },
+  { src: `${base}images/hero/hero-movie-crowd`, alt: 'Neighbors gathered on blankets and chairs for Movie in Wilshire Park', position: 'center 60%' },
+  { src: `${base}images/hero/hero-dog-club`, alt: 'The neighborhood dog-walking group posing with their dogs in Wilshire Park' },
+  { src: `${base}images/hero/hero-cleanup`, alt: 'Volunteers in safety vests at a Fremont Street clean-up' },
+  { src: `${base}images/hero/hero-planting`, alt: 'Volunteers with buckets and shovels at a Wilshire Park planting' },
+];
 
 const allEvents = await getCollection('events');
 const upcomingEvents = expandEvents(allEvents).slice(0, 3);
@@ -11,62 +21,35 @@ const upcomingEvents = expandEvents(allEvents).slice(0, 3);
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 ---
 
-<BaseLayout title="Home">
-  <!-- Hero Section -->
-  <section class="hero hero--tall hero--bg" style={`background-image: url('${base}images/hero-neighborhood.jpg');`}>
-    <div class="container">
-      <h1>Beaumont-Wilshire Neighborhood Association</h1>
-      <p>
-        Nestled among the luscious trees of Northeast Portland, our community is known
-        for its mix of urban and serene lifestyles. We're a group of proud residents
-        who strive to maintain a high standard of living through events and local services.
-      </p>
-      <div class="hero-buttons">
-        <a href={`${base}about`} class="btn btn-primary">Learn About Us</a>
-        <a href={`${base}get-involved`} class="btn btn--outline">Get Involved</a>
-      </div>
-    </div>
-  </section>
+<BaseLayout searchable={false} title="Home">
+  <!-- Hero Carousel -->
+  <HeroCarousel slides={heroSlides} />
 
   <!-- About Preview -->
   <section class="page-section">
     <div class="container">
-      <div class="grid grid-2 grid--aligned">
-        <div>
-          <h2>About Our Neighborhood</h2>
+      <div class="about-grid">
+        <div class="about-map">
+          <img src={`${base}images/bwna-map.png`} alt="Beaumont-Wilshire neighborhood boundary map" class="map-img">
+        </div>
+        <div class="about-text">
           <p>
             The Beaumont-Wilshire Neighborhood Association (BWNA) is one of 95 officially
             recognized neighborhood associations in Portland's historic tradition of local
             volunteer activism and involvement.
           </p>
           <p>
-            Our boundary includes much of the Fremont and NE 42nd Avenue business districts,
-            Beaumont Middle School, and beautiful Wilshire Park.
+            Located in northeast Portland, our boundary includes much of the Fremont and
+            NE 42nd Avenue business districts, Beaumont Middle School, and beautiful
+            Wilshire Park.
           </p>
-          <p>
-            <strong>Membership is free</strong> and open to all residents, property owners,
-            businesses, and nonprofits in the neighborhood.
-          </p>
-          <a href={`${base}about`} class="btn btn-secondary">Meet Our Board</a>
-        </div>
-        <div>
-          <img src={`${base}images/bwna-map.png`} alt="Beaumont-Wilshire neighborhood boundary map" class="map-img">
         </div>
       </div>
     </div>
   </section>
 
   <!-- Newsletter Signup -->
-  <section class="page-section cta-section">
-    <div class="container">
-      <h2>Stay in the Know!</h2>
-      <p>
-        Subscribe to receive monthly email updates about BWNA meetings, activities,
-        and neighborhood announcements.
-      </p>
-      <a href={`${base}subscribe`} class="btn btn-primary">Subscribe to Updates</a>
-    </div>
-  </section>
+  <SignupBand />
 
   <!-- Upcoming Events -->
   <section class="page-section">
@@ -137,30 +120,41 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 </BaseLayout>
 
 <style>
-  .hero--bg {
-    background: linear-gradient(rgba(30,92,58,0.8), rgba(92,138,62,0.85)) center/cover no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
   .centered {
     margin: 0 auto;
   }
 
-  .grid--aligned {
-    align-items: center;
+  .about-grid {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--spacing-2xl);
+    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
   }
 
   .map-img {
     width: 100%;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid var(--color-border);
   }
+
+  @media (max-width: 640px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    /* Read the text first on mobile; map follows smaller */
+    .about-map {
+      order: 2;
+    }
+
+    .about-grid .map-img {
+      max-width: 260px;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
 </style>

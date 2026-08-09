@@ -32,10 +32,10 @@ const chipCategories = [
     <div class="container content-width">
       <div id="search" class="search-container"></div>
       <div class="search-suggestions">
-        <p>Or browse articles by topic:</p>
+        <p>Not sure what to search for? Browse the article archive by topic instead:</p>
         <div class="suggestion-chips">
           {chipCategories.map(cat => (
-            <a class="suggestion-chip" href={`${base}articles?category=${cat}`}>{categoryLabels[cat]}</a>
+            <a class="suggestion-chip" href={`${base}articles?category=${cat}`}>{categoryLabels[cat]} &rarr;</a>
           ))}
         </div>
       </div>
@@ -46,11 +46,11 @@ const chipCategories = [
 <style is:global>
   /* Pagefind theme variables — these are the supported API for customization */
   :root {
-    --pagefind-ui-primary: #1e5c3a;
+    --pagefind-ui-primary: #006092;
     --pagefind-ui-text: #333333;
     --pagefind-ui-background: #ffffff;
-    --pagefind-ui-border: #d0d7d0;
-    --pagefind-ui-tag: #e8f5e9;
+    --pagefind-ui-border: #d0d8de;
+    --pagefind-ui-tag: #e6f1f8;
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 8px;
     --pagefind-ui-font: inherit;
@@ -81,7 +81,7 @@ const chipCategories = [
   #search .pagefind-ui__search-input:focus {
     border-color: var(--pagefind-ui-primary);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(30, 92, 58, 0.1);
+    box-shadow: 0 0 0 3px rgba(0, 96, 146, 0.1);
   }
 
   #search .pagefind-ui__search-clear {
@@ -114,7 +114,7 @@ const chipCategories = [
   }
 
   #search .pagefind-ui__result-excerpt mark {
-    background: #d4edda;
+    background: #eef3c8;
     color: inherit;
     padding: 0.1rem 0.2rem;
     border-radius: 2px;
@@ -140,13 +140,19 @@ const chipCategories = [
   }
 
   #search .pagefind-ui__button:hover {
-    background: #164a2e;
+    background: #004a70;
     color: white;
     border: none;
   }
 
   /* Hide filter panel for now */
   #search .pagefind-ui__filter-panel {
+    display: none;
+  }
+
+  /* Metadata rows (Author, raw Date) — the date already shows in the
+     title, and the static-page sentinel date should never be visible */
+  #search .pagefind-ui__result-tags {
     display: none;
   }
 
@@ -204,14 +210,29 @@ const chipCategories = [
 <script>
   import { PagefindUI } from '@pagefind/default-ui';
 
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
   const pf = new PagefindUI({
     element: '#search',
-    showSubResults: true,
+    showSubResults: false,
     showImages: false,
     autofocus: true,
     bundlePath: import.meta.env.BASE_URL + 'pagefind/',
     ranking: {
       termSimilarity: 5.0,
+    },
+    // Newest first. Static pages carry a far-future sort date (see
+    // BaseLayout) so current info outranks the article archive.
+    sort: { date: 'desc' },
+    // Dated content shows "Title · Mon YYYY"; the 9999 sentinel on
+    // static pages is a placeholder, not a real date, so it's hidden.
+    processResult: (result: any) => {
+      const d = result?.meta?.date;
+      if (d && d < '9000') {
+        const [y, m] = d.split('-');
+        result.meta.title = `${result.meta.title} · ${MONTHS[Number(m) - 1]} ${y}`;
+      }
+      return result;
     },
   });
 

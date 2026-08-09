@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+import PageHero from '../components/PageHero.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -26,12 +27,12 @@ const boardMembers = [
 <BaseLayout title="About Us" description="Learn about the Beaumont-Wilshire Neighborhood Association, our mission, and our volunteer board of directors.">
 
   <!-- Page Header -->
-  <section class="hero">
-    <div class="container">
-      <h1>About Us</h1>
-      <p>Building community in Northeast Portland</p>
-    </div>
-  </section>
+  <PageHero
+    title="About Us"
+    subtitle="Building community in Northeast Portland"
+    image={`${base}images/hero/hero-movie-blankets`}
+    position="center 12%"
+  />
 
   <!-- About Content -->
   <section class="page-section">
