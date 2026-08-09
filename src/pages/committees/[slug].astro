@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../../components/ObfuscatedEmail.astro';
+
+export async function getStaticPaths() {
+  const committees = await getCollection('committees');
+  const newsletters = await getCollection('newsletters');
+  return committees.map((committee) => {
+    const related = (committee.data.relatedArticles || [])
+      .map((id) => newsletters.find((n) => n.id.replace(/\.md$/, '') === id))
+      .filter(Boolean);
+    return {
+      params: { slug: committee.id.replace(/\.md$/, '') },
+      props: { committee, related },
+    };
+  });
+}
+
+const { committee, related } = Astro.props;
+const { Content } = await committee.render();
+const base = import.meta.env.BASE_URL;
+const d = committee.data;
+---
+
+<BaseLayout title={d.name} description={d.summary}>
+  <article class="page-section" data-pagefind-body>
+    <div class="container content-width">
+      <div class="committee-back">
+        <a href={`${base}committees`} class="text-sm">&larr; All Committees</a>
+      </div>
+
+      <h1 class="committee-heading">
+        {d.icon && <span class="committee-heading-icon">{d.icon}</span>}
+        {d.name}
+      </h1>
+
+      {d.status && <p class="committee-status-banner">{d.status}</p>}
+
+      <div class="committee-info-card">
+        {d.chair && (
+          <div class="info-row"><strong>Chair:</strong> {d.chair}</div>
+        )}
+        {d.meetingSchedule && (
+          <div class="info-row"><strong>Meets:</strong> {d.meetingSchedule}</div>
+        )}
+        <div class="info-row">
+          <strong>Get in touch:</strong>{' '}
+          <ObfuscatedEmail email={d.chairEmail || d.contactEmail} />
+        </div>
+      </div>
+
+      <div class="article-content">
+        <Content />
+      </div>
+
+      {related.length > 0 && (
+        <div class="committee-related">
+          <h2>From the newsletter</h2>
+          <ul class="related-list">
+            {related.map((n) => (
+              <li>
+                <a href={`${base}newsletters/${n.id.replace(/\.md$/, '')}`}>{n.data.title}</a>
+                <span class="text-muted text-sm"> — {n.data.issue}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <a href={`${base}get-involved`} class="btn btn-secondary committee-cta">
+        Volunteer with a committee
+      </a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .committee-back {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .committee-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .committee-heading-icon {
+    font-size: 2rem;
+  }
+
+  .committee-status-banner {
+    display: inline-block;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .committee-info-card {
+    background: var(--color-primary-light);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .info-row {
+    padding: var(--spacing-xs) 0;
+  }
+
+  .committee-related {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .related-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .related-list li {
+    padding: var(--spacing-xs) 0;
+  }
+
+  .committee-cta {
+    margin-top: var(--spacing-xl);
+  }
+</style>
