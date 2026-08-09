@@ -76,4 +76,20 @@ const communityUpdates = defineCollection({
   }),
 });
 
-export const collections = { newsletters, events, 'community-updates': communityUpdates };
+const committees = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),                                    // "Land Use Committee"
+    order: z.number().default(99),                       // sort order on the hub page
+    icon: z.string().optional(),                         // emoji for cards
+    summary: z.string(),                                 // one-line blurb for the hub card
+    chair: z.string().optional(),                        // current chair name
+    chairEmail: z.string().optional(),                   // published chair email, if any
+    contactEmail: z.string().default('info@bwnapdx.org'),// fallback contact
+    meetingSchedule: z.string().optional(),              // "Monthly, 4:30 PM"
+    status: z.string().optional(),                       // callout, e.g. "Chair position open"
+    relatedArticles: z.array(z.string()).optional(),     // newsletter ids (filename without .md)
+  }),
+});
+
+export const collections = { newsletters, events, 'community-updates': communityUpdates, committees };

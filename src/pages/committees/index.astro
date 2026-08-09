@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const committees = (await getCollection('committees'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Committees" description="BWNA committees do much of the neighborhood association's ongoing work — Land Use, Transportation, Events, Public Safety, and Communications. Find one that fits your interests.">
+
+  <section class="hero">
+    <div class="container">
+      <h1>Committees</h1>
+      <p>Where much of BWNA's work gets done</p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <p class="lead">
+        A lot of the neighborhood association's work happens in its committees. Each one
+        focuses on a specific part of neighborhood life — and each is powered by volunteers.
+        Committees are one of the best ways to get involved: you can lend an hour or take on
+        a leading role, and you don't need any special background to start.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <div class="grid grid-2">
+        {committees.map((c) => (
+          <a href={`${base}committees/${c.id.replace(/\.md$/, '')}`} class="card committee-card">
+            <h3 class="committee-title">
+              {c.data.icon && <span class="committee-icon">{c.data.icon}</span>}
+              {c.data.name}
+            </h3>
+            <p>{c.data.summary}</p>
+            {c.data.status && <p class="committee-status">{c.data.status}</p>}
+            <span class="committee-more">Learn more &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <div class="card card--highlight">
+        <h3>Not sure where to start?</h3>
+        <p>
+          Tell us which opportunities appeal to you and we'll reach out as openings come up,
+          or come to a meeting and see a committee in action.
+        </p>
+        <a href={`${base}get-involved`} class="btn btn-secondary">More ways to get involved</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .lead {
+    font-size: 1.125rem;
+  }
+
+  .committee-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .committee-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .committee-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .committee-icon {
+    font-size: 1.5rem;
+  }
+
+  .committee-status {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .committee-more {
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+</style>
