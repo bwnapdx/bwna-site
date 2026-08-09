@@ -1,0 +1,275 @@
+---
+/*
+ * Homepage hero: crossfading photo carousel with the site title overlaid,
+ * per the 2026 JF homepage mock. Autoplay pauses on hover/focus and is
+ * disabled entirely for prefers-reduced-motion users.
+ */
+interface Slide {
+  src: string;      // path without extension suffix, e.g. `${base}images/hero/hero-movie-kids`
+  alt: string;
+  position?: string; // object-position override, e.g. "center 30%"
+}
+
+interface Props {
+  slides: Slide[];
+}
+
+const { slides } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="hero-carousel" aria-roledescription="carousel" aria-label="Photos of neighborhood events">
+  <div class="hc-slides">
+    {slides.map((slide, i) => (
+      <div class={`hc-slide${i === 0 ? ' is-active' : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
+        <img
+          src={`${slide.src}-2200w.jpg`}
+          srcset={`${slide.src}-1100w.jpg 1100w, ${slide.src}-2200w.jpg 2200w`}
+          sizes="100vw"
+          alt={slide.alt}
+          style={slide.position ? `object-position: ${slide.position};` : undefined}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : undefined}
+        />
+      </div>
+    ))}
+  </div>
+
+  <div class="hc-overlay container">
+    <h1 class="hc-title">
+      Beaumont-Wilshire<br />Neighborhood&nbsp;Association
+      <span class="hc-subtitle">Portland, Oregon</span>
+    </h1>
+  </div>
+
+  <div class="hc-dots" role="tablist" aria-label="Choose slide">
+    {slides.map((_, i) => (
+      <button
+        class={`hc-dot${i === 0 ? ' is-active' : ''}`}
+        role="tab"
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-label={`Slide ${i + 1}`}
+        data-index={i}
+      ></button>
+    ))}
+  </div>
+
+  <div class="hc-buttons">
+    <a href={`${base}events`} class="hc-btn hc-btn--accent">What&rsquo;s Happening?</a>
+    <a href={`${base}get-involved`} class="hc-btn">Get Involved</a>
+  </div>
+</section>
+
+<style>
+  .hero-carousel {
+    position: relative;
+    height: clamp(340px, 44vw, 560px);
+    /* room for the buttons that overlap the bottom edge */
+    margin-bottom: 1.6rem;
+  }
+
+  .hc-slides,
+  .hc-slide {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .hc-slide {
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+
+  .hc-slide.is-active {
+    opacity: 1;
+  }
+
+  /* Soft vignette behind the title (top-right) so white text stays legible
+     on bright slides. Sits above the images, below the overlay text. */
+  .hc-slides::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 75% 65% at 78% 18%,
+        rgba(0, 0, 0, 0.42) 0%,
+        rgba(0, 0, 0, 0.22) 45%,
+        transparent 72%
+      );
+  }
+
+  .hc-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+
+  .hc-overlay {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    pointer-events: none;
+  }
+
+  .hc-title {
+    margin-top: clamp(1rem, 4vw, 3rem);
+    color: white;
+    text-align: right;
+    font-size: clamp(2rem, 5.2vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55), 0 0 2px rgba(0, 0, 0, 0.6);
+  }
+
+  .hc-subtitle {
+    display: block;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-top: 0.2rem;
+  }
+
+  .hc-dots {
+    position: absolute;
+    bottom: 0.9rem;
+    left: 1rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .hc-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .hc-dot.is-active {
+    background: white;
+  }
+
+  .hc-buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(50%);
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .hc-btn {
+    background: white;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0.65rem 1.6rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-bottom: 4px solid transparent;
+  }
+
+  .hc-btn:hover {
+    text-decoration: none;
+    color: var(--color-primary-dark);
+    background: var(--color-primary-light);
+  }
+
+  .hc-btn--accent {
+    border-bottom-color: var(--color-accent);
+  }
+
+  @media (max-width: 600px) {
+    .hc-title {
+      font-size: 1.7rem;
+    }
+
+    /* Title spans the full width on mobile — widen and recenter the vignette */
+    .hc-slides::after {
+      background:
+        radial-gradient(
+          ellipse 110% 45% at 50% 12%,
+          rgba(0, 0, 0, 0.42) 0%,
+          rgba(0, 0, 0, 0.22) 45%,
+          transparent 72%
+        );
+    }
+
+    /* Stack the buttons, still overlapping the hero's bottom edge; the
+       larger hero margin reserves room for the half that hangs below. */
+    .hero-carousel {
+      margin-bottom: 3.4rem;
+    }
+
+    .hc-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hc-btn {
+      width: min(80vw, 300px);
+      text-align: center;
+    }
+
+    .hc-dots {
+      bottom: 3.6rem;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector('.hero-carousel');
+  if (root) {
+    const slides = Array.from(root.querySelectorAll('.hc-slide'));
+    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('.hc-dot'));
+    let current = 0;
+    let timer: number | undefined;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const show = (i: number) => {
+      slides[current].classList.remove('is-active');
+      dots[current].classList.remove('is-active');
+      dots[current].setAttribute('aria-selected', 'false');
+      current = (i + slides.length) % slides.length;
+      slides[current].classList.add('is-active');
+      dots[current].classList.add('is-active');
+      dots[current].setAttribute('aria-selected', 'true');
+    };
+
+    const start = () => {
+      if (!reducedMotion && slides.length > 1 && timer === undefined) {
+        timer = window.setInterval(() => show(current + 1), 6000);
+      }
+    };
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    dots.forEach((dot) =>
+      dot.addEventListener('click', () => {
+        stop();
+        show(Number(dot.dataset.index));
+        start();
+      })
+    );
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', start);
+    start();
+  }
+</script>

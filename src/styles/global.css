@@ -1,11 +1,13 @@
 /* BWNA Site Styles */
 
 :root {
-  /* Colors inspired by Pacific Northwest / Portland */
-  --color-primary: #1e5c3a;      /* Forest green */
-  --color-primary-dark: #14422a;
-  --color-primary-light: #e8f5e9;
-  --color-accent: #5c8a3e;       /* Moss green */
+  /* 2026 refresh palette from JF homepage mock: ocean blue + chartreuse.
+     Chartreuse fails contrast as text on white — use it only decoratively
+     (header rule, button underline, submit button behind dark text). */
+  --color-primary: #006092;      /* Ocean blue */
+  --color-primary-dark: #004a70;
+  --color-primary-light: #e6f1f8;
+  --color-accent: #bccc32;       /* Chartreuse */
   --color-text: #333333;
   --color-text-light: #666666;
   --color-background: #ffffff;
@@ -72,7 +74,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-accent);
+  color: var(--color-primary-dark);
   text-decoration: underline;
 }
 
@@ -96,6 +98,7 @@ a:hover {
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-bottom: 5px solid var(--color-accent);
 }
 
 .header-content {
@@ -221,7 +224,7 @@ a:hover {
 
 /* Hero section */
 .hero {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: white;
   padding: var(--spacing-xl) 0;
   text-align: center;
