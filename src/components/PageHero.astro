@@ -1,0 +1,90 @@
+---
+/*
+ * Inner-page header with a photo background, matching the homepage hero's
+ * design language (white title, soft vignette for legibility). Falls back
+ * to the plain .hero gradient band on pages that don't pass an image.
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  image: string;    // path without size suffix, e.g. `${base}images/hero/hero-movie-blankets`
+  imageAlt?: string; // empty string (decorative) unless the photo carries meaning
+  position?: string; // object-position override, e.g. "center 30%"
+}
+
+const { title, subtitle, image, imageAlt = '', position } = Astro.props;
+---
+
+<section class="page-hero">
+  <img
+    src={`${image}-2200w.jpg`}
+    srcset={`${image}-1100w.jpg 1100w, ${image}-2200w.jpg 2200w`}
+    sizes="100vw"
+    alt={imageAlt}
+    style={position ? `object-position: ${position};` : undefined}
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="page-hero-overlay container">
+    <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    height: clamp(200px, 24vw, 320px);
+    overflow: hidden;
+  }
+
+  .page-hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 90% 80% at 50% 45%,
+        rgba(0, 0, 0, 0.38) 0%,
+        rgba(0, 0, 0, 0.18) 55%,
+        transparent 80%
+      );
+  }
+
+  .page-hero-overlay {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .page-hero-overlay h1 {
+    color: white;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 2px rgba(0, 0, 0, 0.6);
+  }
+
+  .page-hero-overlay p {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+  }
+</style>
