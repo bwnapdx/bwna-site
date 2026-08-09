@@ -179,6 +179,23 @@ a:hover {
   margin-right: 0.25rem;
 }
 
+/* Header subscribe CTA — the one action button in the nav, so it takes
+   the accent color rather than reading as another menu destination */
+.btn-subscribe {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.btn-subscribe:hover {
+  background: white;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
 /* Dropdown menus */
 .has-dropdown {
   position: relative;
@@ -704,6 +721,14 @@ a:hover {
 
   .hamburger {
     display: flex;
+    order: 2;
+  }
+
+  .btn-subscribe {
+    order: 1;
+    margin-left: auto;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.9rem;
   }
 
   .main-nav {
