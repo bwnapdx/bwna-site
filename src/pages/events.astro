@@ -230,11 +230,24 @@ const calendarEvents = expanded.map(e => ({
       <h3>Have a neighborhood event to share?</h3>
       <p>Contact us to have your community event listed on our calendar.</p>
       <ObfuscatedEmail email="editor@bwnapdx.org" label="Submit an Event" class="btn btn-secondary" />
+      <p class="plaza-host-note">
+        Want to host something at Beaumont Crossing? Small community events at the
+        plaza are free and easy to set up &mdash;
+        <a href="https://www.portland.gov/transportation/planning/plazas/small-plaza-activation" target="_blank" rel="noopener">reserve the plaza through PBOT</a>
+        (specify Beaumont Crossing) and let us know at <ObfuscatedEmail email="plaza@bwnapdx.org" />.
+      </p>
     </div>
   </section>
 </BaseLayout>
 
 <style>
+  .plaza-host-note {
+    margin: var(--spacing-lg) auto 0;
+    max-width: 620px;
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+  }
+
   .featured-label {
     display: inline-block;
     font-size: 0.75rem;
