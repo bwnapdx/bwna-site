@@ -58,7 +58,7 @@ That's it! That's 90% of what you'll ever need.
 
 ### Option A: Using GitHub's Web Editor (Easiest)
 
-1. Go to https://github.com/schavery/bwna-wp (or wherever the repo lives)
+1. Go to https://github.com/bwnapdx/bwna-site (or wherever the repo lives)
 2. Navigate to `src/content/events/`
 3. Click "Add file" → "Create new file"
 4. Name it something like `2026-04-15-earth-day-cleanup.md`

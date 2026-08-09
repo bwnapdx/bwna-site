@@ -6,7 +6,7 @@ location: "Sylvan Learning Center"
 address: "4300 NE Fremont St, Suite 150, Portland, OR"
 type: "meeting"
 recurring: true
-recurrenceWeek: 2
+recurrenceWeek: [2]
 recurrenceDay: 1
 recurrenceMonths: "even"
 summary: "Bimonthly general meeting open to all neighbors. All are welcome!"

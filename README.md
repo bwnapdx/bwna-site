@@ -16,7 +16,7 @@ The official website for the Beaumont-Wilshire Neighborhood Association, built w
 
 ```bash
 # 1. Clone the repo (first time only)
-git clone https://github.com/schavery/bwna-site.git
+git clone https://github.com/bwnapdx/bwna-site.git
 cd bwna-site
 
 # 2. Install dependencies (first time, or after pulling new changes)
