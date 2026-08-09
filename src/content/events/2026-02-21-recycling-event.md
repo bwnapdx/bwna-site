@@ -1,18 +1,22 @@
 ---
-title: "Neighborhood Styrofoam & Electronics Recycling Event"
+title: Neighborhood Styrofoam & Electronics Recycling Event
 date: 2026-02-21
-time: "9:00 AM - 1:00 PM"
-location: "Great Spirit Methodist Church"
-address: "5535 NE Fremont St, Portland, OR"
-type: "community"
+time: 9:00 AM - 1:00 PM
+location: Great Spirit Methodist Church
+address: 5535 NE Fremont St, Portland, OR
+type: community
+scope: bwna
+featured: false
 recurring: false
+recurrenceWeek: []
+recurrenceMonths: all
 ---
-
-Bring your clean styrofoam and old electronics for responsible recycling at this popular neighborhood event!
+Bring out your clean styrofoam and old electronics for responsible recycling at this popular neighborhood event!
 
 ## Accepted Items
 
 ### Styrofoam
+
 - Block styrofoam (packing material)
 - Styrofoam peanuts
 - Clean food containers (rinsed)
@@ -20,6 +24,7 @@ Bring your clean styrofoam and old electronics for responsible recycling at this
 **Not accepted:** Styrofoam with tape, labels, or food residue
 
 ### Electronics
+
 - Computers, laptops, tablets
 - Monitors and TVs
 - Printers and scanners
