@@ -48,7 +48,7 @@ const years: Year[] = [...yearMap.entries()]
 const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
 ---
 
-<BaseLayout title="All Articles" description="Browse all BWNA newsletter articles. Searchable archive of community news, events, and stories from Beaumont-Wilshire.">
+<BaseLayout searchable={false} title="All Articles" description="Browse all BWNA newsletter articles. Searchable archive of community news, events, and stories from Beaumont-Wilshire.">
   <section class="hero">
     <div class="container">
       <h1>Newsletter Articles</h1>

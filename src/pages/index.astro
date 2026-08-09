@@ -20,7 +20,7 @@ const upcomingEvents = expandEvents(allEvents).slice(0, 3);
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 ---
 
-<BaseLayout title="Home">
+<BaseLayout searchable={false} title="Home">
   <!-- Hero Carousel -->
   <HeroCarousel slides={heroSlides} />
 

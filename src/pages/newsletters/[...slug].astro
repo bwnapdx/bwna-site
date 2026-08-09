@@ -26,7 +26,7 @@ const issueArticles = allArticles
   .sort((a, b) => (a.data.page ?? 99) - (b.data.page ?? 99));
 ---
 
-<BaseLayout title={article.data.title} description={`${article.data.title} — from the ${article.data.issue} BWNA Newsletter`}>
+<BaseLayout title={article.data.title} description={`${article.data.title} — from the ${article.data.issue} BWNA Newsletter`} sortDate={article.data.date.toISOString().slice(0, 10)}>
   <article class="page-section" data-pagefind-body>
     <div class="container content-width article-layout">
       <div class="article-back">

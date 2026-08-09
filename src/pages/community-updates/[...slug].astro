@@ -39,7 +39,7 @@ function formatEventDate(d: Date) {
 }
 ---
 
-<BaseLayout title={update.data.title} description={update.data.summary || `${update.data.title} — BWNA Community Update for ${update.data.month}`}>
+<BaseLayout title={update.data.title} description={update.data.summary || `${update.data.title} — BWNA Community Update for ${update.data.month}`} sortDate={update.data.date.toISOString().slice(0, 10)}>
   <article class="page-section" data-pagefind-body>
     <div class="container content-width">
       <div class="article-back">
