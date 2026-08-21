@@ -1,0 +1,191 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+import PageHero from '../components/PageHero.astro';
+import SignupBand from '../components/SignupBand.astro';
+import { expandEvents } from '../data/expandEvents';
+
+const base = import.meta.env.BASE_URL;
+
+// Upcoming events at the plaza, pulled from our own calendar. Empty for most of
+// the year — the section only renders when something is actually scheduled.
+const plazaEvents = expandEvents(await getCollection('events'))
+  .filter(e => /beaumont crossing/i.test(e.entry.data.location))
+  .slice(0, 4);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+}
+---
+
+<BaseLayout
+  title="Public Plaza"
+  description="Beaumont Crossing, the public plaza at NE 44th Avenue and Fremont Street — upcoming events, how to schedule your own, and what happens after the September 2026 trial period."
+>
+
+  <PageHero
+    title="Public Plaza"
+    subtitle="Beaumont Crossing &mdash; NE 44th Avenue at Fremont"
+    image={`${base}images/hero/hero-plaza`}
+    imageAlt="Neighbors gathered at picnic tables under red umbrellas at the Beaumont Crossing plaza"
+    maxWidth={1500}
+    position="center 55%"
+  />
+
+  <section class="page-section">
+    <div class="container content-width">
+      <h2>About the Plaza</h2>
+      <p class="lead">Take the time to get out and enjoy this neighborhood gathering space!</p>
+      <p>
+        This public plaza on NE 44th Avenue at Fremont will hold events through September 2026,
+        then close for an assessment by the Portland Bureau of Transportation (PBOT). Positive
+        results mean it will reopen permanently next spring or summer. So be sure to experience
+        Beaumont Crossing &mdash; our neighborhood gathering place.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <h2>Find Scheduled Events</h2>
+      <p>
+        The Beaumont Business Association (BBA) is hosting Beaumont Crossing events on its
+        <a href="https://bbapdx.org/calendar" target="_blank" rel="noopener">calendar page</a>.
+        Also, follow the
+        <a href="https://www.instagram.com/bbapdx" target="_blank" rel="noopener">BBA on Instagram</a>
+        for timely announcements.
+      </p>
+
+      {plazaEvents.length > 0 && (
+        <ul class="plaza-events">
+          {plazaEvents.map((ev) => (
+            <li>
+              {(ev.entry.body || '').trim().length > 10 ? (
+                <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`}>{ev.entry.data.title}</a>
+              ) : (
+                <span>{ev.entry.data.title}</span>
+              )}
+              <span class="detail">{formatDate(ev.date)} &middot; {ev.entry.data.time}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <p>
+        Plaza events we know about are also on
+        <a href={`${base}events`}>the BWNA events calendar</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <h2>Schedule an Event</h2>
+      <p>
+        Have an event idea? Individuals and community organizations are encouraged to schedule
+        community events at Beaumont Crossing through September. Possibilities include music,
+        family-friendly activities, dancing, pet contests &mdash; if you can dream it up, you
+        can schedule it!
+      </p>
+      <p>
+        For more event ideas, visit
+        <a href="https://www.portland.gov/transportation/planning/plazas/events" target="_blank" rel="noopener">PBOT's event scheduling site</a>.
+      </p>
+      <p>
+        The plaza is open to all, there is no fee for most community events, and the application
+        process is simple! So, what are you waiting for?
+      </p>
+      <p>
+        <a
+          href="https://www.portland.gov/transportation/planning/plazas/community-events-plaza"
+          class="btn btn-secondary"
+          target="_blank"
+          rel="noopener"
+        >Schedule an Event</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <h2>What Happens After September?</h2>
+      <p>
+        Beaumont Crossing barriers and furniture will be removed at the end of the trial period
+        in late September. Additionally, now through September, PBOT is conducting an online
+        survey designed to understand the effects of the plaza. Survey responses and the results
+        of other PBOT assessment work will be included in an evaluation report that, once
+        published, BWNA will announce via this webpage, our monthly (or occasionally more often)
+        emailed Community Updates (<a href={`${base}subscribe`}>subscribe here</a>) and our
+        bi-monthly newsletter as print deadlines allow.
+      </p>
+      <p>
+        <a href="https://www.surveymonkey.com/r/plazas" class="btn btn-secondary" target="_blank" rel="noopener">Take the Survey</a>
+      </p>
+      <p>
+        If this assessment proves positive, there would be an opportunity to re-install Beaumont
+        Crossing as a full-fledged member of PBOT's street plaza program in spring 2027.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <div class="card card--highlight plaza-contact">
+        <h3>Your feedback and questions are appreciated!</h3>
+        <p>
+          Email the BWNA Plaza Committee to share your event ideas, provide feedback on the
+          plaza, or ask a question.
+        </p>
+        <ObfuscatedEmail email="plaza@bwnapdx.org" label="Email the Plaza Committee" class="btn btn-secondary" />
+      </div>
+
+      <p class="partners-note">
+        Beaumont Crossing is a joint project of the Beaumont-Wilshire Neighborhood Association,
+        the Beaumont Business Association (BBA), and the Portland Bureau of Transportation
+        (PBOT). For more about the city's street plaza program, visit
+        <a href="https://www.portland.gov/transportation/planning/plazas" target="_blank" rel="noopener">PBOT's associated webpage</a>.
+      </p>
+    </div>
+  </section>
+
+  <SignupBand />
+
+</BaseLayout>
+
+<style>
+  .lead {
+    font-size: 1.125rem;
+  }
+
+  .plaza-events {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-lg) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .plaza-events li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .plaza-events .detail {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+  }
+
+  .plaza-contact {
+    text-align: center;
+  }
+
+  .partners-note {
+    margin-top: var(--spacing-xl);
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+  }
+</style>

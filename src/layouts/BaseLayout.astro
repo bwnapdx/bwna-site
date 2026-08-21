@@ -56,9 +56,10 @@ const base = import.meta.env.BASE_URL;
             </ul>
           </li>
           <li class="has-dropdown">
-            <a href={`${base}events`} class={currentPath.includes('/events') || currentPath.includes('/community-updates') || currentPath.includes('/meeting-minutes') || currentPath.includes('/get-involved') || currentPath.includes('/subscribe') ? 'active' : ''}>What's Happening?</a>
+            <a href={`${base}events`} class={currentPath.includes('/events') || currentPath.includes('/public-plaza') || currentPath.includes('/community-updates') || currentPath.includes('/meeting-minutes') || currentPath.includes('/get-involved') || currentPath.includes('/subscribe') ? 'active' : ''}>What's Happening?</a>
             <ul class="dropdown">
               <li><a href={`${base}events`}>Upcoming Events</a></li>
+              <li><a href={`${base}public-plaza`}>Public Plaza</a></li>
               <li><a href={`${base}community-updates`}>Community Updates</a></li>
               <li><a href={`${base}meeting-minutes`}>Meeting Minutes</a></li>
               <li><a href={`${base}get-involved`}>Get Involved</a></li>
@@ -103,6 +104,7 @@ const base = import.meta.env.BASE_URL;
           <ul>
             <li><a href={`${base}about`}>About Us</a></li>
             <li><a href={`${base}events`}>Upcoming Events</a></li>
+            <li><a href={`${base}public-plaza`}>Public Plaza</a></li>
             <li><a href={`${base}newsletters`}>Newsletters</a></li>
             <li><a href={`${base}get-involved`}>Get Involved</a></li>
           </ul>
