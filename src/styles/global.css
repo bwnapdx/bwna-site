@@ -281,8 +281,12 @@ a:hover {
   color: var(--color-primary);
 }
 
+/* Hover color is set explicitly on both variants: the bare `a:hover` rule above
+   is more specific than `.btn-*`, so without it the label takes the link hover
+   color — which on .btn-secondary matches its own hover background exactly. */
 .btn-primary:hover {
   background-color: var(--color-primary-light);
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -295,6 +299,7 @@ a:hover {
 .btn-secondary:hover {
   background-color: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
+  color: white;
   text-decoration: none;
 }
 
