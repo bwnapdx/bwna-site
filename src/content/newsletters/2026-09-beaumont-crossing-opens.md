@@ -14,4 +14,4 @@ gallery:
     caption: "Photo by Susan Trabucco."
 ---
 
-A ribbon cutting on July 11 marked the official opening of Beaumont Crossing, a joint project of BWNA and the Beaumont Business Association (BBA). The public plaza on NE 44th Street at Fremont will hold events through September, then close for an assessment by the Portland Bureau of Transportation. Positive results mean it will reopen permanently next summer. Pictured above: BWNA Board President Al Ellis leaning in at left and BBA President Mary Meyers with scissors in hand.
+A ribbon cutting on July 11 marked the official opening of Beaumont Crossing, a joint project of BWNA and the Beaumont Business Association (BBA). The public plaza on NE 44th at Fremont will hold events through September, then close for an assessment by the Portland Bureau of Transportation. Positive results mean it will reopen permanently next summer. Pictured above: BWNA Board President Al Ellis leaning in at left and BBA President Mary Meyers with scissors in hand.
