@@ -1,0 +1,8 @@
+# Cloudflare-only. GitHub Pages ignores this file (it just serves it as a
+# static asset), so it applies solely to the Keystatic admin deploy.
+#
+# The admin build serves the whole public site from '/', not just /keystatic.
+# Without this, the Cloudflare URL would be a second indexable copy of every
+# article competing with the canonical site at bwnapdx.github.io.
+/*
+  X-Robots-Tag: noindex, nofollow
