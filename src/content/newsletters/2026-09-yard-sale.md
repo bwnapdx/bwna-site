@@ -11,10 +11,10 @@ imageAlt: "A throng of shoppers line a driveway on NE 40th Avenue. Photo by John
 gallery:
   - src: "/images/newsletters/2026-09-yard-sale-boots.jpg"
     alt: "Vintage boots for sale on a table."
-    caption: "Vintage boots beckon buyers. Photo by Jane Feinberg."
+    caption: "Vintage boots…"
   - src: "/images/newsletters/2026-09-yard-sale-frames.jpg"
     alt: "Picture frames for sale at a yard sale."
-    caption: "Picture frames beckon buyers. Photo by Jane Feinberg."
+    caption: "…and picture frames beckon buyers. Photos by Jane Feinberg."
   - src: "/images/newsletters/2026-09-yard-sale-shelly-zack.jpg"
     alt: "Shelly and Zack at their yard sale in front of their new house."
     caption: "Shelly and Zack were in their new house for just a month when they jumped into the yard sale. Shelly said she was happy to see all the people out on the street, as it helped them get to know their neighbors. Photo by John Sandie."
