@@ -47,11 +47,45 @@ for (let year = 2025; year >= 2012; year--) {
   }
 }
 
-// Group by year (already ordered newest-first)
-const pdfsByYear: Record<string, typeof olderPdfs> = {};
+// One archive entry per issue, merging the extracted article tables of contents
+// with the scanned PDFs. Before this the two lived in separate sections, so every
+// issue from 2012-2025 was listed on the page twice.
+type ArchiveIssue = {
+  slug: string;
+  label: string;
+  articles: typeof allArticles;
+  pdf?: string;
+};
+
+const archive = new Map<string, ArchiveIssue>();
+
+for (const issue of issues) {
+  archive.set(issue.slug, {
+    slug: issue.slug,
+    label: issue.label,
+    articles: issue.articles,
+    pdf: issue.articles[0]?.data.pdfFile ?? webIssuePdfs[issue.slug],
+  });
+}
+
 for (const nl of olderPdfs) {
-  const year = nl.date.split(' ').pop()!;
-  (pdfsByYear[year] ??= []).push(nl);
+  const slug = nl.file.replace(/^bwna-/, '').replace(/\.pdf$/, '');
+  const existing = archive.get(slug);
+  if (existing) {
+    existing.pdf ??= nl.file;
+  } else {
+    archive.set(slug, { slug, label: nl.date, articles: [], pdf: nl.file });
+  }
+}
+
+const archiveIssues = Array.from(archive.values())
+  .sort((a, b) => b.slug.localeCompare(a.slug));
+
+// Newest issue stays open on the page; everything older collapses by year.
+const currentIssue = archiveIssues[0];
+const issuesByYear: Record<string, ArchiveIssue[]> = {};
+for (const issue of archiveIssues.slice(1)) {
+  (issuesByYear[issue.slug.slice(0, 4)] ??= []).push(issue);
 }
 ---
 
@@ -76,16 +110,14 @@ for (const nl of olderPdfs) {
     </div>
   </section>
 
-  <!-- Issue Articles -->
-  {issues.map((issue, i) => {
-    const issuePdf = issue.articles[0]?.data.pdfFile ?? webIssuePdfs[issue.slug];
-    return (
-    <section class={`page-section ${i > 0 ? 'older-issue' : ''}`}>
+  <!-- Current Issue -->
+  {currentIssue && (
+    <section class="page-section">
       <div class="container content-width">
         <div class="issue-header">
-          <h2>{issue.label}</h2>
-          {issuePdf && (
-            <a href={`${base}newsletters/${issuePdf}`} target="_blank" rel="noopener" class="pdf-link">
+          <h2>{currentIssue.label}</h2>
+          {currentIssue.pdf && (
+            <a href={`${base}newsletters/${currentIssue.pdf}`} target="_blank" rel="noopener" class="pdf-link">
               Download full issue (PDF)
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -97,11 +129,11 @@ for (const nl of olderPdfs) {
         </div>
 
         <div class="article-grid">
-          {issue.articles.map(article => (
+          {currentIssue.articles.map(article => (
             <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} class="article-link">
               <span>
                 <strong>{article.data.title}</strong>
-                {article.data.author && <span class="text-muted text-sm"> — {article.data.author}</span>}
+                {article.data.author && <span class="text-muted text-sm"> &mdash; {article.data.author}</span>}
               </span>
               <span class="category-badge category-badge--sm">{categoryLabels[article.data.category] || article.data.category}</span>
             </a>
@@ -109,43 +141,61 @@ for (const nl of olderPdfs) {
         </div>
       </div>
     </section>
-    );
-  })}
+  )}
 
-  <section class="page-section">
-    <div class="container content-width">
-      <div class="section-footer">
-        <a href={`${base}articles`} class="btn btn-secondary">Browse All Articles &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Older PDFs -->
+  <!-- Archive, collapsed by year -->
   <section class="page-section archive-section">
     <div class="container content-width">
-      <h2>Past Issues (PDF)</h2>
+      <h2>Past Issues</h2>
+      <p class="archive-note">
+        Every issue back to 2012. Expand a year to see its issues, article listings, and PDFs.
+      </p>
 
-      {Object.entries(pdfsByYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items], index) => (
-        <details class="year-group" open={index === 0}>
-          <summary class="year-heading">{year} <span class="year-count">({items.length} {items.length === 1 ? 'issue' : 'issues'})</span></summary>
-          <ul class="newsletter-list">
-            {items.map((nl) => (
-              <li>
-                <span>{nl.date}</span>
-                <a href={`${base}newsletters/${nl.file}`} target="_blank" rel="noopener" class="download-link">
-                  <span>Download PDF</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                  </svg>
-                </a>
-              </li>
+      {Object.entries(issuesByYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items]) => (
+        <details class="year-group">
+          <summary class="year-heading">
+            {year} <span class="year-count">({items.length} {items.length === 1 ? 'issue' : 'issues'})</span>
+          </summary>
+
+          <div class="year-issues">
+            {items.map(issue => (
+              <div class="archive-issue">
+                <div class="issue-header">
+                  <h3>{issue.label}</h3>
+                  {issue.pdf && (
+                    <a href={`${base}newsletters/${issue.pdf}`} target="_blank" rel="noopener" class="download-link">
+                      <span>Download PDF</span>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                      </svg>
+                    </a>
+                  )}
+                </div>
+
+                {issue.articles.length > 0 && (
+                  <div class="article-grid">
+                    {issue.articles.map(article => (
+                      <a href={`${base}newsletters/${article.id.replace(/\.md$/, '')}`} class="article-link">
+                        <span>
+                          <strong>{article.data.title}</strong>
+                          {article.data.author && <span class="text-muted text-sm"> &mdash; {article.data.author}</span>}
+                        </span>
+                        <span class="category-badge category-badge--sm">{categoryLabels[article.data.category] || article.data.category}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
-          </ul>
+          </div>
         </details>
       ))}
 
+      <div class="section-footer">
+        <a href={`${base}articles`} class="btn btn-secondary">Browse All Articles &rarr;</a>
+      </div>
     </div>
   </section>
 
@@ -230,6 +280,34 @@ for (const nl of olderPdfs) {
 
   .archive-section {
     background: var(--color-background-alt);
+  }
+
+  .archive-note {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .year-issues {
+    padding: 0 1rem 1rem;
+  }
+
+  .archive-issue + .archive-issue {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .archive-issue h3 {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+
+  .archive-issue .issue-header {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-footer {
+    margin-top: var(--spacing-xl);
   }
 
   .contribute-grid {

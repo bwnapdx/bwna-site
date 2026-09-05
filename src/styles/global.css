@@ -124,8 +124,9 @@ a:hover {
 }
 
 .site-logo img {
-  height: 50px;
+  height: 24px;
   width: auto;
+  display: block;
 }
 
 /* Hamburger toggle (hidden on desktop) */
