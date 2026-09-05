@@ -24,158 +24,47 @@ const boardMembers = [
 ];
 ---
 
-<BaseLayout title="About Us" description="Learn about the Beaumont-Wilshire Neighborhood Association, our mission, and our volunteer board of directors.">
+<BaseLayout title="Our Board" description="Meet the volunteer board of directors of the Beaumont-Wilshire Neighborhood Association.">
 
-  <!-- Page Header -->
   <PageHero
-    title="About Us"
-    subtitle="Building community in Northeast Portland"
+    title="Our Board"
+    subtitle="The volunteers who help guide our neighborhood association"
     image={`${base}images/hero/hero-movie-blankets`}
     position="center 12%"
   />
 
-  <!-- About Content -->
   <section class="page-section">
-    <div class="container content-width">
-      <h2>Who We Are</h2>
-      <div class="who-grid">
-        <div class="who-text">
-          <p>
-            Records suggest the Beaumont-Wilshire Neighborhood Association may have been
-            established as early as the 1970s. It is one of 95 officially recognized
-            neighborhood associations in Portland, Oregon. Its all-volunteer board is
-            committed to serving its residents and local business owners. The
-            Beaumont-Wilshire neighborhood, as recognized by the City of Portland, extends
-            from NE 33rd to 47th Avenue and is bordered by NE Alberta Court and Prescott on
-            the north and NE Morris, Stanton, and Wistaria Drive on the south.
-          </p>
-        </div>
-        <div class="who-map">
-          <img src={`${base}images/bwna-map.png`} alt="Beaumont-Wilshire neighborhood boundary map" class="map-img">
-        </div>
+    <div class="container">
+      <div class="board-grid">
+        {boardMembers.map((member) => (
+          <div class="board-card">
+            <img src={`${base}images/board/${member.photo}`} alt={member.name} class="board-photo" loading="lazy" />
+            <div class="board-info">
+              <h3>{member.name}</h3>
+              <div class="role">{member.role}</div>
+              <p class="board-details">
+                Neighbor since {member.resident} &middot; Board member since {member.since}
+              </p>
+              <blockquote class="board-quote">{member.quote}</blockquote>
+              <div class="board-contact">
+                {member.email && <ObfuscatedEmail email={member.email} />}
+                {member.email && member.phone && <span> &middot; </span>}
+                {member.phone && <a href={`tel:${member.phone}`}>{member.phone}</a>}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <p>
-        Monthly association meetings alternate between board and general meetings, both of
-        which are open to all. At these meetings the elected board members conduct their work
-        in public. Agenda items may include determining the annual budget and spending
-        priorities; progress on planned events and activities; presentations by community
-        groups or elected officials; and land use, safety, and transportation issues. The
-        bimonthly general meetings offer neighbors an opportunity to ask questions or voice
-        concerns on neighborhood issues.
+      <p class="board-cta">
+        Interested in joining the board? <a href={`${base}get-involved`}>Learn how to get involved</a>
       </p>
     </div>
   </section>
 
-  <!-- Mission Statement -->
-  <section class="page-section">
-    <div class="container content-width">
-      <h2>Mission</h2>
-      <p>
-        The mission of BWNA is to enhance the livability of our neighborhood by undertaking
-        neighborhood improvement projects, examining local issues, and serving as a conduit
-        for communication between neighbors, government agencies and officials, area
-        businesses, and other neighborhood institutions and groups.
-      </p>
-      <p>
-        We are committed to diversity and equity in all our activities. We work closely with
-        the Beaumont Business Association and are allied with 28 other nearby neighborhood
-        associations through the Northeast Coalition of Neighborhoods.
-      </p>
-      <p>
-        To keep neighbors informed of association activities and other neighborhood news, BWNA
-        produces a free bimonthly newsletter that's hand-delivered by volunteers to every
-        resident and business doorstep in the neighborhood. Revenue from advertisements covers
-        newsletter printing costs; revenue in excess of expenses helps support the events and
-        activities of the association.
-      </p>
-      <p>
-        BWNA also emails a monthly Community Update to let neighbors know about news and events
-        outside of the newsletter cycle. To stay in the loop,
-        <a href={`${base}subscribe`}>subscribe</a>!
-      </p>
-    </div>
-  </section>
-
-  <!-- Inclusion Statement -->
-  <section class="page-section">
-    <div class="container content-width">
-      <h2>Inclusion Statement</h2>
-      <p>
-        The Beaumont-Wilshire Neighborhood Association is committed to diversity and equity
-        in all our activities. We welcome and celebrate everyone in our neighborhood and, as
-        per our longtime bylaws, condemn any form of discrimination, exclusion, or expression
-        of hatred based on race, ethnicity, religion, color, sex, sexual orientation, gender
-        identity, age, disability, legal citizenship, national origin, income, political
-        affiliation, or any other basis of personal identity people might use to divide us.
-      </p>
-
-      <p>Accordingly, we pledge:</p>
-      <ol class="spaced-list">
-        <li>To listen and learn, and to assess our own practices and policies with regard to equity and inclusion.</li>
-        <li>To seek advice in particular on how to combat racism in our neighborhood and our city, and welcome feedback that makes us better allies to our neighbors of color.</li>
-        <li>To develop ways we can confront discrimination and support cooperation among Beaumont-Wilshire neighbors.</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Our Board -->
-  <section class="page-section">
-    <div class="container content-width">
-      <h2>Our Board</h2>
-      <p>
-        BWNA is guided by an all-volunteer board of directors.
-        <a href={`${base}board`}>Meet the board &rarr;</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- Documents -->
-  <section class="page-section">
-    <div class="container content-width">
-      <h2>Governing Documents</h2>
-      <ul class="resource-list">
-        <li>
-          <a href={`${base}bylaws`}>BWNA Bylaws</a>
-        </li>
-        <li>
-          <a href={`${base}policies`}>BWNA Policies</a>
-        </li>
-        <li>
-          <a href={`${base}meeting-minutes`}>Meeting Minutes Archive</a>
-        </li>
-      </ul>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
-  .who-grid {
-    display: grid;
-    grid-template-columns: 1fr 240px;
-    gap: var(--spacing-2xl);
-    align-items: start;
-  }
-
-  .map-img {
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid var(--color-border);
-  }
-
-  @media (max-width: 640px) {
-    .who-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-lg);
-    }
-
-    .who-grid .map-img {
-      max-width: 260px;
-      margin: 0 auto;
-      display: block;
-    }
-  }
-
   .board-grid {
     display: grid;
     gap: var(--spacing-xl);

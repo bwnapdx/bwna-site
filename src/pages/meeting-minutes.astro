@@ -90,17 +90,12 @@ function formatDate(dateStr: string) {
   <section class="hero">
     <div class="container">
       <h1>Meeting Minutes</h1>
-      <p>Records of BWNA meetings</p>
+      <p>Approved minutes for BWNA meetings</p>
     </div>
   </section>
 
   <section class="page-section">
     <div class="container content-width">
-      <p>
-        Meeting minutes from BWNA general meetings and board meetings are approved at the
-        following meeting and then made available here.
-      </p>
-
       {Object.entries(byYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items], index) => (
         <details class="year-group" open={index === 0}>
           <summary class="year-heading">{year} <span class="year-count">({items.length} meetings)</span></summary>

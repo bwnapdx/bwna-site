@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 
 interface Props {
   title: string;
@@ -47,25 +46,27 @@ const base = import.meta.env.BASE_URL;
         <ul>
           <li><a href={base} class={currentPath === base || currentPath === base.replace(/\/$/, '') ? 'active' : ''}>Home</a></li>
           <li class="has-dropdown">
-            <a href={`${base}about`} class={currentPath.includes('/about') ? 'active' : ''}>About Us</a>
+            <a href={`${base}about`} class={currentPath.includes('/about') || currentPath.includes('/board') || currentPath.includes('/committees') || currentPath.includes('/bylaws') || currentPath.includes('/policies') || currentPath.includes('/contact') ? 'active' : ''}>About Us</a>
             <ul class="dropdown">
               <li><a href={`${base}about`}>Who We Are</a></li>
+              <li><a href={`${base}board`}>Our Board</a></li>
+              <li><a href={`${base}committees`}>Committees</a></li>
               <li><a href={`${base}bylaws`}>Bylaws</a></li>
               <li><a href={`${base}policies`}>Policies</a></li>
-              <li><a href={`${base}contact`}>Contact</a></li>
+              <li><a href={`${base}contact`}>Contact Us</a></li>
             </ul>
           </li>
           <li class="has-dropdown">
-            <a href={`${base}events`} class={currentPath.includes('/events') || currentPath.includes('/public-plaza') || currentPath.includes('/community-updates') || currentPath.includes('/meeting-minutes') || currentPath.includes('/get-involved') || currentPath.includes('/subscribe') ? 'active' : ''}>What's Happening?</a>
+            <a href={`${base}events`} class={currentPath.includes('/events') || currentPath.includes('/community-updates') || currentPath.includes('/meeting-minutes') || currentPath.includes('/get-involved') || currentPath.includes('/subscribe') ? 'active' : ''}>What's Happening?</a>
             <ul class="dropdown">
               <li><a href={`${base}events`}>Upcoming Events</a></li>
-              <li><a href={`${base}public-plaza`}>Public Plaza</a></li>
               <li><a href={`${base}community-updates`}>Community Updates</a></li>
               <li><a href={`${base}meeting-minutes`}>Meeting Minutes</a></li>
               <li><a href={`${base}get-involved`}>Get Involved</a></li>
               <li><a href={`${base}subscribe`}>Subscribe</a></li>
             </ul>
           </li>
+          <li><a href={`${base}public-plaza`} class={currentPath.includes('/public-plaza') ? 'active' : ''}>Public Plaza</a></li>
           <li class="has-dropdown">
             <a href={`${base}newsletters`} class={currentPath.includes('/newsletters') || currentPath.includes('/newsletter') || currentPath.includes('/ad-rates') || currentPath.includes('/articles') ? 'active' : ''}>Newsletter</a>
             <ul class="dropdown">
@@ -95,8 +96,8 @@ const base = import.meta.env.BASE_URL;
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
-          <h4>Beaumont-Wilshire NA</h4>
-          <p>Enhancing livability in Northeast Portland since the 1970s.</p>
+          <h4>BWNA</h4>
+          <p>Working to enhance livability in our neighborhood.</p>
         </div>
 
         <div class="footer-section">
@@ -105,7 +106,7 @@ const base = import.meta.env.BASE_URL;
             <li><a href={`${base}about`}>About Us</a></li>
             <li><a href={`${base}events`}>Upcoming Events</a></li>
             <li><a href={`${base}public-plaza`}>Public Plaza</a></li>
-            <li><a href={`${base}newsletters`}>Newsletters</a></li>
+            <li><a href={`${base}newsletters`}>Newsletter</a></li>
             <li><a href={`${base}get-involved`}>Get Involved</a></li>
           </ul>
         </div>
@@ -113,15 +114,13 @@ const base = import.meta.env.BASE_URL;
         <div class="footer-section">
           <h4>Contact</h4>
           <ul>
-            <li><ObfuscatedEmail email="info@bwnapdx.org" /></li>
-            <li><a href={`${base}resources`}>Community Resources</a></li>
             <li><a href={`${base}contact`}>Contact Us</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
           <h4>Stay Connected</h4>
-          <p>Subscribe to our email list for monthly Community Updates about BWNA activities and neighborhood news.</p>
+          <p>Sign up to receive our monthly Community Updates for information about BWNA meetings, events, neighborhood news, and volunteer opportunities.</p>
           <a href={`${base}subscribe`} class="btn btn-secondary">Subscribe</a>
         </div>
       </div>

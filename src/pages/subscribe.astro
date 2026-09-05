@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SignupBand from '../components/SignupBand.astro';
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -7,7 +8,7 @@ const base = import.meta.env.BASE_URL;
 <BaseLayout title="Subscribe" description="Subscribe to BWNA email updates for neighborhood news, meetings, and events.">
   <section class="hero">
     <div class="container">
-      <h1>Subscribe to BWNA Updates</h1>
+      <h1>Be in the Know!</h1>
       <p>Stay informed about neighborhood news and events</p>
     </div>
   </section>
@@ -15,132 +16,24 @@ const base = import.meta.env.BASE_URL;
   <section class="page-section">
     <div class="container content-width">
       <p>
-        Subscribe to our email list to receive monthly Community Updates about BWNA meetings,
+        Subscribe to our monthly emailed Community Update and stay up to date on BWNA meetings,
         community events, volunteer opportunities, and neighborhood announcements.
       </p>
+    </div>
+  </section>
 
-      <div id="subscribe-success" class="card card--highlight form-success" hidden role="status" aria-live="polite">
-        <h3>Almost there!</h3>
-        <p>
-          We sent a confirmation email — click the link inside to start receiving
-          Community Updates. (Check your spam folder if you don't see it.)
-        </p>
-      </div>
+  <SignupBand heading={null} intro={null} />
 
-      <!-- Mailchimp Signup Form -->
-      <div class="card mc-card">
-        <div id="mc_embed_shell">
-          <link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
-          <div id="mc_embed_signup">
-            <form
-              action="https://bwnapdx.us21.list-manage.com/subscribe/post?u=203722a9c2f8af9e6db5b3d86&amp;id=bc0c6760de&amp;f_id=00aad5e6f0"
-              method="post"
-              id="mc-embedded-subscribe-form"
-              name="mc-embedded-subscribe-form"
-              class="validate"
-              target="_blank"
-              novalidate
-              data-mailchimp="subscribe-success"
-            >
-              <div id="mc_embed_signup_scroll">
-                <div class="indicates-required">
-                  <span class="asterisk">*</span> indicates required
-                </div>
-                <div class="mc-field-group">
-                  <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
-                  <input
-                    type="email"
-                    name="EMAIL"
-                    class="required email"
-                    id="mce-EMAIL"
-                    required
-                    value=""
-                  />
-                </div>
-                <div class="mc-field-group">
-                  <label for="mce-FNAME">First Name</label>
-                  <input type="text" name="FNAME" class="text" id="mce-FNAME" value="" />
-                </div>
-                <div class="mc-field-group">
-                  <label for="mce-LNAME">Last Name</label>
-                  <input type="text" name="LNAME" class="text" id="mce-LNAME" value="" />
-                </div>
-                <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  <input type="text" name="b_203722a9c2f8af9e6db5b3d86_bc0c6760de" tabindex="-1" value="" />
-                </div>
-                <div class="optionalParent">
-                  <div class="clear foot">
-                    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe" />
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
+  <section class="page-section">
+    <div class="container content-width">
       <div class="card card--highlight">
         <h3>Printed Newsletter</h3>
         <p>
-          BWNA also distributes a free bimonthly printed newsletter to over 2,600
-          neighborhood households. <a href={`${base}newsletters`}>Browse newsletter articles</a>
+          BWNA distributes a free bimonthly printed newsletter to over 2,700 neighborhood
+          households and businesses. <a href={`${base}newsletters`}>Browse newsletter articles</a>
           or download past issues as PDFs.
         </p>
       </div>
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .mc-card {
-    margin: var(--spacing-xl) 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  #mc_embed_signup {
-    font: 14px Helvetica, Arial, sans-serif;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 1.5rem;
-    box-sizing: border-box;
-    background: white;
-  }
-
-  #mc_embed_signup .button {
-    background-color: var(--color-primary, #1e5c3a) !important;
-    border-radius: 6px !important;
-    font-size: 1rem !important;
-    padding: 0.75rem 2rem !important;
-  }
-
-  #mc_embed_signup .button:hover {
-    background-color: var(--color-primary-dark, #164a2e) !important;
-  }
-
-  @media (max-width: 600px) {
-    #mc_embed_signup input[type="email"],
-    #mc_embed_signup input[type="text"],
-    #mc_embed_signup input[type="submit"] {
-      width: 100% !important;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-  }
-</style>
-
-<script src="https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js" is:inline></script>
-<script is:inline>
-  (function($) {
-    window.fnames = new Array();
-    window.ftypes = new Array();
-    fnames[0]='EMAIL';ftypes[0]='merge';
-    fnames[1]='FNAME';ftypes[1]='merge';
-    fnames[2]='LNAME';ftypes[2]='merge';
-  }(jQuery));
-</script>

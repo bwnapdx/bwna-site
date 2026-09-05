@@ -2,16 +2,27 @@
 /*
  * "Stay in the Know!" blue band with the inline MailChimp signup form,
  * per the 2026 JF homepage mock. Same list as /subscribe.
+ *
+ * Pass heading={null} / intro={null} on a page that already introduces the
+ * form in its own hero, so the copy isn't said twice.
  */
+interface Props {
+  heading?: string | null;
+  intro?: string | null;
+}
+
+const {
+  heading = 'Stay in the Know!',
+  intro =
+    'Subscribe to receive our monthly Community Updates by email to stay informed about ' +
+    'meetings, events, neighborhood news, and volunteer opportunities.',
+} = Astro.props;
 ---
 
 <section class="page-section cta-section signup-band">
   <div class="container">
-    <h2>Stay in the Know!</h2>
-    <p>
-      Subscribe to receive monthly email updates about BWNA meetings, activities,
-      and neighborhood news.
-    </p>
+    {heading && <h2>{heading}</h2>}
+    {intro && <p>{intro}</p>}
     <form
       action="https://bwnapdx.us21.list-manage.com/subscribe/post?u=203722a9c2f8af9e6db5b3d86&amp;id=bc0c6760de&amp;f_id=00aad5e6f0"
       method="post"

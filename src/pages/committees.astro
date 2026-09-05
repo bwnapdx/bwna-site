@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+import PageHero from '../components/PageHero.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Committees" description="The volunteer committees of the Beaumont-Wilshire Neighborhood Association and how to join them.">
+
+  <PageHero
+    title="Committees"
+    subtitle="Where the work of the association gets done"
+    image={`${base}images/hero/hero-movie-blankets`}
+    position="center 12%"
+  />
+
+  <section class="page-section">
+    <div class="container content-width">
+
+      <h2>Communication</h2>
+      <p>
+        The Communication Committee ensures that news, events, and activities of interest to
+        Beaumont-Wilshire residents are shared clearly and professionally. The group meets
+        regularly to coordinate BWNA's communication tools &mdash; the website, the bimonthly
+        print newsletter, and the monthly emailed Community Update &mdash; keeping them
+        accurate, aligned, and reflective of BWNA's branding standards. Members include the
+        newsletter editor, Community Update editor, graphic designer, and the BWNA board
+        president.
+      </p>
+      <p>
+        If you'd like to contribute ideas or get involved,
+        <a href={`${base}contact`}>contact the Communication Committee Chair</a>.
+      </p>
+
+      <h2>Crime Prevention &amp; Safety</h2>
+      <p>
+        This committee helps keep neighbors informed about local crime and safety concerns.
+        Members monitor reports of criminal activity and other issues affecting the
+        neighborhood, sharing updates with the BWNA board. The committee maintains a positive
+        working relationship with our Portland Police Bureau liaison to support timely
+        information-sharing and advocacy when needed.
+      </p>
+      <p>
+        Interested in joining? Contact Co-chair Patty Nelson at
+        <a href="tel:503-281-8035">503-281-8035</a> or Co-chair Bill Markwart at
+        <a href="tel:503-282-4610">503-282-4610</a>.
+      </p>
+
+      <h2>Events</h2>
+      <p>
+        The Events Committee is where neighbors come together to make community fun happen!
+        Meeting monthly, the group brainstorms ideas, then plans and carries out events as BWNA
+        resources allow. This energetic team organizes the annual Skidmore Block Party, the
+        Art &amp; Garden Tour, Movie in the Park, the neighborhood-wide yard sale, and speaker
+        forums.
+      </p>
+      <p>
+        If you'd like to attend a meeting or help out with an event,
+        <ObfuscatedEmail email="events@bwnapdx.org" label="email the Events Committee Chair" />.
+      </p>
+
+      <h2>Friends of Wilshire Park</h2>
+      <p>
+        Friends of Wilshire Park (FoWP), operating as a BWNA committee, is a volunteer-driven
+        group dedicated to preserving and enhancing Wilshire Park. Working in partnership with
+        Portland Parks &amp; Recreation, members help keep the park vibrant, welcoming, and well
+        cared for. Their efforts include hosting community events, planting native species,
+        fundraising for improvements such as updated playground equipment, and engaging
+        neighbors in long-term stewardship of this beloved green space.
+      </p>
+      <p>
+        Want to support our neighborhood park?
+        <a href={`${base}contact`}>Contact the FoWP Chair</a>.
+      </p>
+
+      <h2>Land Use</h2>
+      <p>
+        The Land Use Committee monitors development activity that may affect Beaumont-Wilshire.
+        Members track construction notices, zoning changes, and change-of-use permits within the
+        neighborhood boundary and may attend public meetings on issues relevant to residents.
+        The goal of the committee is to keep the BWNA board informed and prepared to respond to
+        land-use matters that shape our community.
+      </p>
+      <p>
+        Interested in participating?
+        <ObfuscatedEmail email="root.timothy@gmail.com" label="Contact the Land Use Committee Chair" />.
+      </p>
+
+      <h2>Newsletter Team</h2>
+      <p>
+        The BWNA newsletter is an all-volunteer effort that has been printed and hand-delivered
+        since at least 1988. While its format has evolved over the years, its mission remains the
+        same: to provide the most comprehensive source of BWNA board activity and neighborhood
+        news to those who live and work in Beaumont-Wilshire.
+      </p>
+      <p>
+        The team meets bimonthly and blends camaraderie with the work at hand. Members include
+        the editor, reporters and writers, copy editors, and a graphic designer who prepares the
+        layout and ensures all design elements follow BWNA branding standards. Advertising sales
+        and service are currently managed by the editor.
+      </p>
+      <p>
+        If you're an experienced writer, reporter, or have advertising sales experience &mdash;
+        or simply enjoy talking with neighbors about the benefits of advertising in our
+        newsletter &mdash; we'd love to have you join us.
+        <ObfuscatedEmail email="editor@bwnapdx.org" label="Contact the Newsletter Team Editor" />.
+      </p>
+
+      <h2>Plaza</h2>
+      <p>
+        Working with the Portland Bureau of Transportation (PBOT) and Beaumont Business
+        Association in 2026, this committee successfully secured the temporary closure of a
+        portion of NE 44th Avenue at Fremont Street to establish
+        <a href={`${base}public-plaza`}>Beaumont Crossing</a>, a neighborhood gathering place.
+      </p>
+      <p>
+        A 3-month trial period for the street plaza extends through late September 2026, after
+        which its success will be evaluated by PBOT. A positive evaluation could lead to a
+        permanent plaza beginning the summer of 2027.
+      </p>
+      <p>
+        <ObfuscatedEmail email="plaza@bwnapdx.org" label="Send questions or comments to the Plaza Committee" />.
+      </p>
+
+      <h2>Transportation</h2>
+      <p>
+        This committee works to identify and advocate for the transportation-related concerns of
+        our neighborhood. Pedestrian, cyclist, and driver safety are their priority. The
+        committee brings its concerns to the attention of the Portland Bureau of Transportation
+        to seek solutions.
+      </p>
+      <p>
+        If you're interested in assisting with the important work of this committee,
+        <ObfuscatedEmail email="pdx.stmptwn@gmail.com" label="contact the Transportation Committee Chair" />.
+      </p>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h2 {
+    margin-top: var(--spacing-2xl);
+  }
+
+  h2:first-of-type {
+    margin-top: 0;
+  }
+</style>

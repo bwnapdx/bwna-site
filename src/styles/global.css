@@ -718,7 +718,8 @@ a:hover {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+/* Nav collapses to the hamburger before seven top-level items can wrap. */
+@media (max-width: 1100px) {
   .header-content {
     flex-wrap: wrap;
     position: relative;
@@ -800,7 +801,9 @@ a:hover {
   .has-dropdown.open .dropdown {
     display: flex;
   }
+}
 
+@media (max-width: 768px) {
   h1 { font-size: 1.875rem; }
   h2 { font-size: 1.5rem; }
 

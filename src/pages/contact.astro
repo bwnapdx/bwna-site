@@ -16,10 +16,7 @@ const base = import.meta.env.BASE_URL;
   <section class="page-section">
     <div class="container content-width">
       <h2>Email Contacts</h2>
-      <p>
-        Reach out directly to the person best suited to help. We aim to respond
-        within a week.
-      </p>
+      <p>We aim to respond within a week.</p>
       <ul class="resource-list">
         <li>
           <strong>President (Al Ellis):</strong>
@@ -30,20 +27,38 @@ const base = import.meta.env.BASE_URL;
           <ObfuscatedEmail email="treasurer@bwnapdx.org" />
         </li>
         <li>
+          <strong>General Information:</strong>
+          <ObfuscatedEmail email="info@bwnapdx.org" />
+        </li>
+        <li>
+          <strong>Events Committee (John Sandie):</strong>
+          <ObfuscatedEmail email="events@bwnapdx.org" />
+        </li>
+        <li>
+          <strong>Land Use Committee (Tim Root):</strong>
+          <ObfuscatedEmail email="root.timothy@gmail.com" />
+        </li>
+        <li>
           <strong>Newsletter Editor (Susan Trabucco):</strong>
-          <ObfuscatedEmail email="editor@bwnapdx.org" />
+          <ObfuscatedEmail email="editor@bwnapdx.org" /> or
+          <a href="tel:503-440-7732">503-440-7732</a>
         </li>
         <li>
           <strong>Newsletter Graphic Design (Jane Feinberg):</strong>
           <ObfuscatedEmail email="design@bwnapdx.org" />
         </li>
         <li>
-          <strong>Events:</strong>
-          <ObfuscatedEmail email="events@bwnapdx.org" />
+          <strong>Newsletter Distribution:</strong>
+          Georgina Head (<a href="tel:360-739-7896">360-739-7896</a>) and
+          John Sandie (<a href="tel:219-508-4162">219-508-4162</a>)
         </li>
         <li>
-          <strong>General Information:</strong>
-          <ObfuscatedEmail email="info@bwnapdx.org" />
+          <strong>Plaza Committee (Aaron Breakstone):</strong>
+          <ObfuscatedEmail email="plaza@bwnapdx.org" />
+        </li>
+        <li>
+          <strong>Transportation Committee (Graeme Rudd):</strong>
+          <ObfuscatedEmail email="pdx.stmptwn@gmail.com" />
         </li>
       </ul>
     </div>
@@ -52,10 +67,10 @@ const base = import.meta.env.BASE_URL;
   <section class="page-section">
     <div class="container content-width">
       <div class="card card--highlight">
-        <h3>Stay in the loop</h3>
+        <h3>Stay in the Loop</h3>
         <p>
-          Subscribe to our email updates for monthly Community Updates about
-          meetings, events, volunteer opportunities, and neighborhood announcements.
+          Subscribe to our monthly (or occasionally more often) Community Updates for
+          information about meetings, events, neighborhood news, and volunteer opportunities.
         </p>
         <a href={`${base}subscribe`} class="btn btn-secondary">Subscribe</a>
       </div>

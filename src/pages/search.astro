@@ -32,7 +32,7 @@ const chipCategories = [
     <div class="container content-width">
       <div id="search" class="search-container"></div>
       <div class="search-suggestions">
-        <p>Not sure what to search for? Browse the article archive by topic instead:</p>
+        <p>Or browse the article archive by topic:</p>
         <div class="suggestion-chips">
           {chipCategories.map(cat => (
             <a class="suggestion-chip" href={`${base}articles?category=${cat}`}>{categoryLabels[cat]} &rarr;</a>
