@@ -265,6 +265,9 @@ def generate_bylaws():
     print(f"Bylaws PDF: {pdf.pages_count} pages")
 
 
+# Superseded: the policies PDF is now authored by Jane in InDesign and lives at
+# public/documents/bwna-policies.pdf. Running this would overwrite it with the
+# older text scraped from the Wix site. Kept for reference only.
 def generate_policies():
     pdf = BWNADocument()
     pdf.alias_nb_pages()
@@ -308,5 +311,5 @@ def generate_policies():
 
 if __name__ == "__main__":
     generate_bylaws()
-    generate_policies()
+    # generate_policies()  # see note above -- would clobber Jane's InDesign PDF
     print("Done!")
