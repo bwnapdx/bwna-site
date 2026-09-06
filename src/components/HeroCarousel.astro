@@ -23,13 +23,15 @@ const base = import.meta.env.BASE_URL;
     {slides.map((slide, i) => (
       <div class={`hc-slide${i === 0 ? ' is-active' : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
         <img
-          src={`${slide.src}-2200w.jpg`}
-          srcset={`${slide.src}-1100w.jpg 1100w, ${slide.src}-2200w.jpg 2200w`}
+          src={i === 0 ? `${slide.src}-2200w.jpg` : undefined}
+          srcset={i === 0 ? `${slide.src}-1100w.jpg 1100w, ${slide.src}-2200w.jpg 2200w` : undefined}
+          data-src={i === 0 ? undefined : `${slide.src}-2200w.jpg`}
+          data-srcset={i === 0 ? undefined : `${slide.src}-1100w.jpg 1100w, ${slide.src}-2200w.jpg 2200w`}
           sizes="100vw"
           alt={slide.alt}
           style={slide.position ? `object-position: ${slide.position};` : undefined}
-          loading={i === 0 ? 'eager' : 'lazy'}
-          fetchpriority={i === 0 ? 'high' : undefined}
+          loading="eager"
+          fetchpriority={i === 0 ? 'high' : 'low'}
         />
       </div>
     ))}
@@ -232,17 +234,31 @@ const base = import.meta.env.BASE_URL;
 <script>
   const root = document.querySelector('.hero-carousel');
   if (root) {
-    const slides = Array.from(root.querySelectorAll('.hc-slide'));
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('.hc-slide'));
     const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('.hc-dot'));
     let current = 0;
     let timer: number | undefined;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Slides sit at opacity 0, and browsers will not lazy-load an image that
+       never renders — they stayed permanently blank. Fetch each slide as it
+       comes up instead, keeping one loaded ahead of the one on screen. */
+    const load = (i: number) => {
+      const img = slides[(i + slides.length) % slides.length]?.querySelector('img');
+      if (!img || !img.dataset.src) return;
+      img.srcset = img.dataset.srcset ?? '';
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+      delete img.dataset.srcset;
+    };
 
     const show = (i: number) => {
       slides[current].classList.remove('is-active');
       dots[current].classList.remove('is-active');
       dots[current].setAttribute('aria-selected', 'false');
       current = (i + slides.length) % slides.length;
+      load(current);
+      load(current + 1);
       slides[current].classList.add('is-active');
       dots[current].classList.add('is-active');
       dots[current].setAttribute('aria-selected', 'true');
@@ -265,6 +281,8 @@ const base = import.meta.env.BASE_URL;
         start();
       })
     );
+
+    load(1);
 
     root.addEventListener('mouseenter', stop);
     root.addEventListener('mouseleave', start);

@@ -135,7 +135,7 @@ const base = import.meta.env.BASE_URL;
     // On mobile, allow tapping a dropdown parent to toggle it open
     document.querySelectorAll('.has-dropdown > a').forEach(link => {
       link.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 1100) {
           const parent = link.parentElement;
           if (!parent.classList.contains('open')) {
             e.preventDefault();
