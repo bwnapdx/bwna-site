@@ -170,9 +170,13 @@ const base = import.meta.env.BASE_URL;
     justify-content: center;
     gap: 1.25rem;
     flex-wrap: wrap;
+    /* Spans the full width and overlaps the dots, which sit behind it in the
+       DOM — without this it swallows every click meant for them. */
+    pointer-events: none;
   }
 
   .hc-btn {
+    pointer-events: auto;
     background: white;
     color: var(--color-primary);
     font-weight: 700;
