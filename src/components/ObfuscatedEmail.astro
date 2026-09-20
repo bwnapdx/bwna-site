@@ -4,6 +4,11 @@
  * in the built HTML. The user/domain are base64-encoded into data attributes
  * at build time and reassembled by a small client script on load. A <noscript>
  * fallback shows an at/dot form for the rare no-JS visitor.
+ *
+ * The markup below runs together deliberately: no whitespace inside the anchor,
+ * and none between its closing tag and the script element. Astro emits any such
+ * whitespace as a text node after the component, so every caller that ended a
+ * sentence with this link used to render a gap before the period.
  */
 interface Props {
   email: string;
@@ -16,10 +21,6 @@ const [user, domain] = email.split('@');
 const b64 = (s: string) => Buffer.from(s).toString('base64');
 ---
 
-{/* No whitespace anywhere around the <a> — not inside it, and not between it and
-    the <script> below. Astro emits that whitespace as a text node after the
-    component, so every caller that ended a sentence with this link rendered a
-    gap before the period (JF, round two). */}
 <a
   class:list={['obf-email', className]}
   data-u={b64(user)}

@@ -8,6 +8,7 @@ interface Slide {
   src: string;      // path without extension suffix, e.g. `${base}images/hero/hero-movie-kids`
   alt: string;
   position?: string; // object-position override, e.g. "center 30%"
+  maxWidth?: number; // largest processed variant, when the source is under 2200px
 }
 
 interface Props {
@@ -20,13 +21,17 @@ const base = import.meta.env.BASE_URL;
 
 <section class="hero-carousel" aria-roledescription="carousel" aria-label="Photos of neighborhood events">
   <div class="hc-slides">
-    {slides.map((slide, i) => (
+    {slides.map((slide, i) => {
+      const w = slide.maxWidth ?? 2200;
+      const wide = `${slide.src}-${w}w.jpg`;
+      const set = `${slide.src}-1100w.jpg 1100w, ${wide} ${w}w`;
+      return (
       <div class={`hc-slide${i === 0 ? ' is-active' : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
         <img
-          src={i === 0 ? `${slide.src}-2200w.jpg` : undefined}
-          srcset={i === 0 ? `${slide.src}-1100w.jpg 1100w, ${slide.src}-2200w.jpg 2200w` : undefined}
-          data-src={i === 0 ? undefined : `${slide.src}-2200w.jpg`}
-          data-srcset={i === 0 ? undefined : `${slide.src}-1100w.jpg 1100w, ${slide.src}-2200w.jpg 2200w`}
+          src={i === 0 ? wide : undefined}
+          srcset={i === 0 ? set : undefined}
+          data-src={i === 0 ? undefined : wide}
+          data-srcset={i === 0 ? undefined : set}
           sizes="100vw"
           alt={slide.alt}
           style={slide.position ? `object-position: ${slide.position};` : undefined}
@@ -34,7 +39,8 @@ const base = import.meta.env.BASE_URL;
           fetchpriority={i === 0 ? 'high' : 'low'}
         />
       </div>
-    ))}
+      );
+    })}
   </div>
 
   <div class="hc-overlay container">

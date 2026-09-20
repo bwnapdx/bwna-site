@@ -12,9 +12,11 @@ const heroSlides = [
   { src: `${base}images/hero/hero-movie-crowd`, alt: 'Neighbors gathered on blankets and chairs for Movie in Wilshire Park', position: 'center 60%' },
   { src: `${base}images/hero/hero-dog-club`, alt: 'The neighborhood dog-walking group posing with their dogs in Wilshire Park' },
   { src: `${base}images/hero/hero-cleanup`, alt: 'Volunteers in safety vests at a Fremont Street clean-up' },
-  // Heads sit high in this frame, so the default 35% focal point clipped them
-  // once the hero got wide enough to crop hard (JF, round two).
-  { src: `${base}images/hero/hero-planting`, alt: 'Volunteers with buckets and shovels at a Wilshire Park planting', position: 'center 10%' },
+  // JF's widened re-crop. It survives the default focal point at ordinary
+  // desktop sizes, but the hero's height caps at 560px while its width keeps
+  // growing, so past ~2000px the crop still reaches the faces — hence 15%.
+  // Source is 1600px wide, so there is no 2200w variant.
+  { src: `${base}images/hero/hero-planting`, alt: 'Volunteers with buckets and shovels at a Wilshire Park planting', position: 'center 15%', maxWidth: 1600 },
 ];
 
 const allEvents = await getCollection('events');
