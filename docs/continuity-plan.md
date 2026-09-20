@@ -1,24 +1,31 @@
 # BWNA Website — Continuity Plan & Replacement Cost Estimate
 
-*Prepared for the Communications Committee, May 2026*
+*Prepared for the Communications Committee — updated September 2026*
 
 ## The short version
 
 The website costs **$0/year to host** and was built so a non-coder volunteer can update it using GitHub's web editor plus an AI assistant like ChatGPT or Claude. If we lose our current volunteer, two things need to happen:
 
-1. **Someone takes over the "site liaison" role** — knows where the README lives, comfortable asking AI for help. ~1 hr/month.
+1. **Someone takes over the "site liaison" role** — knows where the README lives, comfortable following step-by-step instructions. ~1 hr/month. Matt Grainger has agreed to serve as backup in this role.
 2. **We set aside a small contingency budget** — roughly **$100–$300/year** if we use Fiverr-style freelancers for occasional small fixes, or up to ~$1,500/year if we prefer local Portland freelancers.
 
-## What skills are needed to maintain the site?
+## The events editor — no code needed
+
+The most frequent update to the site is adding or editing events. For this, we have a **visual editor** hosted on Cloudflare that works like a web form: a volunteer signs in with a free GitHub account, fills in the event title, date, time, location, and description, and clicks save. The change goes live automatically — no code, no terminal, no AI chatbot needed.
+
+This covers the single most common maintenance task and means a non-technical volunteer can handle it with minimal orientation.
+
+## What skills are needed for other tasks?
 
 | Task | How often | Who can do it |
 |---|---|---|
-| Add events, newsletter blurbs, board updates, or edit page text | As needed | Any volunteer with a GitHub login + 10 min of orientation |
-| Add a menu item or new page | A few times a year | AI-assisted volunteer OR ~30 min of freelancer time |
-| Change site colors/fonts | Rare | AI-assisted volunteer OR freelancer, 1–2 hrs |
-| Fix the deploy if it breaks | Almost never | AI-assisted volunteer OR freelancer, 1–2 hrs |
+| Add or edit events | As needed | **Any volunteer via the visual editor** (see above) |
+| Edit newsletter blurbs, board updates, or page text | As needed | Any volunteer with a GitHub login + 10 min of orientation |
+| Add a menu item or new page | A few times a year | Volunteer with a free AI chatbot* OR ~30 min of freelancer time |
+| Change site colors/fonts | Rare | Volunteer with a free AI chatbot* OR freelancer, 1–2 hrs |
+| Fix the deploy if it breaks | Almost never | Volunteer with a free AI chatbot* OR freelancer, 1–2 hrs |
 
-The site was deliberately built on simple, well-documented tools so that AI assistants can read the entire codebase and walk a volunteer through any change.
+\* **What does "volunteer with a free AI chatbot" mean?** A volunteer pastes the site's code into a free tool like ChatGPT or Claude and asks it what to change. The chatbot gives step-by-step instructions — no coding experience required. The site was deliberately built on simple, well-documented tools so these chatbots can read the entire codebase and walk a volunteer through any change.
 
 ## What would it cost to hire help?
 
