@@ -12,7 +12,9 @@ const heroSlides = [
   { src: `${base}images/hero/hero-movie-crowd`, alt: 'Neighbors gathered on blankets and chairs for Movie in Wilshire Park', position: 'center 60%' },
   { src: `${base}images/hero/hero-dog-club`, alt: 'The neighborhood dog-walking group posing with their dogs in Wilshire Park' },
   { src: `${base}images/hero/hero-cleanup`, alt: 'Volunteers in safety vests at a Fremont Street clean-up' },
-  { src: `${base}images/hero/hero-planting`, alt: 'Volunteers with buckets and shovels at a Wilshire Park planting' },
+  // Heads sit high in this frame, so the default 35% focal point clipped them
+  // once the hero got wide enough to crop hard (JF, round two).
+  { src: `${base}images/hero/hero-planting`, alt: 'Volunteers with buckets and shovels at a Wilshire Park planting', position: 'center 10%' },
 ];
 
 const allEvents = await getCollection('events');
@@ -45,7 +47,7 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
     <div class="container">
       <div class="section-header">
         <h2>Upcoming Events</h2>
-        <p>Join us at our next community gathering</p>
+        <p>Join your neighbors at an upcoming event</p>
       </div>
 
       <div class="content-width centered">
@@ -84,19 +86,19 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
       <div class="grid grid-3">
         <div class="card">
           <h3>Latest Newsletter</h3>
-          <p>Read the latest issue for neighborhood news, events, and community updates.</p>
+          <p>Read the latest issue for neighborhood news, events, and feature stories.</p>
           <a href={`${base}newsletters`}>Read Newsletter &rarr;</a>
         </div>
 
         <div class="card">
           <h3>Volunteer With Us</h3>
           <p>From event planning to newsletter delivery, there are many ways to contribute to our community.</p>
-          <a href={`${base}get-involved`}>Find Opportunities &rarr;</a>
+          <a href={`${base}get-involved`}>Get Involved &rarr;</a>
         </div>
 
         <div class="card">
           <h3>Community Resources</h3>
-          <p>Emergency contacts, city services, and helpful links for Beaumont-Wilshire residents.</p>
+          <p>Emergency phone numbers, links to government services, and other helpful contact information.</p>
           <a href={`${base}resources`}>View Resources &rarr;</a>
         </div>
       </div>

@@ -94,14 +94,18 @@ const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
               </span>
             </summary>
             <div class="year-body">
-              {y.issues.map(issue => (
-                <div class="issue-group" data-issue={issue.issueSlug}>
-                  <h3 class="issue-heading">
+              {y.issues.map((issue, issueIndex) => (
+                <details
+                  class="issue-group"
+                  data-issue={issue.issueSlug}
+                  open={index === 0 && issueIndex === 0}
+                >
+                  <summary class="issue-heading">
                     <span>{issue.issueLabel}</span>
                     <span class="issue-article-count">
                       {issue.articles.length} {issue.articles.length === 1 ? 'article' : 'articles'}
                     </span>
-                  </h3>
+                  </summary>
                   <div class="issue-articles">
                     {issue.articles.map(article => (
                       <a
@@ -122,7 +126,7 @@ const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
                       </a>
                     ))}
                   </div>
-                </div>
+                </details>
               ))}
             </div>
           </details>
@@ -200,16 +204,19 @@ const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
     flex: 1;
     min-width: 200px;
   }
+  /* Matches the .suggestion-chip topic buttons on the Search page. */
   .filter-btn {
-    background: white;
-    border: 1px solid var(--color-border);
-    padding: 0.25rem 0.75rem;
-    font-size: 0.875rem;
-    border-radius: 4px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border: 1px solid transparent;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.85rem;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
   }
   .filter-btn:hover {
+    background: white;
     border-color: var(--color-primary);
   }
   .filter-btn.active {
@@ -268,18 +275,31 @@ const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
     font-size: 1rem;
     font-weight: 600;
     color: var(--color-primary-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin: 0 0 0.75rem;
+    margin: 0;
     padding: 0 0 0.6rem;
     border-bottom: 1px solid var(--color-border);
+    cursor: pointer;
+    list-style: none;
+  }
+  .issue-heading::-webkit-details-marker {
+    display: none;
+  }
+  .issue-heading::before {
+    content: '▸';
+    display: inline-block;
+    transition: transform 0.15s;
+    font-size: 0.9em;
+  }
+  .issue-group[open] .issue-heading::before {
+    transform: rotate(90deg);
+  }
+  .issue-group[open] .issue-articles {
+    margin-top: 0.75rem;
   }
   .issue-article-count {
     font-size: 0.8rem;
     font-weight: 400;
     color: var(--color-text-light);
-    text-transform: none;
-    letter-spacing: 0;
     margin-left: auto;
   }
 </style>
@@ -287,13 +307,14 @@ const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
 <script>
   const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
   const cards = document.querySelectorAll<HTMLElement>('.article-card');
-  const issueGroups = document.querySelectorAll<HTMLElement>('.issue-group');
+  const issueGroups = document.querySelectorAll<HTMLDetailsElement>('.issue-group');
   const yearGroups = document.querySelectorAll<HTMLDetailsElement>('.year-group');
   const countEl = document.querySelector<HTMLElement>('.count-number');
   const totalCount = cards.length;
 
   const defaultOpenState = new Map<HTMLDetailsElement, boolean>();
   yearGroups.forEach(g => defaultOpenState.set(g, g.open));
+  issueGroups.forEach(g => defaultOpenState.set(g, g.open));
 
   function applyFilter(filter: string) {
     filterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === filter));
@@ -305,11 +326,13 @@ const firstExtractedYearIndex = years.findIndex(y => y.allExtracted);
       if (matches) visibleCount++;
     });
 
-    // Hide issue groups with no visible cards
+    // Hide issue groups with no visible cards; force-open when filtering so the
+    // matches aren't buried inside a collapsed issue.
     issueGroups.forEach(group => {
       const hasVisible = Array.from(group.querySelectorAll<HTMLElement>('.article-card'))
         .some(c => c.style.display !== 'none');
       group.style.display = hasVisible ? 'block' : 'none';
+      group.open = filter === 'all' ? (defaultOpenState.get(group) ?? false) : hasVisible;
     });
 
     // Hide year groups with no visible issue groups; force-open when filtering

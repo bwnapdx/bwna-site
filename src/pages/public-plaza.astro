@@ -21,7 +21,7 @@ function formatDate(date: Date) {
 
 <BaseLayout
   title="Public Plaza"
-  description="Beaumont Crossing, the public plaza at NE 44th Avenue and Fremont Street — upcoming events and how to schedule your own."
+  description="Beaumont Crossing, the public plaza at NE 44th Avenue and Fremont Street — upcoming events, how to schedule your own, and what happens after the trial period."
 >
 
   <PageHero
@@ -36,7 +36,7 @@ function formatDate(date: Date) {
   <section class="page-section">
     <div class="container content-width">
       <h2>About the Plaza</h2>
-      <p class="lead">Take the time to get out and enjoy this neighborhood gathering space!</p>
+      <p>Take the time to get out and enjoy this neighborhood gathering space!</p>
       <p>
         This public plaza on NE 44th Avenue at Fremont will hold events through September 2026,
         then close for an assessment by the Portland Bureau of Transportation (PBOT). Positive
@@ -50,9 +50,10 @@ function formatDate(date: Date) {
     <div class="container content-width">
       <h2>Find Scheduled Events</h2>
       <p>
-        The Beaumont Business Association (BBA) lists Beaumont Crossing events on its
-        <a href="https://bbapdx.org/calendar" target="_blank" rel="noopener">calendar page</a>.
-        You can also follow the
+        Check our <a href={`${base}events`}>Upcoming Events</a> page or the
+        Beaumont Business Association (BBA)
+        <a href="https://bbapdx.org/calendar" target="_blank" rel="noopener">calendar page</a>
+        for Beaumont Crossing events. You can also follow the
         <a href="https://www.instagram.com/bbapdx" target="_blank" rel="noopener">BBA on Instagram</a>
         for timely announcements.
       </p>
@@ -71,11 +72,6 @@ function formatDate(date: Date) {
           ))}
         </ul>
       )}
-
-      <p>
-        Plaza events we know about are also on
-        <a href={`${base}events`}>the BWNA events calendar</a>.
-      </p>
     </div>
   </section>
 
@@ -109,6 +105,37 @@ function formatDate(date: Date) {
 
   <section class="page-section">
     <div class="container content-width">
+      <h2>What Comes Next?</h2>
+      <p>
+        Beaumont Crossing is a pilot street plaza through PBOT&rsquo;s first-ever Open Call for
+        Plaza Partners. Barriers and furniture will be removed on September 30 at the end of
+        the three-month trial period.
+      </p>
+      <p>
+        The purpose of the pilot is to allow for direct observation through tangible,
+        on-the-ground experience with the plaza in place. This information is part of an
+        evaluation process conducted by PBOT to inform consideration of next steps. A key
+        component of the evaluation is a survey conducted by PBOT to hear from the neighborhood
+        about your experiences with Beaumont Crossing &mdash; please follow the link below to
+        offer your thoughts. Results of the evaluation will be shared publicly on the PBOT
+        webpage. If it reveals that the plaza site functioned well and there is widespread
+        neighborhood support, the Beaumont Business Association, Beaumont-Wilshire Neighborhood
+        Association, and PBOT will consider bringing Beaumont Crossing back as a permanent
+        member of PBOT&rsquo;s Public Street Plaza Program.
+      </p>
+      <p>
+        <a
+          href="https://www.surveymonkey.com/r/beaumontcrossing"
+          class="btn btn-secondary"
+          target="_blank"
+          rel="noopener"
+        >Take the Survey</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
       <div class="card card--highlight plaza-contact">
         <h3>Your feedback and questions are appreciated!</h3>
         <p>
@@ -131,10 +158,6 @@ function formatDate(date: Date) {
 </BaseLayout>
 
 <style>
-  .lead {
-    font-size: 1.125rem;
-  }
-
   .plaza-events {
     list-style: none;
     padding: 0;

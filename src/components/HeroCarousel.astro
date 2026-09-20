@@ -57,7 +57,7 @@ const base = import.meta.env.BASE_URL;
   </div>
 
   <div class="hc-buttons">
-    <a href={`${base}events`} class="hc-btn hc-btn--accent">What&rsquo;s Happening?</a>
+    <a href={`${base}events`} class="hc-btn">What&rsquo;s Happening</a>
     <a href={`${base}get-involved`} class="hc-btn">Get Involved</a>
   </div>
 </section>
@@ -186,13 +186,13 @@ const base = import.meta.env.BASE_URL;
     border-bottom: 4px solid transparent;
   }
 
-  .hc-btn:hover {
+  /* The chartreuse rule is the hover state on both buttons, per JF's mock —
+     it used to sit statically under "What's Happening" only. */
+  .hc-btn:hover,
+  .hc-btn:focus-visible {
     text-decoration: none;
     color: var(--color-primary-dark);
     background: var(--color-primary-light);
-  }
-
-  .hc-btn--accent {
     border-bottom-color: var(--color-accent);
   }
 

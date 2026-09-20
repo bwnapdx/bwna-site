@@ -21,24 +21,24 @@ const opportunities = [
     icon: "📰",
     image: `${base}images/get-involved/card-newsletter.jpg`,
     imageAlt: "The cover of the July-August 2026 BWNA newsletter",
-    description: "Gather news, write articles, design layout, and distribute updates to keep neighbors informed.",
-    commitment: "Bimonthly, 2-5 hours",
+    description: "Work with the editor and newsletter team to line out articles, gather news, and write.",
+    commitment: "Bimonthly, 2 to 5 hours",
     contact: "editor@bwnapdx.org"
   },
   {
     title: "Newsletter Delivery",
     icon: "🚶",
     image: `${base}images/get-involved/card-delivery.jpg`,
-    imageAlt: "A volunteer with the newsletter distribution boxes on Fremont Street",
-    description: "Deliver newsletters to homes on your block or nearby streets. Great exercise and a way to meet neighbors!",
+    imageAlt: "John Sandie and Georgina Head on a front porch with stacks of BWNA newsletters",
+    description: "Deliver newsletters to homes and businesses in the neighborhood. It's great exercise and a way to meet neighbors!",
     commitment: "Bimonthly, 1 to 2 hours each issue",
-    contact: "editor@bwnapdx.org"
+    contact: "sandiefam@gmail.com"
   },
   {
     title: "Friends of Wilshire Park",
     icon: "🌳",
-    image: `${base}images/get-involved/card-wilshire-park.jpg`,
-    imageAlt: "A neighbor and her dog at the Wilshire Park dog fountain",
+    image: `${base}images/get-involved/card-board.jpg`,
+    imageAlt: "The Wilshire Park sign in golden morning light",
     description: "Join this volunteer group dedicated to keeping Wilshire Park vibrant and welcoming for all.",
     commitment: "Monthly meetups",
     link: "https://www.friendsofwilshirepark.org/"
@@ -46,8 +46,9 @@ const opportunities = [
   {
     title: "Board Membership",
     icon: "🏛️",
-    image: `${base}images/get-involved/card-board.jpg`,
-    imageAlt: "The Wilshire Park sign in golden morning light",
+    // TODO (JF round two): swap in a photo of the board at a meeting when Jane finds one.
+    image: `${base}images/get-involved/card-wilshire-park.jpg`,
+    imageAlt: "A neighbor and her dog at the Wilshire Park dog fountain",
     description: "Help guide the direction of BWNA by joining the board of directors. Elections are held annually.",
     commitment: "2-year term, monthly meetings, lead projects",
     contact: "president@bwnapdx.org"
@@ -67,7 +68,7 @@ const opportunities = [
 
   <section class="page-section">
     <div class="container content-width">
-      <p class="lead">
+      <p>
         While the Beaumont-Wilshire Neighborhood Association is officially guided by a volunteer
         board of directors, the strength of our association lies in the many residents who step
         up to provide valuable input, lend their time, and support community-led activities and
@@ -138,10 +139,6 @@ const opportunities = [
 </BaseLayout>
 
 <style>
-  .lead {
-    font-size: 1.125rem;
-  }
-
   /* Photo bleeds to the card edges above the title */
   .opp-card {
     padding-top: 0;
