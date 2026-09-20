@@ -16,16 +16,16 @@ const [user, domain] = email.split('@');
 const b64 = (s: string) => Buffer.from(s).toString('base64');
 ---
 
+{/* No whitespace anywhere around the <a> — not inside it, and not between it and
+    the <script> below. Astro emits that whitespace as a text node after the
+    component, so every caller that ended a sentence with this link rendered a
+    gap before the period (JF, round two). */}
 <a
   class:list={['obf-email', className]}
   data-u={b64(user)}
   data-d={b64(domain)}
   data-l={label ? b64(label) : undefined}
->
-  <span class="obf-email__text">{label ?? 'Email'}</span><noscript> ({user} at {domain.replace(/\./g, ' dot ')})</noscript>
-</a>
-
-<script>
+><span class="obf-email__text">{label ?? 'Email'}</span><noscript> ({user} at {domain.replace(/\./g, ' dot ')})</noscript></a><script>
   document.querySelectorAll<HTMLAnchorElement>('a.obf-email').forEach((el) => {
     const data = el.dataset;
     const user = data.u ? atob(data.u) : '';
