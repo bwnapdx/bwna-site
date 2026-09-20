@@ -345,6 +345,18 @@ a:hover {
   margin-bottom: var(--spacing-md);
 }
 
+/* `display: flex` above outranks the user-agent rule for [hidden], so the
+   homepage's spare events need this to actually stay out of the layout. */
+.event-item[hidden] {
+  display: none;
+}
+
+.event-empty {
+  color: var(--color-text-light);
+  text-align: center;
+  margin: 0;
+}
+
 .event-date {
   flex-shrink: 0;
   text-align: center;

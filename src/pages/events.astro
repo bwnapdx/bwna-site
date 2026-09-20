@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+import StaleEventFilter from '../components/StaleEventFilter.astro';
 import { expandEvents, toLocalDate, type ExpandedEvent } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
@@ -9,10 +10,19 @@ const base = import.meta.env.BASE_URL;
 const allEvents = await getCollection('events');
 const expanded = expandEvents(allEvents);
 
-// Hero: the single next upcoming featured event (expanded is date-sorted, so the
-// first match is the soonest). It's shown once as a hero card and excluded from
-// the month list below so it never appears twice.
-const nextFeatured = expanded.find(e => e.entry.data.featured && !e.entry.data.recurring) ?? null;
+// Hero: the next upcoming featured event (expanded is date-sorted, so the first
+// match is the soonest). It's shown once as a hero card and excluded from the
+// month list below so it never appears twice.
+//
+// The runners-up are rendered as hidden spares so StaleEventFilter can promote
+// one once the leader's date passes. Only the leader is pulled from the month
+// list — a spare stays in the list until it's actually promoted, at which point
+// the filter hides the list copy via its data-hero-dup key. That way the page
+// looks the same with JS off as it always has.
+const featuredCandidates = expanded
+  .filter(e => e.entry.data.featured && !e.entry.data.recurring)
+  .slice(0, 4);
+const nextFeatured = featuredCandidates[0] ?? null;
 const listEvents = nextFeatured
   ? expanded.filter(e => e.entry.id !== nextFeatured.entry.id)
   : expanded;
@@ -112,34 +122,49 @@ const calendarEvents = expanded.map(e => ({
       <div class="events-layout">
 
         <!-- Event list (left/main) -->
-        <div class="events-list">
+        <div class="events-list" data-events-list>
 
-          {nextFeatured && (
-            <div class="featured-section">
+          {featuredCandidates.map((feat, i) => (
+            <div
+              class="featured-section"
+              data-event-hero
+              hidden={i > 0}
+              data-start={ymd(feat.date)}
+              data-end={feat.entry.data.endDate ? ymd(toLocalDate(feat.entry.data.endDate)) : undefined}
+              data-hero-dup={i > 0 ? `${feat.entry.id}::${ymd(feat.date)}` : undefined}
+            >
               <span class="featured-label">Next featured event</span>
-              <a href={`${base}events/${nextFeatured.entry.id.replace(/\.md$/, '')}`} class="featured-event">
-                {nextFeatured.entry.data.image && (
-                  <img src={nextFeatured.entry.data.image.startsWith('/') ? `${base}${nextFeatured.entry.data.image.slice(1)}` : nextFeatured.entry.data.image} alt={nextFeatured.entry.data.imageAlt || nextFeatured.entry.data.title} class="featured-event-img" />
+              <a href={`${base}events/${feat.entry.id.replace(/\.md$/, '')}`} class="featured-event">
+                {feat.entry.data.image && (
+                  <img src={feat.entry.data.image.startsWith('/') ? `${base}${feat.entry.data.image.slice(1)}` : feat.entry.data.image} alt={feat.entry.data.imageAlt || feat.entry.data.title} class="featured-event-img" />
                 )}
                 <div class="featured-event-content">
-                  <span class="event-type" style={`background: ${typeColors[nextFeatured.entry.data.type] || '#666'};`}>{nextFeatured.entry.data.type}</span>
-                  <h2>{nextFeatured.entry.data.title}</h2>
+                  <span class="event-type" style={`background: ${typeColors[feat.entry.data.type] || '#666'};`}>{feat.entry.data.type}</span>
+                  <h2>{feat.entry.data.title}</h2>
                   <div class="event-meta">
-                    {formatDate(nextFeatured.date, nextFeatured.entry.data.endDate ? toLocalDate(nextFeatured.entry.data.endDate) : undefined)} &middot; {nextFeatured.entry.data.time}
+                    {formatDate(feat.date, feat.entry.data.endDate ? toLocalDate(feat.entry.data.endDate) : undefined)} &middot; {feat.entry.data.time}
                   </div>
-                  <div class="event-meta">{nextFeatured.entry.data.location}</div>
-                  {nextFeatured.entry.data.summary && <p>{nextFeatured.entry.data.summary}</p>}
+                  <div class="event-meta">{feat.entry.data.location}</div>
+                  {feat.entry.data.summary && <p>{feat.entry.data.summary}</p>}
                   <span class="btn btn-secondary">View Details &rarr;</span>
                 </div>
               </a>
             </div>
-          )}
+          ))}
           {monthGroups.map(({ key, label, events: monthEvents }) => (
-            <div class="month-group">
+            <div class="month-group" data-event-group>
               <h2 class="month-heading">{label}</h2>
 
               {monthEvents.map((ev) => (
-                <div class="event-item event-item--bordered">
+                <div
+                  class="event-item event-item--bordered"
+                  data-event
+                  data-event-key={`${ev.entry.id}::${ymd(ev.date)}`}
+                  data-start={ymd(ev.date)}
+                  data-end={!ev.entry.data.recurring && ev.entry.data.endDate
+                    ? ymd(toLocalDate(ev.entry.data.endDate))
+                    : undefined}
+                >
                   <div class="event-date">
                     <div class="month">{monthsShort[ev.date.getMonth()]}</div>
                     <div class="day">{ev.date.getDate()}</div>
@@ -194,9 +219,11 @@ const calendarEvents = expanded.map(e => ({
             </div>
           ))}
 
-          {expanded.length === 0 && (
-            <p class="text-muted">No upcoming events scheduled. Check back soon!</p>
-          )}
+          <p class="text-muted" data-events-empty hidden={expanded.length > 0}>
+            No upcoming events scheduled. Check back soon!
+          </p>
+
+          <StaleEventFilter />
         </div>
 
         <!-- Calendar sidebar (right on desktop, top on mobile) -->
@@ -653,6 +680,16 @@ const calendarEvents = expanded.map(e => ({
   let currentMonth = today.getMonth();
   let selectedDay = null;
 
+  // calMinYear/calMinMonth is the month the site was *built* in. Once the build
+  // ages past it, defer to the visitor's clock so the back arrow can't page into
+  // months that are already over.
+  let minYear = calMinYear;
+  let minMonth = calMinMonth;
+  if (currentYear > minYear || (currentYear === minYear && currentMonth > minMonth)) {
+    minYear = currentYear;
+    minMonth = currentMonth;
+  }
+
   const daysEl = document.getElementById('cal-days');
   const labelEl = document.getElementById('cal-label');
   const detailEl = document.getElementById('cal-detail');
@@ -660,7 +697,7 @@ const calendarEvents = expanded.map(e => ({
   const nextBtn = document.getElementById('cal-next');
 
   function canGoPrev() {
-    return currentYear > calMinYear || (currentYear === calMinYear && currentMonth > calMinMonth);
+    return currentYear > minYear || (currentYear === minYear && currentMonth > minMonth);
   }
 
   function canGoNext() {

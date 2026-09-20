@@ -4,19 +4,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 import PageHero from '../components/PageHero.astro';
 import SignupBand from '../components/SignupBand.astro';
-import { expandEvents } from '../data/expandEvents';
+import { expandEvents, toLocalDate } from '../data/expandEvents';
+import StaleEventFilter from '../components/StaleEventFilter.astro';
 
 const base = import.meta.env.BASE_URL;
 
 // Upcoming events at the plaza, pulled from our own calendar. Empty for most of
 // the year — the section only renders when something is actually scheduled.
+// We render spares past the four on show so StaleEventFilter can retire the
+// ones that pass between deploys and promote the next in line.
+const VISIBLE_EVENTS = 4;
 const plazaEvents = expandEvents(await getCollection('events'))
   .filter(e => /beaumont crossing/i.test(e.entry.data.location))
-  .slice(0, 4);
+  .slice(0, 10);
 
 function formatDate(date: Date) {
   return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 }
+
+/** Local calendar day as YYYY-MM-DD — toISOString() would shift it west of Greenwich. */
+const ymd = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 ---
 
 <BaseLayout
@@ -46,7 +54,7 @@ function formatDate(date: Date) {
   </section>
 
   <section class="page-section">
-    <div class="container content-width">
+    <div class="container content-width" data-events-list>
       <h2>Find Scheduled Events</h2>
       <p>
         Check our <a href={`${base}events`}>Upcoming Events</a> page or the
@@ -58,9 +66,16 @@ function formatDate(date: Date) {
       </p>
 
       {plazaEvents.length > 0 && (
-        <ul class="plaza-events">
-          {plazaEvents.map((ev) => (
-            <li>
+        <ul class="plaza-events" data-event-group>
+          {plazaEvents.map((ev, i) => (
+            <li
+              data-event
+              hidden={i >= VISIBLE_EVENTS}
+              data-start={ymd(ev.date)}
+              data-end={!ev.entry.data.recurring && ev.entry.data.endDate
+                ? ymd(toLocalDate(ev.entry.data.endDate))
+                : undefined}
+            >
               {(ev.entry.body || '').trim().length > 10 ? (
                 <a href={`${base}events/${ev.entry.id.replace(/\.md$/, '')}`}>{ev.entry.data.title}</a>
               ) : (
@@ -71,6 +86,7 @@ function formatDate(date: Date) {
           ))}
         </ul>
       )}
+      <StaleEventFilter limit={VISIBLE_EVENTS} />
     </div>
   </section>
 
@@ -171,6 +187,10 @@ function formatDate(date: Date) {
     gap: 0.25rem 0.75rem;
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid var(--color-border);
+  }
+
+  .plaza-events li[hidden] {
+    display: none;
   }
 
   .plaza-events .detail {

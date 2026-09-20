@@ -3,7 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import SignupBand from '../components/SignupBand.astro';
-import { expandEvents } from '../data/expandEvents';
+import StaleEventFilter from '../components/StaleEventFilter.astro';
+import { expandEvents, toLocalDate } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
 
@@ -20,9 +21,20 @@ const heroSlides = [
 ];
 
 const allEvents = await getCollection('events');
-const upcomingEvents = expandEvents(allEvents).slice(0, 3);
+
+// The page is static, so "upcoming" is frozen at build time. We render a buffer
+// of spares past the three on show; StaleEventFilter drops whatever has passed
+// by the time someone actually loads the page and slides the spares up to fill
+// in. That keeps the list honest between deploys without a scheduled rebuild.
+const VISIBLE_EVENTS = 3;
+const EVENT_BUFFER = 12;
+const upcomingEvents = expandEvents(allEvents).slice(0, EVENT_BUFFER);
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/** Local calendar day as YYYY-MM-DD — toISOString() would shift it west of Greenwich. */
+const ymd = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 ---
 
 <BaseLayout searchable={false} title="Home">
@@ -52,9 +64,17 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
         <p>Join your neighbors at an upcoming event</p>
       </div>
 
-      <div class="content-width centered">
-        {upcomingEvents.map((ev) => (
-          <div class="event-item">
+      <div class="content-width centered" data-events-list>
+        {upcomingEvents.map((ev, i) => (
+          <div
+            class="event-item"
+            data-event
+            hidden={i >= VISIBLE_EVENTS}
+            data-start={ymd(ev.date)}
+            data-end={!ev.entry.data.recurring && ev.entry.data.endDate
+              ? ymd(toLocalDate(ev.entry.data.endDate))
+              : undefined}
+          >
             <div class="event-date">
               <div class="month">{months[ev.date.getMonth()]}</div>
               <div class="day">{ev.date.getDate()}</div>
@@ -74,7 +94,13 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
             </div>
           </div>
         ))}
+        <p class="event-empty" data-events-empty hidden>
+          Nothing on the calendar right now &mdash; see the events page for the latest schedule.
+        </p>
       </div>
+
+      <StaleEventFilter limit={VISIBLE_EVENTS} />
+
 
       <div class="section-footer">
         <a href={`${base}events`} class="btn btn-secondary">View All Events</a>

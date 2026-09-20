@@ -1,0 +1,84 @@
+---
+/**
+ * Pages are statically built, so "upcoming" is frozen at whatever the build
+ * machine's clock said. This re-checks it in the visitor's browser and hides
+ * whatever has passed since, which keeps event listings honest between deploys
+ * without a scheduled rebuild.
+ *
+ * It only ever *hides* markup that's already on the page, so with JS off a
+ * visitor still sees exactly what the build produced.
+ *
+ * Markup contract, all within `scope`:
+ *   [data-event]        a row, carrying data-start="YYYY-MM-DD" and optionally
+ *                       data-end for multi-day events. Hidden once past.
+ *   [data-event-group]  a heading + its rows; hidden when all its rows are.
+ *   [data-events-empty] fallback copy, revealed when nothing is left.
+ *   [data-event-hero]   featured candidates; the first one still upcoming is
+ *                       shown, the rest stay hidden. Its data-hero-dup points
+ *                       at the [data-event-key] row it duplicates in the list.
+ */
+interface Props {
+  /** Selector for the container to work within. */
+  scope?: string;
+  /** Cap on visible rows; 0 keeps every upcoming one. */
+  limit?: number;
+}
+
+const { scope = '[data-events-list]', limit = 0 } = Astro.props;
+---
+
+<script define:vars={{ scope, limit }}>
+  (function () {
+    var root = document.querySelector(scope);
+    if (!root) return;
+
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    // "2026-09-25" through the Date constructor is parsed as UTC, which lands on
+    // the previous day in Portland — build the date from its parts instead.
+    function parseDay(value) {
+      var parts = value.split('-');
+      return new Date(+parts[0], +parts[1] - 1, +parts[2]);
+    }
+
+    // A multi-day event stays listed until its last day is over.
+    function isPast(el) {
+      return parseDay(el.dataset.end || el.dataset.start) < today;
+    }
+
+    var duplicateOfHero = null;
+    var heroes = root.querySelectorAll('[data-event-hero]');
+    var heroTaken = false;
+    for (var h = 0; h < heroes.length; h++) {
+      var hero = heroes[h];
+      var takeHero = !heroTaken && !isPast(hero);
+      hero.hidden = !takeHero;
+      if (takeHero) {
+        heroTaken = true;
+        duplicateOfHero = hero.dataset.heroDup || null;
+      }
+    }
+
+    var items = root.querySelectorAll('[data-event]');
+    var shown = 0;
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      var keep =
+        !isPast(item) &&
+        item.dataset.eventKey !== duplicateOfHero &&
+        (!limit || shown < limit);
+      item.hidden = !keep;
+      if (keep) shown++;
+    }
+
+    // A month heading with nothing left under it shouldn't linger.
+    var groups = root.querySelectorAll('[data-event-group]');
+    for (var g = 0; g < groups.length; g++) {
+      groups[g].hidden = !groups[g].querySelector('[data-event]:not([hidden])');
+    }
+
+    var empty = root.querySelector('[data-events-empty]');
+    if (empty) empty.hidden = shown > 0;
+  })();
+</script>
