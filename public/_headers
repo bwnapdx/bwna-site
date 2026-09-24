@@ -3,6 +3,6 @@
 #
 # The admin build serves the whole public site from '/', not just /keystatic.
 # Without this, the Cloudflare URL would be a second indexable copy of every
-# article competing with the canonical site at bwnapdx.github.io.
+# article competing with the canonical site at www.bwnapdx.org.
 /*
   X-Robots-Tag: noindex, nofollow
