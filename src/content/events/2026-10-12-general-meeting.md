@@ -12,7 +12,7 @@ summary: "October general meeting featuring Jona Davis, Executive Director of th
 
 The meeting will open with a statement from BWNA President **Al Ellis** to honor Indigenous Peoples' Day, which falls on October 12.
 
-This month's featured speaker is **Jona Davis**, Executive Director of the nonprofit **Northeast Coalition of Neighborhoods**. NECN is the District 2 Coalition for North and Northeast Portland, which includes Beaumont-Wilshire and 27 other neighborhood associations. One of four city-established coalitions in Portland, its stated mission is to connect residents, neighborhood associations, businesses, and local policymakers to address community priorities. As a 501(c)(3), NECN also serves as BWNA's fiscal sponsor, which allows donations to BWNA to be tax deductible in many cases. NECN has also awarded some funds for BWNA communications and facilitates grants for some neighborhood community projects.
+This month's featured speaker is **Jona Davis**, Executive Director of the nonprofit **Northeast Coalition of Neighborhoods**. NECN is the District 2 Coalition for North and Northeast Portland, which includes 29 neighborhood associations, Beaumont-Wilshire among them. One of four city-established coalitions in Portland, its stated mission is to connect residents, neighborhood associations, businesses, and local policymakers to address community priorities. As a 501(c)(3), NECN also serves as BWNA's fiscal sponsor, which allows donations to BWNA to be tax deductible in many cases. NECN has also awarded some funds for BWNA communications and facilitates grants for some neighborhood community projects.
 
 Jona will lay out the coalition's plans for the associations it serves and take questions afterward.
 
