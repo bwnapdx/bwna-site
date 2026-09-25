@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 import StaleEventFilter from '../components/StaleEventFilter.astro';
-import { expandEvents, toLocalDate, type ExpandedEvent } from '../data/expandEvents';
+import { expandEvents, formatLocation, toLocalDate, type ExpandedEvent } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
 
@@ -99,7 +99,7 @@ const calendarEvents = expanded.map(e => ({
   date: ymd(e.date),
   endDate: e.entry.data.endDate ? ymd(toLocalDate(e.entry.data.endDate)) : undefined,
   time: e.entry.data.time,
-  location: e.entry.data.location,
+  location: formatLocation(e.entry.data),
   type: e.entry.data.type,
   scope: e.entry.data.scope,
   summary: e.entry.data.summary || '',
@@ -144,7 +144,7 @@ const calendarEvents = expanded.map(e => ({
                   <div class="event-meta">
                     {formatDate(feat.date, feat.entry.data.endDate ? toLocalDate(feat.entry.data.endDate) : undefined)} &middot; {feat.entry.data.time}
                   </div>
-                  <div class="event-meta">{feat.entry.data.location}</div>
+                  <div class="event-meta">{formatLocation(feat.entry.data)}</div>
                   {feat.entry.data.summary && <p>{feat.entry.data.summary}</p>}
                   <span class="btn btn-secondary">View Details &rarr;</span>
                 </div>
@@ -188,7 +188,7 @@ const calendarEvents = expanded.map(e => ({
                       </div>
                     </div>
                     <div class="event-meta">
-                      {ev.entry.data.time} &nbsp;|&nbsp; {ev.entry.data.location}
+                      {ev.entry.data.time} &nbsp;|&nbsp; {formatLocation(ev.entry.data)}
                     </div>
                     {ev.entry.data.summary && <p>{ev.entry.data.summary}</p>}
                     <div class="event-links">

@@ -18,6 +18,17 @@ export function toLocalDate(d: Date): Date {
   return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
 }
 
+/**
+ * Venue plus street address for display, e.g. "Sylvan Learning, 4300 NE Fremont St, Suite 150".
+ * The trailing "Portland, OR" is dropped since every event is local, and the address is
+ * skipped when the location already names a street ("Top of the stairwell at NE 42nd & Alameda").
+ */
+export function formatLocation(data: { location: string; address?: string }): string {
+  const street = data.address?.replace(/,?\s*Portland,?\s*OR\b.*$/i, '').trim();
+  if (!street || /\b(NE|N|SE)\s+\w|\b(Street|St|Ave|Avenue|Blvd)\b/.test(data.location)) return data.location;
+  return `${data.location}, ${street}`;
+}
+
 function startOfToday(): Date {
   const now = new Date();
   return new Date(now.getFullYear(), now.getMonth(), now.getDate());

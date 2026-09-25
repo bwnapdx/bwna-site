@@ -2,7 +2,7 @@
 title: "BWNA General Meeting"
 date: 2026-10-12
 time: "7:00 PM - 8:30 PM"
-location: "Sylvan Learning Center"
+location: "Sylvan Learning"
 address: "4300 NE Fremont St, Suite 150, Portland, OR"
 type: "meeting"
 scope: "bwna"

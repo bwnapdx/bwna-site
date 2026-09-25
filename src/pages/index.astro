@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import SignupBand from '../components/SignupBand.astro';
 import StaleEventFilter from '../components/StaleEventFilter.astro';
-import { expandEvents, toLocalDate } from '../data/expandEvents';
+import { expandEvents, formatLocation, toLocalDate } from '../data/expandEvents';
 
 const base = import.meta.env.BASE_URL;
 
@@ -88,7 +88,7 @@ const ymd = (d: Date) =>
                 )}
               </h3>
               <div class="event-meta">
-                {ev.entry.data.time} • {ev.entry.data.location}
+                {ev.entry.data.time} • {formatLocation(ev.entry.data)}
               </div>
               <p>{ev.entry.data.summary || ''}</p>
             </div>

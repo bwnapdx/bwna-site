@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { toLocalDate } from '../../data/expandEvents';
+import { formatLocation, toLocalDate } from '../../data/expandEvents';
 
 export async function getStaticPaths() {
   const events = await getCollection('events');
@@ -58,7 +58,7 @@ function formatDate(date: Date, endDate?: Date) {
           <strong>Time:</strong> {event.data.time}
         </div>
         <div class="event-info-row">
-          <strong>Location:</strong> {event.data.location}
+          <strong>Location:</strong> {formatLocation(event.data)}
           {event.data.address && (
             <a href={`https://maps.google.com/?q=${encodeURIComponent(event.data.address)}`}
                target="_blank" rel="noopener" class="text-sm"> (View Map)</a>
