@@ -60,6 +60,7 @@ const events = defineCollection({
     imageAlt: z.string().optional(),
     summary: z.string().optional(),
     ticketUrl: z.string().optional(),        // external ticketing/RSVP page (e.g. Eventbrite)
+    ticketLabel: z.string().optional(),      // button text for ticketUrl; defaults to "Buy Tickets" (use e.g. "Reserve a Seat" for free events)
   }),
 });
 
