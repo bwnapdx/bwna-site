@@ -36,69 +36,83 @@ const base = import.meta.env.BASE_URL;
   <section class="page-section">
     <div class="container content-width">
       <h2>Getting to Know Your BWNA Transportation Volunteer</h2>
+      <p class="byline">By Graeme Rudd, BWNA Transportation Committee Chair</p>
       <p>
-        Hi neighbors, my name is Graeme Rudd. I recently volunteered to support the BWNA in a
-        transportation role, and I wanted to introduce myself and share a bit about what I've
-        been working on.
+        Hi neighbors, I'm Graeme Rudd. I recently volunteered to support BWNA as its
+        Transportation Committee chair, and I'd like to introduce myself and share what I've been
+        working on.
       </p>
 
-      <h3>A little about me</h3>
+      <h3>A Little About Me</h3>
       <p>
-        I spent about 14 years working for the federal government in a variety of roles, mostly
-        in the military. I served as a Green Beret, and part of that work included time with a
-        technology lab and as an intelligence analyst, where I spent a lot of time working with
-        geographic information systems (GIS). That background shapes how I'm approaching this
-        role: I like to start by getting a clear picture of what's actually happening on the
-        ground.
+        I spent about 14 years in federal service, mostly in the military. I served as a Green
+        Beret, including time with a technology lab and as an intelligence analyst working with
+        geographic information systems (GIS). That background shapes my approach: I like to
+        start with a clear picture of what's happening on the ground.
       </p>
 
-      <h3>Why I'm doing this</h3>
+      <h3>Why I'm Doing This</h3>
       <p>
-        We often hear that there's no money right now for many of the transportation
-        improvements our neighborhood needs. At the same time, I've become aware that there may
-        be funding allocations or programs out there. So my first goal has been simple: get a
-        better understanding of our neighborhood's transportation picture, and find out what
-        resources might be available.
+        We often hear there's no money for the transportation improvements our neighborhood
+        needs. But there may be funding allocations or programs out there to help meet those
+        needs. So, my first goal is simple: to understand our neighborhood's transportation
+        picture and find out what resources might be available.
       </p>
 
-      <h3>What I've been working on</h3>
+      <h3>What I've Been Working On</h3>
       <p>
-        So far I've had two helpful conversations with PBOT (the Portland Bureau of
-        Transportation). I learned a lot, and they pointed me to data that has helped me
-        understand what's going on in our area and where I need to dig deeper.
+        I've had two helpful conversations with representatives from the Portland Bureau of
+        Transportation (PBOT), who pointed me to data that clarified our neighborhood's
+        transportation realities and where to dig deeper. I've started putting that data onto an
+        <a href={`${base}transportation-map`}>interactive map</a> showing:
       </p>
-      <p>I've also started putting that data onto an interactive map. It shows things like:</p>
       <ul class="spaced-list">
-        <li>Where our greenways are</li>
-        <li>Roads on the High Crash Network (Fremont, for example, is one)</li>
-        <li>Safe Routes to School</li>
-        <li>The intersections that crash data shows are most dangerous</li>
+        <li>
+          B-W neighborhood greenways (streets that prioritize people walking, bicycling, and
+          rolling).
+        </li>
+        <li>
+          Roads on the city's High Crash Network (HCN), which includes NE Fremont Street. Visit
+          <a href="https://www.portland.gov/transportation/vision-zero/high-crash-network-streets-and-intersections">this PBOT page</a>
+          for more info about Portland's HCN.
+        </li>
+        <li>Safe Routes to School (safe, accessible routes for students).</li>
+        <li>Intersections that crash data shows are most dangerous.</li>
       </ul>
       <p>
-        My hope is to build this out into something neighbors can explore, so we all have a
-        shared understanding of what we're looking at.
+        My hope is to build this into something neighbors can explore so we share an
+        understanding of our current baseline and where improvements are needed.
       </p>
 
-      <h3>Where this could lead</h3>
+      <h3>Where This Could Lead</h3>
       <p>
-        Once we have a clearer picture, I'd like to see whether any of our needs line up with
-        existing programs that could help fund improvements, such as Safe Routes to School. At
-        the very least, this work should help us show PBOT and our elected representatives where
-        our neighborhood needs the most help.
+        With a clearer picture, I'd like to see whether our needs line up with existing
+        programs, such as Safe Routes to School, that could help fund improvements. At a minimum,
+        this work should help us show PBOT and our elected representatives where our
+        neighborhood needs the most help.
       </p>
 
-      <h3>How you can be part of it</h3>
+      <h3>How You Can Be Part of It</h3>
       <p>
-        Data only tells part of the story. I'm also working with other members of the committee
-        on ways to gather community input and feedback, so we can present a more complete
-        picture of our neighborhood. The goal is for us to advocate for what the community needs
-        most with data and insights to support our communications.
+        Data only tells part of the story. I'm working with other committee members on ways to
+        gather community input so we can advocate for what the neighborhood needs most, backed by
+        data and your insights.
       </p>
       <p>
-        I'll share more as the map comes together. In the meantime, if you have thoughts about
-        transportation in the neighborhood, I'd love to hear them.
+        I'll share more as the map comes together. Meanwhile, if you have thoughts about
+        transportation in the neighborhood, I'd love to hear them. Email me at
+        <ObfuscatedEmail email="pdx.stmptwn@gmail.com" />.
       </p>
-      <p>Best,<br />Graeme</p>
+
+      <p class="bio">
+        Graeme Rudd spent about 14 years in the military with multiple deployments overseas.
+        During his service he was assigned to a military lab that assessed new and emerging
+        technology, which is how he entered the Cybersecurity and Deep Tech space. He later
+        attended Lewis &amp; Clark Law School and earned his JD (Juris Doctor) degree, then
+        co-founded two businesses focused on new and emerging technologies. After over a decade
+        as a geographic nomad, he looks forward to raising his family in the Beaumont-Wilshire
+        neighborhood.
+      </p>
     </div>
   </section>
   <section class="page-section">
@@ -132,5 +146,17 @@ const base = import.meta.env.BASE_URL;
 
   .map-callout h2 {
     margin-top: 0;
+  }
+
+  .byline {
+    font-style: italic;
+    color: var(--color-text-light);
+  }
+
+  .bio {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+    font-style: italic;
   }
 </style>
