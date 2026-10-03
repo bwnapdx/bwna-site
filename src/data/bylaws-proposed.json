@@ -1,0 +1,1610 @@
+{
+ "source": "Proposed revisions, September 2026",
+ "articles": [
+  {
+   "number": 1,
+   "title": "Name and Purpose",
+   "currentTitle": "Name and Purpose",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1: Name"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The name of the association shall be the Beaumont-Wilshire Neighborhood Association (hereinafter BWNA). BWNA is organized under Oregon Revised Statutes Chapter 65 and recognizes the standards established by the City of Portland for Neighborhood Associations."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 2: Purpose"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Subject to the limitations stated in the Articles of Incorporation, the purpose of this BWNA corporation shall be to engage in any lawful activities, none of which are for profit, for which corporations may be organized under Chapter 65 of the Oregon Revised Statutes (or its corresponding future provisions)."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "This"
+     },
+     {
+      "op": "eq",
+      "text": "corporation’s",
+      "current": "corporation's"
+     },
+     {
+      "op": "eq",
+      "text": "primary purpose shall be:"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "A. To enhance the livability of the Beaumont-Wilshire neighborhood by undertaking various neighborhood improvement projects, examining local issues, and serving as a conduit for communication among neighbors, government agencies and officials, area businesses, and other neighborhood institutions and groups."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "B. To provide, encourage, and facilitate open processes whereby all"
+     },
+     {
+      "op": "del",
+      "text": "members"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents (see Article 3, Section 1)"
+     },
+     {
+      "op": "eq",
+      "text": "of BWNA may involve themselves in, and be heard on, the issues, affairs, and concerns of the neighborhood."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "C. To perform all activities related to the purposes enumerated above. To have and enjoy all the powers granted, vested, or allowed BWNA by law."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "D. To organize exclusively for educational, scientific, environmental, and charitable purposes as prescribed by law."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "E. To be inclusive of all. Committed to diversity and equity in all our activities, BWNA may not discriminate against individuals or groups on the basis of race, ethnicity, religion, color, sex, sexual orientation, gender identity, age, disability, legal citizenship, national origin, income, political affiliation in any of its policies, recommendations, or actions."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "F. To work in collaboration with the Beaumont Business Association and the other nearby Neighborhood Associations allied through"
+     },
+     {
+      "op": "del",
+      "text": "BWNA's District Coalition (hereinafter DC)."
+     },
+     {
+      "op": "ins",
+      "text": "the Northeast Coalition of Neighborhoods (hereinafter NECN)."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 2,
+   "title": "Boundaries",
+   "currentTitle": "Boundaries",
+   "changed": false,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "The boundaries are defined as follows: starting at NE 47th and Prescott; south to Wistaria Drive; west to Stanton; west to 37th; north to Morris; west to 33rd; north to Alberta Court; east to 42nd; south to Prescott; east to 47th."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 3,
+   "title": "Participation and Voting",
+   "currentTitle": "Membership and Voting",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1: Membership"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "A. Eligibility: All residents 18 years of age or older within the boundaries of BWNA are eligible to"
+     },
+     {
+      "op": "del",
+      "text": "become members."
+     },
+     {
+      "op": "ins",
+      "text": "participate in and vote at BWNA meetings in accordance with Section 2 below."
+     },
+     {
+      "op": "eq",
+      "text": "Representatives of non-resident property owners, government agencies, businesses, and nonprofit organizations located within the boundaries of BWNA"
+     },
+     {
+      "op": "del",
+      "text": "are eligible to become members"
+     },
+     {
+      "op": "ins",
+      "text": "(hereinafter referred to as “eligible non-residents”) are likewise eligible to participate in and to vote"
+     },
+     {
+      "op": "eq",
+      "text": "at the rate of one representative per entity."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "B. There are no dues or initiation fees."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 2: Voting"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "A. All votes are contingent on having a quorum of BWNA Board members present, as outlined in Article 6, Section 6."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "B. As enumerated in Article 6 below,"
+     },
+     {
+      "op": "del",
+      "text": "regular monthly meetings of BWNA alternate between Board Meetings and General Meetings."
+     },
+     {
+      "op": "ins",
+      "text": "there are different types of BWNA meetings."
+     },
+     {
+      "op": "eq",
+      "text": "Though all meetings are open to all residents, voting protocols are different for the"
+     },
+     {
+      "op": "del",
+      "text": "two"
+     },
+     {
+      "op": "ins",
+      "text": "varied"
+     },
+     {
+      "op": "eq",
+      "text": "types of meeting."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "C. At Board Meetings, only BWNA Board members may vote. Decisions shall be determined by a majority vote of all board members present. No absentee or proxy voting will be"
+     },
+     {
+      "op": "del",
+      "text": "allowed."
+     },
+     {
+      "op": "ins",
+      "text": "allowed, though real-time online participants may vote (see F below)."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "D. At General Meetings, all"
+     },
+     {
+      "op": "del",
+      "text": "members in attendance"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "may vote on"
+     },
+     {
+      "op": "del",
+      "text": "any matter, but depending on the issue, those votes may be determinative or advisory. For three specific issues--the"
+     },
+     {
+      "op": "ins",
+      "text": "only three specific issues as stipulated by Portland city rules—the"
+     },
+     {
+      "op": "eq",
+      "text": "election of BWNA Board members, the approval of BWNA bylaw changes, or the dissolution or merger of the"
+     },
+     {
+      "op": "del",
+      "text": "organization--all"
+     },
+     {
+      "op": "ins",
+      "text": "organization. All other votes are taken only by BWNA Board members only. All"
+     },
+     {
+      "op": "eq",
+      "text": "decisions shall be determined by a majority vote of"
+     },
+     {
+      "op": "del",
+      "text": "all B-W residents 18 or older who are present at the meeting."
+     },
+     {
+      "op": "ins",
+      "text": "eligible voters."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "E. At General Meetings, any decision on any issue besides the three enumerated above can occasion a vote of all B-W residents"
+     },
+     {
+      "op": "ins",
+      "text": "and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "on an advisory basis, but after that"
+     },
+     {
+      "op": "del",
+      "text": "input"
+     },
+     {
+      "op": "ins",
+      "text": "input,"
+     },
+     {
+      "op": "eq",
+      "text": "the BWNA Board will take a final vote and the decision will be determined by a majority of board members present. No absentee or proxy voting will be allowed."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "F. In the event of any circumstance"
+     },
+     {
+      "op": "ins",
+      "text": "(such as a pandemic or wildfire smoke),"
+     },
+     {
+      "op": "eq",
+      "text": "requiring a BWNA meeting to be held"
+     },
+     {
+      "op": "del",
+      "text": "online (such as a pandemic or wildfire smoke),"
+     },
+     {
+      "op": "ins",
+      "text": "online, or if any voting-eligible individual is attending an in-person meeting online,"
+     },
+     {
+      "op": "eq",
+      "text": "the above voting protocols still apply."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "G. Voting at"
+     },
+     {
+      "op": "ins",
+      "text": "in-person"
+     },
+     {
+      "op": "eq",
+      "text": "meetings may be done orally, by a show of hands, or by a written ballot that contains the name of the"
+     },
+     {
+      "op": "del",
+      "text": "member"
+     },
+     {
+      "op": "ins",
+      "text": "person"
+     },
+     {
+      "op": "eq",
+      "text": "voting and the vote of that"
+     },
+     {
+      "op": "del",
+      "text": "member."
+     },
+     {
+      "op": "ins",
+      "text": "person."
+     },
+     {
+      "op": "eq",
+      "text": "For elections of officers and board members,"
+     },
+     {
+      "op": "ins",
+      "text": "in-person"
+     },
+     {
+      "op": "eq",
+      "text": "voting may be done by a secret ballot."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 4,
+   "title": "Funding",
+   "currentTitle": "Funding",
+   "changed": false,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Activities to raise funds for BWNA may be held as appropriate."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 5,
+   "title": "Board of Directors",
+   "currentTitle": "Board of Directors",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1: Composition"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Composition of the BWNA Board of Directors (hereinafter the board): The board shall be composed of a President, Vice President, Secretary, Treasurer, and the Immediate Past President (hereinafter the officers), plus up to ten members at large. Each board officer and member is in office for a term of two years. Annual elections shall be held at the annual"
+     },
+     {
+      "op": "del",
+      "text": "membership meeting"
+     },
+     {
+      "op": "ins",
+      "text": "General Meeting"
+     },
+     {
+      "op": "eq",
+      "text": "held in April."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 2: Duties of Board Members"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "A. President (elected in even years): Subject to the approval of the board, the President shall prepare and disseminate to the board at least seven days in advance the agenda for"
+     },
+     {
+      "op": "del",
+      "text": "Board, General and Special Membership Meetings."
+     },
+     {
+      "op": "ins",
+      "text": "all BWNA meetings."
+     },
+     {
+      "op": "eq",
+      "text": "The agenda needs to be approved at the beginning of each meeting. The President shall submit a copy of each meeting agenda to"
+     },
+     {
+      "op": "del",
+      "text": "the BWNA NC,"
+     },
+     {
+      "op": "ins",
+      "text": "NECN,"
+     },
+     {
+      "op": "eq",
+      "text": "post on the BWNA website, and arrange for copies of the most current BWNA Newsletter to be delivered to the"
+     },
+     {
+      "op": "del",
+      "text": "BWNA NC"
+     },
+     {
+      "op": "ins",
+      "text": "NECN"
+     },
+     {
+      "op": "eq",
+      "text": "Office. When present, the President shall preside at"
+     },
+     {
+      "op": "del",
+      "text": "Board, General, Emergency, and Special Membership Meetings."
+     },
+     {
+      "op": "ins",
+      "text": "all meetings."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "B. Vice President (elected in odd years): The Vice President shall work in partnership with the President. In the"
+     },
+     {
+      "op": "eq",
+      "text": "President’s",
+      "current": "President's"
+     },
+     {
+      "op": "eq",
+      "text": "absence the Vice President shall function as the President. If the President resigns, the Vice President will serve as the Interim President until the next scheduled election."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "C. Secretary (elected in odd years): The Secretary shall keep written minutes of all"
+     },
+     {
+      "op": "del",
+      "text": "general, board, and special membership"
+     },
+     {
+      "op": "eq",
+      "text": "meetings and submit those minutes, following approval by the board, for posting to the BWNA website with a copy to"
+     },
+     {
+      "op": "del",
+      "text": "the BWNA DC;"
+     },
+     {
+      "op": "ins",
+      "text": "NECN;"
+     },
+     {
+      "op": "eq",
+      "text": "shall keep written copies of the bylaws up to date; shall maintain the list of members; and shall make records of BWNA available for inspection for any proper purpose at any reasonable time. The Secretary shall work with the President to complete correspondence as needed. The Secretary shall track and retain the conflict-of-interest statements that all members of the board must complete annually."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "D. Treasurer (elected in even years): The Treasurer shall be held accountable for all funds and shall give an accounting at General and Board Meetings, submitting all accounting reports (including bank statements) to"
+     },
+     {
+      "op": "del",
+      "text": "the BWNA NC;"
+     },
+     {
+      "op": "ins",
+      "text": "NECN;"
+     },
+     {
+      "op": "eq",
+      "text": "shall invoice for, receive, safe keep, and disburse BWNA funds, either by paper or electronic means; and shall complete and submit required annual reports to state oversight agencies. The President, Vice President, and Treasurer shall each be authorized signers. Any combination of two signatures of the authorized signers shall constitute valid disbursement."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "E. Immediate Past President: The Immediate Past President of BWNA shall serve as an advisor and as a voting member of the board. This is not an elected position."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "F. Ten At-Large Members: Positions 1, 2, 3, ...10. Odd-numbered positions are to be elected in odd years, even-numbered positions in even years. It is the responsibility of board members to take on tasks as agreed upon."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 3: Duties of the Board"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "A. Powers of the Board: The board shall be responsible for reviewing and acting upon, as needed, all business coming before the neighborhood association and for assuring that"
+     },
+     {
+      "op": "del",
+      "text": "members"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "are informed of the business that affects them through reasonable means of notification. The board has the responsibility of acting in the best interest of the neighborhood. The board will take under advisement all discussion by"
+     },
+     {
+      "op": "del",
+      "text": "neighborhood members"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "but is not bound to act according to the desire of the majority of"
+     },
+     {
+      "op": "del",
+      "text": "members"
+     },
+     {
+      "op": "ins",
+      "text": "persons"
+     },
+     {
+      "op": "eq",
+      "text": "attending a neighborhood association meeting."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "B. Management: The board shall make decisions and represent the interests of the neighborhood association on all matters"
+     },
+     {
+      "op": "del",
+      "text": "for which"
+     },
+     {
+      "op": "eq",
+      "text": "it is impractical to present to"
+     },
+     {
+      "op": "del",
+      "text": "the membership"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "in advance. The board shall be accountable to the"
+     },
+     {
+      "op": "del",
+      "text": "membership;"
+     },
+     {
+      "op": "ins",
+      "text": "neighborhood;"
+     },
+     {
+      "op": "eq",
+      "text": "shall seek the views of those affected by any proposed policies or actions before adopting any recommendation on behalf of BWNA; and shall comply with these bylaws."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "C. Vacancies: Written resignations from the board will be accepted. At the third consecutive unexcused absence by a board member, the member will be considered as having abandoned the position and it is vacant. The board may fill any vacancy on the board or a committee by majority vote of the board at the next scheduled General"
+     },
+     {
+      "op": "del",
+      "text": "or Board"
+     },
+     {
+      "op": "eq",
+      "text": "Meeting. A member appointed to fill a vacancy shall serve the remainder of the unexpired term."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "D. Emergency Powers: In such cases where the board is required to provide neighborhood response before the question is presented to"
+     },
+     {
+      "op": "del",
+      "text": "the membership,"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents,"
+     },
+     {
+      "op": "eq",
+      "text": "the board must indicate that this is the case and shall present the action taken at the next General Meeting"
+     },
+     {
+      "op": "del",
+      "text": "or at a Special Membership Meeting"
+     },
+     {
+      "op": "eq",
+      "text": "for review by"
+     },
+     {
+      "op": "del",
+      "text": "the membership."
+     },
+     {
+      "op": "ins",
+      "text": "attendees."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "E. Conflict of Interest: To protect the integrity of the"
+     },
+     {
+      "op": "eq",
+      "text": "association’s",
+      "current": "association's"
+     },
+     {
+      "op": "eq",
+      "text": "decision-making processes, board members will disclose to the board any interest they have in a transaction or decision of the board that may result in a financial benefit or gain to them and/or their business, family members and/or significant other, employer, and/or close associates, and other nonprofit organizations with which they are affiliated. The board member will not participate in any board discussion of or vote on the transaction or decision."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 6,
+   "title": "Meetings",
+   "currentTitle": "Meetings",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1:"
+     },
+     {
+      "op": "del",
+      "text": "Membership"
+     },
+     {
+      "op": "ins",
+      "text": "General"
+     },
+     {
+      "op": "eq",
+      "text": "Meetings"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "A."
+     },
+     {
+      "op": "del",
+      "text": "Annual Meetings: The annual meeting shall be held each year at the General Meeting in April."
+     },
+     {
+      "op": "ins",
+      "text": "General Meetings will be held every month on a regularly-scheduled day and time of the month (for example, the second Monday of every month from 7 to 8:30 p.m.) Meetings in even-numbered months will include Open Floor time set aside for attendees to bring up matters not on the agenda, with speakers given an equal time limit to express themselves."
+     },
+     {
+      "op": "eq",
+      "text": "The business of"
+     },
+     {
+      "op": "del",
+      "text": "this annual"
+     },
+     {
+      "op": "ins",
+      "text": "the annual April"
+     },
+     {
+      "op": "eq",
+      "text": "meeting shall include a report from the board on the state of the association and the annual election of at-large board members and officers. Notice of"
+     },
+     {
+      "op": "del",
+      "text": "the annual meeting"
+     },
+     {
+      "op": "ins",
+      "text": "meetings must be made"
+     },
+     {
+      "op": "eq",
+      "text": "to the public"
+     },
+     {
+      "op": "del",
+      "text": "must be"
+     },
+     {
+      "op": "eq",
+      "text": "at least seven days in advance."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "B."
+     },
+     {
+      "op": "del",
+      "text": "General Meetings: General Meetings shall be held each year in the months of February, April, June, October, and December. The meetings shall be convened at a time and day decided upon by the majority vote of the board. All General Meetings shall require seven days advance notice. C. Special Membership Meetings: The board may call a Special Membership Meeting. Notice of special meetings to BWNA members and to the public must be at least seven days in advance. Section 2: Board Meetings A. Board Meetings: Board meetings shall be held each year in the months of January, March, May, July, September, and November and at any other time set either by the President or by one-half of the board. At least seven days advance notice of each meeting shall be given to each board member. B. Special Board"
+     },
+     {
+      "op": "ins",
+      "text": "Special"
+     },
+     {
+      "op": "eq",
+      "text": "Meetings: The President may call a Special"
+     },
+     {
+      "op": "del",
+      "text": "Board"
+     },
+     {
+      "op": "eq",
+      "text": "Meeting when the timeliness of a regular"
+     },
+     {
+      "op": "del",
+      "text": "meeting"
+     },
+     {
+      "op": "ins",
+      "text": "General Meeting"
+     },
+     {
+      "op": "eq",
+      "text": "is insufficient to"
+     },
+     {
+      "op": "del",
+      "text": "take action on particular issues."
+     },
+     {
+      "op": "ins",
+      "text": "deliberate and act on one particular issue."
+     },
+     {
+      "op": "eq",
+      "text": "Notice to the public and people of interest of"
+     },
+     {
+      "op": "del",
+      "text": "Special Board Meetings, including the purpose,"
+     },
+     {
+      "op": "ins",
+      "text": "such Special Meetings, including identifying the single topic on the agenda,"
+     },
+     {
+      "op": "eq",
+      "text": "must be at least seven days in"
+     },
+     {
+      "op": "del",
+      "text": "advance and must identify the topics on the agenda. The board can only discuss and make decisions at Special"
+     },
+     {
+      "op": "ins",
+      "text": "advance. Discussion and decisions can address only that one issue."
+     }
+    ],
+    [
+     {
+      "op": "ins",
+      "text": "Section 2:"
+     },
+     {
+      "op": "eq",
+      "text": "Board Meetings"
+     },
+     {
+      "op": "del",
+      "text": "on the topics on the agenda. C."
+     }
+    ],
+    [
+     {
+      "op": "ins",
+      "text": "A."
+     },
+     {
+      "op": "eq",
+      "text": "Emergency Board Meetings: The President or a majority of the board may call an emergency meeting of the board when there is insufficient time to address timely business within the notice requirements of a"
+     },
+     {
+      "op": "del",
+      "text": "regular or special meeting."
+     },
+     {
+      "op": "ins",
+      "text": "General or Special Meeting."
+     },
+     {
+      "op": "eq",
+      "text": "Notice to all board members of an Emergency Board Meeting, including the purpose, may not be less than 24 hours in advance. Direct notice to individuals known to have an interest in a particular agenda item must be provided. Meeting minutes must describe the circumstances requiring an emergency meeting."
+     },
+     {
+      "op": "del",
+      "text": "Section 3: Executive Sessions"
+     }
+    ],
+    [
+     {
+      "op": "ins",
+      "text": "B. Executive Sessions:"
+     },
+     {
+      "op": "eq",
+      "text": "Executive Sessions are when all or part of BWNA Board Meetings are closed to certain persons, but only for deliberation on matters stipulated by the"
+     },
+     {
+      "op": "eq",
+      "text": "city’s",
+      "current": "city's"
+     },
+     {
+      "op": "eq",
+      "text": "Standards for Neighborhood Associations, such as legal consultations or mediation sessions."
+     }
+    ],
+    [
+     {
+      "op": "ins",
+      "text": "C. Annual Board Retreats: Board officers may schedule an annual retreat for BWNA Board members and committee chairs. The agenda will be set by officers with input from all board members and will include team-building, goal-setting, and decision-making (i.e., discussion & voting on motions)."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 4: Agenda"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The President, Vice President or committee chair will prepare and communicate an agenda for all meetings prior to the meeting. Any person may request that an item be added to the agenda by submitting the item in writing to the person responsible for the"
+     },
+     {
+      "op": "del",
+      "text": "agenda. The person responsible for an agenda may establish a cutoff time requirement for submitting agenda items. The cutoff time requirement shall not exceed 14 days before"
+     },
+     {
+      "op": "ins",
+      "text": "agenda, who has the discretion to decide if that item will be added. Requested agenda items must be submitted no later than eight days prior to"
+     },
+     {
+      "op": "eq",
+      "text": "the meeting."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 5: Minutes"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Minutes of all BWNA Board and"
+     },
+     {
+      "op": "del",
+      "text": "Membership"
+     },
+     {
+      "op": "ins",
+      "text": "General"
+     },
+     {
+      "op": "eq",
+      "text": "Meetings shall be retained by the secretary and available for inspection within ten days following any meeting. The secretary will send minutes to"
+     },
+     {
+      "op": "del",
+      "text": "the BWNA DC"
+     },
+     {
+      "op": "ins",
+      "text": "NECN"
+     },
+     {
+      "op": "eq",
+      "text": "within one week of approval."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 6: Quorum"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "A quorum for any kind of BWNA meeting shall be a majority of the currently serving board members. A quorum is required for any action at any meeting."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 7: Participation"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Any kind of BWNA meeting is open to all people who wish to attend and be heard; however, only Beaumont-Wilshire neighborhood residents"
+     },
+     {
+      "op": "ins",
+      "text": "and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "are entitled to vote according to the protocols outlined in Article 3, Section 2 above. All actions or recommendations taken will be communicated to all affected parties, including minority reports. The chair of any meeting controls the extent of public participation. BWNA is not required to allow public participation in board or committee meetings, although the public is allowed to be present."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 8: Presentations and Positions"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "As part of the mission of providing opportunities for Beaumont-Wilshire residents"
+     },
+     {
+      "op": "ins",
+      "text": "and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "to examine local issues, the board may arrange for presentations at meetings by political candidates and proponents of ballot measures and other political and legislative issues that affect the neighborhood. Every effort must be made to ensure that all candidates and points of view are represented in any such forum."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "In accord with City of Portland standards for Neighborhood Associations, BWNA cannot take positions in support of or in opposition to any political candidate or party. However, the organization may take positions on ballot measures, referendums, and other political and legislative issues based on a vote of board members."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 9: Procedures"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "BWNA generally follows"
+     },
+     {
+      "op": "eq",
+      "text": "Robert’s",
+      "current": "Robert's"
+     },
+     {
+      "op": "eq",
+      "text": "Rules of Order in all areas not covered by the bylaws."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 10: Absence"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Board members must provide notice to at least one other board member, who will be in attendance, that they will not be attending a scheduled meeting. Such notice constitutes an excused absence. Failure to provide notice shall be recorded in the minutes as an unexcused absence."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 11: Open Meetings and Public Records Law"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "BWNA shall abide by all the requirements relative to public meetings and public records as outlined in the City of"
+     },
+     {
+      "op": "eq",
+      "text": "Portland’s",
+      "current": "Portland's"
+     },
+     {
+      "op": "eq",
+      "text": "Standards for Neighborhood Associations, including conducting its affairs in meetings open to and with adequate notice to the public. (The exception, as noted and defined in Section 4 above, is Executive Sessions for narrowly defined matters such as legal consultations or mediation sessions.) Voting to render a decision, including a decision on matters considered in Executive Session, must be done in a meeting open to public attendance. Official action(s) taken by the Neighborhood Association must be on record or part of the minutes of each meeting. The minutes shall include a record of attendance and the results of any vote(s) and recommendations made along with a summary of dissenting views. Official records will be kept on file at the"
+     },
+     {
+      "op": "del",
+      "text": "BWNA DC"
+     },
+     {
+      "op": "ins",
+      "text": "NECN"
+     },
+     {
+      "op": "eq",
+      "text": "office."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 7,
+   "title": "District Coalition Representative",
+   "currentTitle": "District Coalition Representative",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "The board will elect representatives to serve on the board of"
+     },
+     {
+      "op": "del",
+      "text": "BWNA's DC,"
+     },
+     {
+      "op": "ins",
+      "text": "NECN,"
+     },
+     {
+      "op": "eq",
+      "text": "and participate and vote in accordance with the"
+     },
+     {
+      "op": "eq",
+      "text": "DC’s",
+      "current": "DC's"
+     },
+     {
+      "op": "eq",
+      "text": "bylaws. The board may also elect representatives to serve on"
+     },
+     {
+      "op": "del",
+      "text": "the BWNA's DC"
+     },
+     {
+      "op": "ins",
+      "text": "NECN"
+     },
+     {
+      "op": "eq",
+      "text": "committee(s). These representatives are expected to attend"
+     },
+     {
+      "op": "del",
+      "text": "DC committee meetings"
+     },
+     {
+      "op": "ins",
+      "text": "NECN committee meetings to which"
+     },
+     {
+      "op": "eq",
+      "text": "they have been"
+     },
+     {
+      "op": "del",
+      "text": "elected to."
+     },
+     {
+      "op": "ins",
+      "text": "elected."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 8,
+   "title": "Committees",
+   "currentTitle": "Committees",
+   "changed": false,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1: Standing Committees"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The board shall establish standing committees as deemed appropriate, establish a general purpose statement for each committee, and designate a committee chair. The chair shall be responsible to provide the board regular updates and report back to the board."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 2: Ad Hoc Committees"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The president or the board shall establish ad hoc committees as deemed appropriate and designate a committee chair. The chair shall be responsible to provide the board regular updates and report back to the board. Ad hoc committees shall disband when the purpose for establishing the committee has been accomplished."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 3: Committee Recommendations"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Committee recommendations to the board are advisory. Board approval is needed for implementation of a recommendation."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 9,
+   "title": "Elections",
+   "currentTitle": "Elections",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1: Eligibility"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Any"
+     },
+     {
+      "op": "del",
+      "text": "member"
+     },
+     {
+      "op": "ins",
+      "text": "resident or eligible non-resident"
+     },
+     {
+      "op": "eq",
+      "text": "shall be qualified to hold an elected or appointed position."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 2: At-Large Board Members"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "At-large members of the board shall be elected to serve for two years at the"
+     },
+     {
+      "op": "del",
+      "text": "Annual"
+     },
+     {
+      "op": "ins",
+      "text": "April General"
+     },
+     {
+      "op": "eq",
+      "text": "Meeting. The election shall be by nomination from the floor and requires a majority vote of the"
+     },
+     {
+      "op": "del",
+      "text": "membership"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "present."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 3: Officers"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Officers shall be elected to serve for two years at the"
+     },
+     {
+      "op": "del",
+      "text": "Annual"
+     },
+     {
+      "op": "ins",
+      "text": "April General"
+     },
+     {
+      "op": "eq",
+      "text": "Meeting. The election shall be by nomination from the floor and requires a majority vote of the"
+     },
+     {
+      "op": "del",
+      "text": "membership"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "present."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 4:"
+     },
+     {
+      "op": "ins",
+      "text": "Term of Office"
+     }
+    ],
+    [
+     {
+      "op": "ins",
+      "text": "All duties of newly-elected BWNA At-Large Board Members and Officers shall begin at the May meeting following the annual April General Meeting election."
+     }
+    ],
+    [
+     {
+      "op": "ins",
+      "text": "Section 5:"
+     },
+     {
+      "op": "eq",
+      "text": "Removal from Office"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Any holder of an elected position may be removed and replaced by a two-thirds vote of the"
+     },
+     {
+      "op": "del",
+      "text": "membership"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "present at a General, Special, or Emergency Meeting."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 10,
+   "title": "Grievance Procedure",
+   "currentTitle": "Grievance Procedure",
+   "changed": false,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1: One-on-One Dialogue and Mediation"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Individuals and groups are encouraged to reconcile differences, whether inside or outside the scope of these grievance procedures, through one-on-one dialogue or mediation."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 2: Eligibility to Grieve"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Any person or group may initiate this grievance procedure by submitting a grievance in writing to the Board. Grievances are limited to complaints that the grievant has been harmed by a violation of City of Portland Standards for Neighborhood Associations or these bylaws that has directly affected the outcome of a decision of the BWNA. Grievances must be submitted within 45 business days of the alleged violation."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 3: Processing the Grievance"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The Board shall arrange a Grievance Committee, which shall review the grievance. The committee shall hold a public hearing and give the grievant and others wishing to present relevant comment an opportunity to be heard. The committee shall then forward its recommendations to the board."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 4: Final Resolution"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Within 60 calendar days from receipt of the grievance, the BWNA shall render a final decision on the grievance and notify the grievant of their decision. Deliberations by the grievance committee on a recommendation and by the board on a decision may be held in Executive Session. The findings shall be a matter of public record."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 11,
+   "title": "Procedure for Consideration of Proposals",
+   "currentTitle": "Procedure for Consideration of Proposals",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1: Execution"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The board shall be responsible for the execution of this article."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 2: Submission of Proposals"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Any person or group, inside or outside the boundaries of BWNA, and any city agency may propose in writing items for consideration and/or recommendation to the board. The board shall decide whether proposed items will appear on the agenda of"
+     },
+     {
+      "op": "del",
+      "text": "either a Board, General, Emergency, or Special Meeting."
+     },
+     {
+      "op": "ins",
+      "text": "the appropriate meeting."
+     },
+     {
+      "op": "eq",
+      "text": "A majority vote of the board is required to add a proposed item to a meeting agenda."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 3: Notification"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The proponent"
+     },
+     {
+      "op": "del",
+      "text": "and members"
+     },
+     {
+      "op": "ins",
+      "text": "as well as residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "directly affected by such proposals shall be notified in writing not less than seven days in advance of the place, day, and hour when the proposal shall be reviewed."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section"
+     },
+     {
+      "op": "del",
+      "text": "4: Attendance"
+     },
+     {
+      "op": "ins",
+      "text": "4 Attendance."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The proponent may attend the meeting to make a presentation and answer questions concerning the proposal."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 5: Dissemination"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "BWNA shall submit recommendations and dissenting views as recorded from the meeting to the proponent and other appropriate parties."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 12,
+   "title": "Amendments",
+   "currentTitle": "Amendments",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Any proposed amendment to the bylaws shall be, at a minimum, summarized and included in a written notice"
+     },
+     {
+      "op": "ins",
+      "text": "seven days"
+     },
+     {
+      "op": "eq",
+      "text": "before the General or Special Meeting at which it will be considered. The full text, existing and proposed, shall be made available. A two-thirds majority vote of the"
+     },
+     {
+      "op": "del",
+      "text": "members"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "present at said meeting is required to amend the bylaws."
+     }
+    ]
+   ]
+  },
+  {
+   "number": 13,
+   "title": "Dissolution",
+   "currentTitle": "Dissolution",
+   "changed": true,
+   "paragraphs": [
+    [
+     {
+      "op": "eq",
+      "text": "Section 1: Method"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "The question of the dissolution of BWNA shall be considered at a General Meeting following advance written notice to"
+     },
+     {
+      "op": "del",
+      "text": "the membership."
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents."
+     },
+     {
+      "op": "eq",
+      "text": "A 75 percent majority vote of the"
+     },
+     {
+      "op": "del",
+      "text": "members"
+     },
+     {
+      "op": "ins",
+      "text": "residents and eligible non-residents"
+     },
+     {
+      "op": "eq",
+      "text": "present at the meeting is required to dissolve BWNA."
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Section 2: Records and Funds"
+     }
+    ],
+    [
+     {
+      "op": "eq",
+      "text": "Upon dissolution of BWNA all records and bookkeeping materials are to go to"
+     },
+     {
+      "op": "del",
+      "text": "the responsible BWNA DC,"
+     },
+     {
+      "op": "ins",
+      "text": "NECN"
+     },
+     {
+      "op": "eq",
+      "text": "and funds are to go to charitable, educational, or civic improvement efforts related to or located within the BWNA boundaries described in these bylaws. This disbursement will be approved by a majority vote of the board and is the final action of the board."
+     }
+    ]
+   ]
+  }
+ ]
+}
