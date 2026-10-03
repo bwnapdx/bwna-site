@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beaumont-Wilshire neighborhood map</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --moss: #2F5D3A;   /* boundary line, headers */
+    --fern: #6E9A5B;   /* accents */
+    --bark: #3B2F25;   /* text */
+    --muted: #6b6158;  /* secondary text */
+    --fog:  #F7F8F5;   /* panels */
+    --rule: #dcdcd4;   /* dividers */
+  }
+  html, body { height: 100%; margin: 0; }
+  body { font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif; color: var(--bark); background: var(--fog); }
+  #map { position: absolute; inset: 0; }
+  .leaflet-container { font-family: inherit; }
+
+  /* Title card */
+  .title {
+    position: absolute; z-index: 1000; left: 16px; top: calc(16px + env(safe-area-inset-top, 0px));
+    background: var(--fog); padding: 14px 18px 12px; border-left: 5px solid var(--moss);
+    box-shadow: 0 2px 10px rgba(0,0,0,.18); max-width: min(340px, calc(100% - 120px));
+  }
+  .title h1 { margin: 0; font-size: 1.5rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
+  .title p { margin: 4px 0 0; font-size: .85rem; color: var(--muted); }
+
+  /* Layers panel */
+  .panel {
+    background: var(--fog); box-shadow: 0 2px 10px rgba(0,0,0,.18); width: 270px;
+    max-height: calc(100vh - 150px); overflow-y: auto; font-size: .85rem; color: var(--bark);
+  }
+  .panel-head {
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    padding: 10px 12px; background: var(--moss); color: #fff; position: sticky; top: 0; z-index: 1;
+  }
+  .panel-head span { font-weight: 800; font-size: .95rem; letter-spacing: .01em; }
+  .panel-head button {
+    background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.5); border-radius: 3px;
+    font: 600 .75rem/1 inherit; padding: 5px 8px; cursor: pointer;
+  }
+  .panel.collapsed .panel-body { display: none; }
+  .panel-body { padding: 4px 0 8px; }
+  .section { border-bottom: 1px solid var(--rule); }
+  .section-head {
+    display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 12px;
+    background: none; border: none; cursor: pointer; text-align: left;
+    font: 800 .72rem/1.2 "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase; letter-spacing: .08em; color: var(--moss);
+  }
+  .section-head:hover { background: rgba(47,93,58,.07); }
+  .section-head:focus-visible { outline: 3px solid var(--fern); outline-offset: -3px; }
+  .section-title { flex: 1; }
+  .chev { width: 7px; height: 7px; border-right: 2px solid var(--moss); border-bottom: 2px solid var(--moss);
+    transform: rotate(-45deg); transition: transform .15s; flex: none; margin-right: 2px; }
+  .section.open .chev { transform: rotate(45deg); }
+  .badge { font-size: .68rem; letter-spacing: .02em; text-transform: none; font-weight: 600;
+    background: var(--moss); color: #fff; border-radius: 9px; padding: 2px 7px; }
+  .badge:empty { display: none; }
+  .section-body { display: none; padding-bottom: 6px; }
+  .section.open .section-body { display: block; }
+  .note strong { color: var(--bark); }
+  .note { margin: -2px 12px 4px 35px; font-size: .72rem; line-height: 1.35; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
+  .panel h2 {
+    margin: 10px 12px 4px; padding-bottom: 4px; border-bottom: 1px solid var(--rule);
+    font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--moss);
+  }
+  .row { display: flex; align-items: center; gap: 8px; padding: 5px 12px; cursor: pointer; line-height: 1.25; }
+  .row:hover { background: rgba(47,93,58,.07); }
+  .row input { margin: 0; accent-color: var(--moss); width: 15px; height: 15px; flex: none; cursor: pointer; }
+  .row .label { flex: 1; }
+  .row .count { color: var(--muted); font-size: .75rem; font-variant-numeric: tabular-nums; }
+  .row .count.error { color: #9b1c1c; }
+  .err-note { color: #9b1c1c; word-break: break-word; }
+  .sub { padding-left: 22px; }
+  .sub.disabled { opacity: .45; pointer-events: none; }
+  .swatch { width: 12px; height: 12px; flex: none; border-radius: 50%; border: 1px solid rgba(0,0,0,.4); }
+  .swatch.line { border-radius: 0; height: 4px; border: none; }
+  .swatch.line.dashed { background: repeating-linear-gradient(90deg, currentColor 0 5px, transparent 5px 8px) !important; }
+  .swatch.square { border-radius: 2px; }
+  .source { margin: 10px 12px 0; font-size: .7rem; color: var(--muted); line-height: 1.4; }
+
+  /* Buttons & focus toggle */
+  .reset-btn { background: #fff; border: none; width: 34px; height: 34px; font-size: 18px; cursor: pointer; }
+  .focus-toggle {
+    display: flex; align-items: center; gap: 10px;
+    font: 600 .9rem/1 "Libre Franklin", "Helvetica Neue", Arial, sans-serif; color: var(--bark);
+    background: var(--fog); border: none; border-left: 5px solid var(--moss);
+    padding: 10px 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.18);
+    margin-bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .focus-toggle .switch { position: relative; width: 34px; height: 18px; border-radius: 9px; background: #c9c9c1; transition: background .15s; }
+  .focus-toggle .switch::after {
+    content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%;
+    background: #fff; transition: transform .15s;
+  }
+  .focus-toggle[aria-pressed="true"] .switch { background: var(--moss); }
+  .focus-toggle[aria-pressed="true"] .switch::after { transform: translateX(16px); }
+  .reset-btn:focus-visible, .focus-toggle:focus-visible, .panel-head button:focus-visible, .row input:focus-visible {
+    outline: 3px solid var(--fern); outline-offset: 2px;
+  }
+  .popup { font-size: .85rem; line-height: 1.45; }
+  .emoji-pin { background: none; border: none; }
+  .emoji-pin span {
+    display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;
+    font-size: 17px; line-height: 1; background: #fff; border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0,0,0,.35); border: 2px solid var(--moss);
+  }
+  .popup b { font-size: .95rem; }
+  @media (prefers-reduced-motion: reduce) { .focus-toggle .switch, .focus-toggle .switch::after { transition: none; } }
+  @media (max-width: 600px) { .panel { width: 240px; max-height: calc(100vh - 220px); } }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Map of the Beaumont-Wilshire neighborhood"></div>
+<div class="title">
+  <h1>Beaumont-Wilshire</h1>
+  <p>Northeast Portland, Oregon</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+<script>
+// ======================================================================
+// BOUNDARY (City of Portland neighborhood boundaries)
+// ======================================================================
+const boundary = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"name": "Beaumont-Wilshire", "source": "City of Portland neighborhood boundaries (BPS)"}, "geometry": {"type": "Polygon", "coordinates": [[[-122.620417, 45.558272], [-122.620415, 45.555561], [-122.614896, 45.555536], [-122.615007, 45.550114], [-122.615053, 45.549783], [-122.615068, 45.548291], [-122.614712, 45.54829], [-122.61476, 45.542408], [-122.614999, 45.542303], [-122.615001, 45.542001], [-122.615001, 45.541946], [-122.615003, 45.541679], [-122.614982, 45.541593], [-122.615247, 45.541585], [-122.615964, 45.541501], [-122.617895, 45.542017], [-122.618405, 45.542295], [-122.618716, 45.542525], [-122.618925, 45.542831], [-122.620428, 45.54283], [-122.620934, 45.542954], [-122.621958, 45.54324], [-122.622386, 45.543397], [-122.622643, 45.54354], [-122.622971, 45.543639], [-122.625005, 45.543651], [-122.625015, 45.544687], [-122.62608, 45.544656], [-122.626087, 45.544686], [-122.626133, 45.544887], [-122.626285, 45.545191], [-122.626418, 45.545355], [-122.62765, 45.545347], [-122.627656, 45.545461], [-122.627796, 45.545666], [-122.628295, 45.54599], [-122.628558, 45.546028], [-122.630703, 45.546021], [-122.630682, 45.555389], [-122.630678, 45.558304], [-122.626165, 45.5583], [-122.625526, 45.558291], [-122.620417, 45.558272]]]}}]};
+const ringLngLat = boundary.features[0].geometry.coordinates[0];
+
+const map = L.map("map", { zoomControl: false, minZoom: 12 });
+L.control.zoom({ position: "bottomright" }).addTo(map);  // kept clear of the title card
+
+// Base map: Esri World Street Map (no API key needed, works when opened as a file)
+L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+  maxZoom: 19,
+  attribution: 'Tiles &copy; Esri | Data: City of Portland, PBOT, ODOT'
+}).addTo(map);
+// Quieter alternative that makes data layers pop:
+// L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", { maxZoom: 16, attribution: 'Tiles &copy; Esri' }).addTo(map);
+
+// Mask: world-sized polygon with the neighborhood cut out
+const ring = ringLngLat.map(([lng, lat]) => [lat, lng]);
+const world = [[90, -180], [90, 180], [-90, 180], [-90, -180]];
+const DIM  = { fillColor: "#282c28", fillOpacity: 0.42 };  // normal view
+const HIDE = { fillColor: "#F7F8F5", fillOpacity: 1 };     // "only our neighborhood" view
+// The mask sits ABOVE all data layers, so anything that extends past the boundary is dimmed or hidden too.
+// pointer-events: none lets clicks pass through to the crash dots and lines underneath.
+const maskPane = map.createPane("mask");
+maskPane.style.zIndex = 470;
+maskPane.style.pointerEvents = "none";
+const mask = L.polygon([world, ring], { pane: "mask", stroke: false, interactive: false, ...DIM }).addTo(map);
+
+const outline = L.geoJSON(boundary, { pane: "mask", style: { color: "#2F5D3A", weight: 4, opacity: 0.95, fill: false }, interactive: false }).addTo(map);
+const bounds = outline.getBounds();
+map.fitBounds(bounds, { padding: [30, 30] });
+map.setMaxBounds(bounds.pad(1.5));
+
+// Data layers draw in their own pane, above the mask and the boundary line
+map.createPane("data").style.zIndex = 450;
+// Official designations draw underneath the other data so crash dots stay clickable on top
+map.createPane("designations").style.zIndex = 440;
+
+// ======================================================================
+// HELPERS
+// ======================================================================
+function insideBoundary([x, y]) {
+  let inside = false;
+  for (let i = 0, j = ringLngLat.length - 1; i < ringLngLat.length; j = i++) {
+    const [xi, yi] = ringLngLat[i], [xj, yj] = ringLngLat[j];
+    if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+// Ask an ArcGIS map service for everything touching the neighborhood polygon
+// Convert ArcGIS's own JSON format to GeoJSON (used when a server won't answer in GeoJSON)
+function esriToGeoJSON(data) {
+  return (data.features || []).map(f => {
+    const g = f.geometry || {};
+    let geometry = null;
+    if (typeof g.x === "number") geometry = { type: "Point", coordinates: [g.x, g.y] };
+    else if (g.paths) geometry = { type: "MultiLineString", coordinates: g.paths };
+    else if (g.rings) geometry = { type: "Polygon", coordinates: g.rings };
+    else if (g.points) geometry = { type: "MultiPoint", coordinates: g.points };
+    return { type: "Feature", properties: f.attributes || {}, geometry };
+  });
+}
+
+// Ask an ArcGIS map service for everything touching the neighborhood.
+// Tries several request styles in turn, because some city layers only answer one of them.
+async function queryService(layerUrl, { where = "1=1", outFields = "*" } = {}) {
+  const b = bounds;
+  const polygon = { geometry: JSON.stringify({ rings: [ringLngLat], spatialReference: { wkid: 4326 } }), geometryType: "esriGeometryPolygon" };
+  const envelope = { geometry: [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].join(","), geometryType: "esriGeometryEnvelope" };
+  const attempts = [
+    { ...polygon,  f: "geojson", outFields },
+    { ...polygon,  f: "json",    outFields },
+    { ...envelope, f: "json",    outFields: "*" }
+  ];
+  let lastErr;
+  for (const a of attempts) {
+    try {
+      const params = new URLSearchParams({
+        where, inSR: "4326", outSR: "4326", spatialRel: "esriSpatialRelIntersects", returnGeometry: "true", ...a
+      });
+      // Some city layers return only 150-200 records per request, so keep asking for the next page
+      const all = [];
+      for (let page = 0; page < 25; page++) {
+        params.set("resultOffset", String(all.length));
+        const res = await fetch(`${layerUrl}/query?${params}`);
+        if (!res.ok) throw new Error(`server answered ${res.status}`);
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message || "server error");
+        const feats = a.f === "geojson" ? (data.features || []) : esriToGeoJSON(data);
+        all.push(...feats);
+        const more = data.exceededTransferLimit || (data.properties && data.properties.exceededTransferLimit);
+        if (!more || feats.length === 0) break;
+      }
+      return all;
+    } catch (err) {
+      lastErr = err;
+      console.warn(`Query attempt failed (${a.f}, ${a.geometryType}):`, layerUrl, err);
+    }
+  }
+  throw lastErr;
+}
+
+// Show why a layer failed, right under its row, so it can be reported and fixed
+function showError(r, err) {
+  r.count.textContent = "unavailable"; r.count.classList.add("error");
+  r.input.checked = false;
+  let n = r.el.nextElementSibling;
+  if (!n || !n.classList.contains("err-note")) {
+    n = document.createElement("p"); n.className = "note err-note";
+    r.el.after(n);
+  }
+  n.textContent = "Error: " + (err && err.message ? err.message : String(err));
+}
+
+// Generic popup: a title plus the fields that have values
+const SKIP = /^(OBJECTID|Shape|SHAPE|GlobalID|Shape_Length|Shape_Area|Shape__Length|Shape__Area)$/i;
+function genericPopup(title, props, max = 6) {
+  const rows = Object.entries(props)
+    .filter(([k, v]) => !SKIP.test(k) && v !== null && v !== "" && v !== " ")
+    .slice(0, max)
+    .map(([k, v]) => `${k.replace(/_/g, " ")}: ${v}`);
+  return `<div class="popup"><b>${title}</b><br>${rows.join("<br>")}</div>`;
+}
+
+// ======================================================================
+// CRASH RECORDS (ODOT Crash Data 2019-2024)
+// ======================================================================
+const CRASH_SERVICE = "https://gis.odot.state.or.us/arcgis1006/rest/services/agol/OTSDE_Crash/MapServer/0";
+const SEVERITY = {
+  K: { label: "Fatal",                color: "#B3001B", radius: 9, weight: 1.0 },
+  A: { label: "Serious injury",       color: "#E4572E", radius: 8, weight: 0.8 },
+  B: { label: "Moderate injury",      color: "#F3A712", radius: 7, weight: 0.55 },
+  C: { label: "Minor injury",         color: "#7FB069", radius: 6, weight: 0.4 },
+  O: { label: "Property damage only", color: "#6C8EAD", radius: 5, weight: 0.25 }
+};
+const crashGroup = L.layerGroup();                 // parent for all individual crashes
+const severityGroups = {};                         // one sub-layer per severity
+Object.keys(SEVERITY).forEach(k => { severityGroups[k] = L.layerGroup().addTo(crashGroup); });
+let crashHeat = L.heatLayer([], {
+  radius: 22, blur: 18, maxZoom: 17, minOpacity: 0.3, pane: "data",
+  gradient: { 0.2: "#6C8EAD", 0.45: "#F3A712", 0.7: "#E4572E", 1.0: "#B3001B" }
+});
+
+function crashPopup(p) {
+  const sev = SEVERITY[p.KABCO] || { label: "Unknown severity" };
+  const date = [p.CRASH_MO_NO, p.CRASH_DAY_NO, p.CRASH_YR_NO].filter(Boolean).join("/");
+  const where = [p.ST_FULL_NM, p.ISECT_ST_FULL_NM].filter(Boolean).join(" & ");
+  const who = [];
+  if (p.Ped_Pres_Flg === "1" || p.TOT_PED_CNT > 0) who.push("pedestrian involved");
+  if (p.Bike_Pres_Flg === "1" || p.TOT_PEDCYCL_CNT > 0) who.push("cyclist involved");
+  return `<div class="popup"><b>${sev.label}</b><br>
+    ${date}${p.CRASH_HR_LONG_DESC ? ", " + p.CRASH_HR_LONG_DESC : ""}<br>
+    ${where || "Location description not recorded"}<br>
+    ${p.COLLIS_TYP_LONG_DESC ? p.COLLIS_TYP_LONG_DESC + "<br>" : ""}${who.join(", ")}</div>`;
+}
+
+async function loadCrashes() {
+  const features = await queryService(CRASH_SERVICE, {
+    outFields: "KABCO,CRASH_YR_NO,CRASH_MO_NO,CRASH_DAY_NO,CRASH_HR_LONG_DESC,ST_FULL_NM,ISECT_ST_FULL_NM,COLLIS_TYP_LONG_DESC,Ped_Pres_Flg,Bike_Pres_Flg,TOT_PED_CNT,TOT_PEDCYCL_CNT,UNLOCT_FLG"
+  });
+  const crashes = features.filter(f => f.geometry && f.properties.UNLOCT_FLG !== 1 && insideBoundary(f.geometry.coordinates));
+  const counts = { K: 0, A: 0, B: 0, C: 0, O: 0 };
+  const heatPts = [];
+  crashes.forEach(f => {
+    const [lng, lat] = f.geometry.coordinates;
+    const code = SEVERITY[f.properties.KABCO] ? f.properties.KABCO : "O";
+    const sev = SEVERITY[code];
+    counts[code]++;
+    heatPts.push([lat, lng, sev.weight]);
+    L.circleMarker([lat, lng], { pane: "data", radius: sev.radius, color: "#222", weight: 1, fillColor: sev.color, fillOpacity: 0.9 })
+      .bindPopup(crashPopup(f.properties)).addTo(severityGroups[code]);
+  });
+  crashHeat.setLatLngs(heatPts);
+  return { total: crashes.length, counts };
+}
+
+// ======================================================================
+// WALKING & BIKING LAYERS (City of Portland / PBOT, loaded when first switched on)
+// ======================================================================
+const PBOT = "https://www.portlandmaps.com/arcgis/rest/services/Public";
+const BEACON_TYPES = { 2540: "Crossing beacon", 2550: "Illuminated WALK sign", 2570: "School zone beacon" };
+
+const WALKBIKE = [
+  {
+    id: "greenways", label: "Neighborhood greenways", swatch: { color: "#2E8B3E", kind: "line" },
+    url: `${PBOT}/PBOT_Planning/MapServer/62`, where: "Facility = 'NG'",
+    style: { color: "#2E8B3E", weight: 5, opacity: 0.9 },
+    popup: p => `<div class="popup"><b>Neighborhood greenway</b><br>${p.SegmentName || ""}${p.YearBuilt ? "<br>Built " + p.YearBuilt : ""}</div>`
+  },
+  {
+    id: "bikeways", label: "Other bike lanes & paths", swatch: { color: "#3564A6", kind: "line" },
+    url: `${PBOT}/PBOT_Planning/MapServer/62`, where: "Facility <> 'NG'",
+    style: { color: "#3564A6", weight: 4, opacity: 0.85 },
+    popup: p => {
+      const types = { PBL: "Protected bike lane", BBL: "Buffered bike lane", BL: "Bike lane", SIR: "Bike lane", ABL: "Advisory bike lane", ESR: "Enhanced shared roadway", TRL: "Off-street path" };
+      return `<div class="popup"><b>${types[p.Facility] || "Bikeway"}</b><br>${p.SegmentName || ""}${p.YearBuilt ? "<br>Built " + p.YearBuilt : ""}</div>`;
+    }
+  },
+  {
+    id: "srts-network", label: "Safe Routes to School network", swatch: { color: "#7A4EAB", kind: "line" },
+    url: `${PBOT}/PBOT_Planning/MapServer/73`,
+    style: { color: "#7A4EAB", weight: 6, opacity: 0.75 },
+    popup: p => genericPopup("Safe Routes to School route", p)
+  },
+  {
+    id: "srts-projects", label: "Safe Routes to School projects", swatch: { color: "#0F7C8C", kind: "line dashed" },
+    urls: [`${PBOT}/PBOT_Planning/MapServer/71`, `${PBOT}/PBOT_Planning/MapServer/72`],
+    style: { color: "#0F7C8C", weight: 5, opacity: 0.9, dashArray: "8 6" },
+    point: { radius: 7, color: "#fff", weight: 2, fillColor: "#0F7C8C", fillOpacity: 1 },
+    popup: p => genericPopup("Safe Routes to School project", p)
+  },
+  {
+    id: "crossings", label: "Marked crosswalks", swatch: { color: "#1F5FAD", kind: "square" },
+    url: `${PBOT}/PBOT_Planning/MapServer/57`,
+    point: { radius: 5, color: "#fff", weight: 1.5, fillColor: "#1F5FAD", fillOpacity: 1 },
+    popup: p => genericPopup("Marked crosswalk", p)
+  },
+  {
+    id: "crossing-gaps", label: "Crossing deficiencies (PedPDX)", swatch: { color: "#D9480F", kind: "line" },
+    url: `${PBOT}/PBOT_Planning/MapServer/54`,
+    style: { color: "#D9480F", weight: 5, opacity: 0.85, dashArray: "2 6", lineCap: "round" },
+    point: { radius: 6, color: "#D9480F", weight: 2, fillColor: "#fff", fillOpacity: 1 },
+    note: "Places the city's pedestrian plan says lack safe, frequent enough crossings.",
+    popup: p => genericPopup("PedPDX crossing deficiency", p)
+  },
+  {
+    id: "beacons", label: "Crossing beacons & signs", swatch: { color: "#F2C80F" },
+    url: `${PBOT}/PBOT_Assets/MapServer/206`, where: "ISBType IN (2540, 2550, 2570)",
+    point: { radius: 7, color: "#3B2F25", weight: 1.5, fillColor: "#F2C80F", fillOpacity: 1 },
+    popup: p => `<div class="popup"><b>${BEACON_TYPES[p.ISBType] || "Beacon"}</b>${p.LocationID ? "<br>Location ID " + p.LocationID : ""}</div>`
+  }
+];
+
+// Official safety designations (PBOT High Crash Network)
+const DESIGNATIONS = [
+  {
+    id: "hcn-streets", label: "High Crash Streets", swatch: { color: "#8E1B3A", kind: "line" },
+    url: `${PBOT}/PBOT_Planning/MapServer/60`, pane: "designations",
+    style: { color: "#8E1B3A", weight: 11, opacity: 0.35, lineCap: "round" },
+    note: "PBOT's list of the streets with the most serious crashes citywide.",
+    popup: p => genericPopup("High Crash Street", p, 4)
+  },
+  {
+    id: "hcn-intersections", label: "High Crash Intersections", swatch: { color: "#8E1B3A" },
+    url: `${PBOT}/PBOT_Planning/MapServer/69`, pane: "designations",
+    point: { radius: 13, color: "#8E1B3A", weight: 3, fillColor: "#8E1B3A", fillOpacity: 0.18 },
+    popup: p => genericPopup("High Crash Intersection", p, 5)
+  }
+];
+
+// Measured speeds: colored by the recorded speed if the record has one
+function measuredSpeed(p) {
+  const keys = Object.keys(p);
+  const pick = keys.find(k => /85/.test(k) && !isNaN(parseFloat(p[k])))
+            || keys.find(k => /(avg|average|mean).*speed|speed.*(avg|average|mean)/i.test(k) && !isNaN(parseFloat(p[k])));
+  return pick ? parseFloat(p[pick]) : null;
+}
+function speedColor(v) {
+  if (v === null) return "#5B6C7D";
+  return v <= 25 ? "#2E8B57" : v <= 30 ? "#E0A100" : "#C0392B";
+}
+const TRAFFIC_LIGHTING = [
+  {
+    id: "speeds", label: "Measured traffic speeds", swatch: { color: "#E0A100" },
+    url: `${PBOT}/Transportation/MapServer/10`,
+    pointFor: p => ({ radius: 7, color: "#fff", weight: 1.5, fillColor: speedColor(measuredSpeed(p)), fillOpacity: 1 }),
+    note: "Where PBOT has measured speeds. Green: 25 mph or under · amber: 26–30 · red: over 30.",
+    popup: p => genericPopup("Traffic speed count", p, 8)
+  },
+  {
+    id: "streetlights", label: "Street lights", swatch: { color: "#FFD84D" },
+    url: `${PBOT}/PBOT_Assets/MapServer/207`,
+    point: { radius: 3.5, color: "#6B5A00", weight: 1, fillColor: "#FFD84D", fillOpacity: 1 },
+    note: "Gaps between lights show poorly lit stretches. Pair with night-time crashes.",
+    popup: p => genericPopup("Street light", p, 5)
+  }
+];
+
+function buildLayer(def, features) {
+  return L.geoJSON({ type: "FeatureCollection", features }, {
+    pane: def.pane || "data",
+    style: () => def.style || {},
+    pointToLayer: (f, latlng) => def.emojiFor
+      ? L.marker(latlng, { pane: def.pane || "data", icon: L.divIcon({
+          className: "emoji-pin", html: `<span>${def.emojiFor(f.properties || {})}</span>`, iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -12] }) })
+      : L.circleMarker(latlng, {
+      pane: def.pane || "data",
+      ...(def.pointFor ? def.pointFor(f.properties || {}) : (def.point || { radius: 5 }))
+    }),
+    onEachFeature: (f, layer) => layer.bindPopup(def.popup(f.properties || {}))
+  });
+}
+
+async function loadWalkBike(def) {
+  let features;
+  if (def.load) features = await def.load();
+  else {
+    const urls = def.urls || [def.url];
+    const results = def.firstWorking
+      ? [await queryFirstWorking(urls, { where: def.where || "1=1" })]
+      : await Promise.all(urls.map(u => queryService(u, { where: def.where || "1=1" })));
+    features = results.flat();
+  }
+  features = features.filter(f => f.geometry);
+  def.layer = buildLayer(def, features);
+  return features.length;
+}
+
+// ======================================================================
+// STREET CONDITION (PBOT: planned paving, pavement moratoriums)
+// ======================================================================
+// Pavement condition grades (PBOT Pavement Management System, listed as "Pavement Maintenance")
+const PAVE_COND_URLS = [
+  "https://www.portlandmaps.com/od/rest/services/COP_OpenData_Transportation/MapServer/71",
+  `${PBOT}/COP_OpenData_Transportation/MapServer/71`,
+  `${PBOT}/COP_OpenData/MapServer/71`
+];
+// PBOT's scale: 0-25 very poor, 26-50 poor. The upper bands follow the common PCI convention.
+const PAVE_GRADES = {
+  vgood:  { label: "Very good",  color: "#1A9850", min: 86 },
+  good:   { label: "Good",       color: "#91CF60", min: 71 },
+  fair:   { label: "Fair",       color: "#F2C200", min: 51 },
+  poor:   { label: "Poor",       color: "#F46D43", min: 26 },
+  vpoor:  { label: "Very poor",  color: "#B2182B", min: 0 },
+  none:   { label: "Not graded", color: "#9A9A9A" }
+};
+// Work out which field holds the grade: a 0-100 score, or a text rating like "Fair"
+let paveField = null;
+function findPaveField(features) {
+  const sample = features.slice(0, 200).map(f => f.properties || {});
+  const keys = [...new Set(sample.flatMap(Object.keys))];
+  const numeric = k => sample.some(p => p[k] !== null && p[k] !== "" && !isNaN(parseFloat(p[k])) && parseFloat(p[k]) >= 0 && parseFloat(p[k]) <= 100);
+  const score = keys.find(k => /pci|cond(ition)?_?(index|score)|pavement_?score/i.test(k) && numeric(k))
+             || keys.find(k => /(cond|rating|score)/i.test(k) && !/date|year|yr|dt/i.test(k) && numeric(k));
+  if (score) return { key: score, kind: "score" };
+  const text = keys.find(k => /cond|rating|grade/i.test(k) && sample.some(p => /good|fair|poor/i.test(String(p[k] || ""))));
+  return text ? { key: text, kind: "text" } : null;
+}
+function paveGrade(p) {
+  if (!paveField) return "none";
+  const v = p[paveField.key];
+  if (v === null || v === undefined || v === "") return "none";
+  if (paveField.kind === "text") {
+    const t = String(v).toLowerCase();
+    if (/very\s*poor|failed|serious/.test(t)) return "vpoor";
+    if (/poor/.test(t)) return "poor";
+    if (/fair/.test(t)) return "fair";
+    if (/very\s*good|excellent/.test(t)) return "vgood";
+    if (/good|satisf/.test(t)) return "good";
+    return "none";
+  }
+  const n = parseFloat(v);
+  if (isNaN(n)) return "none";
+  return n >= 86 ? "vgood" : n >= 71 ? "good" : n >= 51 ? "fair" : n >= 26 ? "poor" : "vpoor";
+}
+// Street length in meters, counting only the stretches that fall inside the neighborhood
+function metersBetween([x1, y1], [x2, y2]) {
+  const R = 6371000, toRad = d => d * Math.PI / 180;
+  const dLat = toRad(y2 - y1), dLng = toRad(x2 - x1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(y1)) * Math.cos(toRad(y2)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+function lengthInside(geometry) {
+  const lines = geometry.type === "LineString" ? [geometry.coordinates]
+              : geometry.type === "MultiLineString" ? geometry.coordinates : [];
+  let total = 0;
+  lines.forEach(line => {
+    for (let i = 1; i < line.length; i++) {
+      const a = line[i - 1], b = line[i];
+      // split each piece into short steps so partly-inside pieces are measured fairly
+      const steps = Math.max(1, Math.ceil(metersBetween(a, b) / 10));
+      for (let s = 0; s < steps; s++) {
+        const p0 = [a[0] + (b[0] - a[0]) * s / steps, a[1] + (b[1] - a[1]) * s / steps];
+        const p1 = [a[0] + (b[0] - a[0]) * (s + 1) / steps, a[1] + (b[1] - a[1]) * (s + 1) / steps];
+        if (insideBoundary([(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2])) total += metersBetween(p0, p1);
+      }
+    }
+  });
+  return total;
+}
+
+const paveGroups = {};
+Object.keys(PAVE_GRADES).forEach(k => { paveGroups[k] = L.layerGroup(); });
+const paveCondition = L.layerGroup(Object.values(paveGroups));
+let paveLoaded = null;
+function loadPaveCondition() {
+  if (!paveLoaded) paveLoaded = queryFirstWorking(PAVE_COND_URLS, {}).then(features => {
+    features = features.filter(f => f.geometry);
+    paveField = findPaveField(features);
+    const counts = Object.fromEntries(Object.keys(PAVE_GRADES).map(k => [k, 0]));
+    const meters = Object.fromEntries(Object.keys(PAVE_GRADES).map(k => [k, 0]));
+    features.forEach(f => {
+      const p = f.properties || {};
+      const g = paveGrade(p);
+      counts[g]++;
+      meters[g] += lengthInside(f.geometry);
+      const grade = PAVE_GRADES[g];
+      const valueLine = paveField && p[paveField.key] !== null && p[paveField.key] !== undefined
+        ? `<br>${paveField.kind === "score" ? "Condition score" : "Rating"}: ${p[paveField.key]}` : "";
+      L.geoJSON(f, { pane: "designations", style: { color: grade.color, weight: 6, opacity: 0.9, lineCap: "round" } })
+        .bindPopup(genericPopup(`Pavement: ${grade.label.toLowerCase()}`, p, 8).replace("</b><br>", `</b>${valueLine}<br>`))
+        .addTo(paveGroups[g]);
+    });
+    return { total: features.length, counts, meters, field: paveField };
+  }).catch(err => { paveLoaded = null; throw err; });
+  return paveLoaded;
+}
+
+// Two copies of the same pavement layer: the city's open-data service, then the operational one as backup
+const PAVING_URLS = [
+  "https://www.portlandmaps.com/od/rest/services/COP_OpenData_Transportation/MapServer/70",
+  `${PBOT}/PBOT_ROW_Coordination/MapServer/5`
+];
+async function queryFirstWorking(urls, opts) {
+  let lastErr;
+  for (const u of urls) {
+    try { return await queryService(u, opts); } catch (err) { lastErr = err; console.warn("Paving source failed:", u, err); }
+  }
+  throw lastErr;
+}
+
+// Paving: planned treatments (by type) and recently repaved streets under moratorium
+const PAVING_TYPES = {
+  GRINDNPAVE: { label: "Grind & pave",   color: "#8C2D04" },
+  BASEREPAIR: { label: "Base repair",    color: "#E6550D" },
+  CRACKSEAL:  { label: "Crack seal",     color: "#FDAE6B" },
+  OTHER:      { label: "Other treatment", color: "#B8860B" }
+};
+const plannedGroups = {};
+Object.keys(PAVING_TYPES).forEach(k => { plannedGroups[k] = L.layerGroup(); });
+const plannedPaving = L.layerGroup(Object.values(plannedGroups));
+const moratoriumLayer = L.layerGroup();
+function pavingPopup(p, heading) {
+  const t = PAVING_TYPES[p.ProjectType] ? PAVING_TYPES[p.ProjectType].label : (p.ProjectType || "");
+  const span = [p.FromStreet, p.ToStreet].filter(Boolean).join(" to ");
+  const when = [p.ProposedSeason, p.ProposedFY].filter(Boolean).join(" ");
+  return `<div class="popup"><b>${heading}</b><br>${p.StreetName || ""}${span ? "<br>" + span : ""}
+    ${t ? "<br>Treatment: " + t : ""}${when ? "<br>Proposed: " + when.charAt(0) + when.slice(1).toLowerCase() : ""}</div>`;
+}
+let pavingLoaded = null;
+function loadPaving() {
+  if (!pavingLoaded) pavingLoaded = queryFirstWorking(PAVING_URLS, {
+    outFields: "Status,StreetName,FromStreet,ToStreet,ProjectType,ProposedFY,ProposedSeason"
+  }).then(features => {
+    const counts = { GRINDNPAVE: 0, BASEREPAIR: 0, CRACKSEAL: 0, OTHER: 0 };
+    let moratorium = 0;
+    features.filter(f => f.geometry && ["PLANNED", "MORATORIUM"].includes((f.properties || {}).Status)).forEach(f => {
+      const p = f.properties || {};
+      if (p.Status === "MORATORIUM") {
+        moratorium++;
+        L.geoJSON(f, { pane: "data", style: { color: "#4A5A6A", weight: 6, opacity: 0.7 } })
+          .bindPopup(pavingPopup(p, "Recently repaved (moratorium)")).addTo(moratoriumLayer);
+      } else {
+        const type = PAVING_TYPES[p.ProjectType] ? p.ProjectType : "OTHER";
+        counts[type]++;
+        L.geoJSON(f, { pane: "data", style: { color: PAVING_TYPES[type].color, weight: 6, opacity: 0.9, dashArray: "10 6" } })
+          .bindPopup(pavingPopup(p, "Planned paving")).addTo(plannedGroups[type]);
+      }
+    });
+    return { planned: Object.values(counts).reduce((a, b) => a + b, 0), counts, moratorium };
+  }).catch(err => { pavingLoaded = null; throw err; });  // allow a retry next time it's switched on
+  return pavingLoaded;
+}
+
+// ======================================================================
+// LAYERS PANEL
+// ======================================================================
+function clearError(r) {
+  r.count.classList.remove("error");
+  const n = r.el.nextElementSibling;
+  if (n && n.classList.contains("err-note")) n.remove();
+}
+function row({ label, swatch, checked = false, sub = false }) {
+  const el = document.createElement("label");
+  el.className = "row" + (sub ? " sub" : "");
+  const sw = swatch
+    ? `<span class="swatch ${swatch.kind || ""}" style="background:${swatch.color};color:${swatch.color}"></span>`
+    : "";
+  el.innerHTML = `<input type="checkbox" ${checked ? "checked" : ""}>${sw}<span class="label">${label}</span><span class="count"></span>`;
+  return { el, input: el.querySelector("input"), count: el.querySelector(".count") };
+}
+
+const Panel = L.Control.extend({
+  options: { position: "topright" },
+  onAdd() {
+    const panel = L.DomUtil.create("div", "panel");
+    if (window.innerWidth < 600) panel.classList.add("collapsed");
+    L.DomEvent.disableClickPropagation(panel);
+    L.DomEvent.disableScrollPropagation(panel);
+
+    panel.innerHTML = `<div class="panel-head"><span>Map layers</span>
+      <button type="button" aria-expanded="${!panel.classList.contains("collapsed")}">${panel.classList.contains("collapsed") ? "Show" : "Hide"}</button></div>
+      <div class="panel-body"></div>`;
+    const body = panel.querySelector(".panel-body");
+
+    // Collapsible section: a header button that shows how many layers are on inside it
+    let target = body;
+    function section(title, { open = false } = {}) {
+      const wrap = document.createElement("div");
+      wrap.className = "section" + (open ? " open" : "");
+      const id = "sec-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      wrap.innerHTML = `<button type="button" class="section-head" aria-expanded="${open}" aria-controls="${id}">
+          <span class="chev" aria-hidden="true"></span><span class="section-title">${title}</span><span class="badge"></span>
+        </button><div class="section-body" id="${id}"></div>`;
+      const head = wrap.querySelector(".section-head");
+      const inner = wrap.querySelector(".section-body");
+      const badge = wrap.querySelector(".badge");
+      head.onclick = () => {
+        const isOpen = wrap.classList.toggle("open");
+        head.setAttribute("aria-expanded", String(isOpen));
+      };
+      const update = () => {
+        const n = inner.querySelectorAll(".row:not(.sub) input:checked").length;
+        badge.textContent = n ? `${n} on` : "";
+      };
+      inner.addEventListener("change", () => setTimeout(update, 0));
+      wrap.refresh = update;
+      body.append(wrap);
+      target = inner;
+      return wrap;
+    }
+
+    // A group of simple layers that load the first time they're switched on
+    function addSimpleLayers(defs, sec) {
+      defs.forEach(def => {
+        const r = row({ label: def.label, swatch: def.swatch });
+        target.append(r.el);
+        if (def.note) {
+          const n = document.createElement("p");
+          n.className = "note"; n.textContent = def.note;
+          target.append(n);
+        }
+        r.input.onchange = async () => {
+          if (!r.input.checked) { def.layer && def.layer.remove(); return; }
+          if (!def.layer) {
+            clearError(r);
+            r.count.textContent = "loading…";
+            try { r.count.textContent = await loadWalkBike(def); }
+            catch (err) {
+              console.error(def.id, err);
+              showError(r, err); sec.refresh(); return;
+            }
+          }
+          if (r.input.checked) def.layer.addTo(map);
+        };
+      });
+    }
+    const toggle = panel.querySelector(".panel-head button");
+    toggle.onclick = () => {
+      const collapsed = panel.classList.toggle("collapsed");
+      toggle.textContent = collapsed ? "Show" : "Hide";
+      toggle.setAttribute("aria-expanded", String(!collapsed));
+    };
+
+    // ---- Crash records section ----
+    const crashSec = section("Crash records, 2019–2024", { open: true });
+    const heatRow = row({ label: "Crash heat map", checked: true });
+    const pointsRow = row({ label: "Individual crashes" });
+    target.append(heatRow.el, pointsRow.el);
+
+    const subRows = {};
+    Object.entries(SEVERITY).forEach(([code, s]) => {
+      const r = row({ label: s.label, swatch: { color: s.color }, checked: true, sub: true });
+      r.el.classList.add("disabled");
+      r.input.onchange = () => r.input.checked ? crashGroup.addLayer(severityGroups[code]) : crashGroup.removeLayer(severityGroups[code]);
+      subRows[code] = r;
+      target.append(r.el);
+    });
+
+    crashHeat.addTo(map);
+    heatRow.input.onchange = () => heatRow.input.checked ? crashHeat.addTo(map) : crashHeat.remove();
+    pointsRow.input.onchange = () => {
+      const on = pointsRow.input.checked;
+      on ? crashGroup.addTo(map) : crashGroup.remove();
+      Object.values(subRows).forEach(r => r.el.classList.toggle("disabled", !on));
+    };
+
+    heatRow.count.textContent = "loading…";
+    loadCrashes().then(({ total, counts }) => {
+      heatRow.count.textContent = total;
+      pointsRow.count.textContent = total;
+      Object.entries(counts).forEach(([code, n]) => { subRows[code].count.textContent = n; });
+    }).catch(err => {
+      console.error(err);
+      [heatRow, pointsRow].forEach(r => { r.count.textContent = "unavailable"; r.count.classList.add("error"); });
+      heatRow.el.title = pointsRow.el.title = "Crash records didn't load: " + err.message;
+    });
+
+    // ---- Official safety designations ----
+    addSimpleLayers(DESIGNATIONS, section("Official safety designations"));
+
+    // ---- Walking & biking section ----
+    addSimpleLayers(WALKBIKE, section("Walking & biking"));
+
+    // ---- Traffic speed & lighting ----
+    addSimpleLayers(TRAFFIC_LIGHTING, section("Traffic speed & lighting"));
+
+    // ---- Street condition section ----
+    const streetSec = section("Street condition");
+
+    // A parent toggle with child toggles underneath (same pattern as crash severity)
+    function parentWithChildren({ parentLabel, parentSwatch, parentLayer, children, load, onLoaded }) {
+      const parent = row({ label: parentLabel, swatch: parentSwatch });
+      target.append(parent.el);
+      const kids = {};
+      Object.entries(children).forEach(([key, c]) => {
+        const r = row({ label: c.label, swatch: c.swatch, checked: true, sub: true });
+        r.el.classList.add("disabled");
+        r.input.onchange = () => r.input.checked ? parentLayer.addLayer(c.layer) : parentLayer.removeLayer(c.layer);
+        kids[key] = r;
+        target.append(r.el);
+      });
+      parent.input.onchange = async () => {
+        const on = parent.input.checked;
+        Object.values(kids).forEach(r => r.el.classList.toggle("disabled", !on));
+        if (!on) { parentLayer.remove(); return; }
+        clearError(parent);
+        if (!/^\d+$/.test(parent.count.textContent)) parent.count.textContent = "loading…";
+        try { onLoaded(await load(), parent, kids); }
+        catch (err) {
+          console.error(err);
+          showError(parent, err);
+          Object.values(kids).forEach(r => r.el.classList.add("disabled"));
+          return;
+        }
+        if (parent.input.checked) parentLayer.addTo(map);
+      };
+      return { parent, kids };
+    }
+
+    // Pavement condition, split by grade
+    const paveUI = parentWithChildren({
+      parentLabel: "Pavement condition",
+      parentSwatch: { color: "#F46D43", kind: "line" },
+      parentLayer: paveCondition,
+      children: Object.fromEntries(Object.entries(PAVE_GRADES).map(([k, g]) =>
+        [k, { label: g.label, swatch: { color: g.color, kind: "line" }, layer: paveGroups[k] }])),
+      load: loadPaveCondition,
+      onLoaded: (r, parent, kids) => {
+        parent.count.textContent = r.total;
+        Object.entries(r.counts).forEach(([k, n]) => {
+          kids[k].count.textContent = n;
+          if (k === "none") kids[k].el.style.display = n ? "" : "none";
+        });
+        if (!r.field) {
+          paveNote.textContent = "The city's records didn't include a condition field I could read, so segments show as not graded. Click one to see what's there.";
+          return;
+        }
+        const graded = ["vgood", "good", "fair", "poor", "vpoor"];
+        const gradedM = graded.reduce((t, k) => t + r.meters[k], 0);
+        const badM = r.meters.poor + r.meters.vpoor;
+        const gradedN = graded.reduce((t, k) => t + r.counts[k], 0);
+        const badN = r.counts.poor + r.counts.vpoor;
+        const pct = gradedM ? Math.round(100 * badM / gradedM) : 0;
+        const miles = m => (m / 1609.34).toFixed(1);
+        paveNote.innerHTML = gradedM
+          ? `<strong>${pct}% of graded street length is poor or very poor</strong> (${miles(badM)} of ${miles(gradedM)} miles; ${badN} of ${gradedN} segments).` +
+            ` Very poor alone: ${Math.round(100 * r.meters.vpoor / gradedM)}%.` +
+            (r.counts.none ? ` ${r.counts.none} segments have no grade and aren't counted.` : "") +
+            ` Grades from the "${r.field.key}" field.`
+          : `No graded streets found inside the boundary. Grades from the "${r.field.key}" field.`;
+      }
+    });
+    const paveNote = document.createElement("p");
+    paveNote.className = "note";
+    paveNote.textContent = "Street-by-street condition ratings from PBOT's pavement management system.";
+    paveUI.parent.el.after(paveNote);
+
+    // Planned paving, split by treatment type
+    parentWithChildren({
+      parentLabel: "Planned paving",
+      parentSwatch: { color: "#E6550D", kind: "line dashed" },
+      parentLayer: plannedPaving,
+      children: Object.fromEntries(Object.entries(PAVING_TYPES).map(([k, t]) =>
+        [k, { label: t.label, swatch: { color: t.color, kind: "line dashed" }, layer: plannedGroups[k] }])),
+      load: loadPaving,
+      onLoaded: (r, parent, kids) => {
+        parent.count.textContent = r.planned;
+        Object.entries(r.counts).forEach(([k, n]) => {
+          kids[k].count.textContent = n;
+          if (k === "OTHER" && n === 0) kids[k].el.style.display = "none";
+        });
+      }
+    });
+
+    // Recently repaved streets (moratorium: protected from being dug up)
+    const morRow = row({ label: "Recently repaved", swatch: { color: "#4A5A6A", kind: "line" } });
+    morRow.el.title = "Streets under a pavement moratorium, which usually means they were just resurfaced";
+    target.append(morRow.el);
+    morRow.input.onchange = async () => {
+      if (!morRow.input.checked) { moratoriumLayer.remove(); return; }
+      clearError(morRow);
+      if (!/^\d+$/.test(morRow.count.textContent)) morRow.count.textContent = "loading…";
+      try { const r = await loadPaving(); morRow.count.textContent = r.moratorium; }
+      catch (err) { console.error(err); showError(morRow, err); return; }
+      if (morRow.input.checked) moratoriumLayer.addTo(map);
+    };
+
+    body.insertAdjacentHTML("beforeend",
+      `<p class="source">Crashes: ODOT (reported crashes only). All other layers: City of Portland / PBOT. Numbers show features in or touching the neighborhood.</p>`);
+    crashSec.refresh();
+    return panel;
+  }
+});
+map.addControl(new Panel());
+
+// ======================================================================
+// CONTROLS: reset view, "only our neighborhood"
+// ======================================================================
+const Reset = L.Control.extend({
+  options: { position: "bottomright" },
+  onAdd() {
+    const wrap = L.DomUtil.create("div", "leaflet-bar");
+    const btn = L.DomUtil.create("button", "reset-btn", wrap);
+    btn.type = "button"; btn.title = "Zoom to Beaumont-Wilshire"; btn.setAttribute("aria-label", btn.title);
+    btn.textContent = "⌂";
+    L.DomEvent.disableClickPropagation(wrap);
+    btn.onclick = () => map.fitBounds(bounds, { padding: [30, 30] });
+    return wrap;
+  }
+});
+map.addControl(new Reset());
+
+let focusOn = false;
+const Focus = L.Control.extend({
+  options: { position: "bottomleft" },
+  onAdd() {
+    const btn = L.DomUtil.create("button", "focus-toggle");
+    btn.type = "button"; btn.setAttribute("aria-pressed", "false");
+    btn.innerHTML = '<span class="switch" aria-hidden="true"></span>Only our neighborhood';
+    L.DomEvent.disableClickPropagation(btn);
+    btn.onclick = () => {
+      focusOn = !focusOn;
+      mask.setStyle(focusOn ? HIDE : DIM);
+      btn.setAttribute("aria-pressed", String(focusOn));
+      if (focusOn) map.fitBounds(bounds, { padding: [30, 30] });
+    };
+    return btn;
+  }
+});
+map.addControl(new Focus());
+
+// ---- Your own places go here later, e.g.: ----
+// L.marker([45.5485, -122.6205]).addTo(map).bindPopup("<b>Fremont Street</b><br>Main street of the neighborhood");
+</script>
+</body>
+</html>
