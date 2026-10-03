@@ -127,6 +127,27 @@ export default config({
           label: 'Ticket URL',
           description: 'External ticketing/RSVP page (e.g. Eventbrite).',
         }),
+        attachments: fields.array(
+          fields.object({
+            label: fields.text({
+              label: 'Label',
+              description: 'Link text, e.g. "Agenda".',
+              validation: { length: { min: 1 } },
+            }),
+            file: fields.file({
+              label: 'File',
+              description: 'Upload a PDF. Name it with the date, e.g. 2026-10-12-general-meeting-agenda.pdf.',
+              directory: 'public/documents/agendas',
+              publicPath: '/documents/agendas/',
+              validation: { isRequired: true },
+            }),
+          }),
+          {
+            label: 'Documents',
+            description: 'Files linked from the event page, such as a meeting agenda.',
+            itemLabel: (props) => props.fields.label.value || 'Document',
+          }
+        ),
         body: fields.markdoc({
           label: 'Details',
           extension: 'md',

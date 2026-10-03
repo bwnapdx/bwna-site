@@ -7,6 +7,9 @@ address: "4300 NE Fremont St, Suite 150, Portland, OR"
 type: "meeting"
 scope: "bwna"
 recurring: false
+attachments:
+  - label: "Agenda"
+    file: "/documents/agendas/2026-10-12-general-meeting-agenda.pdf"
 summary: "October general meeting featuring Jona Davis, Executive Director of the Northeast Coalition of Neighborhoods. In person and on Zoom."
 ---
 

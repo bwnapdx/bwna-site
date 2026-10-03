@@ -61,6 +61,10 @@ const events = defineCollection({
     summary: z.string().optional(),
     ticketUrl: z.string().optional(),        // external ticketing/RSVP page (e.g. Eventbrite)
     ticketLabel: z.string().optional(),      // button text for ticketUrl; defaults to "Buy Tickets" (use e.g. "Reserve a Seat" for free events)
+    attachments: z.array(z.object({          // documents linked from the event page, e.g. a meeting agenda
+      label: z.string(),                     // "Agenda"
+      file: z.string(),                      // "/documents/agendas/2026-10-12-general-meeting-agenda.pdf"
+    })).optional(),
   }),
 });
 

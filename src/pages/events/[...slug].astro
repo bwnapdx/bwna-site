@@ -64,6 +64,19 @@ function formatDate(date: Date, endDate?: Date) {
                target="_blank" rel="noopener" class="text-sm"> (View Map)</a>
           )}
         </div>
+        {event.data.attachments && event.data.attachments.length > 0 && (
+          <div class="event-info-row">
+            <strong>Documents:</strong>{' '}
+            {event.data.attachments.map((doc, i) => (
+              <>
+                {i > 0 && <span aria-hidden="true"> &middot; </span>}
+                <a href={doc.file.startsWith('/') ? `${base}${doc.file.slice(1)}` : doc.file} target="_blank" rel="noopener">
+                  {doc.label}{doc.file.toLowerCase().endsWith('.pdf') && ' (PDF)'}
+                </a>
+              </>
+            ))}
+          </div>
+        )}
       </div>
 
       {event.data.ticketUrl && (

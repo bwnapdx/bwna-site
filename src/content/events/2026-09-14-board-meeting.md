@@ -7,6 +7,9 @@ address: "4300 NE Fremont St, Suite 150, Portland, OR"
 type: "meeting"
 scope: "bwna"
 recurring: false
+attachments:
+  - label: "Agenda"
+    file: "/documents/agendas/2026-09-14-board-meeting-agenda.pdf"
 summary: "September board meeting featuring a presentation on emergency preparedness from Bec Lawson of the Beaumont-Wilshire/Alameda Neighborhood Emergency Team."
 ---
 
