@@ -17,6 +17,9 @@ interface Props {
 const { title, description = "Beaumont-Wilshire Neighborhood Association - A vibrant community in Northeast Portland", noindex = false, sortDate = '9999-12-31', searchable = true } = Astro.props;
 const currentPath = Astro.url.pathname;
 const base = import.meta.env.BASE_URL;
+// Cloudflare Web Analytics (cookieless). Skipped in dev and in the Keystatic
+// admin build so editor visits don't count toward the public site's stats.
+const analytics = import.meta.env.PROD && !process.env.KEYSTATIC_ADMIN;
 ---
 
 <!DOCTYPE html>
@@ -27,6 +30,9 @@ const base = import.meta.env.BASE_URL;
   <meta name="description" content={description}>
   <title>{title} | BWNA</title>
   <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`}>
+  {analytics && (
+    <script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "7a7bfbeef3d34f7685a0c1257a6a0179"}'></script>
+  )}
 </head>
 <body>
   <header class="site-header">
