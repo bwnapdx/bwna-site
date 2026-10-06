@@ -168,6 +168,16 @@ const calendarEvents = expanded.map(e => ({
                   <div class="event-date">
                     <div class="month">{monthsShort[ev.date.getMonth()]}</div>
                     <div class="day">{ev.date.getDate()}</div>
+                    {!ev.entry.data.recurring && ev.entry.data.endDate && (() => {
+                      const end = toLocalDate(ev.entry.data.endDate);
+                      return (
+                        <div class="range">
+                          <div class="range-label">to</div>
+                          <div class="month">{monthsShort[end.getMonth()]}</div>
+                          <div class="range-day">{end.getDate()}</div>
+                        </div>
+                      );
+                    })()}
                   </div>
                   <div class="event-details">
                     <div class="event-header">
