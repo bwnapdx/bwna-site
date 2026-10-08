@@ -23,6 +23,7 @@ Also on the agenda:
 
 - An Open Floor segment, where non-board attendees can speak for up to three minutes on a B-W topic of their choosing.
 - An update on the loss of pedestrian crosswalk flags.
+- A discussion of Amazon's proposed drone delivery in N/NE Portland, and whether the topic falls within BWNA's purview.
 - An update on the Inner Eastside Zoning Project.
 - An update on Beaumont Crossing and the future of the plaza.
 
