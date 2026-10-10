@@ -5,6 +5,8 @@ time: "7:00 PM - 8:30 PM"
 location: "Sylvan Learning"
 address: "4300 NE Fremont St, Suite 150, Portland, OR"
 type: "meeting"
+ticketUrl: "https://us06web.zoom.us/j/86798571365?pwd=ufBoaDGhieyCI3bammVMhbbqzGdZU5.1"
+ticketLabel: "Join on Zoom"
 scope: "bwna"
 recurring: false
 attachments:
