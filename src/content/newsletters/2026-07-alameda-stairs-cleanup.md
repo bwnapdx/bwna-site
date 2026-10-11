@@ -16,4 +16,4 @@ Angela Frome, event organizer, was pleased with the result.
 
 "When neighbors come together to improve shared spaces," she said, "They create not only a more beautiful community, but a stronger one."
 
-Look for announcements about additional beautification events in the BWNA newsletter and our monthly emailed Community Updates. Subscribe to receive the updates at BWNApdx.org.
+Look for announcements about additional beautification events in the BWNA newsletter and our monthly emailed Community Updates. Subscribe to receive the updates at [BWNApdx.org](/).

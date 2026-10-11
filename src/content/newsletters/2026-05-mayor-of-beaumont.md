@@ -22,4 +22,4 @@ One day, I came home with Hiya, a rescue dog from the Oregon Humane Society. My 
 
 The Mayor of Beaumont has crossed the rainbow bridge, waiting there by the curb for us to bring her treats and rub her belly.
 
-*Recently retired from a long career in environmental consulting, Gary Hahn has lived in B-W for 10 years. Not only is he an active supporter of animals, but Gary is also active in sight restoration in SE Asia and eye protection in Ukraine. He is one of the founders of the BBH Eye Foundation at bbheye.org.*
+*Recently retired from a long career in environmental consulting, Gary Hahn has lived in B-W for 10 years. Not only is he an active supporter of animals, but Gary is also active in sight restoration in SE Asia and eye protection in Ukraine. He is one of the founders of the BBH Eye Foundation at [bbheye.org](https://bbheye.org).*

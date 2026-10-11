@@ -22,4 +22,4 @@ The plan is a simple Friday subscription: fresh bagels, made weekly in limited q
 
 There's something deeply satisfying about the process — working the dough, shaping each piece by hand, knowing where they'll end up. In a neighborhood as warm and connected as ours, it feels like a natural fit: something simple, made carefully, and shared.
 
-Find more information on Instagram @bwbagelclub and my website bagelclubpdx.com (coming soon).
+Find more information on Instagram @bwbagelclub and my website [bagelclubpdx.com](https://bagelclubpdx.com) (coming soon).

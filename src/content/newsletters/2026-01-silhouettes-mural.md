@@ -20,6 +20,6 @@ Artist/designer Raziah Roushan actually created the masterpiece, not once, but t
 
 From my perspective, Julia and Raziah formed the perfect team. Both are passionate about their craft, possess a native instinct for style, and have a creative gene. Stop by and view the mural next time you are near the corner of NE 42nd and Fremont. If you see Julia, tell her Mike on a Bike says "Hi!"
 
-For more about Silhouette visit silhouettetailoringstudio.com. Artist Raziah Roushan's work can be seen at raziahroushan.com.
+For more about Silhouette visit [silhouettetailoringstudio.com](https://silhouettetailoringstudio.com). Artist Raziah Roushan's work can be seen at [raziahroushan.com](https://raziahroushan.com).
 
 *Alameda resident Michael Wright is a rewired (not a typo) sports agent who moved to PDX with his wife Sally in 2009 from New York City. Writing, cycling, and sports of all types are no longer side hustles, but full-time pursuits*

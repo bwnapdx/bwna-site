@@ -16,7 +16,7 @@ Are you a senior who could use some help with yardwork? Or perhaps you're a neig
 - **Mows:** They mow lawns, edge, remove limbs and debris from lawn areas, and blow or sweep grass clippings from curbs, walks, driveways, and patios.
 - **Prunes:** They prune your shrubs, bushes, and small trees to manage new growth so views from windows are not obscured and walkways are not blocked.
 
-For more information visit hopeoregon.org or contact Hen Truong at hentruong@hopeoregon.org.
+For more information visit [hopeoregon.org](https://hopeoregon.org) or contact Hen Truong at [hentruong@hopeoregon.org](mailto:hentruong@hopeoregon.org).
 
 **Northeast Village PDX** — Operating as a program of the Northeast Community Center, Northeast Village PDX is a vibrant and engaging community of older adults (60+) living in 18 neighborhoods in Northeast Portland. The volunteer-led organization helps adults 60+ stay independent by providing services like transportation, yardwork, and tech help alongside social activities such as book clubs and coffee gatherings. It connects seniors with volunteers and partners to foster community and support aging in place through a membership model.
 
@@ -24,6 +24,6 @@ There are two levels of membership in The Village: Associate and Full Service. I
 
 Trained volunteers also provide in-home assistance. They can help with some household tasks, make simple repairs, and give information and advice for organizing files and paperwork or cleaning out closets or cabinets.
 
-Visit nevillagepdx.org, email info@nevillagepdx.org, or call (503) 895-2750 for more information.
+Visit [nevillagepdx.org](https://nevillagepdx.org), email [info@nevillagepdx.org](mailto:info@nevillagepdx.org), or call (503) 895-2750 for more information.
 
 *Pamela Plimpton, a B-W resident since 1980, retired as a professor of English in 2020. Her interests include reading, writing, gardening, and singing with a community chorale. She and her husband enjoy playing golf, working out at the Northeast Community Center, traveling, and grandparenting their granddaughter.*

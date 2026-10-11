@@ -32,7 +32,7 @@ Are you able to give time, donate, or be a sponsor for Alameda Elementary School
 
 This is one of our local public elementary school's most important fundraisers; proceeds directly support classroom enrichment, student programs, teacher support, and initiatives that help ensure every Alameda student has what they need to succeed.
 
-With Portland Public Schools facing a $50 million dollar budget deficit for the upcoming school year, these efforts are more important than ever. To volunteer, email Stephanie at admin@friendsofalameda.com. To donate, sponsor, or contribute in another way, contact friendsofalameda@alamedaschool.org. For more information about the Auction & Gala, visit alamedaelementary.com/alameda-gala-auction-2026.
+With Portland Public Schools facing a $50 million dollar budget deficit for the upcoming school year, these efforts are more important than ever. To volunteer, email Stephanie at [admin@friendsofalameda.com](mailto:admin@friendsofalameda.com). To donate, sponsor, or contribute in another way, contact [friendsofalameda@alamedaschool.org](mailto:friendsofalameda@alamedaschool.org). For more information about the Auction & Gala, visit [alamedaelementary.com/alameda-gala-auction-2026](https://alamedaelementary.com/alameda-gala-auction-2026).
 
 ## B-W Book Club Idea Takes Flight
 

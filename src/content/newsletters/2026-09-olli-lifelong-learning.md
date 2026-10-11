@@ -24,6 +24,6 @@ Bill, a former federal 'bureaucrat,' in his words, started evangelizing for OLLI
 
 A six-month membership costs $140 and entitles you to attend any presentation without registration or additional fee. (Year-long and three-month memberships are also available.) Better yet, anyone can attend a lecture for free to get a feel for what OLLI's all about — and there are no tests and no homework!
 
-Find out more at osher.uoregon.edu.
+Find out more at [osher.uoregon.edu](https://osher.uoregon.edu).
 
 *Chris Rauber and his wife moved to Portland and B-W in mid-2022 after many years in the San Francisco Bay Area. He wrote for the San Francisco Business Times and other publications. He was born in Oregon.*

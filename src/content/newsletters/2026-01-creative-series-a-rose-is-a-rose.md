@@ -22,6 +22,6 @@ Love, Shakespeare takes the intimidation out of the Bard. Rose laughs, "If someo
 
 The most creative part of the work, she says, is the ensemble itself. "Listening is everything so that you don't miss anything and you don't drop anything. Creating a Shakespearean play out of nothing is pretty amazing."
 
-Neighbors can support the troupe by coming to shows, telling others about the troupe, or by volunteering. "Being audience members, spreading the word, supporting us, all are fantastic ways to get involved," Rose says. For more information, tickets, and a contact form, visit LoveShakespearePDX.com.
+Neighbors can support the troupe by coming to shows, telling others about the troupe, or by volunteering. "Being audience members, spreading the word, supporting us, all are fantastic ways to get involved," Rose says. For more information, tickets, and a contact form, visit [LoveShakespearePDX.com](https://LoveShakespearePDX.com).
 
 *David Friedman, @friedart, is a visual artist specializing in papercutting, printmaking, and painting. He and his dog, Poppi @poppipdx, can be seen daily at Wilshire Park. His work is on display at the Alberta Street Gallery, daily 11-7.*

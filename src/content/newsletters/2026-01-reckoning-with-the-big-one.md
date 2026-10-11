@@ -22,6 +22,6 @@ This is where Dr. Safran's presentation pivoted from academics to real life impa
 
 "We're not all going to die, but it's going to suck," Safran announced to a rapt crowd. She said people need to be prepared to depend on close neighbors for weeks or months. She encouraged folks to develop relationships with their neighbors, discuss and coordinate emergency supplies, and build in local resiliency that will be required when the "Big One" does occur.
 
-Check out the Portland Bureau of Emergency Management at portland.gov/pbem for links to many useful sites that aim to help neighborhoods prepare for emergencies.
+Check out the Portland Bureau of Emergency Management at [portland.gov/pbem](https://portland.gov/pbem) for links to many useful sites that aim to help neighborhoods prepare for emergencies.
 
 *John Sandie relocated from the Midwest with his wife Kathy to be closer to children and grandchildren in the area, landing on Fremont Street in B-W in early 2011. In retirement they pursue their desires to make a difference locally, John by volunteering with the neighborhood association, Kathy with Alameda School. The duo is contentedly busy volunteering and keeping up with grandchildren.*

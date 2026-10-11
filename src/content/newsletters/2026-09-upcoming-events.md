@@ -21,7 +21,7 @@ Enjoy live music, Grant High School's Royal Blues a cappella group, dancing, kid
 
 **Location:** Rose City Park United Methodist Church Conference Room, 5830 NE Alameda St.
 
-Want to learn about a vibrant and engaging community of older adults (60+) in northeast Portland? Join NE Village PDX to learn how you (or someone you love) can become a member and/or a volunteer. The Village creates connections, shares skills and expertise, and provides services to members such as rides, yard work, tech support, and rightsizing advice, along with a variety of social activities and educational programs. Free and open to the public. For more info call 503-895-2750 or email info@nevillagepdx.org.
+Want to learn about a vibrant and engaging community of older adults (60+) in northeast Portland? Join NE Village PDX to learn how you (or someone you love) can become a member and/or a volunteer. The Village creates connections, shares skills and expertise, and provides services to members such as rides, yard work, tech support, and rightsizing advice, along with a variety of social activities and educational programs. Free and open to the public. For more info call 503-895-2750 or email [info@nevillagepdx.org](mailto:info@nevillagepdx.org).
 
 ## Positive Aging Health & Wellness Fair
 
@@ -37,7 +37,7 @@ How can we age in place in the comfort of our own home? What Portland-area resou
 
 **Location:** Fremont United Methodist Church 2620 NE Fremont St.
 
-Ever wondered why you find so many rocks when you dig in your Portland garden? You can thank the ice age Missoula Floods for this consternating condition. Join your neighbors to hear Jim O'Connor from the U.S. Geological Survey discuss the history of the glacial floods that shaped the remarkable and diverse landscapes of the Columbia Gorge, Willamette Valley, and beyond. Limited seating. To secure your ticket, find the QR code in the ad on this page or visit Eventbrite at tinyurl.com/5f9z6ywr.
+Ever wondered why you find so many rocks when you dig in your Portland garden? You can thank the ice age Missoula Floods for this consternating condition. Join your neighbors to hear Jim O'Connor from the U.S. Geological Survey discuss the history of the glacial floods that shaped the remarkable and diverse landscapes of the Columbia Gorge, Willamette Valley, and beyond. Limited seating. To secure your ticket, find the QR code in the ad on this page or visit Eventbrite at [tinyurl.com/5f9z6ywr](https://tinyurl.com/5f9z6ywr).
 
 ## Trick or Treat on Fremont Street
 
@@ -45,6 +45,6 @@ Ever wondered why you find so many rocks when you dig in your Portland garden? Y
 
 **Location:** Fremont United Methodist Church 2620 NE Fremont St.
 
-Join the Beaumont Business Association for a fun-filled Halloween celebration with costumes, candy, and plenty of spooky surprises! Mark your calendar, and follow @bbapdx on Instagram and Facebook or visit bbapdx.org. More details coming soon.
+Join the Beaumont Business Association for a fun-filled Halloween celebration with costumes, candy, and plenty of spooky surprises! Mark your calendar, and follow @bbapdx on Instagram and Facebook or visit [bbapdx.org](https://bbapdx.org). More details coming soon.
 
-*Got Events? Email Editor@BWNApdx.org*
+*Got Events? Email [Editor@BWNApdx.org](mailto:Editor@BWNApdx.org)*

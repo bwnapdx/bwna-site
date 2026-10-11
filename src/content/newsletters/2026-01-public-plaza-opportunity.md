@@ -22,6 +22,6 @@ The initial application to PBOT consisted of a survey in which prospective partn
 
 If selected in the first application round, final proposals will be due on March 1, followed soon after by an announcement of new locations to operate as trial plazas in summer 2026. If a Beaumont Village location is among them, a committee tasked with planning, programming, and upkeep would be formed, and interested neighbors would be encouraged to join.
 
-More information about the plaza program is available at tinyurl.com/bdz3k9a2. You can also find PBOT's 2024 Portland Street Plazas Annual Report at tinyurl.com/swpsdh9r. See excerpts from the annual report on page 19.
+More information about the plaza program is available at [tinyurl.com/bdz3k9a2](https://tinyurl.com/bdz3k9a2). You can also find PBOT's 2024 Portland Street Plazas Annual Report at [tinyurl.com/swpsdh9r](https://tinyurl.com/swpsdh9r). See excerpts from the annual report on page 19.
 
 *Aaron has lived in Beaumont-Wilshire for 15 years. He and his wife, 12-year-old son, and 4-year-old dog spend lots of time roaming the neighborhood and love having so many destinations within walking distance from their front door.*

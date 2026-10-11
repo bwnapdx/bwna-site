@@ -36,6 +36,6 @@ To a query over concerns about the impending Inner Eastside Zoning Project, the 
 
 Pirtle-Guiney finished by thanking BWNA for having her at the meeting. "It is a privilege to get out of City Hall and hear what is on your minds."
 
-Pirtle-Guiney's outreach aide for constituent concerns, Faisal Osman, can be contacted at faisal.osman2@portlandoregon.gov.
+Pirtle-Guiney's outreach aide for constituent concerns, Faisal Osman, can be contacted at [faisal.osman2@portlandoregon.gov](mailto:faisal.osman2@portlandoregon.gov).
 
 *by Tim Gillespie, BWNA Vice President and Newsletter Team Member*

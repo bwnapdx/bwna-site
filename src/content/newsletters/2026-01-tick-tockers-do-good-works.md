@@ -28,6 +28,6 @@ Meetings and activities are scheduled to accommodate the girls' school commitmen
 
 NCL activities can be listed on college applications and can lead to other opportunities. The minimum participation requirement is 15 hours per year. The organization charges an annual fee that covers all costs for the year. There is a limit of 30 girls per grade, and the Portland NCL chapter has room to grow.
 
-The organization's Portland membership drive opens on January 15, 2026. Applications are available for sixth, seventh, and eighth grade girls. The application deadline is March 1, 2026. If you are interested in more information, you can complete an inquiry form at tinyurl.com/2m9jtt6f. And remember — time is tick-tocking away!
+The organization's Portland membership drive opens on January 15, 2026. Applications are available for sixth, seventh, and eighth grade girls. The application deadline is March 1, 2026. If you are interested in more information, you can complete an inquiry form at [tinyurl.com/2m9jtt6f](https://tinyurl.com/2m9jtt6f). And remember — time is tick-tocking away!
 
 *Pamela Plimpton, a B-W resident since 1980, retired as a professor of English in 2020. Her interests include reading, writing, gardening, and singing with a community chorale. She and her husband enjoy playing golf, working out at the N.E. Community Center, traveling, and grandparenting their granddaughter.*

@@ -24,7 +24,7 @@ My wife and I have lived in Beaumont-Wilshire since 1990. I find it an eclectic 
 
 **What would you tell readers who are interested in volunteering?**
 
-Though all 15 board positions are currently filled, there are still ways to participate. I'd recommend attending a monthly meeting or two to become acquainted with our board members and the activities we're engaged in for the benefit of the neighborhood. Also, check out our website, BWNApdx.org, click on the "Get Involved" tab, and let us know what interests you: the newsletter, helping with events, beautification, or Open to Anything! Other opportunities not yet listed on the website include the communication, transportation, and land use committees and the new-neighbor welcoming project. Feel free to connect directly with the committee chair or lead in any of these categories; you'll find their contact info on page 2 of every BNWA newsletter.
+Though all 15 board positions are currently filled, there are still ways to participate. I'd recommend attending a monthly meeting or two to become acquainted with our board members and the activities we're engaged in for the benefit of the neighborhood. Also, check out our website, [BWNApdx.org](/), click on the "Get Involved" tab, and let us know what interests you: the newsletter, helping with events, beautification, or Open to Anything! Other opportunities not yet listed on the website include the communication, transportation, and land use committees and the new-neighbor welcoming project. Feel free to connect directly with the committee chair or lead in any of these categories; you'll find their contact info on page 2 of every BNWA newsletter.
 
 **Volunteer  Do Good  Meet People  Have Fun!**
 

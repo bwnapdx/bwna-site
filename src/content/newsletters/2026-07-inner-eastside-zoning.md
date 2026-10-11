@@ -30,6 +30,6 @@ After the work plan is presented to Council, BPS staff will prepare a draft zoni
 
 **Q: What's the best way for our residents to stay informed about the project?**
 
-A: For neighbors who are interested in more information about the project, I recommend signing up for regular updates at portland.gov/bps/planning/inner-eastside-zoning-project/about. Neighbors can also communicate with City Council, who will make the final decision on zoning changes.
+A: For neighbors who are interested in more information about the project, I recommend signing up for regular updates at [portland.gov/bps/planning/inner-eastside-zoning-project/about](https://portland.gov/bps/planning/inner-eastside-zoning-project/about). Neighbors can also communicate with City Council, who will make the final decision on zoning changes.
 
 *BWNA board member David Knowles has been a B-W resident for over 40 years. With his wife, Pam, he's been active in politics and public policy. His career focused on transportation, land use, and politics, including as Portland planning director and former elected Metro councilor representing northeast Portland.*

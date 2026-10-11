@@ -19,7 +19,7 @@ Of particular relevance to BWNA is the last sentence of my friend's message: "Ou
 
 **Serve as a conduit for intra-neighborhood communication**
 
-This newsletter is BWNA's most extensive communication vehicle, reaching over 2,700 B-W households and businesses, but it's an every-other-month publication. We also provide more timely information about events and current issues via our monthly community update emailed to nearly 600 residents. To receive these updates, subscribe via the BWNA website (BWNApdx.org/Subscribe).
+This newsletter is BWNA's most extensive communication vehicle, reaching over 2,700 B-W households and businesses, but it's an every-other-month publication. We also provide more timely information about events and current issues via our monthly community update emailed to nearly 600 residents. To receive these updates, subscribe via the BWNA website ([BWNApdx.org/Subscribe](/subscribe)).
 
 **Facilitate civic participation on the local level**
 

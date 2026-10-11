@@ -22,6 +22,6 @@ Its expanded menu will highlight burgers, fries, and a rotating list of veggie o
 
 Sure Shot started in Beaverton as a food cart in 2020, moving to its current spot in early 2022. Kuhns, who's spent 25 years in restaurant kitchens, came aboard in 2021. Jarvis has a "front of the house" resume, including helping start several Seattle-area restaurants.
 
-The food cart, which was located at 5013 NE 42nd, closed in mid-June. Visit sureshotburger.com for updates on the opening of their brick-and-mortar restaurant.
+The food cart, which was located at 5013 NE 42nd, closed in mid-June. Visit [sureshotburger.com](https://sureshotburger.com) for updates on the opening of their brick-and-mortar restaurant.
 
 *Chris Rauber and his wife moved to Portland and B-W in mid-2022 after many years in the San Francisco Bay Area. He wrote for the San Francisco Business Times and other publications. He was born in Oregon.*

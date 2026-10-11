@@ -20,6 +20,6 @@ Today, in addition to her two salons, Trinh owns a home in Rose City Park, is ma
 
 When asked what differentiates her salon from others, Trinh didn't hesitate. "We are very much a family. Even staff who are not family, we treat like family," she said. "Also, we don't offer acrylic nails because the chemicals can be a health hazard to staff and also to customers."
 
-Find BB Nails and Spa at 4605 NE Fremont St. For more information about nail and spa services and hours, visit bb-nails.com.
+Find BB Nails and Spa at 4605 NE Fremont St. For more information about nail and spa services and hours, visit [bb-nails.com](https://bb-nails.com).
 
-*Susan Trabucco is a BWNA board member and the volunteer editor of this newsletter. She was the founder, editor and publisher of a regional business journal. Since 2012, Susan and her husband have called B-W home, where she enjoys working in her tropical-ish garden. Reach her by emailing Editor@BWNApdx.org.*
+*Susan Trabucco is a BWNA board member and the volunteer editor of this newsletter. She was the founder, editor and publisher of a regional business journal. Since 2012, Susan and her husband have called B-W home, where she enjoys working in her tropical-ish garden. Reach her by emailing [Editor@BWNApdx.org](mailto:Editor@BWNApdx.org).*

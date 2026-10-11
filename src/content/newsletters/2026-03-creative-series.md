@@ -24,6 +24,6 @@ Neighborhood favorites roll off easily: Bagel Land for morning carbs, The Arrang
 
 And on the rare night off? "Our second-favorite spot in Portland is that couch," Sarah laughs. Damian grins: "Life is so loud, so we just stay home and listen to the sound of our ears ringing."
 
-Check out Sarah and Damian's websites at SarahClarkeMusic.com and DamianErskine.com.
+Check out Sarah and Damian's websites at [SarahClarkeMusic.com](https://SarahClarkeMusic.com) and [DamianErskine.com](https://DamianErskine.com).
 
 *David Friedman, @friedart, is a visual artist specializing in papercutting, printmaking, and painting. He and his dog, Poppi @poppipdx, can be seen daily at Wilshire Park. His work is on display at the Alberta Street Gallery, daily 11-7.*

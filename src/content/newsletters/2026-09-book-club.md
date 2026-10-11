@@ -14,7 +14,7 @@ When was the last time you gave yourself permission to read a book just for the 
 
 Bev Yashar and Karen Kun, founders of the B-W Book Club in Beaumont-Wilshire, have created the opportunity for you to do just that.
 
-While helping children to be better readers for the SMART Reading program (smartreading.org), Yashar and Kun found they shared a love of reading. Both women also wanted to engage in an activity that would build community while supporting neighborhood businesses. They came up with the idea of organizing a book club for Beaumont-Wilshire residents. Book club members would meet monthly to discuss a book, holding their meetings at B-W food and drink spots.
+While helping children to be better readers for the SMART Reading program ([smartreading.org](https://smartreading.org)), Yashar and Kun found they shared a love of reading. Both women also wanted to engage in an activity that would build community while supporting neighborhood businesses. They came up with the idea of organizing a book club for Beaumont-Wilshire residents. Book club members would meet monthly to discuss a book, holding their meetings at B-W food and drink spots.
 
 They contacted BWNA newsletter editor, who suggested they use the newsletter to invite B-W residents to contact them if interested in a neighborhood book group. To their delight, nearly 40 people responded.
 
@@ -26,6 +26,6 @@ Book club members can choose which meeting they attend. If a member cannot atten
 
 Yashar and Kun surveyed book club members regarding their choices for the October through January meetings. The books selected are: "Grey Bees" by Andrey Kurkov; "How to Winter: Finding Warmth on Cold, Dark Difficult Days" by Kari Leibowitz; "Tomorrow and Tomorrow and Tomorrow" by Gabrielle Zevin; and "Winter Dance" by Gary Paulson.
 
-If you are interested in joining the B-W Book Club, contact Bev Yashar at yashar@med.umich.edu or Karen Kun at karen.kun@outlook.com. "All are welcome!" Kun said.
+If you are interested in joining the B-W Book Club, contact Bev Yashar at [yashar@med.umich.edu](mailto:yashar@med.umich.edu) or Karen Kun at [karen.kun@outlook.com](mailto:karen.kun@outlook.com). "All are welcome!" Kun said.
 
 *Pamela Plimpton, a B-W resident since 1980, retired as a professor of English in 2020. Her interests include reading, writing, gardening, and singing with a community chorale. She and her husband enjoy playing golf, working out at the Northeast Community Center, traveling, and grandparenting their granddaughter.*

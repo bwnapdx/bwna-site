@@ -28,6 +28,6 @@ But we've done it. Sold many of our once-treasured belongings and schlepped our 
 
 The best outcome from this move, however, is that I no longer feel sadness about the ADU. Instead, I feel it's my turn to bring joy and laughter to those who venture across the threshold of our tiny home.
 
-Do you have a downsizing story to tell? We'd love to hear it. Email Editor@BWNApdx.org.
+Do you have a downsizing story to tell? We'd love to hear it. Email [Editor@BWNApdx.org](mailto:Editor@BWNApdx.org).
 
-*Susan Trabucco is a BWNA Board member and the volunteer editor of this newsletter. She was the founder, editor and publisher of a regional business journal. Since 2012, Susan and her husband have called B-W home, where she practices zonal denial in her tropical-ish garden. Reach her by emailing Editor@BWNApdx.org.*
+*Susan Trabucco is a BWNA Board member and the volunteer editor of this newsletter. She was the founder, editor and publisher of a regional business journal. Since 2012, Susan and her husband have called B-W home, where she practices zonal denial in her tropical-ish garden. Reach her by emailing [Editor@BWNApdx.org](mailto:Editor@BWNApdx.org).*

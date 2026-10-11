@@ -26,4 +26,4 @@ She's long been involved in the work of helping people get stronger — first as
 
 Her energy seems boundless; perhaps there really is something to her strength training regimen.
 
-For more information about Women's Strength Collective, visit womensstrengthcollectivepdx.com.
+For more information about Women's Strength Collective, visit [womensstrengthcollectivepdx.com](https://womensstrengthcollectivepdx.com).

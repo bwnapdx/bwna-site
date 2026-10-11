@@ -24,7 +24,7 @@ I love the people I've met through volunteering and enjoy helping to create oppo
 
 We have so much fun! And many hands make light work. I participate with the Events Committee, and we'd love more ideas for how to bring our little slice of the city together. Having more folks on the committee with the energy to help make the ideas happen would be great, too!
 
-If you are interested in learning more about the Events Committee, please contact John Sandie at SandieFam@gmail.com. Meetings are held the first Tuesday of each month at 7 p.m. The meeting location rotates among committee members' homes. Email John for the next meeting location.
+If you are interested in learning more about the Events Committee, please contact John Sandie at [SandieFam@gmail.com](mailto:SandieFam@gmail.com). Meetings are held the first Tuesday of each month at 7 p.m. The meeting location rotates among committee members' homes. Email John for the next meeting location.
 
 Next up for the Events Committee: A Styrofoam and electronics recycling event on February 21. Check out Upcoming Events on page 6 for details.
 

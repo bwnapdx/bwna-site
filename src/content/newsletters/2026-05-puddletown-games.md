@@ -26,4 +26,4 @@ Looking ahead, the goal for Puddletown is simple, says Miles. "We wish to keep t
 
 Visit their new space later this spring.
 
-*The BBA is a 501(c)(6) organization that advocates for its member businesses and works to promote the business district along NE Fremont Street from NE 38th Avenue to NE 50th. For more information about the BBA contact beaumontbusinesses@gmail.com.*
+*The BBA is a 501(c)(6) organization that advocates for its member businesses and works to promote the business district along NE Fremont Street from NE 38th Avenue to NE 50th. For more information about the BBA contact [beaumontbusinesses@gmail.com](mailto:beaumontbusinesses@gmail.com).*

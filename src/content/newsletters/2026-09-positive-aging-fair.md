@@ -20,6 +20,6 @@ Other workshops and activities will include Navigating Medicare, fall prevention
 
 The event will be held rain or shine, but will primarily be indoors at the German American Society. Last held in April 2025, the fair welcomed more than 100 attendees.
 
-An RSVP is not required for admission, but it helps event organizers get a general idea of how many people to expect. For more information and to RSVP, search for Positive Aging Health & Wellness Fair on eventbrite.com, or use the QR code on the event ad at the bottom of page 6.
+An RSVP is not required for admission, but it helps event organizers get a general idea of how many people to expect. For more information and to RSVP, search for Positive Aging Health & Wellness Fair on [eventbrite.com](https://eventbrite.com), or use the QR code on the event ad at the bottom of page 6.
 
 *Molly McRoberts and her spouse, Helen, moved to B-W in 2012. The couple and their dog Sophia love and appreciate their wonderful neighbors and neighborhood.*

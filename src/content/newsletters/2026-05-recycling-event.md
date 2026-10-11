@@ -20,6 +20,6 @@ Many thanks to Helen, manager at Great Spirit Church, for the use of its parking
 
 BWNA Events Committee volunteers for the day were John Sandie, Bev Yashar, Claudia Carle, Karla Lenox, Patti Koehler, Kate Krider, Steve Sandie, Sven Hansen, and Susan Trabucco. B-W neighbors Laurie Webber and Geoff Wickes organized the event.
 
-Interested in getting involved in this or other BWNA events? Email SandieFam@gmail.com to reach Events Committee Chair John Sandie.
+Interested in getting involved in this or other BWNA events? Email [SandieFam@gmail.com](mailto:SandieFam@gmail.com) to reach Events Committee Chair John Sandie.
 
-*Susan Trabucco is a BWNA board member and the volunteer editor of this newsletter. She was the founder, editor and publisher of a regional business journal. Since 2012, Susan and her husband have called B-W home, where she enjoys working in her tropical-ish garden. Reach her by emailing Editor@BWNApdx.org.*
+*Susan Trabucco is a BWNA board member and the volunteer editor of this newsletter. She was the founder, editor and publisher of a regional business journal. Since 2012, Susan and her husband have called B-W home, where she enjoys working in her tropical-ish garden. Reach her by emailing [Editor@BWNApdx.org](mailto:Editor@BWNApdx.org).*

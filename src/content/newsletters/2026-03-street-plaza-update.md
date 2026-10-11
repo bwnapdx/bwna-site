@@ -14,6 +14,6 @@ While applications were being reviewed, the joint BBA/BWNA team conducted initia
 
 If neighbors and nearby businesses are supportive of moving forward and the BBA/BWNA proposal is approved by PBOT, a plaza planning phase would occur over several months this spring. This planning effort, along with later plaza programming and oversight, would be undertaken by a committee made up of BBA and BWNA board members and other interested residents and local business representatives. The plaza would operate on a trial basis during the summer months of 2026, followed by an evaluation by PBOT that would be the basis for any discussions around potential continuation.
 
-A summary of outreach findings and information on next steps will be shared in an upcoming community update that will be emailed to subscribers. If you'd like to receive this information and haven't yet signed up, visit BWNApdx.org/Subscribe.
+A summary of outreach findings and information on next steps will be shared in an upcoming community update that will be emailed to subscribers. If you'd like to receive this information and haven't yet signed up, visit [BWNApdx.org/Subscribe](/subscribe).
 
 *Aaron has lived in Beaumont-Wilshire for 15 years. He and his wife, 12-year-old son, and 4-year-old dog spend lots of time roaming the neighborhood and love having so many destinations within walking distance from their front door.*

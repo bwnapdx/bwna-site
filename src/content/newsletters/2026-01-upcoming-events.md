@@ -17,7 +17,7 @@ Come swap non-GMO seeds, rhizomes, roots, and tubers with other local gardeners 
 
 A free workshop "How to Start Seeds and Plan a Vegetable Garden," starts at 11:15 a.m.
 
-Northeast Village PDX, a program of the Northeast Community Center, is a vibrant and engaging community of older adults (60+) living in 18 neighborhoods in northeast Portland. For more info call (503) 895-2750 or email info@nevillagepdx.org.
+Northeast Village PDX, a program of the Northeast Community Center, is a vibrant and engaging community of older adults (60+) living in 18 neighborhoods in northeast Portland. For more info call (503) 895-2750 or email [info@nevillagepdx.org](mailto:info@nevillagepdx.org).
 
 ## Neighborhood Styrofoam & Electronics Recycling Event
 
@@ -27,7 +27,7 @@ Northeast Village PDX, a program of the Northeast Community Center, is a vibrant
 
 Bring your Styrofoam, old batteries, and electronics to this BWNA-sponsored recycling event organized by neighbors Laurie Webber and Geoff Wickes. Donations accepted.
 
-**Required:** Email Laurie.Webber2011@gmail.com ahead of the event with details about what you intend to drop off so we know how many trucks we'll need!
+**Required:** Email [Laurie.Webber2011@gmail.com](mailto:Laurie.Webber2011@gmail.com) ahead of the event with details about what you intend to drop off so we know how many trucks we'll need!
 
 **Fees apply for some items to cover the cost of disposal:**
 
@@ -43,4 +43,4 @@ Bring your Styrofoam, old batteries, and electronics to this BWNA-sponsored recy
 
 **Location:** Sylvan Learning, 4300 NE Fremont St., Suite 150
 
-*Got Events? Email Editor@BWNApdx.org*
+*Got Events? Email [Editor@BWNApdx.org](mailto:Editor@BWNApdx.org)*

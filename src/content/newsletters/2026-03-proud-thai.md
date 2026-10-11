@@ -26,6 +26,6 @@ The duo emphasized their concept of "friends' sphere" — all are family both at
 
 Kate and Kiki wouldn't let me leave without a sample of their pad see ew and pork belly bao buns; needless to say, I will be back for more.
 
-Find Proud Thai at 4727 NE Fremont St. Hours of operation are every day from 11:30 a.m. to 9 p.m. You can view their creative menu and order for pickup or delivery at proudeatery.com.
+Find Proud Thai at 4727 NE Fremont St. Hours of operation are every day from 11:30 a.m. to 9 p.m. You can view their creative menu and order for pickup or delivery at [proudeatery.com](https://proudeatery.com).
 
 *John Sandie relocated from the Midwest with his wife Kathy to be closer to children and grandchildren in the area, landing on Fremont Street in B-W in early 2011. In retirement they pursue their desires to make a difference locally, John by volunteering with the neighborhood association, Kathy with Alameda School. The duo is contentedly busy volunteering and keeping up with grandchildren.*

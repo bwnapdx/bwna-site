@@ -14,8 +14,8 @@ Gas leaf blowers produce both noise and air pollution, negatively impacting the 
 
 Portland City Code Chapter 17.101, which addressed the use of gas-powered leaf blowers, was passed in March 2024 after years of citizen activism. The policy applies to all property owners in Portland. This means that a property owner cannot use gas leaf blowers and must ensure that any contractor or property manager they hire does not use them. Electric leaf blowers are permitted year-round, and all leaf blowers must comply with the city's noise code.
 
-If you observe a gas-powered leaf blower being used during the ban period, complaints can be filed online at portland.gov/ppd/noise/noise-concerns. If it's someone you have a relationship with, like a neighbor or friend, please consider "nudging" them to look into the new ordinance before reporting them. Violations may result in fines ranging from $250 to $1,000.
+If you observe a gas-powered leaf blower being used during the ban period, complaints can be filed online at [portland.gov/ppd/noise/noise-concerns](https://portland.gov/ppd/noise/noise-concerns). If it's someone you have a relationship with, like a neighbor or friend, please consider "nudging" them to look into the new ordinance before reporting them. Violations may result in fines ranging from $250 to $1,000.
 
-For more information visit portland.gov/bps/climate-action/leaf-blowers.
+For more information visit [portland.gov/bps/climate-action/leaf-blowers](https://portland.gov/bps/climate-action/leaf-blowers).
 
 *Liz Erickson has lived in the neighborhood with her husband and two children since 2009. Growing up in Beaverton, she remembers visiting grandparents on NE 42nd and walking to Rose's Ice Cream for a scoop of butter brickle. She's a Master Recycler volunteer with Metro and served in the Peace Corps in Morocco.*

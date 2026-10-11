@@ -9,7 +9,7 @@ page: 4
 
 ## Save the Date: Movie-in-the-(Wilshire) Park August 13
 
-It's not too early to get this event on your calendar! This summer's movie-in-the-park, co-sponsored and funded by the Beaumont-Wilshire and Alameda Neighborhood associations, takes place on Thurs., Aug. 13, at Wilshire Park. The featured movie, shown as part of Portland Parks & Recreation's Summer Free for All program, is "How to Train Your Dragon." Look for more details, including pre-movie activities and food vendors, in BWNA's monthly emailed Community Updates, the July-August newsletter, and at BWNApdx.org/Upcoming-Events.
+It's not too early to get this event on your calendar! This summer's movie-in-the-park, co-sponsored and funded by the Beaumont-Wilshire and Alameda Neighborhood associations, takes place on Thurs., Aug. 13, at Wilshire Park. The featured movie, shown as part of Portland Parks & Recreation's Summer Free for All program, is "How to Train Your Dragon." Look for more details, including pre-movie activities and food vendors, in BWNA's monthly emailed Community Updates, the July-August newsletter, and at [BWNApdx.org/Upcoming-Events](/events).
 
 ## Beloved Tree Team Leader Passes
 
@@ -21,7 +21,7 @@ Jeff embraced the volunteer role for which he was trained by Portland Parks & Re
 
 ## 2026 PDX World Naked Bike Ride to Launch from B-W
 
-Saturday, July 25, is the date scheduled for the 2026 PDX World Naked Bike Ride, which will start in Beaumont-Wilshire. Representatives of the ride will attend BWNA's board meeting on Monday, May 11, at 7 p.m. at Sylvan Learning, 4300 NE Fremont, to discuss the details of this permitted event. For more information visit pdxwnbr.org.
+Saturday, July 25, is the date scheduled for the 2026 PDX World Naked Bike Ride, which will start in Beaumont-Wilshire. Representatives of the ride will attend BWNA's board meeting on Monday, May 11, at 7 p.m. at Sylvan Learning, 4300 NE Fremont, to discuss the details of this permitted event. For more information visit [pdxwnbr.org](https://pdxwnbr.org).
 
 ## Seeking Block Party Sponsors by June 1
 
@@ -29,11 +29,11 @@ Calling all potential sponsors! We're looking for businesses or individuals to s
 
 Sponsor opportunities for this popular event range from $100 to $500 or more, with increasing levels of exposure for your name or logo in BWNA's marketing materials before and after the event. These include color event ads in the newsletter, promotional flyers, B-W yard signs, and a large banner at the event. Commitment by June 1 is required to be included in the marketing materials.
 
-Sponsor donations help cover the cost of this family-friendly event. Funds in excess of block party expenses help support other neighborhood events and BWNA projects such as the pedestrian street crossing flags. To become a sponsor, email Patti Koehler at patricekoehler@gmail.com or Susan Trabucco at Editor@BWNApdx.org.
+Sponsor donations help cover the cost of this family-friendly event. Funds in excess of block party expenses help support other neighborhood events and BWNA projects such as the pedestrian street crossing flags. To become a sponsor, email Patti Koehler at [patricekoehler@gmail.com](mailto:patricekoehler@gmail.com) or Susan Trabucco at [Editor@BWNApdx.org](mailto:Editor@BWNApdx.org).
 
 ## Hey! Young Buskers, Refreshment Vendors Needed for Art & Garden Tour
 
-Can you help make the 2026 Art & Garden Tour even more fun? The BWNA Events Committee is looking for volunteer student musicians and vendors for five different Art & Garden Tour locations on Saturday, July 18, from 11 a.m. to 4 p.m. Participants under 12 years of age must have an accompanying adult during event hours. Those interested should contact John Sandie at SandieFam@gmail.com.
+Can you help make the 2026 Art & Garden Tour even more fun? The BWNA Events Committee is looking for volunteer student musicians and vendors for five different Art & Garden Tour locations on Saturday, July 18, from 11 a.m. to 4 p.m. Participants under 12 years of age must have an accompanying adult during event hours. Those interested should contact John Sandie at [SandieFam@gmail.com](mailto:SandieFam@gmail.com).
 
 ## Board Elections 2026
 
@@ -47,4 +47,4 @@ At BWNA's April 13 board meeting, with no opposition, seven neighbors handily wo
 - Rob Lee, At Large Position 8 (Board member since 2023)
 - Colin O'Neill, At Large Position 10 (Board member since 2022)
 
-Visit BWNApdx.org/About-Us for more information about these volunteers.
+Visit [BWNApdx.org/About-Us](/about) for more information about these volunteers.

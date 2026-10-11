@@ -20,7 +20,7 @@ Carla is what I would describe as a free spirit sort of artist. She gets a visio
 
 She told me that one very rewarding aspect of painting publicly in busy neighborhoods is the interaction she gets from those who stop to discuss her projects.
 
-If you would like to see some more of Carla's artwork, current works are always on display at Little River Cafe on the banks of the Willamette River just north of Poet's Beach or check out her work at carladeal.com.
+If you would like to see some more of Carla's artwork, current works are always on display at Little River Cafe on the banks of the Willamette River just north of Poet's Beach or check out her work at [carladeal.com](https://carladeal.com).
 
 She's the real deal!
 

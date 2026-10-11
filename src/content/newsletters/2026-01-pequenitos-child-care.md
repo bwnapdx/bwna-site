@@ -22,6 +22,6 @@ Pequeñitos operates other sites on NE 55th Avenue (currently its main site), N.
 
 The company started 19 years ago, when CEO Karen Messner, Sthefany's aunt, turned caring for her own daughter into the beginning of a bigger childcare career.
 
-For more information, visit pequenitoschildcare.org.
+For more information, visit [pequenitoschildcare.org](https://pequenitoschildcare.org).
 
 *Chris Rauber and his wife moved to Portland and B-W in mid-2022 after many years in the San Francisco Bay Area. He wrote for the San Francisco Business Times and other publications. He was born in Oregon*

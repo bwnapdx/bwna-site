@@ -14,7 +14,7 @@ Baseball fans will surely know that the #42 was worn by Jackie Robinson, the fir
 
 A wonderful mural depicting Robinson in action rounding first base is about 100 feet north of our B-W neighborhood, on the corner of NE 42nd Street and Sumner. The mural is the work of artist John Vance who was tasked with creating an image that would help promote Our 42nd Avenue, an economic development organization that fosters the business community along NE 42nd Avenue.
 
-John, aka 'johnnyterrific,' is a fascinating man who creates art as his calling. When I met with him at the mural, I found him to be engaging, energetic, creative beyond measure, and extraordinarily community focused. His mural is also the cover art for Our42nd's website: 42ave.org.
+John, aka 'johnnyterrific,' is a fascinating man who creates art as his calling. When I met with him at the mural, I found him to be engaging, energetic, creative beyond measure, and extraordinarily community focused. His mural is also the cover art for Our42nd's website: [42ave.org](https://42ave.org).
 
 A quotation by Jackie Robinson is inscribed on the mural: "A life is not important except in the impact it has on other lives."
 
