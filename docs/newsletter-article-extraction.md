@@ -4,7 +4,67 @@
 
 Each bimonthly BWNA newsletter PDF contains 10-18 articles that need to be extracted into individual markdown files for the website's content collection. This is a manual process done with Claude Code.
 
-## Process (per issue, ~15 minutes)
+New issues (2026 onward) are transcribed from the InDesign HTML export. See [Current issues: InDesign export](#current-issues-indesign-export). The PDF-based process below is how the back catalog was extracted.
+
+## Current issues: InDesign export
+
+Source folder in Dropbox: `COMMUNICATIONS/HTML Newsletters for Web/<Year> HTML/<Mon>-<Mon> <Year> Newsletter HTML/`
+
+- `publication-web-resources/html/publication-*.html`: the text, one two-page spread per file
+- `photos used in InDesign <Mon>-<Mon> <Year>/`: the full-size photo originals
+
+### 1. Transcribe the text word for word
+
+This is an archive, so never summarize, paraphrase or "clean up" the text.
+
+- The spread files are absolutely positioned `<span>`s. Group spans by their `top:` value to rebuild lines. Watch for drop caps ("S o goes" means "So goes") and sentences split across columns or pages.
+- Text frames are interleaved, so check paragraph order and pull-quote placement against the rendered PDF page: `pdftoppm -jpeg -f N -l N public/newsletters/bwna-YYYY-MM.pdf /tmp/page`
+- Keep source typos as printed, and flag them for the editor.
+- Put photo captions in `imageAlt` (or the gallery `caption`) verbatim. Italicize closing author bios.
+- Compare every markdown paragraph against the extracted source text with a fuzzy match. A paragraph below ~0.99 that isn't explained by heading case, poem formatting or a column split has been paraphrased and needs fixing.
+
+### 2. Convert photos to sRGB using their color profiles
+
+Use the originals in `photos used in InDesign …`, not the export's `publication-web-resources/image/` folder, which only has ~350px copies.
+
+Most originals are print CMYK files tagged **U.S. Web Coated (SWOP) v2**, including some without "cmyk" in the filename. Some iPhone photos are **Display P3**. Check each one first:
+
+```bash
+magick identify -verbose "photo.jpg" | grep -E 'Colorspace|icc:description'
+```
+
+Convert through the embedded profile into sRGB:
+
+```bash
+magick "photo.jpg" -auto-orient -intent Perceptual -black-point-compensation \
+  -profile "/System/Library/ColorSync/Profiles/sRGB Profile.icc" \
+  -resize '1600x1600>' -strip -quality 85 public/images/newsletters/YYYY-MM-slug.jpg
+```
+
+Never use `-colorspace sRGB` on a CMYK photo. It ignores the profile and produces blown-out, neon colors. That's what happened to the Sep-Oct 2026 photos, which were fixed in October 2026. Photos that are already plain sRGB only need resizing.
+
+Look at the result next to the original before committing. Skin tones, grass and bright clothing are where a bad conversion shows most.
+
+### 3. Turn web addresses and emails into links
+
+The printed text has bare addresses like `portland.gov/pbem` and `Editor@BWNApdx.org`. Make them clickable:
+
+```bash
+python3 scripts/linkify-articles.py src/content/newsletters/YYYY-MM-*.md
+```
+
+- Link text stays exactly as printed. Only the link target is added.
+- `BWNApdx.org` addresses point to the current site's pages: `/Subscribe` goes to `/subscribe`, `/Upcoming-Events` to `/events`, `/About-Us` to `/about`, and the bare domain to the homepage. Add any new BWNApdx.org paths to `INTERNAL` in the script.
+- Emails become `mailto:` links. Other sites get `https://`.
+- The script skips existing links, so it's safe to rerun.
+
+Then review the diff and click through the outside links. Some sites block automated checks, so test those by hand. If a site is dead, keep the link as printed and consider a transparency note rather than editing the text.
+
+### 4. Build and check
+
+Run `npm run build`, then spot-check the new articles on `npm run dev`. Check photo colors and links especially.
+
+## Back catalog: PDF extraction (per issue, ~15 minutes)
 
 ### 1. Convert PDF to page images
 
