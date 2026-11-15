@@ -196,6 +196,8 @@ Check that the new articles appear in the build output and the page count increa
 
 All 85 issues from 2012–2026 extracted (1,095 articles) via `scripts/extract-articles.mjs` on 2026-04-23 using the Anthropic API + Sonnet 4.6. The script now uses Sonnet 5.5.
 
+Nov–Dec 2025 was first transcribed by hand from page images, and `verify-extraction.py` showed it had drifted badly. Upcoming Events had the wrong event name, address, phone number, email and signup link, and the real-estate stats box was missing. On 2026-11-15 it was re-extracted with the current script, keeping the original file names, titles, categories and featured flags. It now passes 132 of 132 paragraphs.
+
 2002–2011: all 60 issues extracted (995 articles) on 2026-11-15 with Sonnet 5.5 via the Batch API, using the `ant` CLI sign-in. `verify-extraction.py` passed 4,110 of 4,153 paragraphs. All 43 flags were spot-checked and none were transcription errors. They come from three limits of the PDFs' own text:
 
 - **Drop caps and superscripts** are stored apart from their words ("I N CASE you", "23 rd"), leaving one- or two-letter leftovers.
