@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
 import { categoryLabels } from '../data/categoryLabels';
+import { issueLabel, issueYear } from '../data/issues';
+import fs from 'node:fs';
 
 const base = import.meta.env.BASE_URL;
 
@@ -35,18 +37,11 @@ const webIssuePdfs: Record<string, string> = {
   '2026-01': 'bwna-2026-01.pdf',
 };
 
-// Generate bimonthly newsletter PDF archive (2012-2025)
-const bimonthlyPairs = [
-  ['Nov', 'Dec', '11'], ['Sep', 'Oct', '09'], ['Jul', 'Aug', '07'],
-  ['May', 'Jun', '05'], ['Mar', 'Apr', '03'], ['Jan', 'Feb', '01'],
-];
-
-const olderPdfs: { date: string; file: string }[] = [];
-for (let year = 2025; year >= 2012; year--) {
-  for (const [start, end, month] of bimonthlyPairs) {
-    olderPdfs.push({ date: `${start} - ${end} ${year}`, file: `bwna-${year}-${month}.pdf` });
-  }
-}
+// Every issue PDF in public/newsletters (back to Dec 2001-Jan 2002).
+const olderPdfs: { date: string; file: string }[] = fs
+  .readdirSync('public/newsletters')
+  .filter(f => /^bwna-\d{4}-\d{2}\.pdf$/.test(f))
+  .map(file => ({ date: issueLabel(file.slice(5, 12)), file }));
 
 // One archive entry per issue, merging the extracted article tables of contents
 // with the scanned PDFs. Before this the two lived in separate sections, so every
@@ -86,7 +81,7 @@ const archiveIssues = Array.from(archive.values())
 const currentIssue = archiveIssues[0];
 const issuesByYear: Record<string, ArchiveIssue[]> = {};
 for (const issue of archiveIssues.slice(1)) {
-  (issuesByYear[issue.slug.slice(0, 4)] ??= []).push(issue);
+  (issuesByYear[issueYear(issue.slug)] ??= []).push(issue);
 }
 ---
 
@@ -148,7 +143,7 @@ for (const issue of archiveIssues.slice(1)) {
     <div class="container content-width">
       <h2>Past Issues</h2>
       <p class="archive-note">
-        Every issue back to 2012. Expand a year to see its issues, article listings, and PDFs.
+        Every issue back to 2002. Expand a year to see its issues, article listings, and PDFs.
       </p>
 
       {Object.entries(issuesByYear).sort(([a], [b]) => Number(b) - Number(a)).map(([year, items]) => (
