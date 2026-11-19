@@ -2,7 +2,7 @@
 title: "BWNA Communications Committee Meeting"
 date: 2026-05-21
 time: "4:30 PM"
-location: "Contact Michelle Rudd — pdx.stmptwn@gmail.com"
+location: "Email info@bwnapdx.org for the location"
 type: "meeting"
 scope: "bwna"
 recurring: false

@@ -2,7 +2,7 @@
 title: "BWNA Events Committee Meeting"
 date: 2026-10-06
 time: "7:00 PM - 8:30 PM"
-location: "Contact John Sandie — sandiefam@gmail.com"
+location: "Email info@bwnapdx.org for the location"
 type: "meeting"
 scope: "bwna"
 recurring: false

@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import cloudflare from '@astrojs/cloudflare';
+import rehypeRedactEmails from './src/utils/rehype-redact-emails.mjs';
 
 // Keystatic's admin UI (/keystatic) needs server routes for the GitHub OAuth
 // callback — so it can't ship in the GitHub Pages build, which is fully
@@ -20,4 +21,6 @@ export default defineConfig({
   site: 'https://www.bwnapdx.org',
   adapter: isAdminBuild ? cloudflare() : undefined,
   integrations: [pagefind(), sitemap(), ...(withKeystatic ? [react(), keystatic()] : [])],
+  // Only @bwnapdx.org addresses appear on the site. See the plugin for details.
+  markdown: { rehypePlugins: [rehypeRedactEmails] },
 });
