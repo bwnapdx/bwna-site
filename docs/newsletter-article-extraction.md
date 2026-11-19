@@ -4,7 +4,7 @@
 
 Each bimonthly BWNA newsletter PDF contains 10-18 articles that need to be extracted into individual markdown files for the website's content collection. This is a manual process done with Claude Code.
 
-New issues (2026 onward) are transcribed from the InDesign HTML export. See [Current issues: InDesign export](#current-issues-indesign-export). The PDF-based process below is how the back catalog was extracted.
+New issues (2026 onward) are transcribed from the InDesign HTML export. See [Current issues: InDesign export](#current-issues-indesign-export). 2002–2011 issues go through the script with a word-for-word check. See [Early issues: 2002–2011](#early-issues-20022011). The PDF-based process below is how the 2012–2025 back catalog was extracted.
 
 ## Current issues: InDesign export
 
@@ -63,6 +63,48 @@ Then review the diff and click through the outside links. Some sites block autom
 ### 4. Build and check
 
 Run `npm run build`, then spot-check the new articles on `npm run dev`. Check photo colors and links especially.
+
+## Early issues: 2002–2011
+
+Source folder in Dropbox: `COMMUNICATIONS/HTML Newsletters for Web/Newsletters 2002 through 2011/`. Sixty issues, December 2001 through November–December 2011. The files are online-only in Dropbox, so open or `cat` them once to download them.
+
+These PDFs were made digitally, so each page has a real text layer. The script passes that text to the model next to each page image, and `scripts/verify-extraction.py` checks every paragraph against it. That makes these issues more trustworthy than the 2012–2025 extraction, which had nothing to check against.
+
+### 1. Copy the PDFs in under their issue codes
+
+The Dropbox filenames are `<n> <Mon>-<Mon> <Year>.pdf`, where the year is the year the issue *ends* in. "1 Dec-Jan 2002.pdf" is December 2001/January 2002, so it becomes `bwna-2001-12.pdf`. Every other issue is named by its first month as usual.
+
+| Years | Issues | Codes |
+|------|--------|-------|
+| 2002–2009 | Dec–Jan, Feb–Mar, Apr–May, Jun–Jul, Aug–Sep, Oct–Nov | `YYYY-12` (previous year), `-02`, `-04`, `-06`, `-08`, `-10` |
+| Oct–Dec 2009 | One three-month issue (filed as "Oct-Nov 2009") that moved the schedule over | `2009-10` |
+| 2010 on | Jan–Feb, Mar–Apr, … | `-01`, `-03`, `-05`, `-07`, `-09`, `-11` |
+
+Display names and which year an issue is filed under come from `src/data/issues.ts`. A Dec–Jan issue is filed under the year it ends in. The script has a copy of the same logic in `issueDisplayName()`. If you add another odd issue, add it to `LABEL_OVERRIDES` in both.
+
+### 2. Extract
+
+```bash
+node scripts/extract-articles.mjs --issues=2001-12            # one issue
+node scripts/extract-articles.mjs --issues=2001-12,2002-02 --batch
+```
+
+The early covers don't have an "IN THIS ISSUE" list, so the model finds articles by reading every page. It skips ads and recurring boilerplate (the officers roster, the staff box, submission guidelines, the mailing panel).
+
+### 3. Verify word for word
+
+```bash
+python3 scripts/verify-extraction.py 2001-12
+```
+
+- **Fidelity:** each paragraph is compared with the PDF text as lowercase letters and digits only, so case, punctuation, line-break hyphens, drop caps and column order don't count. A paragraph under 0.99 contains words that aren't in the PDF. The script prints those words. Fix the markdown to match the PDF. Don't regenerate the issue for a few bad paragraphs.
+- **Coverage:** the share of each page's text that ended up in an article, plus any long runs of text that didn't. Ads and boilerplate are expected to show up here. A missing story is not, so add it by hand, transcribing from `pdftotext -f N -l N`.
+
+The script exits 1 if anything fails the fidelity check, so the batch run can be checked with one command: `python3 scripts/verify-extraction.py $(ls public/newsletters | sed -nE 's/bwna-(20(0[0-9]|1[01])-[0-9]{2})\.pdf/\1/p') --quiet`.
+
+### 4. Build and check
+
+Same as below. These issues keep `pdfFile` in their frontmatter, so they carry the "text-extracted" archive disclaimer like the rest of the back catalog.
 
 ## Back catalog: PDF extraction (per issue, ~15 minutes)
 
@@ -152,7 +194,19 @@ Check that the new articles appear in the build output and the page count increa
 
 ## Progress tracker
 
-All 85 issues extracted (1,095 articles) via `scripts/extract-articles.mjs` on 2026-04-23 using the Anthropic API + Sonnet 4.6.
+All 85 issues from 2012–2026 extracted (1,095 articles) via `scripts/extract-articles.mjs` on 2026-04-23 using the Anthropic API + Sonnet 4.6. The script now uses Sonnet 5.5.
+
+Nov–Dec 2025 was first transcribed by hand from page images, and `verify-extraction.py` showed it had drifted badly. Upcoming Events had the wrong event name, address, phone number, email and signup link, and the real-estate stats box was missing. On 2026-11-15 it was re-extracted with the current script, keeping the original file names, titles, categories and featured flags. It now passes 132 of 132 paragraphs.
+
+2002–2011: all 60 issues extracted (995 articles) on 2026-11-15 with Sonnet 5.5 via the Batch API, using the `ant` CLI sign-in. `verify-extraction.py` passed 4,110 of 4,153 paragraphs. All 43 flags were spot-checked and none were transcription errors. They come from three limits of the PDFs' own text:
+
+- **Drop caps and superscripts** are stored apart from their words ("I N CASE you", "23 rd"), leaving one- or two-letter leftovers.
+- **Text wrapped around photos** is sometimes stored as scattered letters (Cool Runnings Café, Dec 2002).
+- **Text inside graphics** has no PDF text to check against, including comics, flyers, phone lists and real-estate tables. The model transcribed these from the page image. The Backpack Lunch flyer (Oct–Dec 2009) was checked by eye and is accurate.
+
+Many ads use fonts whose text comes out as gibberish (e.g. `PVSGBNJMZ…`). They show up in the coverage report but are skipped on purpose.
+
+The batch hit the 20k output limit on the 12-page Oct–Dec 2009 issue. The script now allows 32k, streams single-issue runs, and skips incomplete `save_article` calls instead of crashing. Sonnet 5.5 rejects `tool_choice: any`, so the script uses `auto`.
 
 First pass (image-based, Batch API) extracted 82 issues. Three issues (2014-03, 2025-01, 2025-09) repeatedly tripped Anthropic's output content filter. They succeeded on a retry using direct-PDF input + a softer prompt that established BWNA's ownership of the content.
 
@@ -174,7 +228,7 @@ node scripts/extract-articles.mjs --batch --all
 node scripts/extract-articles.mjs --poll=msgbatch_XXX
 ```
 
-Requires `ANTHROPIC_API_KEY` in `.env` (gitignored).
+Sign in once with the Anthropic CLI (`ant auth login`) and the script uses that sign-in, refreshing the token as needed. Otherwise it falls back to `ANTHROPIC_API_KEY` in `.env` (gitignored).
 
 ## Tips
 

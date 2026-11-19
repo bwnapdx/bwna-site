@@ -22,7 +22,7 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const NEWSLETTERS_PDF_DIR = path.join(REPO_ROOT, 'public/newsletters');
 const ARTICLES_OUT_DIR = path.join(REPO_ROOT, 'src/content/newsletters');
 const IMAGE_CACHE_DIR = '/tmp/bwna-batch';
-const MODEL = 'claude-sonnet-4-6';
+const MODEL = 'claude-sonnet-5-5';
 const DPI = 150;
 
 const CATEGORIES = [
@@ -31,10 +31,35 @@ const CATEGORIES = [
   'announcements', 'volunteer', 'other',
 ];
 
-const MONTH_PAIRS = {
-  '01': 'Jan-Feb', '03': 'Mar-Apr', '05': 'May-Jun',
-  '07': 'Jul-Aug', '09': 'Sep-Oct', '11': 'Nov-Dec',
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+// Issues that don't follow the two-month pattern. Keep in sync with
+// src/data/issues.ts.
+const ISSUE_LABEL_OVERRIDES = {
+  '2009-10': 'Oct-Dec 2009', // three-month issue bridging to the Jan-Feb schedule
 };
+
+// Credentials, in order: ANTHROPIC_AUTH_TOKEN, the `ant` CLI's signed-in
+// profile (run `ant auth login` once; it refreshes its own token), then
+// ANTHROPIC_API_KEY from .env.
+function makeClient() {
+  if (process.env.ANTHROPIC_AUTH_TOKEN) {
+    return new Anthropic({ authToken: process.env.ANTHROPIC_AUTH_TOKEN, apiKey: null });
+  }
+  try {
+    const authToken = execSync('ant auth print-credentials --access-token', { stdio: ['ignore', 'pipe', 'ignore'] })
+      .toString().trim();
+    if (authToken) {
+      console.log('Using the ant CLI sign-in');
+      return new Anthropic({ authToken, apiKey: null });
+    }
+  } catch {
+    // ant not installed or not signed in
+  }
+  if (process.env.ANTHROPIC_API_KEY) return new Anthropic();
+  console.error('No credentials: run `ant auth login`, or set ANTHROPIC_API_KEY in .env');
+  process.exit(1);
+}
 
 function parseArgs() {
   const args = {};
@@ -64,10 +89,28 @@ function listExtractedIssues() {
   return slugs;
 }
 
+// Every issue covers two months, named by its first month: 2012-01 is
+// "Jan-Feb 2012". Before 2010 the issues started on even months, so 2001-12
+// is "Dec 2001-Jan 2002".
 function issueDisplayName(issueSlug) {
-  const [year, month] = issueSlug.split('-');
-  const pair = MONTH_PAIRS[month] ?? month;
-  return `${pair} ${year}`;
+  if (ISSUE_LABEL_OVERRIDES[issueSlug]) return ISSUE_LABEL_OVERRIDES[issueSlug];
+  const [year, month] = issueSlug.split('-').map(Number);
+  const first = MONTHS[month - 1];
+  if (month === 12) return `Dec ${year}-Jan ${year + 1}`;
+  return `${first}-${MONTHS[month]} ${year}`;
+}
+
+// The PDF's own text layer, one string per page. Pre-2012 issues were made
+// digitally and have a clean one; we pass it alongside the page images so the
+// model can transcribe from real text instead of reading pixels. Returns []
+// when there's no usable text layer (scanned issues).
+function pdfPageTexts(issueSlug) {
+  const pdfPath = path.join(NEWSLETTERS_PDF_DIR, `bwna-${issueSlug}.pdf`);
+  const text = execSync(`pdftotext -q "${pdfPath}" -`, { maxBuffer: 64 * 1024 * 1024 }).toString();
+  const pages = text.split('\f');
+  if (pages.at(-1).trim() === '') pages.pop();
+  const words = pages.join(' ').split(/\s+/).filter(Boolean).length;
+  return words > 200 * pages.length ? pages : [];
 }
 
 function issueDate(issueSlug) {
@@ -94,7 +137,12 @@ function buildSystemPrompt() {
 
 You will receive one issue of the newsletter. Your job is to identify each article and submit it using the \`save_article\` tool — one tool call per article, as many parallel calls as needed in a single response.
 
+This is an archive, so transcribe every article word for word, exactly as printed. Never summarize, condense, paraphrase, reorder sentences or "fix" wording. Keep the printed spelling, typos, capitalization of names and numbers as they are. The only changes allowed are: rejoin words hyphenated across line breaks, rejoin drop caps to their word (e.g. "R ECENT EVENTS" → "Recent events"), rejoin sentences split across columns or pages, and convert ALL-CAPS lead-ins to normal sentence case.
+
+When a page's text layer is supplied, copy the words from it. Use the page image only to work out reading order, which text belongs to which article, headings, pull quotes and formatting. The text layer's line order can jump between columns, so follow the image for order.
+
 A few conventions for the archive:
+- Skip recurring boilerplate that isn't an article: the officers and board member roster, the newsletter staff box, submission guidelines, the mailing panel and return address.
 - Please skip full-page advertisements; we only want editorial articles.
 - The "IN THIS ISSUE" table of contents is not an article.
 - The cover story (usually a prominent front-page feature) should have featured: true. All others false.
@@ -132,18 +180,22 @@ const SAVE_ARTICLE_TOOL = {
 };
 
 function buildUserMessageFromImages(issueSlug, imagePaths) {
-  const imageBlocks = imagePaths.map(p => ({
-    type: 'image',
-    source: {
-      type: 'base64',
-      media_type: 'image/jpeg',
-      data: fs.readFileSync(p).toString('base64'),
+  const texts = pdfPageTexts(issueSlug);
+  const pageBlocks = imagePaths.flatMap((p, i) => [
+    {
+      type: 'image',
+      source: {
+        type: 'base64',
+        media_type: 'image/jpeg',
+        data: fs.readFileSync(p).toString('base64'),
+      },
     },
-  }));
+    ...(texts[i] ? [{ type: 'text', text: `Text layer of page ${i + 1}:\n\n${texts[i]}` }] : []),
+  ]);
   return {
     role: 'user',
     content: [
-      ...imageBlocks,
+      ...pageBlocks,
       {
         type: 'text',
         text: `Issue: ${issueDisplayName(issueSlug)} (pdfFile: bwna-${issueSlug}.pdf)\n\nPlease extract all articles from this issue of the BWNA newsletter archive.`,
@@ -180,10 +232,10 @@ function buildRequestParams(issueSlug, { usePdf = false } = {}) {
     : buildUserMessageFromImages(issueSlug, pdfToImages(issueSlug));
   return {
     model: MODEL,
-    max_tokens: 20000,
+    max_tokens: 32000, // 12-page issues need ~20k
     system: buildSystemPrompt(),
     tools: [SAVE_ARTICLE_TOOL],
-    tool_choice: { type: 'any', disable_parallel_tool_use: false },
+    tool_choice: { type: 'auto' }, // Sonnet 5.5 rejects forced tool choice ('any'/'tool')
     messages: [userMessage],
     metadata: { user_id: `bwna-${issueSlug}` },
   };
@@ -226,6 +278,13 @@ function cleanBody(body) {
 function writeArticles(issueSlug, articles) {
   let written = 0;
   for (const a of articles) {
+    // tool_choice is 'auto' (Sonnet 5.5 can't force tools), so the input schema
+    // isn't guaranteed. Skip incomplete calls instead of crashing mid-issue.
+    const missing = ['slug', 'title', 'body', 'category'].filter(k => typeof a[k] !== 'string' || !a[k]);
+    if (missing.length) {
+      console.log(`  SKIPPED incomplete article (${a.slug ?? 'no slug'}): missing ${missing.join(', ')}`);
+      continue;
+    }
     const filename = `${issueSlug}-${a.slug}.md`;
     const filepath = path.join(ARTICLES_OUT_DIR, filename);
     if (fs.existsSync(filepath)) {
@@ -255,7 +314,8 @@ async function runSync(anthropic, issues, opts = {}) {
     try {
       const params = buildRequestParams(issueSlug, opts);
       console.log(`  model=${params.model}, mode=${opts.usePdf ? 'pdf' : 'images'}`);
-      const resp = await anthropic.messages.create(params);
+      // Streamed: the SDK refuses non-streaming requests this large.
+      const resp = await anthropic.messages.stream(params).finalMessage();
       console.log(`  tokens: in=${resp.usage.input_tokens} out=${resp.usage.output_tokens} stop=${resp.stop_reason}`);
       const articles = extractArticlesFromResponse(resp.content);
       console.log(`  extracted ${articles.length} articles`);
@@ -344,7 +404,7 @@ async function main() {
   const args = parseArgs();
 
   if (args.poll) {
-    const anthropic = new Anthropic();
+    const anthropic = makeClient();
     await pollBatch(anthropic, args.poll);
     return;
   }
@@ -372,12 +432,7 @@ async function main() {
     return;
   }
 
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('ANTHROPIC_API_KEY not set (expected in .env)');
-    process.exit(1);
-  }
-
-  const anthropic = new Anthropic();
+  const anthropic = makeClient();
   const opts = { usePdf: !!args.pdf };
 
   if (args.batch) {

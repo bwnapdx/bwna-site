@@ -1,0 +1,23 @@
+---
+title: "A Word from Our New President"
+issue: "Jun-Jul 2008"
+issueSlug: "2008-06"
+date: 2008-06-01
+category: "presidents-message"
+featured: false
+page: 2
+pdfFile: "bwna-2008-06.pdf"
+---
+Summer is in the air, and for BWNA it signals the beginning of planning for the next 12 months with leadership, including 3 newly-elected board members, an additional Central Northeast Neighbors representative, and a new president and treasurer. The resulting influx of new energy and fresh perspectives can only heighten the effectiveness of our association. In taking on the position of BWNA President, I am both honored by the confidence shown in me and humbled by the breadth and scope of the office.
+
+Fortunately, our veteran vice president, Bill Markwart, has taken me under his steady wing and is providing much-appreciated mentorship. Bill also deserves a thanks for stepping up to serve as interim president the past year following the departure from the neighborhood of former president Albert Kaufman. Under Bill’s direction, the board meetings have been run fairly and knowledgeably, and general meetings have been well attended, due to the informative and, occasionally, provocative nature of the topics presented and discussed. Through it all, Bill has remained cool, collected—and bursting with wit and humor. Our neighborhood hats go off to you, Bill! I look forward to working with Bill and the officers and board members in the coming year to help enhance our already vibrant and beautiful neighborhood.
+
+Although I’ve only been an active participant in BWNA for the past few years, my connection with the Beaumont Wilshire neighborhood and Wilshire Park spans over 30 years. However, I must confess up front to initially entering Oregon via California. Born in San Francisco and raised in San Carlos (south of S.F. on The Peninsula), my introduction to Oregon came as a college student at Willamette University in Salem, where I met my wife, Peggy, to whom I’ve been married since 1970. We both became teachers—she an elementary teacher and reading specialist in Vancouver’s Evergreen District, and I (mostly) a high-school teacher of Russian language and social studies in the Portland School District. We bought our first house on 49th, just down the street from Stanich’s, and began our family (two daughters) there. During those years, we loved going to Wilshire Park for picnics with friends & kids, and in 1990 we made the move to our current home, located right across the street from the park! And what a delight it has been to watch the park evolve over the years into the amply-lighted, family-friendly, athlete-friendly, dog owner-friendly neighborhood recreation center. This is the very kind of progress that BWNA strives to promote and facilitate through its organization of volunteer efforts and distribution of monetary assistance.
+
+Since my retirement in 2000, after 30 years of teaching in Portland, I have worked as an adjunct instructor in the Graduate Education Department at PSU, supervising student teachers. I’m also and an officer, in Portland’s Russian sister city association (Portland- Khabarovsk Sister City Association). While continuing to serve in the sister city association, I have called it quits at Portland State, and that has opened up time for me to devote to BWNA—hence my decision to allow myself to be nominated for the presidency of the association last month.
+
+Recently I worked on a BWNA committee to organize April’s “Taste of Beaumont,” an event that is purposely scheduled each year on the evening of the general meeting devoted to electing neighborhood residents to fill board vacancies. On behalf of the board, I want to thank the parents and teachers who went out of their way to assist us at Beaumont Middle School, the Beaumont M.S. band for an inspired concert, and especially the chefs from neighborhood restaurants who volunteered their time and culinary expertise to make this evening both enjoyable and tasty. Recently, in thanking the restaurants personally, I received a written reply from Karen Stahr of Ottoman Klasik: “So glad the event was a success...My husband said he saw many of our customers there...We look forward to participating in more community events with BWNA...Many thanks for your thoughtful message.”
+
+That’s great to hear, and the BWNA leadership will work to build on this year’s success. I encourage you to attend our next general meeting on the evening of Monday, June 9th, at Beaumont Middle School, and look forward to hearing your ideas on what BWNA should include in its goals and objectives for the coming months.
+
+*–Al Ellis*
