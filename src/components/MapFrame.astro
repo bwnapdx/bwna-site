@@ -1,0 +1,39 @@
+---
+// Embeds one of the self-contained Leaflet maps in public/maps/<slug>/index.html.
+// The map files are Graeme's (Grunyar, LLC) and are served unmodified.
+interface Props {
+  slug: string;
+  title: string;
+}
+
+const { slug, title } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const mapUrl = `${base}maps/${slug}/index.html`;
+---
+
+<div class="container map-frame-wrap">
+  <iframe src={mapUrl} title={title} class="map-frame" loading="lazy"></iframe>
+  <p class="map-frame-fullscreen">
+    <a href={mapUrl} class="btn btn-secondary" target="_blank" rel="noopener">Open the full-screen map</a>
+  </p>
+</div>
+
+<style>
+  .map-frame-wrap {
+    margin: var(--spacing-lg) auto var(--spacing-xl);
+  }
+
+  .map-frame {
+    display: block;
+    width: 100%;
+    height: min(80vh, 760px);
+    min-height: 460px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .map-frame-fullscreen {
+    margin-top: var(--spacing-md);
+    text-align: center;
+  }
+</style>

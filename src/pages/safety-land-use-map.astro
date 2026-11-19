@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+import MapFrame from '../components/MapFrame.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Public Safety & Land Use Map" description="An interactive map of Beaumont-Wilshire and Portland: reported crime, zoning, earthquake and flood hazards, and emergency resources.">
+  <section class="hero">
+    <div class="container">
+      <h1>Public Safety &amp; Land Use Map</h1>
+      <p>Crime reports, zoning, hazards, and emergency resources</p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container content-width">
+      <p>
+        A companion to the <a href={`${base}transportation-map`}>Neighborhood Transportation Map</a>,
+        built by Transportation Committee chair Graeme Rudd from City of Portland, Portland
+        Police Bureau, Portland Fire &amp; Rescue, Metro, FEMA, and state geology data. Use the
+        layers panel to switch on:
+      </p>
+      <ul class="spaced-list">
+        <li>Reported crime, as individual reports or heat maps, and graffiti reports</li>
+        <li>Zoning, the Comprehensive Plan map, historic and conservation districts, and land use reviews</li>
+        <li>Earthquake faults and liquefaction, landslides, and floodplains</li>
+        <li>Fire stations, hydrants, and emergency response streets</li>
+        <li>Neighborhood Emergency Team staging areas and BEECN earthquake communication sites</li>
+        <li>Hospitals, libraries, community centers, and grocery and hardware stores</li>
+      </ul>
+      <p>
+        The dashboard compares Beaumont-Wilshire with other Portland neighborhoods and Portland
+        with other cities. Crime figures are reports to police, not convictions, and the map's
+        own notes explain the limits of each source. The map loads live from the agencies that
+        publish the data, so a layer can take a few seconds to appear.
+      </p>
+    </div>
+
+    <MapFrame slug="safety-land-use" title="Interactive Beaumont-Wilshire public safety and land use map" />
+
+    <div class="container content-width">
+      <p>
+        Questions about safety or development in the neighborhood? BWNA's
+        <a href={`${base}committees#crime-prevention-safety`}>Crime Prevention &amp; Safety</a> and
+        <a href={`${base}committees#land-use`}>Land Use</a> committees follow these issues.
+        For questions about the map itself,
+        <ObfuscatedEmail email="info@bwnapdx.org" label="contact the Transportation Committee" />.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
