@@ -1,0 +1,15 @@
+---
+title: "BWNA General Meeting"
+date: 2026-01-01
+time: "7:00 PM - 8:30 PM"
+location: "Sylvan Learning"
+address: "4300 NE Fremont St, Suite 150, Portland, OR"
+type: "meeting"
+ticketUrl: "https://us06web.zoom.us/j/86798571365?pwd=ufBoaDGhieyCI3bammVMhbbqzGdZU5.1"
+ticketLabel: "Join on Zoom"
+recurring: true
+recurrenceWeek: [2]
+recurrenceDay: 1
+recurrenceMonths: "odd"
+summary: "Monthly general meeting, open to all neighbors. All are welcome!"
+---
