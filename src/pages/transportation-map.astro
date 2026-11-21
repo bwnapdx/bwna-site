@@ -1,81 +1,55 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+import MapFrame from '../components/MapFrame.astro';
 
 const base = import.meta.env.BASE_URL;
-const mapUrl = `${base}maps/transportation/index.html`;
 ---
 
-<BaseLayout title="Neighborhood Transportation Map" description="An interactive map of Beaumont-Wilshire's greenways, bike routes, Safe Routes to School, High Crash Network streets, and crash records.">
+<BaseLayout title="Neighborhood Transportation Map" description="An interactive map of how people get around Beaumont-Wilshire and Portland: crashes, High Crash Network streets, bike routes, transit, traffic speeds, crossings, and paving.">
   <section class="hero">
     <div class="container">
       <h1>Neighborhood Transportation Map</h1>
-      <p>Greenways, safe routes, and crash data for Beaumont-Wilshire</p>
+      <p>Streets, safety, and getting around in Beaumont-Wilshire</p>
     </div>
   </section>
 
   <section class="page-section">
     <div class="container content-width">
       <p>
-        Built by Transportation Committee chair Graeme Rudd from City of Portland (PBOT) and
-        Oregon Department of Transportation data, this map gives neighbors a shared picture of
-        how people get around Beaumont-Wilshire and where the trouble spots are. Use the layers
-        panel to switch on:
+        Built by Transportation Committee chair Graeme Rudd from city, regional, and state data,
+        this map gives neighbors a shared picture of how people get around Beaumont-Wilshire and
+        where the trouble spots are. Use the layers panel to switch on:
       </p>
       <ul class="spaced-list">
-        <li>Neighborhood greenways and other bike lanes and paths</li>
-        <li>Safe Routes to School</li>
-        <li>Streets on PBOT's High Crash Network, such as NE Fremont</li>
-        <li>Crash records, shown by severity or as a heat map</li>
+        <li>Crash records since 2007, shown by severity or as a heat map</li>
+        <li>Streets and intersections on PBOT's High Crash Network, such as NE Fremont</li>
+        <li>Measured traffic speeds and speed limits</li>
+        <li>Neighborhood greenways, bike routes, and Safe Routes to School</li>
+        <li>TriMet Frequent Service and MAX lines</li>
+        <li>Crosswalks, crossing beacons, curb ramps, and gaps in the sidewalk network</li>
+        <li>Street paving condition and upcoming city projects</li>
       </ul>
       <p>
-        Click any line or dot for details. The map loads live from the city and state, so a
-        layer can take a few seconds to appear.
-      </p>
-      <p>
-        <a href={mapUrl} class="btn btn-secondary" target="_blank" rel="noopener">Open the full-screen map</a>
+        The dashboard compares Beaumont-Wilshire with other Portland neighborhoods and Portland
+        with other cities. Click any line or dot for details. The map loads live from the
+        agencies that publish the data, so a layer can take a few seconds to appear.
       </p>
     </div>
 
-    <div class="container map-frame-wrap">
-      <iframe
-        src={mapUrl}
-        title="Interactive Beaumont-Wilshire transportation map"
-        class="map-frame"
-        loading="lazy"
-      ></iframe>
-    </div>
+    <MapFrame slug="transportation" title="Interactive Beaumont-Wilshire transportation map" />
 
     <div class="container content-width">
+      <p>
+        See also the <a href={`${base}safety-land-use-map`}>Public Safety &amp; Land Use Map</a>,
+        covering crime reports, zoning, natural hazards, and emergency resources.
+      </p>
       <p>
         Have thoughts about transportation in the neighborhood, or see something the map
         should show?
         <ObfuscatedEmail email="info@bwnapdx.org" label="Contact the Transportation Committee" />,
-        or learn more about BWNA's <a href={`${base}committees`}>committees</a>.
+        or learn more about BWNA's <a href={`${base}committees#transportation`}>committees</a>.
       </p>
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .content-width > h2:not(:first-child) {
-    margin-top: var(--spacing-2xl);
-  }
-
-  .content-width > h3:not(:first-child) {
-    margin-top: var(--spacing-xl);
-  }
-
-  .map-frame-wrap {
-    margin: var(--spacing-lg) auto var(--spacing-xl);
-  }
-
-  .map-frame {
-    display: block;
-    width: 100%;
-    height: min(75vh, 720px);
-    min-height: 420px;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-  }
-</style>

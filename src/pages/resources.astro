@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Community Resources" description="Emergency contacts, city services, and helpful resources for Beaumont-Wilshire residents.">
@@ -100,6 +102,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- Online Resources -->
   <section class="page-section">
     <div class="container content-width">
+      <h2>🗺️ Neighborhood Maps</h2>
+      <div class="map-callouts">
+        <a class="map-callout" href={`${base}transportation-map`}>
+          <span class="map-callout__kicker">Interactive map</span>
+          <span class="map-callout__title">Transportation</span>
+          <span class="map-callout__desc">Crashes, High Crash Network streets, traffic speeds, bike routes, transit, and crossings.</span>
+        </a>
+        <a class="map-callout" href={`${base}safety-land-use-map`}>
+          <span class="map-callout__kicker">Interactive map</span>
+          <span class="map-callout__title">Public Safety &amp; Land Use</span>
+          <span class="map-callout__desc">Reported crime, zoning, earthquake and flood hazards, and emergency resources.</span>
+        </a>
+      </div>
+
       <h2>🔗 Helpful Websites</h2>
 
       <h3 class="link-list-heading">City of Portland</h3>
