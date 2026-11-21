@@ -9,7 +9,7 @@ ticketUrl: "https://us06web.zoom.us/j/86798571365?pwd=ufBoaDGhieyCI3bammVMhbbqzG
 ticketLabel: "Join on Zoom"
 scope: "bwna"
 recurring: false
-summary: "December monthly meeting, with a 15-minute Open Floor for residents and an update on Beaumont Crossing. In person and on Zoom."
+summary: "December general meeting, with a 15-minute Open Floor for residents and an update on Beaumont Crossing. In person and on Zoom."
 ---
 
 The board had tentatively planned to vote at this meeting on whether to bring back **Beaumont Crossing** as a permanent public plaza. That vote has been postponed to the **January 11** meeting. PBOT's survey results are incomplete because of the city workers strike, and the board was also concerned about absences during the holidays.

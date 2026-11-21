@@ -10,6 +10,6 @@ ticketLabel: "Join on Zoom"
 recurring: true
 recurrenceWeek: [2]
 recurrenceDay: 1
-recurrenceMonths: "even"
-summary: "Bimonthly general meeting open to all neighbors. All are welcome!"
+recurrenceMonths: "all"
+summary: "Monthly general meeting, open to all neighbors. Meetings in even-numbered months include an Open Floor segment for residents."
 ---
