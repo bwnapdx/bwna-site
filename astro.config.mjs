@@ -23,4 +23,6 @@ export default defineConfig({
   integrations: [pagefind(), sitemap(), ...(withKeystatic ? [react(), keystatic()] : [])],
   // Only @bwnapdx.org addresses appear on the site. See the plugin for details.
   markdown: { rehypePlugins: [rehypeRedactEmails] },
+  // The November 2026 newsletter printed this address; the page was retired after the vote.
+  redirects: { '/bylaws/proposed-changes': '/bylaws' },
 });
